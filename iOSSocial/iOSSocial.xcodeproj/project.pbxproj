@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1264A13013D08B900085E394 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A12F13D08B900085E394 /* Foundation.framework */; };
-		1264A13613D08B900085E394 /* iOSSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A13513D08B900085E394 /* iOSSocial.m */; };
+		1264A13613D08B900085E394 /* iOSSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A13513D08B900085E394 /* iOSSocial.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1264A13E13D08B900085E394 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A13D13D08B900085E394 /* SenTestingKit.framework */; };
 		1264A14013D08B900085E394 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A13F13D08B900085E394 /* UIKit.framework */; };
 		1264A14113D08B900085E394 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A12F13D08B900085E394 /* Foundation.framework */; };
@@ -446,6 +446,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSSocial/iOSSocial-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				"OTHER_CFLAGS[arch=*]" = "-DIOSSDEBUG";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

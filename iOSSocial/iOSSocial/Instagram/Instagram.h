@@ -25,4 +25,15 @@
 
 - (void)logout;
 
+//cwnote: may not want there here permanently. Either that, or make private header for other methods in this class
+//these methods make it easy to interact with the instagram app on the user's device
+
++ (void)instagram;
++ (void)camera;
++ (void)tagWithName:(NSString*)name;
++ (void)userWithName:(NSString*)name; 
++ (void)locationWithID:(NSString*)locationID;
++ (void)mediaWithID:(NSString*)mediaID;
++ (void)editPhotoWithURL:(NSURL*)url andMenuFromView:(UIView*)view;
+
 @end

@@ -10,3 +10,11 @@
 #import "SocialManager.h"
 #import "InstagramUser.h"
 #import "LocalInstagramUser.h"
+
+void iOSDebug(const char *fileName, int lineNumber, NSString *fmt, ...);
+
+#ifdef IOSSDEBUG 
+#define iOSSLog(format...) iOSDebug(__FILE__, __LINE__, format) 
+#else 
+#define iOSSLog(format...) 
+#endif

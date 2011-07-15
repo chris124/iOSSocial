@@ -10,6 +10,7 @@
 #import "GTMOAuth2Authentication.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2SignIn.h"
+#import "iOSSocial.h"
 
 @interface Instagram ()
 
@@ -46,6 +47,7 @@
            redirectURI:(NSString*)uri
    andKeyChainItemName:(NSString*)kcin
 {
+    iOSSLog(@"initWithClientID");
     self = [self init];
     if (self) {
         // Initialization code here.
@@ -66,13 +68,13 @@
         // Authentication failed
         // Authentication failed (perhaps the user denied access, or closed the
         // window before granting access)
-        NSLog(@"Authentication error: %@", error);
+        iOSSLog(@"Authentication error: %@", error);
         NSData *responseData = [[error userInfo] objectForKey:@"data"]; // kGTMHTTPFetcherStatusDataKey
         if ([responseData length] > 0) {
             // show the body of the server's authentication failure response
             NSString *str = [[NSString alloc] initWithData:responseData
                                                   encoding:NSUTF8StringEncoding];
-            NSLog(@"%@", str);
+            iOSSLog(@"%@", str);
         }
         
         self.auth = nil;
@@ -197,5 +199,109 @@
     // Discard our retained authentication object.
     self.auth = nil;
 }
+
+
++ (void)instagram
+{
+    NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        [[UIApplication sharedApplication] openURL:instagramURL];
+    }
+}
+
++ (void)camera 
+{
+    NSURL *instagramURL = [NSURL URLWithString:@"instagram://camera"];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        [[UIApplication sharedApplication] openURL:instagramURL];
+    }
+}
+
++ (void)tagWithName:(NSString*)name 
+{
+    NSString *urlString = [NSString stringWithFormat:@"instagram://tag?name=%@", name];
+    NSURL *instagramURL = [NSURL URLWithString:urlString];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        [[UIApplication sharedApplication] openURL:instagramURL];
+    }
+}
+
++ (void)userWithName:(NSString*)name 
+{
+    NSString *urlString = [NSString stringWithFormat:@"instagram://user?username=%@", name];
+    NSURL *instagramURL = [NSURL URLWithString:urlString];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        [[UIApplication sharedApplication] openURL:instagramURL];
+    }
+}
+
++ (void)locationWithID:(NSString*)locationID
+{
+    NSString *urlString = [NSString stringWithFormat:@"instagram://location?id=%@", locationID];
+    NSURL *instagramURL = [NSURL URLWithString:urlString];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        [[UIApplication sharedApplication] openURL:instagramURL];
+    }
+}
+
++ (void)mediaWithID:(NSString*)mediaID
+{
+    NSString *urlString = [NSString stringWithFormat:@"instagram://media?id=%@", mediaID];
+    NSURL *instagramURL = [NSURL URLWithString:urlString];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        [[UIApplication sharedApplication] openURL:instagramURL];
+    }
+}
+
+/*
+ If your application creates photos and you'd like your users to share these photos using Instagram, you can use the Document Interaction API to open your photo in Instagram's sharing flow.
+ 
+ You must first save your file in PNG or JPEG (preferred) format and use the filename extension ".ig". Using the iOS Document Interaction APIs you can trigger the photo to be opened by Instagram. The Identifier for our Document Interaction UTI is com.instagram.photo, and it conforms to the public/jpeg and public/png UTIs. See the Apple documentation articles: Previewing and Opening Files and the UIDocumentInteractionController Class Reference for more information.
+ 
+ When triggered, Instagram will immediately present the user with our filter screen. The image is preloaded and sized appropriately for Instagram. Other than using the appropriate image format, described above, our only requirement is that the image is at least 612px tall and/or wide. For best results, Instagram prefers opening a JPEG that is 612px by 612px square. If the image is larger, it will be resized dynamically.
+ 
+ An important note: If either dimension of the image is less than 612 pixels, Instagram will present an alert to the user saying we were unable to open the file. It's our current policy not to upscale or stretch images to our minimum dimension.
+ */
++ (void)editPhotoWithURL:(NSURL*)url andMenuFromView:(UIView*)view
+{
+    static UIDocumentInteractionController *interactionController = nil;
+    if (nil == interactionController) {
+        interactionController = [UIDocumentInteractionController interactionControllerWithURL:url];
+        //<UIDocumentInteractionControllerDelegate>
+        //interactionController.delegate = self;
+        interactionController.UTI = @"com.instagram.photo";
+    }
+    
+    BOOL didOpen = [interactionController presentOpenInMenuFromRect:CGRectMake(50.0f, 50.0f, 20.0f, 20.0f) 
+                                                             inView:view 
+                                                           animated:YES];
+    if (didOpen) {
+        iOSSLog(@"presentOpenInMenuFromRect");
+    }
+}
+
+#pragma
+#pragma mark UIDocumentInteractionControllerDelegate
+/*
+- (void) documentInteractionController: (UIDocumentInteractionController *) controller willBeginSendingToApplication: (NSString *) application
+{
+    iOSSLog(@"willBeginSendingToApplication");
+}
+
+- (void) documentInteractionController: (UIDocumentInteractionController *) controller didEndSendingToApplication: (NSString *) application
+{
+    iOSSLog(@"didEndSendingToApplication");
+}
+
+- (void) documentInteractionControllerWillPresentOpenInMenu: (UIDocumentInteractionController *) controller
+{
+    iOSSLog(@"documentInteractionControllerWillPresentOpenInMenu");
+}
+
+- (void) documentInteractionControllerDidDismissOpenInMenu: (UIDocumentInteractionController *) controller
+{
+    iOSSLog(@"documentInteractionControllerDidDismissOpenInMenu");
+}
+*/
 
 @end
