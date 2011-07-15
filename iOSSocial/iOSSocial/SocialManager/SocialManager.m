@@ -11,7 +11,9 @@
 
 static SocialManager *socialManager = nil;
 
-@interface SocialManager ()
+@interface SocialManager () {
+    Instagram *_instagram;
+}
 
 @property (nonatomic, readwrite, retain)   Instagram *instagram;
 
@@ -19,7 +21,7 @@ static SocialManager *socialManager = nil;
 
 @implementation SocialManager
 
-@synthesize instagram;
+@synthesize instagram=_instagram;
 
 + (SocialManager *)socialManager
 {
@@ -42,14 +44,14 @@ static SocialManager *socialManager = nil;
 
 - (Instagram*)instagram
 {
-    if (nil == self.instagram) {
-        self.instagram = [[Instagram alloc] initWithClientID:kSMInstagramClientID 
+    if (nil == _instagram) {
+        _instagram = [[Instagram alloc] initWithClientID:kSMInstagramClientID 
                                                 clientSecret:kSMInstagramClientSecret 
                                                  redirectURI:kSMInstagramRedirectURI 
                                          andKeyChainItemName:kSMInstagramKeychainItemName];
     }
     
-    return self.instagram;
+    return _instagram;
 }
 
 @end
