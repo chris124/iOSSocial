@@ -1,5 +1,5 @@
 .DS_Store
-iOSSocial.xcodeproj/project.xcworkspace/
-iOSSocial.xcodeproj/xcuserdata/
-build/
-output/
+iOSSocial/iOSSocial.xcodeproj/project.xcworkspace/
+iOSSocial/iOSSocial.xcodeproj/xcuserdata/
+iOSSocial/build/
+iOSSocial/output/
