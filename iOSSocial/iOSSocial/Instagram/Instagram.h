@@ -16,7 +16,8 @@
            redirectURI:(NSString*)uri
    andKeyChainItemName:(NSString*)kcin;
 
-- (void)authorize:(NSArray *)permissions fromViewController:(UIViewController*)vc;
+- (void)authorizeWithScope:(NSString *)scope 
+        fromViewController:(UIViewController*)vc;
 
 //- (void)authorize:(NSArray *)permissions
 //         delegate:(id<FBSessionDelegate>)delegate;
@@ -34,6 +35,7 @@
 + (void)userWithName:(NSString*)name; 
 + (void)locationWithID:(NSString*)locationID;
 + (void)mediaWithID:(NSString*)mediaID;
-+ (void)editPhotoWithURL:(NSURL*)url andMenuFromView:(UIView*)view;
++ (void)editPhotoWithURL:(NSURL*)url 
+         andMenuFromView:(UIView*)view;
 
 @end

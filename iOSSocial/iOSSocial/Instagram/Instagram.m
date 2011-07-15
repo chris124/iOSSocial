@@ -63,7 +63,8 @@
 
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
       finishedWithAuth:(GTMOAuth2Authentication *)newAuth
-                 error:(NSError *)error {
+                 error:(NSError *)error 
+{
     if (error != nil) {
         // Authentication failed
         // Authentication failed (perhaps the user denied access, or closed the
@@ -111,21 +112,12 @@
 }
 
 
-- (void)authorize:(NSArray *)permissions fromViewController:(UIViewController*)vc
+- (void)authorizeWithScope:(NSString *)scope 
+        fromViewController:(UIViewController*)vc
 {
     
     self.auth = [self authForCustomService];
-    
-    //cwnote: set scope from array of permissions
-    // Specify the appropriate scope string, if any, according to the service's API documentation
-    NSString *newScope = @"";
-    for (NSString *permission in permissions) {
-        newScope = [newScope stringByAppendingString:permission];
-        //dont' add one on at the end. ugh.
-        newScope = [newScope stringByAppendingString:@" "];
-    }
-    self.auth.scope = @"basic comments relationships likes";
-    //self.auth.scope = newScope;
+    self.auth.scope = scope;
     
     NSURL *authURL = [NSURL URLWithString:@"https://api.instagram.com/oauth/authorize"];
     
@@ -154,7 +146,8 @@
     return isSignedIn;
 }
 
-- (GTMOAuth2Authentication *)authForCustomService {
+- (GTMOAuth2Authentication *)authForCustomService 
+{
     
     NSURL *tokenURL = [NSURL URLWithString:@"https://api.instagram.com/oauth/access_token"];
     
@@ -167,7 +160,8 @@
     return newAuth;
 }
 
-- (void)checkAuthentication {
+- (void)checkAuthentication 
+{
     // Listen for network change notifications
     /*
      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -262,7 +256,8 @@
  
  An important note: If either dimension of the image is less than 612 pixels, Instagram will present an alert to the user saying we were unable to open the file. It's our current policy not to upscale or stretch images to our minimum dimension.
  */
-+ (void)editPhotoWithURL:(NSURL*)url andMenuFromView:(UIView*)view
++ (void)editPhotoWithURL:(NSURL*)url 
+         andMenuFromView:(UIView*)view
 {
     static UIDocumentInteractionController *interactionController = nil;
     if (nil == interactionController) {

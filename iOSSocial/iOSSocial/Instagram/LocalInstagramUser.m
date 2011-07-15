@@ -60,7 +60,7 @@ static LocalInstagramUser *localInstagramUser = nil;
     */
 }
 
-- (void)authenticateUserPermissions:(NSArray*)permissions 
+- (void)authenticateWithScope:(NSString*)scope 
                  fromViewController:(UIViewController*)vc
               withCompletionHandler:(AuthenticationHandler)completionHandler
 {
@@ -69,7 +69,7 @@ static LocalInstagramUser *localInstagramUser = nil;
         
         self.authenticationHandler = completionHandler;
         
-        [[SocialManager socialManager].instagram authorize:permissions 
+        [[SocialManager socialManager].instagram authorizeWithScope:scope 
                                         fromViewController:vc];
         
         //[[SocialManager socialManager].instagram authorize:permissions 

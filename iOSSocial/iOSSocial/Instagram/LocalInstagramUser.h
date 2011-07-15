@@ -26,9 +26,9 @@ typedef void(^AuthenticationHandler)(NSError *error);
 // 1. Communications problem
 // 2. User credentials invalid
 // 3. User cancelled
-- (void)authenticateUserPermissions:(NSArray*)permissions 
-                 fromViewController:(UIViewController*)vc 
-              withCompletionHandler:(AuthenticationHandler)completionHandler;
+- (void)authenticateWithScope:(NSString*)scope 
+           fromViewController:(UIViewController*)vc 
+        withCompletionHandler:(AuthenticationHandler)completionHandler;
 
 - (void)logout;
 
