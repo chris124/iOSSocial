@@ -20,7 +20,6 @@
 @property(nonatomic, readwrite, assign) NSInteger mediaCount;
 @property(nonatomic, readwrite, assign) NSInteger followsCount;
 @property(nonatomic, readwrite, assign) NSInteger followedByCount;
-//@property (nonatomic, retain)           NSMutableDictionary *requestDictionary;
 @property (nonatomic, copy)             LoadPhotoHandler loadPhotoHandler;
 
 @end

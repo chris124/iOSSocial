@@ -11,6 +11,7 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2SignIn.h"
 #import "iOSSocial.h"
+#import "InstagramConstants.h"
 
 @interface Instagram ()
 
@@ -19,6 +20,7 @@
 @property(nonatomic, readwrite, retain) NSString *keychainItemName;
 @property(nonatomic, readwrite, retain) NSString *redirectURI;
 @property(nonatomic, readwrite, retain) GTMOAuth2Authentication *auth;
+@property(nonatomic, readwrite, retain) UIViewController *viewController;
 
 - (void)checkAuthentication;
 - (GTMOAuth2Authentication *)authForCustomService;
@@ -32,6 +34,7 @@
 @synthesize keychainItemName;
 @synthesize redirectURI;
 @synthesize auth;
+@synthesize viewController;
 
 - (id)init
 {
@@ -42,19 +45,15 @@
     return self;
 }
 
-- (id)initWithClientID:(NSString*)ID 
-          clientSecret:(NSString*)cs 
-           redirectURI:(NSString*)uri
-   andKeyChainItemName:(NSString*)kcin
+- (id)initWithDictionary:(NSDictionary*)dictionary
 {
-    iOSSLog(@"initWithClientID");
     self = [self init];
     if (self) {
         // Initialization code here.
-        self.clientID = ID;
-        self.clientSecret = cs;
-        self.redirectURI = uri;
-        self.keychainItemName = kcin;
+        self.clientID           = [dictionary objectForKey:kSMInstagramClientID];
+        self.clientSecret       = [dictionary objectForKey:kSMInstagramClientSecret];
+        self.redirectURI        = [dictionary objectForKey:kSMInstagramRedirectURI];
+        self.keychainItemName   = [dictionary objectForKey:kSMInstagramKeychainItemName];
         [self checkAuthentication];
     }
     
@@ -105,9 +104,9 @@
         }
         */
         self.auth = newAuth;
-        //[self dismissModalViewControllerAnimated:YES];
+        [self.viewController dismissModalViewControllerAnimated:YES];
         
-        //notify success
+        //notify success?
     }
 }
 
@@ -115,6 +114,7 @@
 - (void)authorizeWithScope:(NSString *)scope 
         fromViewController:(UIViewController*)vc
 {
+    self.viewController = vc;
     
     self.auth = [self authForCustomService];
     self.auth.scope = scope;
@@ -122,8 +122,8 @@
     NSURL *authURL = [NSURL URLWithString:@"https://api.instagram.com/oauth/authorize"];
     
     // Display the authentication view
-    GTMOAuth2ViewControllerTouch *viewController;
-    viewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:auth
+    GTMOAuth2ViewControllerTouch *oaViewController;
+    oaViewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:auth
                                                                  authorizationURL:authURL
                                                                  keychainItemName:self.keychainItemName
                                                                          delegate:self
@@ -131,13 +131,13 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"touch" forKey:@"display"];
-    viewController.signIn.additionalAuthorizationParameters = params;
+    oaViewController.signIn.additionalAuthorizationParameters = params;
     
     // Optional: display some html briefly before the sign-in page loads
     NSString *html = @"<html><body bgcolor=silver><div align=center>Loading sign-in page...</div></body></html>";
-    viewController.initialHTMLString = html;
+    oaViewController.initialHTMLString = html;
     
-    [vc presentModalViewController:viewController animated:YES];
+    [self.viewController presentModalViewController:oaViewController animated:YES];
 }
 
 - (BOOL)isSessionValid
@@ -193,110 +193,5 @@
     // Discard our retained authentication object.
     self.auth = nil;
 }
-
-
-+ (void)instagram
-{
-    NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
-    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        [[UIApplication sharedApplication] openURL:instagramURL];
-    }
-}
-
-+ (void)camera 
-{
-    NSURL *instagramURL = [NSURL URLWithString:@"instagram://camera"];
-    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        [[UIApplication sharedApplication] openURL:instagramURL];
-    }
-}
-
-+ (void)tagWithName:(NSString*)name 
-{
-    NSString *urlString = [NSString stringWithFormat:@"instagram://tag?name=%@", name];
-    NSURL *instagramURL = [NSURL URLWithString:urlString];
-    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        [[UIApplication sharedApplication] openURL:instagramURL];
-    }
-}
-
-+ (void)userWithName:(NSString*)name 
-{
-    NSString *urlString = [NSString stringWithFormat:@"instagram://user?username=%@", name];
-    NSURL *instagramURL = [NSURL URLWithString:urlString];
-    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        [[UIApplication sharedApplication] openURL:instagramURL];
-    }
-}
-
-+ (void)locationWithID:(NSString*)locationID
-{
-    NSString *urlString = [NSString stringWithFormat:@"instagram://location?id=%@", locationID];
-    NSURL *instagramURL = [NSURL URLWithString:urlString];
-    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        [[UIApplication sharedApplication] openURL:instagramURL];
-    }
-}
-
-+ (void)mediaWithID:(NSString*)mediaID
-{
-    NSString *urlString = [NSString stringWithFormat:@"instagram://media?id=%@", mediaID];
-    NSURL *instagramURL = [NSURL URLWithString:urlString];
-    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-        [[UIApplication sharedApplication] openURL:instagramURL];
-    }
-}
-
-/*
- If your application creates photos and you'd like your users to share these photos using Instagram, you can use the Document Interaction API to open your photo in Instagram's sharing flow.
- 
- You must first save your file in PNG or JPEG (preferred) format and use the filename extension ".ig". Using the iOS Document Interaction APIs you can trigger the photo to be opened by Instagram. The Identifier for our Document Interaction UTI is com.instagram.photo, and it conforms to the public/jpeg and public/png UTIs. See the Apple documentation articles: Previewing and Opening Files and the UIDocumentInteractionController Class Reference for more information.
- 
- When triggered, Instagram will immediately present the user with our filter screen. The image is preloaded and sized appropriately for Instagram. Other than using the appropriate image format, described above, our only requirement is that the image is at least 612px tall and/or wide. For best results, Instagram prefers opening a JPEG that is 612px by 612px square. If the image is larger, it will be resized dynamically.
- 
- An important note: If either dimension of the image is less than 612 pixels, Instagram will present an alert to the user saying we were unable to open the file. It's our current policy not to upscale or stretch images to our minimum dimension.
- */
-+ (void)editPhotoWithURL:(NSURL*)url 
-         andMenuFromView:(UIView*)view
-{
-    static UIDocumentInteractionController *interactionController = nil;
-    if (nil == interactionController) {
-        interactionController = [UIDocumentInteractionController interactionControllerWithURL:url];
-        //<UIDocumentInteractionControllerDelegate>
-        //interactionController.delegate = self;
-        interactionController.UTI = @"com.instagram.photo";
-    }
-    
-    BOOL didOpen = [interactionController presentOpenInMenuFromRect:CGRectMake(50.0f, 50.0f, 20.0f, 20.0f) 
-                                                             inView:view 
-                                                           animated:YES];
-    if (didOpen) {
-        iOSSLog(@"presentOpenInMenuFromRect");
-    }
-}
-
-#pragma
-#pragma mark UIDocumentInteractionControllerDelegate
-/*
-- (void) documentInteractionController: (UIDocumentInteractionController *) controller willBeginSendingToApplication: (NSString *) application
-{
-    iOSSLog(@"willBeginSendingToApplication");
-}
-
-- (void) documentInteractionController: (UIDocumentInteractionController *) controller didEndSendingToApplication: (NSString *) application
-{
-    iOSSLog(@"didEndSendingToApplication");
-}
-
-- (void) documentInteractionControllerWillPresentOpenInMenu: (UIDocumentInteractionController *) controller
-{
-    iOSSLog(@"documentInteractionControllerWillPresentOpenInMenu");
-}
-
-- (void) documentInteractionControllerDidDismissOpenInMenu: (UIDocumentInteractionController *) controller
-{
-    iOSSLog(@"documentInteractionControllerDidDismissOpenInMenu");
-}
-*/
 
 @end

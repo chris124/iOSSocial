@@ -26,6 +26,25 @@ typedef void(^LoadPhotoHandler)(UIImage *photo, NSError *error);
 @property(nonatomic, readonly, assign)  NSInteger followedByCount;      // The user's total number of followers
 //@property(nonatomic, readonly)          BOOL isFriend;          // True if this user is a friend of the local user
 
+// Initialize a user with a dictionary object. The definition for the dictionary can be found here:
+// http://instagram.com/developer/endpoints/users/
+// Here is the example for those too lazy to go to the URL :D
+/*
+{
+    "id": "1574083",
+    "username": "snoopdogg",
+    "first_name": "Snoop",
+    "last_name": "Dogg",
+    "profile_picture": "http://distillery.s3.amazonaws.com/profiles/profile_1574083_75sq_1295469061.jpg",
+    "bio": "This is my bio",
+    "website": "http://snoopdogg.com",
+    "counts: {
+    "media": 1320,
+    "follows": 420,
+    "followed_by": 3410 
+    }
+}
+*/
 - (id)initWithDictionary:(NSDictionary*)userDictionary;
 
 // Asynchronously load the users's photo. Error will be nil on success.

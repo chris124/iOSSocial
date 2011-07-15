@@ -32,10 +32,9 @@
 		1264A18A13D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18313D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1264A18E13D0974F0085E394 /* GTMHTTPFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A18C13D0974F0085E394 /* GTMHTTPFetcher.h */; };
 		1264A18F13D0974F0085E394 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1264A1EA13D09D880085E394 /* SocialManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A1E813D09D880085E394 /* SocialManager.h */; };
-		1264A1EB13D09D880085E394 /* SocialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A1E913D09D880085E394 /* SocialManager.m */; };
 		12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */; };
 		12E0ACCF13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */; };
+		12E0ACD613D0EE710025C3B7 /* InstagramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,10 +77,9 @@
 		1264A18413D096FE0085E394 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		1264A18C13D0974F0085E394 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcher.h; path = "gtm-oauth2/HTTPFetcher/GTMHTTPFetcher.h"; sourceTree = "<group>"; };
 		1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcher.m; path = "gtm-oauth2/HTTPFetcher/GTMHTTPFetcher.m"; sourceTree = "<group>"; };
-		1264A1E813D09D880085E394 /* SocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialManager.h; path = SocialManager/SocialManager.h; sourceTree = "<group>"; };
-		1264A1E913D09D880085E394 /* SocialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialManager.m; path = SocialManager/SocialManager.m; sourceTree = "<group>"; };
 		12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+iOSSSubviewTraversal.h"; sourceTree = "<group>"; };
 		12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+iOSSSubviewTraversal.m"; sourceTree = "<group>"; };
+		12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				12E0ACCB13D0D28B0025C3B7 /* UIView */,
-				1264A1E713D09D430085E394 /* SocialManager */,
 				1264A16C13D0965E0085E394 /* gtm-oauth2 */,
 				1264A15913D08CA80085E394 /* Instagram */,
 				1264A13413D08B900085E394 /* iOSSocial.h */,
@@ -190,6 +187,7 @@
 				1264A16113D094E70085E394 /* InstagramUser.m */,
 				1264A16213D094E70085E394 /* LocalInstagramUser.h */,
 				1264A16313D094E70085E394 /* LocalInstagramUser.m */,
+				12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */,
 			);
 			name = Instagram;
 			sourceTree = "<group>";
@@ -235,15 +233,6 @@
 			name = HTTPFetcher;
 			sourceTree = "<group>";
 		};
-		1264A1E713D09D430085E394 /* SocialManager */ = {
-			isa = PBXGroup;
-			children = (
-				1264A1E813D09D880085E394 /* SocialManager.h */,
-				1264A1E913D09D880085E394 /* SocialManager.m */,
-			);
-			name = SocialManager;
-			sourceTree = "<group>";
-		};
 		12E0ACCB13D0D28B0025C3B7 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,8 +256,8 @@
 				1264A18713D096FE0085E394 /* GTMOAuth2SignIn.h in Headers */,
 				1264A18913D096FE0085E394 /* GTMOAuth2ViewControllerTouch.h in Headers */,
 				1264A18E13D0974F0085E394 /* GTMHTTPFetcher.h in Headers */,
-				1264A1EA13D09D880085E394 /* SocialManager.h in Headers */,
 				12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */,
+				12E0ACD613D0EE710025C3B7 /* InstagramConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +367,6 @@
 				1264A18813D096FE0085E394 /* GTMOAuth2SignIn.m in Sources */,
 				1264A18A13D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				1264A18F13D0974F0085E394 /* GTMHTTPFetcher.m in Sources */,
-				1264A1EB13D09D880085E394 /* SocialManager.m in Sources */,
 				12E0ACCF13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
