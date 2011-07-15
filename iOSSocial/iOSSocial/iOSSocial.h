@@ -10,9 +10,3 @@
 #import "SocialManager.h"
 #import "InstagramUser.h"
 #import "LocalInstagramUser.h"
-
-//cwnote: put other header files here!
-
-@interface iOSSocial : NSObject
-
-@end
