@@ -17,6 +17,23 @@
 		1264A14C13D08B900085E394 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1264A14A13D08B900085E394 /* InfoPlist.strings */; };
 		1264A14E13D08B900085E394 /* iOSSocialTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1264A14D13D08B900085E394 /* iOSSocialTests.h */; };
 		1264A15013D08B900085E394 /* iOSSocialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A14F13D08B900085E394 /* iOSSocialTests.m */; };
+		1264A16413D094E70085E394 /* Instagram.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A15E13D094E70085E394 /* Instagram.h */; };
+		1264A16513D094E70085E394 /* Instagram.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A15F13D094E70085E394 /* Instagram.m */; };
+		1264A16613D094E70085E394 /* InstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A16013D094E70085E394 /* InstagramUser.h */; };
+		1264A16713D094E70085E394 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A16113D094E70085E394 /* InstagramUser.m */; };
+		1264A16813D094E70085E394 /* LocalInstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A16213D094E70085E394 /* LocalInstagramUser.h */; };
+		1264A16913D094E70085E394 /* LocalInstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A16313D094E70085E394 /* LocalInstagramUser.m */; };
+		1264A16B13D0951E0085E394 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A16A13D0951E0085E394 /* UIKit.framework */; };
+		1264A18513D096FE0085E394 /* GTMOAuth2Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A17D13D096FE0085E394 /* GTMOAuth2Authentication.h */; };
+		1264A18613D096FE0085E394 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A17E13D096FE0085E394 /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1264A18713D096FE0085E394 /* GTMOAuth2SignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A17F13D096FE0085E394 /* GTMOAuth2SignIn.h */; };
+		1264A18813D096FE0085E394 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18013D096FE0085E394 /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1264A18913D096FE0085E394 /* GTMOAuth2ViewControllerTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A18213D096FE0085E394 /* GTMOAuth2ViewControllerTouch.h */; };
+		1264A18A13D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18313D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1264A18E13D0974F0085E394 /* GTMHTTPFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A18C13D0974F0085E394 /* GTMHTTPFetcher.h */; };
+		1264A18F13D0974F0085E394 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1264A1EA13D09D880085E394 /* SocialManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A1E813D09D880085E394 /* SocialManager.h */; };
+		1264A1EB13D09D880085E394 /* SocialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A1E913D09D880085E394 /* SocialManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +60,24 @@
 		1264A14B13D08B900085E394 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1264A14D13D08B900085E394 /* iOSSocialTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSSocialTests.h; sourceTree = "<group>"; };
 		1264A14F13D08B900085E394 /* iOSSocialTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSSocialTests.m; sourceTree = "<group>"; };
+		1264A15E13D094E70085E394 /* Instagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Instagram.h; path = Instagram/Instagram.h; sourceTree = "<group>"; };
+		1264A15F13D094E70085E394 /* Instagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Instagram.m; path = Instagram/Instagram.m; sourceTree = "<group>"; };
+		1264A16013D094E70085E394 /* InstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramUser.h; path = Instagram/InstagramUser.h; sourceTree = "<group>"; };
+		1264A16113D094E70085E394 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramUser.m; path = Instagram/InstagramUser.m; sourceTree = "<group>"; };
+		1264A16213D094E70085E394 /* LocalInstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalInstagramUser.h; path = Instagram/LocalInstagramUser.h; sourceTree = "<group>"; };
+		1264A16313D094E70085E394 /* LocalInstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalInstagramUser.m; path = Instagram/LocalInstagramUser.m; sourceTree = "<group>"; };
+		1264A16A13D0951E0085E394 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1264A17D13D096FE0085E394 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2Authentication.h; path = "gtm-oauth2/Source/GTMOAuth2Authentication.h"; sourceTree = "<group>"; };
+		1264A17E13D096FE0085E394 /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2Authentication.m; path = "gtm-oauth2/Source/GTMOAuth2Authentication.m"; sourceTree = "<group>"; };
+		1264A17F13D096FE0085E394 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2SignIn.h; path = "gtm-oauth2/Source/GTMOAuth2SignIn.h"; sourceTree = "<group>"; };
+		1264A18013D096FE0085E394 /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2SignIn.m; path = "gtm-oauth2/Source/GTMOAuth2SignIn.m"; sourceTree = "<group>"; };
+		1264A18213D096FE0085E394 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
+		1264A18313D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
+		1264A18413D096FE0085E394 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
+		1264A18C13D0974F0085E394 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcher.h; path = "gtm-oauth2/HTTPFetcher/GTMHTTPFetcher.h"; sourceTree = "<group>"; };
+		1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcher.m; path = "gtm-oauth2/HTTPFetcher/GTMHTTPFetcher.m"; sourceTree = "<group>"; };
+		1264A1E813D09D880085E394 /* SocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialManager.h; path = SocialManager/SocialManager.h; sourceTree = "<group>"; };
+		1264A1E913D09D880085E394 /* SocialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialManager.m; path = SocialManager/SocialManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1264A16B13D0951E0085E394 /* UIKit.framework in Frameworks */,
 				1264A13013D08B900085E394 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +127,7 @@
 		1264A12E13D08B900085E394 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1264A16A13D0951E0085E394 /* UIKit.framework */,
 				1264A12F13D08B900085E394 /* Foundation.framework */,
 				1264A13D13D08B900085E394 /* SenTestingKit.framework */,
 				1264A13F13D08B900085E394 /* UIKit.framework */,
@@ -102,6 +139,9 @@
 		1264A13113D08B900085E394 /* iOSSocial */ = {
 			isa = PBXGroup;
 			children = (
+				1264A1E713D09D430085E394 /* SocialManager */,
+				1264A16C13D0965E0085E394 /* gtm-oauth2 */,
+				1264A15913D08CA80085E394 /* Instagram */,
 				1264A13413D08B900085E394 /* iOSSocial.h */,
 				1264A13513D08B900085E394 /* iOSSocial.m */,
 				1264A13213D08B900085E394 /* Supporting Files */,
@@ -136,6 +176,69 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1264A15913D08CA80085E394 /* Instagram */ = {
+			isa = PBXGroup;
+			children = (
+				1264A15E13D094E70085E394 /* Instagram.h */,
+				1264A15F13D094E70085E394 /* Instagram.m */,
+				1264A16013D094E70085E394 /* InstagramUser.h */,
+				1264A16113D094E70085E394 /* InstagramUser.m */,
+				1264A16213D094E70085E394 /* LocalInstagramUser.h */,
+				1264A16313D094E70085E394 /* LocalInstagramUser.m */,
+			);
+			name = Instagram;
+			sourceTree = "<group>";
+		};
+		1264A16C13D0965E0085E394 /* gtm-oauth2 */ = {
+			isa = PBXGroup;
+			children = (
+				1264A17C13D096EF0085E394 /* Sources */,
+			);
+			name = "gtm-oauth2";
+			sourceTree = "<group>";
+		};
+		1264A17C13D096EF0085E394 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1264A18B13D0970A0085E394 /* HTTPFetcher */,
+				1264A17D13D096FE0085E394 /* GTMOAuth2Authentication.h */,
+				1264A17E13D096FE0085E394 /* GTMOAuth2Authentication.m */,
+				1264A17F13D096FE0085E394 /* GTMOAuth2SignIn.h */,
+				1264A18013D096FE0085E394 /* GTMOAuth2SignIn.m */,
+				1264A18113D096FE0085E394 /* Touch */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		1264A18113D096FE0085E394 /* Touch */ = {
+			isa = PBXGroup;
+			children = (
+				1264A18213D096FE0085E394 /* GTMOAuth2ViewControllerTouch.h */,
+				1264A18313D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m */,
+				1264A18413D096FE0085E394 /* GTMOAuth2ViewTouch.xib */,
+			);
+			name = Touch;
+			path = "gtm-oauth2/Source/Touch";
+			sourceTree = "<group>";
+		};
+		1264A18B13D0970A0085E394 /* HTTPFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				1264A18C13D0974F0085E394 /* GTMHTTPFetcher.h */,
+				1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */,
+			);
+			name = HTTPFetcher;
+			sourceTree = "<group>";
+		};
+		1264A1E713D09D430085E394 /* SocialManager */ = {
+			isa = PBXGroup;
+			children = (
+				1264A1E813D09D880085E394 /* SocialManager.h */,
+				1264A1E913D09D880085E394 /* SocialManager.m */,
+			);
+			name = SocialManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -143,6 +246,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1264A16413D094E70085E394 /* Instagram.h in Headers */,
+				1264A16613D094E70085E394 /* InstagramUser.h in Headers */,
+				1264A16813D094E70085E394 /* LocalInstagramUser.h in Headers */,
+				1264A18513D096FE0085E394 /* GTMOAuth2Authentication.h in Headers */,
+				1264A18713D096FE0085E394 /* GTMOAuth2SignIn.h in Headers */,
+				1264A18913D096FE0085E394 /* GTMOAuth2ViewControllerTouch.h in Headers */,
+				1264A18E13D0974F0085E394 /* GTMHTTPFetcher.h in Headers */,
+				1264A1EA13D09D880085E394 /* SocialManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +356,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1264A13613D08B900085E394 /* iOSSocial.m in Sources */,
+				1264A16513D094E70085E394 /* Instagram.m in Sources */,
+				1264A16713D094E70085E394 /* InstagramUser.m in Sources */,
+				1264A16913D094E70085E394 /* LocalInstagramUser.m in Sources */,
+				1264A18613D096FE0085E394 /* GTMOAuth2Authentication.m in Sources */,
+				1264A18813D096FE0085E394 /* GTMOAuth2SignIn.m in Sources */,
+				1264A18A13D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m in Sources */,
+				1264A18F13D0974F0085E394 /* GTMHTTPFetcher.m in Sources */,
+				1264A1EB13D09D880085E394 /* SocialManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
