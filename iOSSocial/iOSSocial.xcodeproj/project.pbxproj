@@ -34,6 +34,8 @@
 		1264A18F13D0974F0085E394 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1264A1EA13D09D880085E394 /* SocialManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A1E813D09D880085E394 /* SocialManager.h */; };
 		1264A1EB13D09D880085E394 /* SocialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A1E913D09D880085E394 /* SocialManager.m */; };
+		12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */; };
+		12E0ACCF13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcher.m; path = "gtm-oauth2/HTTPFetcher/GTMHTTPFetcher.m"; sourceTree = "<group>"; };
 		1264A1E813D09D880085E394 /* SocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialManager.h; path = SocialManager/SocialManager.h; sourceTree = "<group>"; };
 		1264A1E913D09D880085E394 /* SocialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialManager.m; path = SocialManager/SocialManager.m; sourceTree = "<group>"; };
+		12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+iOSSSubviewTraversal.h"; sourceTree = "<group>"; };
+		12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+iOSSSubviewTraversal.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 		1264A13113D08B900085E394 /* iOSSocial */ = {
 			isa = PBXGroup;
 			children = (
+				12E0ACCB13D0D28B0025C3B7 /* UIView */,
 				1264A1E713D09D430085E394 /* SocialManager */,
 				1264A16C13D0965E0085E394 /* gtm-oauth2 */,
 				1264A15913D08CA80085E394 /* Instagram */,
@@ -239,6 +244,15 @@
 			name = SocialManager;
 			sourceTree = "<group>";
 		};
+		12E0ACCB13D0D28B0025C3B7 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */,
+				12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */,
+			);
+			name = UIView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -254,6 +268,7 @@
 				1264A18913D096FE0085E394 /* GTMOAuth2ViewControllerTouch.h in Headers */,
 				1264A18E13D0974F0085E394 /* GTMHTTPFetcher.h in Headers */,
 				1264A1EA13D09D880085E394 /* SocialManager.h in Headers */,
+				12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +379,7 @@
 				1264A18A13D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				1264A18F13D0974F0085E394 /* GTMHTTPFetcher.m in Sources */,
 				1264A1EB13D09D880085E394 /* SocialManager.m in Sources */,
+				12E0ACCF13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +533,7 @@
 				1264A15513D08B900085E394 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1264A15613D08B900085E394 /* Build configuration list for PBXNativeTarget "iOSSocialTests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +542,7 @@
 				1264A15813D08B900085E394 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
