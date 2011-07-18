@@ -13,14 +13,16 @@
 #import "iOSSocial.h"
 #import "InstagramConstants.h"
 
+static GTMOAuth2Authentication *auth = nil;
+
 @interface Instagram ()
 
 @property(nonatomic, readwrite, retain) NSString *clientID;
 @property(nonatomic, readwrite, retain) NSString *clientSecret;
 @property(nonatomic, readwrite, retain) NSString *keychainItemName;
 @property(nonatomic, readwrite, retain) NSString *redirectURI;
-@property(nonatomic, readwrite, retain) GTMOAuth2Authentication *auth;
 @property(nonatomic, readwrite, retain) UIViewController *viewController;
+@property(nonatomic, copy)      AuthorizationHandler authenticationHandler;
 
 - (void)checkAuthentication;
 - (GTMOAuth2Authentication *)authForCustomService;
@@ -33,8 +35,8 @@
 @synthesize clientSecret;
 @synthesize keychainItemName;
 @synthesize redirectURI;
-@synthesize auth;
 @synthesize viewController;
+@synthesize authenticationHandler;
 
 - (id)init
 {
@@ -77,47 +79,38 @@
             iOSSLog(@"%@", str);
         }
         
-        self.auth = nil;
+        if (self.authenticationHandler) {
+            self.authenticationHandler(nil, error);
+            self.authenticationHandler = nil;
+        }
         
-        //[self dismissModalViewControllerAnimated:YES];
+        auth = nil;
         
-        //notify error
+        [self.viewController dismissModalViewControllerAnimated:YES];
     } else {
         // Authentication succeeded
         
-        //get the local user and initialize it with the dictionary? or let it init itself?
-        
-        //cwnote: need to save these goodes. NSUserDefaults?
-        /*
         NSDictionary *dictionary = auth.parameters;
-        NSDictionary *user = [dictionary objectForKey:@"user"];
-        if (user) {
-            NSString *bio = [user objectForKey:@"bio"];
-            NSString *fullName = [user objectForKey:@"full_name"];
-            //id id = 4885060;
-            NSString *profilePictureURLString = [user objectForKey:@"profile_picture"];
-            NSURL *imageURL = [NSURL URLWithString:profilePictureURLString];
-            UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:imageURL]];
-            //self.imageView.image = image;
-            NSString *username = [user objectForKey:@"username"];
-            NSString *website = [user objectForKey:@"website"];
+        if (self.authenticationHandler) {
+            self.authenticationHandler(dictionary, nil);
+            self.authenticationHandler = nil;
         }
-        */
-        self.auth = newAuth;
-        [self.viewController dismissModalViewControllerAnimated:YES];
         
-        //notify success?
+        auth = newAuth;
+        [self.viewController dismissModalViewControllerAnimated:YES];
     }
 }
 
 
 - (void)authorizeWithScope:(NSString *)scope 
-        fromViewController:(UIViewController*)vc
+        fromViewController:(UIViewController*)vc 
+     withCompletionHandler:(AuthorizationHandler)completionHandler
 {
     self.viewController = vc;
+    self.authenticationHandler = completionHandler;
     
-    self.auth = [self authForCustomService];
-    self.auth.scope = scope;
+    auth = [self authForCustomService];
+    auth.scope = scope;
     
     NSURL *authURL = [NSURL URLWithString:@"https://api.instagram.com/oauth/authorize"];
     
@@ -142,7 +135,7 @@
 
 - (BOOL)isSessionValid
 {
-    BOOL isSignedIn = self.auth.canAuthorize;;
+    BOOL isSignedIn = auth.canAuthorize;;
     return isSignedIn;
 }
 
@@ -177,21 +170,29 @@
                                                     authentication:newAuth];
     }
 
-    self.auth = newAuth;
+    auth = newAuth;
 }
 
 - (void)logout
 {
-    if ([self.auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
+    if ([auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
         // remove the token from Google's servers
-        [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.auth];
+        [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:auth];
     }
     
     // remove the stored Google authentication from the keychain, if any
     [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:self.keychainItemName];
     
     // Discard our retained authentication object.
-    self.auth = nil;
+    auth = nil;
+}
+
++ (NSURL*)authorizeURL:(NSURL*)URL
+{
+    NSString *access_token = [NSString stringWithFormat:@"?access_token=%@", auth.accessToken];
+    NSURL *url = [NSURL URLWithString:access_token relativeToURL:URL];
+    
+    return url;
 }
 
 @end

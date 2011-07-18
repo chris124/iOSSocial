@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "InstagramUser.h"
 
 typedef void(^AuthenticationHandler)(NSError *error);
 
 @class SocialManager;
-@interface LocalInstagramUser : NSObject
+@interface LocalInstagramUser : InstagramUser
 
 // Obtain the LocalInstagramUser object.
 // The user is only available for offline use until logged in.
@@ -42,6 +43,16 @@ typedef void(^AuthenticationHandler)(NSError *error);
 
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
+
+- (void)fetchFeed;
+
+- (void)fetchLikedMedia;
+
+- (void)fetchRelationshipToUser;
+
+- (void)fetchRequestedBy;
+
+- (void)modifyRelationshipToUser;
 
 // These methods make it easy to interact with the instagram app on the user's device.
 + (void)instagram;

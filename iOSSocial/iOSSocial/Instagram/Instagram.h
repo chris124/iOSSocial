@@ -9,19 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef void(^AuthorizationHandler)(NSDictionary *userInfo, NSError *error);
+
 @interface Instagram : NSObject
 
 // See InstagramConstants.h for the Keys for this dictionary.
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 
 - (void)authorizeWithScope:(NSString *)scope 
-        fromViewController:(UIViewController*)vc;
-
-//- (void)authorize:(NSArray *)permissions
-//         delegate:(id<FBSessionDelegate>)delegate;
+        fromViewController:(UIViewController*)vc 
+     withCompletionHandler:(AuthorizationHandler)completionHandler;
 
 - (BOOL)isSessionValid;
 
 - (void)logout;
+
++ (NSURL*)authorizeURL:(NSURL*)URL;
 
 @end

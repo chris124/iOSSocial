@@ -52,4 +52,15 @@ typedef void(^LoadPhotoHandler)(UIImage *photo, NSError *error);
 // 1. Communications failure
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler;
 
+- (void)fetchUserData;
+
+- (void)fetchRecentMedia;
+
+- (void)fetchFollows;
+
+- (void)fetchFollowedBy;
+
+//search for a user...q and count param
++ (void)searchUsers;
+
 @end

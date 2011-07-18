@@ -7,22 +7,8 @@
 //
 
 #import "InstagramUser.h"
-
-@interface InstagramUser ()
-
-@property(nonatomic, readwrite, retain) NSString *userID;
-@property(nonatomic, readwrite, retain) NSString *alias;
-@property(nonatomic, readwrite, retain) NSString *firstName;
-@property(nonatomic, readwrite, retain) NSString *lastName;
-@property(nonatomic, readwrite, retain) NSString *profilePictureURL;
-@property(nonatomic, readwrite, retain) NSString *bio;
-@property(nonatomic, readwrite, retain) NSString *website;
-@property(nonatomic, readwrite, assign) NSInteger mediaCount;
-@property(nonatomic, readwrite, assign) NSInteger followsCount;
-@property(nonatomic, readwrite, assign) NSInteger followedByCount;
-@property (nonatomic, copy)             LoadPhotoHandler loadPhotoHandler;
-
-@end
+#import "InstagramUser+Private.h"
+#import "IGRequest.h"
 
 @implementation InstagramUser
 
@@ -82,6 +68,126 @@
     FBRequest *request = [[SocialManager socialManager].facebook requestWithGraphPath:path andDelegate:self];
     [self recordRequest:request withType:FBUserPictureRequestType];
     */
+    
+    //NSURL *imageURL = [NSURL URLWithString:profilePictureURLString];
+    //UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:imageURL]];
+    //self.imageView.image = image;
+}
+
+- (void)fetchUserData
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/", self.userID];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    IGRequest *request = [[IGRequest alloc] initWithURL:url  
+                                             parameters:nil 
+                                          requestMethod:IGRequestMethodGET];
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            //
+            int i = 0;
+            i = 1;
+        } else {
+            //
+            
+            NSString *jsonStr = [[NSString alloc] initWithData:responseData
+                                                      encoding:NSUTF8StringEncoding];
+            /*
+             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
+             */
+            
+            int i = 0;
+            i = 1;
+        }
+    }];
+}
+
+- (void)fetchRecentMedia
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent", self.userID];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    IGRequest *request = [[IGRequest alloc] initWithURL:url  
+                                             parameters:nil 
+                                          requestMethod:IGRequestMethodGET];
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            //
+            int i = 0;
+            i = 1;
+        } else {
+            //
+            
+            NSString *jsonStr = [[NSString alloc] initWithData:responseData
+                                                      encoding:NSUTF8StringEncoding];
+            /*
+             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
+             */
+            
+            int i = 0;
+            i = 1;
+        }
+    }];
+}
+
+- (void)fetchFollows
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/follows", self.userID];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    IGRequest *request = [[IGRequest alloc] initWithURL:url  
+                                             parameters:nil 
+                                          requestMethod:IGRequestMethodGET];
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            //
+            int i = 0;
+            i = 1;
+        } else {
+            //
+            
+            NSString *jsonStr = [[NSString alloc] initWithData:responseData
+                                                      encoding:NSUTF8StringEncoding];
+            /*
+             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
+             */
+            
+            int i = 0;
+            i = 1;
+        }
+    }];
+}
+
+- (void)fetchFollowedBy
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/followed-by", self.userID];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    IGRequest *request = [[IGRequest alloc] initWithURL:url  
+                                             parameters:nil 
+                                          requestMethod:IGRequestMethodGET];
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            //
+            int i = 0;
+            i = 1;
+        } else {
+            //
+            
+            NSString *jsonStr = [[NSString alloc] initWithData:responseData
+                                                      encoding:NSUTF8StringEncoding];
+            /*
+             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
+             */
+            
+            int i = 0;
+            i = 1;
+        }
+    }];
 }
 
 @end
