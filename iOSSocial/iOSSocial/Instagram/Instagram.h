@@ -26,4 +26,6 @@ typedef void(^AuthorizationHandler)(NSDictionary *userInfo, NSError *error);
 
 + (NSURL*)authorizeURL:(NSURL*)URL;
 
++ (id)JSONFromData:(NSData*)data;
+
 @end

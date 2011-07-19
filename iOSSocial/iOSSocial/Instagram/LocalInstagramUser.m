@@ -11,6 +11,7 @@
 #import "iOSSocial.h"
 #import "IGRequest.h"
 #import "InstagramUser+Private.h"
+#import "NSUserDefaults+iOSSAdditions.h"
 
 static LocalInstagramUser *localInstagramUser = nil;
 
@@ -41,6 +42,21 @@ static LocalInstagramUser *localInstagramUser = nil;
     self = [super init];
     if (self) {
         // Initialization code here.
+        NSDictionary *localUserDictionary = [[NSUserDefaults standardUserDefaults] ioss_instagramUserDictionary];
+        if (localUserDictionary) {
+            self.userDictionary = localUserDictionary;
+            /*
+            NSDictionary *user = [localUserDictionary objectForKey:@"user"];
+            if (user) {
+                self.bio = [user objectForKey:@"bio"];
+                //NSString *fullName = [user objectForKey:@"full_name"];
+                self.userID = [user objectForKey:@"id"];
+                self.profilePictureURL = [user objectForKey:@"profile_picture"];
+                self.alias = [user objectForKey:@"username"];
+                self.website = [user objectForKey:@"website"];
+            }
+            */
+        }
     }
     
     return self;
@@ -72,20 +88,8 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            //
-            int i = 0;
-            i = 1;
         } else {
-            //
-            
-            NSString *jsonStr = [[NSString alloc] initWithData:responseData
-                                                      encoding:NSUTF8StringEncoding];
-            /*
-             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
-             */
-            
-            int i = 0;
-            i = 1;
+            //id obj = [Instagram JSONFromData:responseData];
         }
     }];
 }
@@ -102,20 +106,8 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            //
-            int i = 0;
-            i = 1;
         } else {
-            //
-            
-            NSString *jsonStr = [[NSString alloc] initWithData:responseData
-                                                      encoding:NSUTF8StringEncoding];
-            /*
-             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
-             */
-            
-            int i = 0;
-            i = 1;
+            //id obj = [Instagram JSONFromData:responseData];
         }
     }];
 }
@@ -130,20 +122,8 @@ static LocalInstagramUser *localInstagramUser = nil;
 
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            //
-            int i = 0;
-            i = 1;
         } else {
-            //
-            
-            NSString *jsonStr = [[NSString alloc] initWithData:responseData
-                                                       encoding:NSUTF8StringEncoding];
-            /*
-            {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
-            */
-            
-            int i = 0;
-            i = 1;
+            //id obj = [Instagram JSONFromData:responseData];
         }
     }];
 }
@@ -162,20 +142,8 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            //
-            int i = 0;
-            i = 1;
         } else {
-            //
-            
-            NSString *jsonStr = [[NSString alloc] initWithData:responseData
-                                                      encoding:NSUTF8StringEncoding];
-            /*
-             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
-             */
-            
-            int i = 0;
-            i = 1;
+            //id obj = [Instagram JSONFromData:responseData];
         }
     }];
 }
@@ -194,20 +162,8 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            //
-            int i = 0;
-            i = 1;
         } else {
-            //
-            
-            NSString *jsonStr = [[NSString alloc] initWithData:responseData
-                                                      encoding:NSUTF8StringEncoding];
-            /*
-             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
-             */
-            
-            int i = 0;
-            i = 1;
+            //id obj = [Instagram JSONFromData:responseData];
         }
     }];
 }
@@ -215,6 +171,13 @@ static LocalInstagramUser *localInstagramUser = nil;
 - (void)modifyRelationshipToUser
 {
     //POST /users/{user-id}/relationship
+}
+
+- (void)setUserDictionary:(NSDictionary *)theUserDictionary
+{
+    [super setUserDictionary:theUserDictionary];
+    
+    [[NSUserDefaults standardUserDefaults] ioss_setInstagramUserDictionary:theUserDictionary];
 }
 
 - (void)authenticateWithScope:(NSString*)scope 
@@ -234,14 +197,7 @@ static LocalInstagramUser *localInstagramUser = nil;
                                                 
                                             } else {
                                                 NSDictionary *user = [userInfo objectForKey:@"user"];
-                                                if (user) {
-                                                    self.bio = [user objectForKey:@"bio"];
-                                                    NSString *fullName = [user objectForKey:@"full_name"];
-                                                    self.userID = [user objectForKey:@"id"];
-                                                    self.profilePictureURL = [user objectForKey:@"profile_picture"];
-                                                    self.alias = [user objectForKey:@"username"];
-                                                    self.website = [user objectForKey:@"website"];
-                                                }
+                                                self.userDictionary = user;
                                             }
                                             
                                             self.authenticationHandler = nil;
@@ -251,7 +207,7 @@ static LocalInstagramUser *localInstagramUser = nil;
                                             //[self fetchLikedMedia];
                                             //[self fetchRelationshipToUser];
                                             //[self fetchRequestedBy];
-                                            [self fetchRecentMedia];
+                                            //[self fetchRecentMedia];
                                             //[self fetchFollows];
                                             //[self fetchFollowedBy];
                                         }];

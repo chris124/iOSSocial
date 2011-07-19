@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class InstagramMediaCollection;
+
 typedef void(^LoadPhotoHandler)(UIImage *photo, NSError *error);
+typedef void(^FetchMediaHandler)(InstagramMediaCollection *collection, NSError *error);
+typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 
 @interface InstagramUser : NSObject
 
@@ -54,13 +58,13 @@ typedef void(^LoadPhotoHandler)(UIImage *photo, NSError *error);
 
 - (void)fetchUserData;
 
-- (void)fetchRecentMedia;
+- (void)fetchRecentMediaWithCompletionHandler:(FetchMediaHandler)completionHandler;
 
-- (void)fetchFollows;
+- (void)fetchFollowsWithCompletionHandler:(FetchUsersHandler)completionHandler;
 
-- (void)fetchFollowedBy;
+- (void)fetchFollowedByWithCompletionHandler:(FetchUsersHandler)completionHandler;
 
 //search for a user...q and count param
-+ (void)searchUsers;
++ (void)searchUsersWithCompletionHandler:(FetchUsersHandler)completionHandler;
 
 @end

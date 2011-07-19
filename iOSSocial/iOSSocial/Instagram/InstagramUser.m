@@ -9,9 +9,20 @@
 #import "InstagramUser.h"
 #import "InstagramUser+Private.h"
 #import "IGRequest.h"
+#import "Instagram.h"
+#import "InstagramMediaCollection.h"
+
+@interface InstagramUser ()
+
+@property(nonatomic, copy)      LoadPhotoHandler loadPhotoHandler;
+@property(nonatomic, copy)      FetchMediaHandler fetchMediaHandler;
+@property(nonatomic, copy)      FetchUsersHandler   fetchUsersHandler;
+
+@end
 
 @implementation InstagramUser
 
+@synthesize userDictionary;
 @synthesize userID;
 @synthesize alias;
 @synthesize firstName;
@@ -23,6 +34,8 @@
 @synthesize followsCount;
 @synthesize followedByCount;
 @synthesize loadPhotoHandler;
+@synthesize fetchMediaHandler;
+@synthesize fetchUsersHandler;
 
 - (id)init
 {
@@ -34,28 +47,36 @@
     return self;
 }
 
-- (id)initWithDictionary:(NSDictionary*)userDictionary
+- (id)initWithDictionary:(NSDictionary*)theUserDictionary
 {
     self = [self init];
     if (self) {
         // Initialization code here.
-        self.userID = [userDictionary objectForKey:@"id"];
-        self.alias = [userDictionary objectForKey:@"username"];
-        self.firstName = [userDictionary objectForKey:@"first_name"];
-        self.lastName = [userDictionary objectForKey:@"last_name"];
-        self.profilePictureURL = [userDictionary objectForKey:@"profile_picture"];
-        self.bio = [userDictionary objectForKey:@"bio"];
-        self.website = [userDictionary objectForKey:@"website"];
-        
-        NSDictionary *counts = [userDictionary objectForKey:@"counts"];
-        if (counts) {
-            //self.mediaCount = [counts objectForKey:@"media"];
-            //self.followsCount = [counts objectForKey:@"follows"];
-            //self.followedByCount = [counts objectForKey:@"followed_by"];
-        }
+        self.userDictionary = theUserDictionary;
     }
     
     return self;
+}
+
+- (void)setUserDictionary:(NSDictionary *)theUserDictionary
+{
+    userDictionary = theUserDictionary;
+    
+    self.userID = [theUserDictionary objectForKey:@"id"];
+    self.alias = [theUserDictionary objectForKey:@"username"];
+    self.firstName = [theUserDictionary objectForKey:@"first_name"];
+    self.lastName = [theUserDictionary objectForKey:@"last_name"];
+    self.profilePictureURL = [theUserDictionary objectForKey:@"profile_picture"];
+    self.bio = [theUserDictionary objectForKey:@"bio"];
+    self.website = [theUserDictionary objectForKey:@"website"];
+    
+    NSDictionary *counts = [userDictionary objectForKey:@"counts"];
+    if (counts) {
+        //self.mediaCount = [counts objectForKey:@"media"];
+        //self.followsCount = [counts objectForKey:@"follows"];
+        //self.followedByCount = [counts objectForKey:@"followed_by"];
+    }
+
 }
 
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler
@@ -85,26 +106,16 @@
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            //
-            int i = 0;
-            i = 1;
         } else {
-            //
-            
-            NSString *jsonStr = [[NSString alloc] initWithData:responseData
-                                                      encoding:NSUTF8StringEncoding];
-            /*
-             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
-             */
-            
-            int i = 0;
-            i = 1;
+            //id obj = [Instagram JSONFromData:responseData];
         }
     }];
 }
 
-- (void)fetchRecentMedia
+- (void)fetchRecentMediaWithCompletionHandler:(FetchMediaHandler)completionHandler
 {
+    self.fetchMediaHandler = completionHandler;
+    
     NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -114,26 +125,32 @@
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            //
-            int i = 0;
-            i = 1;
+            if (self.fetchMediaHandler) {
+                self.fetchMediaHandler(nil, error);
+                self.fetchMediaHandler = nil;
+            }
         } else {
-            //
-            
-            NSString *jsonStr = [[NSString alloc] initWithData:responseData
-                                                      encoding:NSUTF8StringEncoding];
-            /*
-             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
-             */
-            
-            int i = 0;
-            i = 1;
+            if (responseData) {
+                NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+                
+                InstagramMediaCollection *collection = [[InstagramMediaCollection alloc] initWithDictionary:dictionary];
+                collection.name = [NSString stringWithFormat:@"%@ Feed", self.alias];
+                
+                //call completion handler with error
+                if (self.fetchMediaHandler) {
+                    self.fetchMediaHandler(collection, nil);
+                    self.fetchMediaHandler = nil;
+                }
+
+            }
         }
     }];
 }
 
-- (void)fetchFollows
+- (void)fetchFollowsWithCompletionHandler:(FetchUsersHandler)completionHandler
 {
+    self.fetchUsersHandler = completionHandler;
+    
     NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/follows", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -143,26 +160,34 @@
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            //
-            int i = 0;
-            i = 1;
+            if (self.fetchUsersHandler) {
+                self.fetchUsersHandler(nil, error);
+                self.fetchUsersHandler = nil;
+            }
         } else {
-            //
+            //id obj = [Instagram JSONFromData:responseData];
             
-            NSString *jsonStr = [[NSString alloc] initWithData:responseData
-                                                      encoding:NSUTF8StringEncoding];
-            /*
-             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
-             */
-            
-            int i = 0;
-            i = 1;
+            if (responseData) {
+                NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+                
+                //InstagramMediaCollection *collection = [[InstagramMediaCollection alloc] initWithDictionary:dictionary];
+                //collection.name = [NSString stringWithFormat:@"%@ Feed", self.alias];
+                
+                //call completion handler with error
+                if (self.fetchUsersHandler) {
+                    self.fetchUsersHandler(nil, nil);
+                    self.fetchUsersHandler = nil;
+                }
+                
+            }
         }
     }];
 }
 
-- (void)fetchFollowedBy
+- (void)fetchFollowedByWithCompletionHandler:(FetchUsersHandler)completionHandler
 {
+    self.fetchUsersHandler = completionHandler;
+    
     NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/followed-by", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -172,22 +197,33 @@
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            //
-            int i = 0;
-            i = 1;
+            if (self.fetchUsersHandler) {
+                self.fetchUsersHandler(nil, error);
+                self.fetchUsersHandler = nil;
+            }
         } else {
-            //
+            //id obj = [Instagram JSONFromData:responseData];
             
-            NSString *jsonStr = [[NSString alloc] initWithData:responseData
-                                                      encoding:NSUTF8StringEncoding];
-            /*
-             {"meta": {"code": 200}, "data": {"username": "mrchristopher124", "bio": "", "website": "", "profile_picture": "http://images.instagram.com/profiles/profile_4885060_75sq_1308681839.jpg", "full_name": "", "counts": {"media": 9, "followed_by": 15, "follows": 40}, "id": "4885060"}}
-             */
-            
-            int i = 0;
-            i = 1;
+            if (responseData) {
+                NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+                
+                //InstagramMediaCollection *collection = [[InstagramMediaCollection alloc] initWithDictionary:dictionary];
+                //collection.name = [NSString stringWithFormat:@"%@ Feed", self.alias];
+                
+                //call completion handler with error
+                if (self.fetchUsersHandler) {
+                    self.fetchUsersHandler(nil, nil);
+                    self.fetchUsersHandler = nil;
+                }
+                
+            }
         }
     }];
+}
+
++ (void)searchUsersWithCompletionHandler:(FetchUsersHandler)completionHandler
+{
+    
 }
 
 @end

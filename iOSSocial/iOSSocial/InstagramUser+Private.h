@@ -8,6 +8,7 @@
 
 @interface InstagramUser ()
 
+@property(nonatomic, readwrite, retain) NSDictionary *userDictionary;
 @property(nonatomic, readwrite, retain) NSString *userID;
 @property(nonatomic, readwrite, retain) NSString *alias;
 @property(nonatomic, readwrite, retain) NSString *firstName;
@@ -18,6 +19,5 @@
 @property(nonatomic, readwrite, assign) NSInteger mediaCount;
 @property(nonatomic, readwrite, assign) NSInteger followsCount;
 @property(nonatomic, readwrite, assign) NSInteger followedByCount;
-@property (nonatomic, copy)             LoadPhotoHandler loadPhotoHandler;
 
 @end
