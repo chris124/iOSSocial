@@ -9,13 +9,31 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@class InstagramMediaCollection;
+@protocol IGUserSource;
 
+@protocol IGUser <NSObject>
+
+/**
+ * The photo source that the photo belongs to.
+ */
+@property (nonatomic, assign) id<IGUserSource> userSource;
+
+/**
+ * The index of the user within its photo source.
+ */
+@property (nonatomic) NSInteger index;
+
+@end
+
+@class InstagramMediaCollection;
+@class InstagramUserCollection;
+
+typedef void(^FetchUserDataHandler)(NSError *error);
 typedef void(^LoadPhotoHandler)(UIImage *photo, NSError *error);
 typedef void(^FetchMediaHandler)(InstagramMediaCollection *collection, NSError *error);
-typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
+typedef void(^FetchUsersHandler)(InstagramUserCollection *users, NSError *error);
 
-@interface InstagramUser : NSObject
+@interface InstagramUser : NSObject <IGUser>
 
 //cwnote: should alias be copied?
 @property(nonatomic, readonly, retain)  NSString *userID;               // Invariant user identifier.
@@ -29,6 +47,11 @@ typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 @property(nonatomic, readonly, assign)  NSInteger followsCount;         // The user's number of people they follow
 @property(nonatomic, readonly, assign)  NSInteger followedByCount;      // The user's total number of followers
 //@property(nonatomic, readonly)          BOOL isFriend;          // True if this user is a friend of the local user
+
+/**
+ * The photo source that the photo belongs to.
+ */
+@property (nonatomic, assign) id<IGUserSource> userSource;
 
 // Initialize a user with a dictionary object. The definition for the dictionary can be found here:
 // http://instagram.com/developer/endpoints/users/
@@ -56,7 +79,7 @@ typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 // 1. Communications failure
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler;
 
-- (void)fetchUserData;
+- (void)fetchUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler;
 
 - (void)fetchRecentMediaWithCompletionHandler:(FetchMediaHandler)completionHandler;
 

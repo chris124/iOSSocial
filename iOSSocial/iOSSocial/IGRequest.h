@@ -21,6 +21,7 @@ typedef enum IGRequestMethod IGRequestMethod;
 typedef void(^IGRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error);
 
 @interface IGRequest : NSObject {
+    BOOL    requiresAuthentication;
 }
 
 - (id)initWithURL:(NSURL *)url 
@@ -31,6 +32,7 @@ typedef void(^IGRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlResp
 @property(nonatomic, readonly, retain) NSDictionary *parameters;
 @property(nonatomic, readonly, assign) IGRequestMethod requestMethod;
 @property(nonatomic, readonly, retain) NSURL *URL;
+@property(nonatomic, assign)    BOOL requiresAuthentication;
 
 - (void)addMultiPartData:(NSData *)data 
                 withName:(NSString *)name 

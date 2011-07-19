@@ -34,12 +34,14 @@
 @synthesize URL=_URL;
 @synthesize requestHandler;
 @synthesize connection;
+@synthesize requiresAuthentication;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         // Initialization code here.
+        requiresAuthentication = YES;
     }
     
     return self;
@@ -76,7 +78,9 @@
 {
     self.requestHandler = handler;
     
-    self.URL = [self authorizedURL];
+    if (self.requiresAuthentication) {
+        self.URL = [self authorizedURL];
+    }
 
     switch (self.requestMethod) {
         case IGRequestMethodGET:

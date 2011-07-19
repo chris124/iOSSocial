@@ -44,9 +44,9 @@ typedef void(^AuthenticationHandler)(NSError *error);
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 
-- (void)fetchFeed;
+- (void)fetchFeedWithCompletionHandler:(FetchMediaHandler)completionHandler;
 
-- (void)fetchLikedMedia;
+- (void)fetchLikedMediaWithCompletionHandler:(FetchMediaHandler)completionHandler;
 
 - (void)fetchRelationshipToUser;
 

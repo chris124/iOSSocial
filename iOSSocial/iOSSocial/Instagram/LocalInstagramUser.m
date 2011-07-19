@@ -12,6 +12,7 @@
 #import "IGRequest.h"
 #import "InstagramUser+Private.h"
 #import "NSUserDefaults+iOSSAdditions.h"
+#import "InstagramMediaCollection.h"
 
 static LocalInstagramUser *localInstagramUser = nil;
 
@@ -45,17 +46,6 @@ static LocalInstagramUser *localInstagramUser = nil;
         NSDictionary *localUserDictionary = [[NSUserDefaults standardUserDefaults] ioss_instagramUserDictionary];
         if (localUserDictionary) {
             self.userDictionary = localUserDictionary;
-            /*
-            NSDictionary *user = [localUserDictionary objectForKey:@"user"];
-            if (user) {
-                self.bio = [user objectForKey:@"bio"];
-                //NSString *fullName = [user objectForKey:@"full_name"];
-                self.userID = [user objectForKey:@"id"];
-                self.profilePictureURL = [user objectForKey:@"profile_picture"];
-                self.alias = [user objectForKey:@"username"];
-                self.website = [user objectForKey:@"website"];
-            }
-            */
         }
     }
     
@@ -76,11 +66,12 @@ static LocalInstagramUser *localInstagramUser = nil;
     return YES;
 }
 
-- (void)fetchFeed
+- (void)fetchFeedWithCompletionHandler:(FetchMediaHandler)completionHandler
 {
-    //return array of media objects
+    self.fetchMediaHandler = completionHandler;
     
-    NSURL *url = [NSURL URLWithString:@"https://api.instagram.com/v1/users/self/feed"];
+    NSString *urlString = @"https://api.instagram.com/v1/users/self/feed";
+    NSURL *url = [NSURL URLWithString:urlString];
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
@@ -88,17 +79,34 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
+            if (self.fetchMediaHandler) {
+                self.fetchMediaHandler(nil, error);
+                self.fetchMediaHandler = nil;
+            }
         } else {
-            //id obj = [Instagram JSONFromData:responseData];
+            if (responseData) {
+                NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+                
+                InstagramMediaCollection *collection = [[InstagramMediaCollection alloc] initWithDictionary:dictionary];
+                collection.name = [NSString stringWithFormat:@"%@ Likes", self.alias];
+                
+                //call completion handler with error
+                if (self.fetchMediaHandler) {
+                    self.fetchMediaHandler(collection, nil);
+                    self.fetchMediaHandler = nil;
+                }
+                
+            }
         }
     }];
 }
 
-- (void)fetchLikedMedia
+- (void)fetchLikedMediaWithCompletionHandler:(FetchMediaHandler)completionHandler
 {
-    //return array of media objects
+    self.fetchMediaHandler = completionHandler;
     
-    NSURL *url = [NSURL URLWithString:@"https://api.instagram.com/v1/users/self/media/liked"];
+    NSString *urlString = @"https://api.instagram.com/v1/users/self/media/liked";
+    NSURL *url = [NSURL URLWithString:urlString];
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
@@ -106,35 +114,62 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
+            if (self.fetchMediaHandler) {
+                self.fetchMediaHandler(nil, error);
+                self.fetchMediaHandler = nil;
+            }
         } else {
-            //id obj = [Instagram JSONFromData:responseData];
+            if (responseData) {
+                NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+                
+                InstagramMediaCollection *collection = [[InstagramMediaCollection alloc] initWithDictionary:dictionary];
+                collection.name = [NSString stringWithFormat:@"%@ Likes", self.alias];
+                
+                //call completion handler with error
+                if (self.fetchMediaHandler) {
+                    self.fetchMediaHandler(collection, nil);
+                    self.fetchMediaHandler = nil;
+                }
+                
+            }
         }
     }];
 }
 
-- (void)fetchLocalUserData
+- (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
-    NSURL *url = [NSURL URLWithString:@"https://api.instagram.com/v1/users/self/"];
-
+    self.fetchUserDataHandler = completionHandler;
+    
+    NSString *urlString = @"https://api.instagram.com/v1/users/self/";
+    NSURL *url = [NSURL URLWithString:urlString];
+    
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
                                           requestMethod:IGRequestMethodGET];
-
+    
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(error);
+                self.fetchUserDataHandler = nil;
+            }
         } else {
-            //id obj = [Instagram JSONFromData:responseData];
+            NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+            self.userDictionary = dictionary;
+            
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler = nil;
+            }
         }
     }];
 }
 
-- (void)fetchRelationshipToUser
+- (void)fetchRelationshipToUser:(InstagramUser*)user
 {
-    ///users/{user-id}/relationship
-    
     //pass in user object. return relationship
-    
-    NSURL *url = [NSURL URLWithString:@"https://api.instagram.com/v1/users/samanthafarr/relationship"];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/relationship", user.userID];
+    NSURL *url = [NSURL URLWithString:urlString];
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
@@ -143,7 +178,12 @@ static LocalInstagramUser *localInstagramUser = nil;
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
         } else {
-            //id obj = [Instagram JSONFromData:responseData];
+            NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+            
+            //outgoing_status: Your relationship to the user. Can be "follows", "requested", "none". 
+            //incoming_status: A user's relationship to you. Can be "followed_by", "requested_by", "blocked_by_you", "none"
+            
+            int i = 0;
         }
     }];
 }
@@ -152,7 +192,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 {
     ///users/self/requested-by
     
-    //return array of user ids
+    //return InstagramUserCollection
     
     NSURL *url = [NSURL URLWithString:@"https://api.instagram.com/v1/users/self/requested-by"];
     
@@ -200,19 +240,13 @@ static LocalInstagramUser *localInstagramUser = nil;
                                                 self.userDictionary = user;
                                             }
                                             
-                                            self.authenticationHandler = nil;
-                                            
-                                            //[self fetchLocalUserData];
-                                            //[self fetchFeed];
-                                            //[self fetchLikedMedia];
-                                            //[self fetchRelationshipToUser];
-                                            //[self fetchRequestedBy];
-                                            //[self fetchRecentMedia];
-                                            //[self fetchFollows];
-                                            //[self fetchFollowedBy];
+                                            if (self.authenticationHandler) {
+                                                self.authenticationHandler(error);
+                                                self.authenticationHandler = nil;
+                                            }
                                         }];
     } else {
-        [self fetchLocalUserData];
+        [self fetchLocalUserDataWithCompletionHandler:nil];
     }
 }
 

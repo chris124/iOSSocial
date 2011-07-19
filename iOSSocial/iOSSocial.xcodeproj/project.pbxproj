@@ -32,6 +32,8 @@
 		1264A18A13D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18313D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1264A18E13D0974F0085E394 /* GTMHTTPFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A18C13D0974F0085E394 /* GTMHTTPFetcher.h */; };
 		1264A18F13D0974F0085E394 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		12DD953313D617ED00C2AA32 /* InstagramUserCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */; };
+		12DD953413D617ED00C2AA32 /* InstagramUserCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */; };
 		12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */; };
 		12E0ACCF13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */; };
 		12E0ACD613D0EE710025C3B7 /* InstagramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */; };
@@ -258,6 +260,8 @@
 		1264A18413D096FE0085E394 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		1264A18C13D0974F0085E394 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcher.h; path = "gtm-oauth2/HTTPFetcher/GTMHTTPFetcher.h"; sourceTree = "<group>"; };
 		1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcher.m; path = "gtm-oauth2/HTTPFetcher/GTMHTTPFetcher.m"; sourceTree = "<group>"; };
+		12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramUserCollection.h; sourceTree = "<group>"; };
+		12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUserCollection.m; sourceTree = "<group>"; };
 		12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+iOSSSubviewTraversal.h"; sourceTree = "<group>"; };
 		12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+iOSSSubviewTraversal.m"; sourceTree = "<group>"; };
 		12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramConstants.h; sourceTree = "<group>"; };
@@ -409,6 +413,8 @@
 				1264A16213D094E70085E394 /* LocalInstagramUser.h */,
 				1264A16313D094E70085E394 /* LocalInstagramUser.m */,
 				12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */,
+				12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */,
+				12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */,
 				12ECAC5913D4818300C1297B /* IGRequest.h */,
 				12ECAC5A13D4818300C1297B /* IGRequest.m */,
 				12ECACE113D4D39200C1297B /* InstagramMedia.h */,
@@ -584,6 +590,7 @@
 				12ECACE313D4D39200C1297B /* InstagramMedia.h in Headers */,
 				12ECACE813D4D3A300C1297B /* InstagramMediaCollection.h in Headers */,
 				12ECAF7713D5F38100C1297B /* NSUserDefaults+iOSSAdditions.h in Headers */,
+				12DD953313D617ED00C2AA32 /* InstagramUserCollection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,6 +859,7 @@
 				12ECACE413D4D39200C1297B /* InstagramMedia.m in Sources */,
 				12ECACE913D4D3A300C1297B /* InstagramMediaCollection.m in Sources */,
 				12ECAF7813D5F38100C1297B /* NSUserDefaults+iOSSAdditions.m in Sources */,
+				12DD953413D617ED00C2AA32 /* InstagramUserCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

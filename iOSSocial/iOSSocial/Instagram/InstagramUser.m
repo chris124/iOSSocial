@@ -11,11 +11,11 @@
 #import "IGRequest.h"
 #import "Instagram.h"
 #import "InstagramMediaCollection.h"
+#import "InstagramUserCollection.h"
 
 @interface InstagramUser ()
 
 @property(nonatomic, copy)      LoadPhotoHandler loadPhotoHandler;
-@property(nonatomic, copy)      FetchMediaHandler fetchMediaHandler;
 @property(nonatomic, copy)      FetchUsersHandler   fetchUsersHandler;
 
 @end
@@ -36,6 +36,9 @@
 @synthesize loadPhotoHandler;
 @synthesize fetchMediaHandler;
 @synthesize fetchUsersHandler;
+@synthesize fetchUserDataHandler;
+@synthesize index;
+@synthesize userSource;
 
 - (id)init
 {
@@ -83,20 +86,35 @@
 {
     self.loadPhotoHandler = completionHandler;
     
-    //a request has to be authorised
-    /*
-    NSString *path = [NSString stringWithFormat:@"%@/picture", self.userID];
-    FBRequest *request = [[SocialManager socialManager].facebook requestWithGraphPath:path andDelegate:self];
-    [self recordRequest:request withType:FBUserPictureRequestType];
-    */
+    NSString *urlString = self.profilePictureURL;
+    NSURL *url = [NSURL URLWithString:urlString];
     
-    //NSURL *imageURL = [NSURL URLWithString:profilePictureURLString];
-    //UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:imageURL]];
-    //self.imageView.image = image;
+    IGRequest *request = [[IGRequest alloc] initWithURL:url  
+                                             parameters:nil 
+                                          requestMethod:IGRequestMethodGET];
+    //turn off authentication
+    request.requiresAuthentication = NO;
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            if (self.loadPhotoHandler) {
+                self.loadPhotoHandler(nil, error);
+                self.loadPhotoHandler = nil;
+            }
+        } else {
+            UIImage *image = [UIImage imageWithData:responseData];
+            
+            if (self.loadPhotoHandler) {
+                self.loadPhotoHandler(image, nil);
+                self.loadPhotoHandler = nil;
+            }
+        }
+    }];
 }
 
-- (void)fetchUserData
+- (void)fetchUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
+    self.fetchUserDataHandler = completionHandler;
+    
     NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -106,8 +124,18 @@
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(error);
+                self.fetchUserDataHandler = nil;
+            }
         } else {
-            //id obj = [Instagram JSONFromData:responseData];
+            NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+            self.userDictionary = dictionary;
+            
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler = nil;
+            }
         }
     }];
 }
@@ -165,17 +193,15 @@
                 self.fetchUsersHandler = nil;
             }
         } else {
-            //id obj = [Instagram JSONFromData:responseData];
-            
             if (responseData) {
                 NSDictionary *dictionary = [Instagram JSONFromData:responseData];
                 
-                //InstagramMediaCollection *collection = [[InstagramMediaCollection alloc] initWithDictionary:dictionary];
+                InstagramUserCollection *collection = [[InstagramUserCollection alloc] initWithDictionary:dictionary];
                 //collection.name = [NSString stringWithFormat:@"%@ Feed", self.alias];
                 
                 //call completion handler with error
                 if (self.fetchUsersHandler) {
-                    self.fetchUsersHandler(nil, nil);
+                    self.fetchUsersHandler(collection, nil);
                     self.fetchUsersHandler = nil;
                 }
                 
@@ -202,17 +228,15 @@
                 self.fetchUsersHandler = nil;
             }
         } else {
-            //id obj = [Instagram JSONFromData:responseData];
-            
             if (responseData) {
                 NSDictionary *dictionary = [Instagram JSONFromData:responseData];
                 
-                //InstagramMediaCollection *collection = [[InstagramMediaCollection alloc] initWithDictionary:dictionary];
+                InstagramUserCollection *collection = [[InstagramUserCollection alloc] initWithDictionary:dictionary];
                 //collection.name = [NSString stringWithFormat:@"%@ Feed", self.alias];
                 
                 //call completion handler with error
                 if (self.fetchUsersHandler) {
-                    self.fetchUsersHandler(nil, nil);
+                    self.fetchUsersHandler(collection, nil);
                     self.fetchUsersHandler = nil;
                 }
                 
