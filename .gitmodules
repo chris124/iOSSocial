@@ -7,3 +7,6 @@
 [submodule "gtm-oauth2"]
 	path = gtm-oauth2
 	url = https://github.com/chris124/gtm-oauth2
+[submodule "gtm-http-fetcher"]
+	path = gtm-http-fetcher
+	url = git@github.com:chris124/gtm-http-fetcher.git
