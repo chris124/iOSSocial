@@ -1,40 +1,39 @@
 //
-//  Instagram.m
-//  InstaBeta
+//  Twitter.m
+//  iOSSocial
 //
-//  Created by Christopher White on 7/14/11.
+//  Created by Christopher White on 7/22/11.
 //  Copyright 2011 Mad Races, Inc. All rights reserved.
 //
 
-#import "Instagram.h"
-#import "GTMOAuth2Authentication.h"
-#import "GTMOAuth2ViewControllerTouch.h"
-#import "GTMOAuth2SignIn.h"
+#import "Twitter.h"
+#import "GTMOAuthAuthentication+TwitterAdditions.h"
+#import "GTMOAuthViewControllerTouch.h"
 #import "iOSSocial.h"
-#import "InstagramConstants.h"
+#import "TwitterConstants.h"
 
-static GTMOAuth2Authentication *auth = nil;
+static GTMOAuthAuthenticationWithTwitterAdditions *auth = nil;
 
-@interface IOSSOAuth2ParserClass : NSObject
+@interface IOSSOAuthParserClass : NSObject
 // just enough of SBJSON to be able to parse
 - (id)objectWithString:(NSString*)repr error:(NSError**)error;
 @end
 
-@interface Instagram ()
+@interface Twitter ()
 
 @property(nonatomic, readwrite, retain) NSString *clientID;
 @property(nonatomic, readwrite, retain) NSString *clientSecret;
 @property(nonatomic, readwrite, retain) NSString *keychainItemName;
 @property(nonatomic, readwrite, retain) NSString *redirectURI;
 @property(nonatomic, readwrite, retain) UIViewController *viewController;
-@property(nonatomic, copy)      InstagramAuthorizationHandler authenticationHandler;
+@property(nonatomic, copy)      AuthorizationHandler authenticationHandler;
 
 - (void)checkAuthentication;
-- (GTMOAuth2Authentication *)authForCustomService;
+- (GTMOAuthAuthenticationWithTwitterAdditions *)authForCustomService;
 
 @end
 
-@implementation Instagram
+@implementation Twitter
 
 @synthesize clientID;
 @synthesize clientSecret;
@@ -47,6 +46,7 @@ static GTMOAuth2Authentication *auth = nil;
 {
     self = [super init];
     if (self) {
+        // Initialization code here.
     }
     
     return self;
@@ -57,18 +57,18 @@ static GTMOAuth2Authentication *auth = nil;
     self = [self init];
     if (self) {
         // Initialization code here.
-        self.clientID           = [dictionary objectForKey:kSMInstagramClientID];
-        self.clientSecret       = [dictionary objectForKey:kSMInstagramClientSecret];
-        self.redirectURI        = [dictionary objectForKey:kSMInstagramRedirectURI];
-        self.keychainItemName   = [dictionary objectForKey:kSMInstagramKeychainItemName];
+        self.clientID           = [dictionary objectForKey:kSMTwitterClientID];
+        self.clientSecret       = [dictionary objectForKey:kSMTwitterClientSecret];
+        self.redirectURI        = [dictionary objectForKey:kSMTwitterRedirectURI];
+        self.keychainItemName   = [dictionary objectForKey:kSMTwitterKeychainItemName];
         [self checkAuthentication];
     }
     
     return self;
 }
 
-- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
-      finishedWithAuth:(GTMOAuth2Authentication *)newAuth
+- (void)viewController:(GTMOAuthViewControllerTouch *)viewController
+      finishedWithAuth:(GTMOAuthAuthenticationWithTwitterAdditions *)newAuth
                  error:(NSError *)error 
 {
     if (error != nil) {
@@ -93,22 +93,26 @@ static GTMOAuth2Authentication *auth = nil;
             self.authenticationHandler = nil;
         }
     } else {
-        // Authentication succeeded
         auth = newAuth;
         [self.viewController dismissModalViewControllerAnimated:YES];
-        
-        NSDictionary *dictionary = auth.parameters;
+
+        //cwnote: make these keys constants!!!
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        [dictionary setObject:newAuth.userID forKey:@"id"];
+        [dictionary setObject:newAuth.username forKey:@"username"];
+        [userInfo setObject:dictionary forKey:@"user"];
+
         if (self.authenticationHandler) {
-            self.authenticationHandler(dictionary, nil);
+            self.authenticationHandler(userInfo, nil);
             self.authenticationHandler = nil;
         }
     }
 }
 
-
 - (void)authorizeWithScope:(NSString *)scope 
         fromViewController:(UIViewController*)vc 
-     withCompletionHandler:(InstagramAuthorizationHandler)completionHandler
+     withCompletionHandler:(AuthorizationHandler)completionHandler
 {
     self.viewController = vc;
     self.authenticationHandler = completionHandler;
@@ -116,23 +120,30 @@ static GTMOAuth2Authentication *auth = nil;
     auth = [self authForCustomService];
     auth.scope = scope;
     
-    NSURL *authURL = [NSURL URLWithString:@"https://api.instagram.com/oauth/authorize"];
+    NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/oauth/request_token"];
+    NSURL *accessURL = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
+    NSURL *authorizeURL = [NSURL URLWithString:@"https://api.twitter.com/oauth/authorize"];
     
-    // Display the authentication view
-    GTMOAuth2ViewControllerTouch *oaViewController;
-    oaViewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:auth
-                                                                 authorizationURL:authURL
-                                                                 keychainItemName:self.keychainItemName
-                                                                         delegate:self
-                                                                 finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+    GTMOAuthAuthenticationWithTwitterAdditions *auth = [self authForCustomService];
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"touch" forKey:@"display"];
-    oaViewController.signIn.additionalAuthorizationParameters = params;
+    // set the callback URL to which the site should redirect, and for which
+    // the OAuth controller should look to determine when sign-in has
+    // finished or been canceled
+    //
+    // This URL does not need to be for an actual web page
+    [auth setCallback:self.redirectURI];
     
-    // Optional: display some html briefly before the sign-in page loads
-    NSString *html = @"<html><body bgcolor=silver><div align=center>Loading sign-in page...</div></body></html>";
-    oaViewController.initialHTMLString = html;
+    // Display the autentication view
+    GTMOAuthViewControllerTouch *oaViewController;
+    oaViewController = [[GTMOAuthViewControllerTouch alloc] initWithScope:scope
+                                                                  language:nil
+                                                           requestTokenURL:requestURL
+                                                         authorizeTokenURL:authorizeURL
+                                                            accessTokenURL:accessURL
+                                                            authentication:auth
+                                                            appServiceName:self.keychainItemName
+                                                                  delegate:self
+                                                          finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
     [self.viewController presentModalViewController:oaViewController animated:YES];
 }
@@ -143,17 +154,17 @@ static GTMOAuth2Authentication *auth = nil;
     return isSignedIn;
 }
 
-- (GTMOAuth2Authentication *)authForCustomService 
+- (GTMOAuthAuthenticationWithTwitterAdditions *)authForCustomService 
 {
+    GTMOAuthAuthenticationWithTwitterAdditions *newAuth;
+    newAuth = [[GTMOAuthAuthenticationWithTwitterAdditions alloc] initWithSignatureMethod:kGTMOAuthSignatureMethodHMAC_SHA1
+                                                                              consumerKey:self.clientID
+                                                                               privateKey:self.clientSecret];
     
-    NSURL *tokenURL = [NSURL URLWithString:@"https://api.instagram.com/oauth/access_token"];
+    // setting the service name lets us inspect the auth object later to know
+    // what service it is for
+    auth.serviceProvider = @"Twitter Service";
     
-    GTMOAuth2Authentication *newAuth;
-    newAuth = [GTMOAuth2Authentication authenticationWithServiceProvider:@"Instagram Service"
-                                                                tokenURL:tokenURL
-                                                             redirectURI:self.redirectURI
-                                                                clientID:self.clientID
-                                                            clientSecret:self.clientSecret];
     return newAuth;
 }
 
@@ -168,35 +179,32 @@ static GTMOAuth2Authentication *auth = nil;
      [nc addObserver:self selector:@selector(signInNetworkLostOrFound:) name:kGTMOAuth2NetworkFound object:nil];
      */
     
-    GTMOAuth2Authentication *newAuth = [self authForCustomService];
+    GTMOAuthAuthenticationWithTwitterAdditions *newAuth = [self authForCustomService];
     if (newAuth) {
-        [GTMOAuth2ViewControllerTouch authorizeFromKeychainForName:self.keychainItemName 
+        [GTMOAuthViewControllerTouch authorizeFromKeychainForName:self.keychainItemName 
                                                     authentication:newAuth];
     }
-
+    
     auth = newAuth;
 }
 
 - (void)logout
 {
-    if ([auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
+    if ([auth.serviceProvider isEqual:kGTMOAuthServiceProviderGoogle]) {
         // remove the token from Google's servers
-        [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:auth];
+        [GTMOAuthViewControllerTouch revokeTokenForGoogleAuthentication:auth];
     }
     
     // remove the stored Google authentication from the keychain, if any
-    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:self.keychainItemName];
+    [GTMOAuthViewControllerTouch removeParamsFromKeychainForName:self.keychainItemName];
     
     // Discard our retained authentication object.
     auth = nil;
 }
 
-+ (NSURL*)authorizeURL:(NSURL*)URL
++ (void)authorizeURLRequest:(NSMutableURLRequest*)URLRequest
 {
-    NSString *access_token = [NSString stringWithFormat:@"?access_token=%@", auth.accessToken];
-    NSURL *url = [NSURL URLWithString:access_token relativeToURL:URL];
-    
-    return url;
+    [auth authorizeRequest:URLRequest];
 }
 
 + (id)JSONFromData:(NSData*)data
@@ -213,9 +221,9 @@ static GTMOAuth2Authentication *auth = nil;
 #if DEBUG
         if (error) {
             NSString *str = [[NSString alloc] initWithData:data
-                                                   encoding:NSUTF8StringEncoding];
+                                                  encoding:NSUTF8StringEncoding];
             iOSSLog(@"NSJSONSerialization error %@ parsing %@",
-                  error, str);
+                    error, str);
         }
 #endif
         return obj;
@@ -226,15 +234,15 @@ static GTMOAuth2Authentication *auth = nil;
             jsonParseClass = NSClassFromString(@"SBJSON");
         }
         if (jsonParseClass) {
-            IOSSOAuth2ParserClass *parser = [[jsonParseClass alloc] init];
+            IOSSOAuthParserClass *parser = [[jsonParseClass alloc] init];
             NSString *jsonStr = [[NSString alloc] initWithData:data
-                                                       encoding:NSUTF8StringEncoding];
+                                                      encoding:NSUTF8StringEncoding];
             if (jsonStr) {
                 obj = [parser objectWithString:jsonStr error:&error];
 #if DEBUG
                 if (error) {
                     iOSSLog(@"%@ error %@ parsing %@", NSStringFromClass(jsonParseClass),
-                          error, jsonStr);
+                            error, jsonStr);
                 }
 #endif
                 return obj;

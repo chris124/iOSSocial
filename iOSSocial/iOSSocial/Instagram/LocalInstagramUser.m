@@ -18,7 +18,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 @interface LocalInstagramUser () 
 
-@property(nonatomic, copy)      AuthenticationHandler authenticationHandler;
+@property(nonatomic, copy)      InstagramAuthenticationHandler authenticationHandler;
 @property(nonatomic, retain)    Instagram *instagram;
 
 @end
@@ -189,9 +189,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 }
 
 - (void)fetchRequestedBy
-{
-    ///users/self/requested-by
-    
+{    
     //return InstagramUserCollection
     
     NSURL *url = [NSURL URLWithString:@"https://api.instagram.com/v1/users/self/requested-by"];
@@ -222,7 +220,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 - (void)authenticateWithScope:(NSString*)scope 
            fromViewController:(UIViewController*)vc 
-        withCompletionHandler:(AuthenticationHandler)completionHandler
+        withCompletionHandler:(InstagramAuthenticationHandler)completionHandler
 {
     //assert if instagram is nil. params have not been set!
     

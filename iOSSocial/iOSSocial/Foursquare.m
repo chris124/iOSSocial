@@ -1,17 +1,17 @@
 //
-//  Instagram.m
-//  InstaBeta
+//  Foursquare.m
+//  iOSSocial
 //
-//  Created by Christopher White on 7/14/11.
+//  Created by Christopher White on 7/22/11.
 //  Copyright 2011 Mad Races, Inc. All rights reserved.
 //
 
-#import "Instagram.h"
+#import "Foursquare.h"
 #import "GTMOAuth2Authentication.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2SignIn.h"
 #import "iOSSocial.h"
-#import "InstagramConstants.h"
+#import "FoursquareConstants.h"
 
 static GTMOAuth2Authentication *auth = nil;
 
@@ -20,21 +20,21 @@ static GTMOAuth2Authentication *auth = nil;
 - (id)objectWithString:(NSString*)repr error:(NSError**)error;
 @end
 
-@interface Instagram ()
+@interface Foursquare ()
 
 @property(nonatomic, readwrite, retain) NSString *clientID;
 @property(nonatomic, readwrite, retain) NSString *clientSecret;
 @property(nonatomic, readwrite, retain) NSString *keychainItemName;
 @property(nonatomic, readwrite, retain) NSString *redirectURI;
 @property(nonatomic, readwrite, retain) UIViewController *viewController;
-@property(nonatomic, copy)      InstagramAuthorizationHandler authenticationHandler;
+@property(nonatomic, copy)      FoursquareAuthorizationHandler authenticationHandler;
 
 - (void)checkAuthentication;
 - (GTMOAuth2Authentication *)authForCustomService;
 
 @end
 
-@implementation Instagram
+@implementation Foursquare
 
 @synthesize clientID;
 @synthesize clientSecret;
@@ -57,10 +57,10 @@ static GTMOAuth2Authentication *auth = nil;
     self = [self init];
     if (self) {
         // Initialization code here.
-        self.clientID           = [dictionary objectForKey:kSMInstagramClientID];
-        self.clientSecret       = [dictionary objectForKey:kSMInstagramClientSecret];
-        self.redirectURI        = [dictionary objectForKey:kSMInstagramRedirectURI];
-        self.keychainItemName   = [dictionary objectForKey:kSMInstagramKeychainItemName];
+        self.clientID           = [dictionary objectForKey:kSMFoursquareClientID];
+        self.clientSecret       = [dictionary objectForKey:kSMFoursquareClientSecret];
+        self.redirectURI        = [dictionary objectForKey:kSMFoursquareRedirectURI];
+        self.keychainItemName   = [dictionary objectForKey:kSMFoursquareKeychainItemName];
         [self checkAuthentication];
     }
     
@@ -108,7 +108,7 @@ static GTMOAuth2Authentication *auth = nil;
 
 - (void)authorizeWithScope:(NSString *)scope 
         fromViewController:(UIViewController*)vc 
-     withCompletionHandler:(InstagramAuthorizationHandler)completionHandler
+     withCompletionHandler:(FoursquareAuthorizationHandler)completionHandler
 {
     self.viewController = vc;
     self.authenticationHandler = completionHandler;
@@ -116,15 +116,15 @@ static GTMOAuth2Authentication *auth = nil;
     auth = [self authForCustomService];
     auth.scope = scope;
     
-    NSURL *authURL = [NSURL URLWithString:@"https://api.instagram.com/oauth/authorize"];
+    NSURL *authURL = [NSURL URLWithString:@"https://foursquare.com/oauth2/authorize"];
     
     // Display the authentication view
     GTMOAuth2ViewControllerTouch *oaViewController;
     oaViewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:auth
-                                                                 authorizationURL:authURL
-                                                                 keychainItemName:self.keychainItemName
-                                                                         delegate:self
-                                                                 finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+                                                                   authorizationURL:authURL
+                                                                   keychainItemName:self.keychainItemName
+                                                                           delegate:self
+                                                                   finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"touch" forKey:@"display"];
@@ -146,10 +146,10 @@ static GTMOAuth2Authentication *auth = nil;
 - (GTMOAuth2Authentication *)authForCustomService 
 {
     
-    NSURL *tokenURL = [NSURL URLWithString:@"https://api.instagram.com/oauth/access_token"];
+    NSURL *tokenURL = [NSURL URLWithString:@"https://foursquare.com/oauth2/access_token"];
     
     GTMOAuth2Authentication *newAuth;
-    newAuth = [GTMOAuth2Authentication authenticationWithServiceProvider:@"Instagram Service"
+    newAuth = [GTMOAuth2Authentication authenticationWithServiceProvider:@"Foursquare Service"
                                                                 tokenURL:tokenURL
                                                              redirectURI:self.redirectURI
                                                                 clientID:self.clientID
@@ -173,7 +173,7 @@ static GTMOAuth2Authentication *auth = nil;
         [GTMOAuth2ViewControllerTouch authorizeFromKeychainForName:self.keychainItemName 
                                                     authentication:newAuth];
     }
-
+    
     auth = newAuth;
 }
 
@@ -213,9 +213,9 @@ static GTMOAuth2Authentication *auth = nil;
 #if DEBUG
         if (error) {
             NSString *str = [[NSString alloc] initWithData:data
-                                                   encoding:NSUTF8StringEncoding];
+                                                  encoding:NSUTF8StringEncoding];
             iOSSLog(@"NSJSONSerialization error %@ parsing %@",
-                  error, str);
+                    error, str);
         }
 #endif
         return obj;
@@ -228,13 +228,13 @@ static GTMOAuth2Authentication *auth = nil;
         if (jsonParseClass) {
             IOSSOAuth2ParserClass *parser = [[jsonParseClass alloc] init];
             NSString *jsonStr = [[NSString alloc] initWithData:data
-                                                       encoding:NSUTF8StringEncoding];
+                                                      encoding:NSUTF8StringEncoding];
             if (jsonStr) {
                 obj = [parser objectWithString:jsonStr error:&error];
 #if DEBUG
                 if (error) {
                     iOSSLog(@"%@ error %@ parsing %@", NSStringFromClass(jsonParseClass),
-                          error, jsonStr);
+                            error, jsonStr);
                 }
 #endif
                 return obj;

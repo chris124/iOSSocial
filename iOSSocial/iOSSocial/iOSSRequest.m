@@ -1,31 +1,30 @@
 //
-//  IGRequest.m
-//  iOSSocial
+//  iOSSRequest.m
+//  InstaBeta
 //
-//  Created by Christopher White on 7/18/11.
+//  Created by Christopher White on 7/21/11.
 //  Copyright 2011 Mad Races, Inc. All rights reserved.
 //
 
-#import "IGRequest.h"
-#import "UIApplication+iOSSNetworkActivity.h"
+#import "iOSSRequest.h"
+//#import "UIApplication+iOSSNetworkActivity.h"
 #import "iOSSConnection.h"
-#import "Instagram.h"
 
-@interface IGRequest () {
+@interface iOSSRequest () {
     NSDictionary *_parameters;
-    IGRequestMethod _requestMethod;
+    iOSSRequestMethod _requestMethod;
     NSURL *_URL;
 }
 
 @property(nonatomic, readwrite, retain) NSDictionary *parameters;
-@property(nonatomic, readwrite, assign) IGRequestMethod requestMethod;
+@property(nonatomic, readwrite, assign) iOSSRequestMethod requestMethod;
 @property(nonatomic, readwrite, retain) NSURL *URL;
-@property(nonatomic, copy)      IGRequestHandler requestHandler;
+@property(nonatomic, copy)      iOSSRequestHandler requestHandler;
 @property(nonatomic, retain) iOSSConnection *connection;
 
 @end
 
-@implementation IGRequest
+@implementation iOSSRequest
 
 @synthesize parameters=_parameters;
 @synthesize requestMethod=_requestMethod;
@@ -47,7 +46,7 @@
 
 - (id)initWithURL:(NSURL *)url 
        parameters:(NSDictionary *)parameters 
-    requestMethod:(IGRequestMethod)requestMethod
+    requestMethod:(iOSSRequestMethod)requestMethod
 {
     self = [self init];
     if (self) {
@@ -69,19 +68,20 @@
 
 - (NSURL *)authorizedURL
 {
-    return [Instagram authorizeURL:self.URL];
+    return nil;
+    //return [Instagram authorizeURL:self.URL];
 }
 
-- (void)performRequestWithHandler:(IGRequestHandler)handler
+- (void)performRequestWithHandler:(iOSSRequestHandler)handler
 {
     self.requestHandler = handler;
     
     if (self.requiresAuthentication) {
         self.URL = [self authorizedURL];
     }
-
+    
     switch (self.requestMethod) {
-        case IGRequestMethodGET:
+        case iOSSRequestMethodGET:
         {
             self.connection = [iOSSConnection connectionWithURL:self.URL progressBlock:^(iOSSConnection *theConnection) {
                 if (theConnection) {
@@ -99,13 +99,13 @@
         }
             break;
             
-        case IGRequestMethodPOST:
+        case iOSSRequestMethodPOST:
         {
             
         }
             break;
             
-        case IGRequestMethodDELETE:
+        case iOSSRequestMethodDELETE:
         {
             
         }

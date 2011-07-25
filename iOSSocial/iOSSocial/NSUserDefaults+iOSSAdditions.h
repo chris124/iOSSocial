@@ -12,4 +12,8 @@
 
 @property (assign, getter=ioss_instagramUserDictionary, setter=ioss_setInstagramUserDictionary:) NSDictionary *ioss_instagramUserDictionary;
 
+@property (assign, getter=ioss_twitterUserDictionary, setter=ioss_setTwitterUserDictionary:) NSDictionary *ioss_twitterUserDictionary;
+
+@property (assign, getter=ioss_foursquareUserDictionary, setter=ioss_setFoursquareUserDictionary:) NSDictionary *ioss_foursquareUserDictionary;
+
 @end

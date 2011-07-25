@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120888D913D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 120888D713D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h */; };
+		120888DA13D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 120888D813D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m */; };
+		120888DE13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 120888DC13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h */; };
+		120888DF13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 120888DD13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m */; };
+		120888E213D7819300C0FB68 /* iOSSMultipartPOSTRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 120888E013D7819300C0FB68 /* iOSSMultipartPOSTRequest.h */; };
+		120888E313D7819300C0FB68 /* iOSSMultipartPOSTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 120888E113D7819300C0FB68 /* iOSSMultipartPOSTRequest.m */; };
 		1264A13013D08B900085E394 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A12F13D08B900085E394 /* Foundation.framework */; };
 		1264A13613D08B900085E394 /* iOSSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A13513D08B900085E394 /* iOSSocial.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1264A13E13D08B900085E394 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A13D13D08B900085E394 /* SenTestingKit.framework */; };
@@ -32,6 +38,40 @@
 		1264A18A13D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18313D096FE0085E394 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1264A18E13D0974F0085E394 /* GTMHTTPFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A18C13D0974F0085E394 /* GTMHTTPFetcher.h */; };
 		1264A18F13D0974F0085E394 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		126FE23113D9C28E00D72D46 /* iOSSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE22B13D9C28E00D72D46 /* iOSSLog.h */; };
+		126FE23213D9C28E00D72D46 /* iOSSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE22C13D9C28E00D72D46 /* iOSSLog.m */; };
+		126FE23313D9C28E00D72D46 /* iOSSRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE22D13D9C28E00D72D46 /* iOSSRequest.h */; };
+		126FE23413D9C28E00D72D46 /* iOSSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE22E13D9C28E00D72D46 /* iOSSRequest.m */; };
+		126FE23513D9C28E00D72D46 /* iOSSServicesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */; };
+		126FE23613D9C28E00D72D46 /* iOSSServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */; };
+		126FE24713D9C57100D72D46 /* GTMHTTPFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE23C13D9C57100D72D46 /* GTMHTTPFetcher.h */; };
+		126FE24813D9C57100D72D46 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE23D13D9C57100D72D46 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		126FE24913D9C57100D72D46 /* GTMOAuthAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE23F13D9C57100D72D46 /* GTMOAuthAuthentication.h */; };
+		126FE24A13D9C57100D72D46 /* GTMOAuthAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE24013D9C57100D72D46 /* GTMOAuthAuthentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		126FE24B13D9C57100D72D46 /* GTMOAuthSignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE24113D9C57100D72D46 /* GTMOAuthSignIn.h */; };
+		126FE24C13D9C57100D72D46 /* GTMOAuthSignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE24213D9C57100D72D46 /* GTMOAuthSignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		126FE24D13D9C57100D72D46 /* GTMOAuthViewControllerTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE24413D9C57100D72D46 /* GTMOAuthViewControllerTouch.h */; };
+		126FE24E13D9C57100D72D46 /* GTMOAuthViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE24513D9C57100D72D46 /* GTMOAuthViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		126FE25313D9C7DF00D72D46 /* LocalTwitterUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25113D9C7DF00D72D46 /* LocalTwitterUser.h */; };
+		126FE25413D9C7DF00D72D46 /* LocalTwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE25213D9C7DF00D72D46 /* LocalTwitterUser.m */; };
+		126FE25713D9C7F000D72D46 /* TwitterUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25513D9C7F000D72D46 /* TwitterUser.h */; };
+		126FE25813D9C7F000D72D46 /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE25613D9C7F000D72D46 /* TwitterUser.m */; };
+		126FE25B13D9CBEC00D72D46 /* Twitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25913D9CBEB00D72D46 /* Twitter.h */; };
+		126FE25C13D9CBEC00D72D46 /* Twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE25A13D9CBEB00D72D46 /* Twitter.m */; };
+		126FE25E13D9D15600D72D46 /* TwitterConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25D13D9D15500D72D46 /* TwitterConstants.h */; };
+		126FE26013D9D9F100D72D46 /* TwitterUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25F13D9D9F000D72D46 /* TwitterUser+Private.h */; };
+		126FE28113D9F72B00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE27F13D9F72900D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h */; };
+		126FE28213D9F72B00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE28013D9F72A00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m */; };
+		126FE2C213DA214000D72D46 /* Foursquare.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2C013DA214000D72D46 /* Foursquare.h */; };
+		126FE2C313DA214000D72D46 /* Foursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE2C113DA214000D72D46 /* Foursquare.m */; };
+		126FE2C513DA221B00D72D46 /* FoursquareConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2C413DA221A00D72D46 /* FoursquareConstants.h */; };
+		126FE2C813DA225B00D72D46 /* FoursquareUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2C613DA225A00D72D46 /* FoursquareUser.h */; };
+		126FE2C913DA225B00D72D46 /* FoursquareUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE2C713DA225A00D72D46 /* FoursquareUser.m */; };
+		126FE2CB13DA22C500D72D46 /* FoursquareUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2CA13DA22C500D72D46 /* FoursquareUser+Private.h */; };
+		126FE2CE13DA22FF00D72D46 /* LocalFoursquareUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2CC13DA22FD00D72D46 /* LocalFoursquareUser.h */; };
+		126FE2CF13DA22FF00D72D46 /* LocalFoursquareUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE2CD13DA22FD00D72D46 /* LocalFoursquareUser.m */; };
+		1299F1F813D8724F0065735C /* iOSSUploadFileInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1299F1F613D8724E0065735C /* iOSSUploadFileInfo.h */; };
+		1299F1F913D8724F0065735C /* iOSSUploadFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1299F1F713D8724E0065735C /* iOSSUploadFileInfo.m */; };
 		12DD953313D617ED00C2AA32 /* InstagramUserCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */; };
 		12DD953413D617ED00C2AA32 /* InstagramUserCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */; };
 		12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */; };
@@ -231,6 +271,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		120888D713D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSFormEncodedPOSTRequest.h; sourceTree = "<group>"; };
+		120888D813D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSFormEncodedPOSTRequest.m; sourceTree = "<group>"; };
+		120888DC13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+iOSSURLAdditions.h"; sourceTree = "<group>"; };
+		120888DD13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+iOSSURLAdditions.m"; sourceTree = "<group>"; };
+		120888E013D7819300C0FB68 /* iOSSMultipartPOSTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSMultipartPOSTRequest.h; sourceTree = "<group>"; };
+		120888E113D7819300C0FB68 /* iOSSMultipartPOSTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSMultipartPOSTRequest.m; sourceTree = "<group>"; };
 		1264A12C13D08B900085E394 /* libiOSSocial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiOSSocial.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1264A12F13D08B900085E394 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1264A13313D08B900085E394 /* iOSSocial-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSSocial-Prefix.pch"; sourceTree = "<group>"; };
@@ -260,6 +306,41 @@
 		1264A18413D096FE0085E394 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		1264A18C13D0974F0085E394 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcher.h; path = "gtm-oauth2/HTTPFetcher/GTMHTTPFetcher.h"; sourceTree = "<group>"; };
 		1264A18D13D0974F0085E394 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcher.m; path = "gtm-oauth2/HTTPFetcher/GTMHTTPFetcher.m"; sourceTree = "<group>"; };
+		126FE22B13D9C28E00D72D46 /* iOSSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSLog.h; sourceTree = "<group>"; };
+		126FE22C13D9C28E00D72D46 /* iOSSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSLog.m; sourceTree = "<group>"; };
+		126FE22D13D9C28E00D72D46 /* iOSSRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSRequest.h; sourceTree = "<group>"; };
+		126FE22E13D9C28E00D72D46 /* iOSSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSRequest.m; sourceTree = "<group>"; };
+		126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSServicesViewController.h; sourceTree = "<group>"; };
+		126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSServicesViewController.m; sourceTree = "<group>"; };
+		126FE23C13D9C57100D72D46 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
+		126FE23D13D9C57100D72D46 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
+		126FE23F13D9C57100D72D46 /* GTMOAuthAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuthAuthentication.h; sourceTree = "<group>"; };
+		126FE24013D9C57100D72D46 /* GTMOAuthAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuthAuthentication.m; sourceTree = "<group>"; };
+		126FE24113D9C57100D72D46 /* GTMOAuthSignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuthSignIn.h; sourceTree = "<group>"; };
+		126FE24213D9C57100D72D46 /* GTMOAuthSignIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuthSignIn.m; sourceTree = "<group>"; };
+		126FE24413D9C57100D72D46 /* GTMOAuthViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuthViewControllerTouch.h; sourceTree = "<group>"; };
+		126FE24513D9C57100D72D46 /* GTMOAuthViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuthViewControllerTouch.m; sourceTree = "<group>"; };
+		126FE24613D9C57100D72D46 /* GTMOAuthViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuthViewTouch.xib; sourceTree = "<group>"; };
+		126FE25113D9C7DF00D72D46 /* LocalTwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalTwitterUser.h; sourceTree = "<group>"; };
+		126FE25213D9C7DF00D72D46 /* LocalTwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalTwitterUser.m; sourceTree = "<group>"; };
+		126FE25513D9C7F000D72D46 /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUser.h; sourceTree = "<group>"; };
+		126FE25613D9C7F000D72D46 /* TwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterUser.m; sourceTree = "<group>"; };
+		126FE25913D9CBEB00D72D46 /* Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twitter.h; sourceTree = "<group>"; };
+		126FE25A13D9CBEB00D72D46 /* Twitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Twitter.m; sourceTree = "<group>"; };
+		126FE25D13D9D15500D72D46 /* TwitterConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterConstants.h; sourceTree = "<group>"; };
+		126FE25F13D9D9F000D72D46 /* TwitterUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TwitterUser+Private.h"; sourceTree = "<group>"; };
+		126FE27F13D9F72900D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMOAuthAuthentication+TwitterAdditions.h"; sourceTree = "<group>"; };
+		126FE28013D9F72A00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMOAuthAuthentication+TwitterAdditions.m"; sourceTree = "<group>"; };
+		126FE2C013DA214000D72D46 /* Foursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foursquare.h; sourceTree = "<group>"; };
+		126FE2C113DA214000D72D46 /* Foursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foursquare.m; sourceTree = "<group>"; };
+		126FE2C413DA221A00D72D46 /* FoursquareConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareConstants.h; sourceTree = "<group>"; };
+		126FE2C613DA225A00D72D46 /* FoursquareUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareUser.h; sourceTree = "<group>"; };
+		126FE2C713DA225A00D72D46 /* FoursquareUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareUser.m; sourceTree = "<group>"; };
+		126FE2CA13DA22C500D72D46 /* FoursquareUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FoursquareUser+Private.h"; sourceTree = "<group>"; };
+		126FE2CC13DA22FD00D72D46 /* LocalFoursquareUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalFoursquareUser.h; sourceTree = "<group>"; };
+		126FE2CD13DA22FD00D72D46 /* LocalFoursquareUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalFoursquareUser.m; sourceTree = "<group>"; };
+		1299F1F613D8724E0065735C /* iOSSUploadFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSUploadFileInfo.h; sourceTree = "<group>"; };
+		1299F1F713D8724E0065735C /* iOSSUploadFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSUploadFileInfo.m; sourceTree = "<group>"; };
 		12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramUserCollection.h; sourceTree = "<group>"; };
 		12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUserCollection.m; sourceTree = "<group>"; };
 		12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+iOSSSubviewTraversal.h"; sourceTree = "<group>"; };
@@ -320,6 +401,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		120888DB13D77ADB00C0FB68 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				120888DC13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h */,
+				120888DD13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m */,
+			);
+			name = String;
+			sourceTree = "<group>";
+		};
 		1264A12113D08B900085E394 = {
 			isa = PBXGroup;
 			children = (
@@ -362,10 +452,11 @@
 		1264A13113D08B900085E394 /* iOSSocial */ = {
 			isa = PBXGroup;
 			children = (
-				12ECAF7413D5F32300C1297B /* UserDefaults */,
-				12ECAC6513D4904400C1297B /* Connection */,
-				12ECAC6013D4892C00C1297B /* UIApplication */,
-				12E0ACCB13D0D28B0025C3B7 /* UIView */,
+				126FE2BF13DA20C600D72D46 /* Foursquare */,
+				126FE24F13D9C7C400D72D46 /* Twitter */,
+				126FE23913D9C55F00D72D46 /* gtm-oauth */,
+				126FE23813D9C2AC00D72D46 /* Utilities */,
+				126FE23713D9C29E00D72D46 /* ViewControllers */,
 				1264A16C13D0965E0085E394 /* gtm-oauth2 */,
 				1264A15913D08CA80085E394 /* Instagram */,
 				1264A13413D08B900085E394 /* iOSSocial.h */,
@@ -466,6 +557,118 @@
 			name = HTTPFetcher;
 			sourceTree = "<group>";
 		};
+		126FE22113D9C13600D72D46 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				126FE22B13D9C28E00D72D46 /* iOSSLog.h */,
+				126FE22C13D9C28E00D72D46 /* iOSSLog.m */,
+			);
+			name = Log;
+			sourceTree = "<group>";
+		};
+		126FE23713D9C29E00D72D46 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */,
+				126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		126FE23813D9C2AC00D72D46 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				126FE22113D9C13600D72D46 /* Log */,
+				120888DB13D77ADB00C0FB68 /* String */,
+				12ECAF7413D5F32300C1297B /* UserDefaults */,
+				12ECAC6513D4904400C1297B /* Connection */,
+				12ECAC6013D4892C00C1297B /* UIApplication */,
+				12E0ACCB13D0D28B0025C3B7 /* UIView */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		126FE23913D9C55F00D72D46 /* gtm-oauth */ = {
+			isa = PBXGroup;
+			children = (
+				126FE23A13D9C57100D72D46 /* gtm-oauth1 */,
+			);
+			name = "gtm-oauth";
+			sourceTree = "<group>";
+		};
+		126FE23A13D9C57100D72D46 /* gtm-oauth1 */ = {
+			isa = PBXGroup;
+			children = (
+				126FE23B13D9C57100D72D46 /* HTTPFetcher */,
+				126FE23E13D9C57100D72D46 /* Source */,
+			);
+			name = "gtm-oauth1";
+			path = "../../gtm-oauth/gtm-oauth1";
+			sourceTree = "<group>";
+		};
+		126FE23B13D9C57100D72D46 /* HTTPFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				126FE23C13D9C57100D72D46 /* GTMHTTPFetcher.h */,
+				126FE23D13D9C57100D72D46 /* GTMHTTPFetcher.m */,
+			);
+			path = HTTPFetcher;
+			sourceTree = "<group>";
+		};
+		126FE23E13D9C57100D72D46 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				126FE23F13D9C57100D72D46 /* GTMOAuthAuthentication.h */,
+				126FE24013D9C57100D72D46 /* GTMOAuthAuthentication.m */,
+				126FE24113D9C57100D72D46 /* GTMOAuthSignIn.h */,
+				126FE24213D9C57100D72D46 /* GTMOAuthSignIn.m */,
+				126FE24313D9C57100D72D46 /* Touch */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		126FE24313D9C57100D72D46 /* Touch */ = {
+			isa = PBXGroup;
+			children = (
+				126FE24413D9C57100D72D46 /* GTMOAuthViewControllerTouch.h */,
+				126FE24513D9C57100D72D46 /* GTMOAuthViewControllerTouch.m */,
+				126FE24613D9C57100D72D46 /* GTMOAuthViewTouch.xib */,
+			);
+			path = Touch;
+			sourceTree = "<group>";
+		};
+		126FE24F13D9C7C400D72D46 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				126FE25113D9C7DF00D72D46 /* LocalTwitterUser.h */,
+				126FE25213D9C7DF00D72D46 /* LocalTwitterUser.m */,
+				126FE25513D9C7F000D72D46 /* TwitterUser.h */,
+				126FE25613D9C7F000D72D46 /* TwitterUser.m */,
+				126FE25913D9CBEB00D72D46 /* Twitter.h */,
+				126FE25A13D9CBEB00D72D46 /* Twitter.m */,
+				126FE25D13D9D15500D72D46 /* TwitterConstants.h */,
+				126FE25F13D9D9F000D72D46 /* TwitterUser+Private.h */,
+				126FE27F13D9F72900D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h */,
+				126FE28013D9F72A00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m */,
+			);
+			name = Twitter;
+			sourceTree = "<group>";
+		};
+		126FE2BF13DA20C600D72D46 /* Foursquare */ = {
+			isa = PBXGroup;
+			children = (
+				126FE2C013DA214000D72D46 /* Foursquare.h */,
+				126FE2C113DA214000D72D46 /* Foursquare.m */,
+				126FE2C413DA221A00D72D46 /* FoursquareConstants.h */,
+				126FE2C613DA225A00D72D46 /* FoursquareUser.h */,
+				126FE2C713DA225A00D72D46 /* FoursquareUser.m */,
+				126FE2CA13DA22C500D72D46 /* FoursquareUser+Private.h */,
+				126FE2CC13DA22FD00D72D46 /* LocalFoursquareUser.h */,
+				126FE2CD13DA22FD00D72D46 /* LocalFoursquareUser.m */,
+			);
+			name = Foursquare;
+			sourceTree = "<group>";
+		};
 		12E0ACCB13D0D28B0025C3B7 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,8 +690,16 @@
 		12ECAC6513D4904400C1297B /* Connection */ = {
 			isa = PBXGroup;
 			children = (
+				126FE22D13D9C28E00D72D46 /* iOSSRequest.h */,
+				126FE22E13D9C28E00D72D46 /* iOSSRequest.m */,
 				12ECAC6613D4905800C1297B /* iOSSConnection.h */,
 				12ECAC6713D4905800C1297B /* iOSSConnection.m */,
+				120888D713D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h */,
+				120888D813D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m */,
+				120888E013D7819300C0FB68 /* iOSSMultipartPOSTRequest.h */,
+				120888E113D7819300C0FB68 /* iOSSMultipartPOSTRequest.m */,
+				1299F1F613D8724E0065735C /* iOSSUploadFileInfo.h */,
+				1299F1F713D8724E0065735C /* iOSSUploadFileInfo.m */,
 			);
 			name = Connection;
 			sourceTree = "<group>";
@@ -591,6 +802,28 @@
 				12ECACE813D4D3A300C1297B /* InstagramMediaCollection.h in Headers */,
 				12ECAF7713D5F38100C1297B /* NSUserDefaults+iOSSAdditions.h in Headers */,
 				12DD953313D617ED00C2AA32 /* InstagramUserCollection.h in Headers */,
+				120888D913D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h in Headers */,
+				120888DE13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h in Headers */,
+				120888E213D7819300C0FB68 /* iOSSMultipartPOSTRequest.h in Headers */,
+				1299F1F813D8724F0065735C /* iOSSUploadFileInfo.h in Headers */,
+				126FE23113D9C28E00D72D46 /* iOSSLog.h in Headers */,
+				126FE23313D9C28E00D72D46 /* iOSSRequest.h in Headers */,
+				126FE23513D9C28E00D72D46 /* iOSSServicesViewController.h in Headers */,
+				126FE24713D9C57100D72D46 /* GTMHTTPFetcher.h in Headers */,
+				126FE24913D9C57100D72D46 /* GTMOAuthAuthentication.h in Headers */,
+				126FE24B13D9C57100D72D46 /* GTMOAuthSignIn.h in Headers */,
+				126FE24D13D9C57100D72D46 /* GTMOAuthViewControllerTouch.h in Headers */,
+				126FE25313D9C7DF00D72D46 /* LocalTwitterUser.h in Headers */,
+				126FE25713D9C7F000D72D46 /* TwitterUser.h in Headers */,
+				126FE25B13D9CBEC00D72D46 /* Twitter.h in Headers */,
+				126FE25E13D9D15600D72D46 /* TwitterConstants.h in Headers */,
+				126FE26013D9D9F100D72D46 /* TwitterUser+Private.h in Headers */,
+				126FE28113D9F72B00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h in Headers */,
+				126FE2C213DA214000D72D46 /* Foursquare.h in Headers */,
+				126FE2C513DA221B00D72D46 /* FoursquareConstants.h in Headers */,
+				126FE2C813DA225B00D72D46 /* FoursquareUser.h in Headers */,
+				126FE2CB13DA22C500D72D46 /* FoursquareUser+Private.h in Headers */,
+				126FE2CE13DA22FF00D72D46 /* LocalFoursquareUser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +879,7 @@
 		1264A12313D08B900085E394 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Mad Races, Inc.";
 			};
 			buildConfigurationList = 1264A12613D08B900085E394 /* Build configuration list for PBXProject "iOSSocial" */;
@@ -860,6 +1094,24 @@
 				12ECACE913D4D3A300C1297B /* InstagramMediaCollection.m in Sources */,
 				12ECAF7813D5F38100C1297B /* NSUserDefaults+iOSSAdditions.m in Sources */,
 				12DD953413D617ED00C2AA32 /* InstagramUserCollection.m in Sources */,
+				120888DA13D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m in Sources */,
+				120888DF13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m in Sources */,
+				120888E313D7819300C0FB68 /* iOSSMultipartPOSTRequest.m in Sources */,
+				1299F1F913D8724F0065735C /* iOSSUploadFileInfo.m in Sources */,
+				126FE23213D9C28E00D72D46 /* iOSSLog.m in Sources */,
+				126FE23413D9C28E00D72D46 /* iOSSRequest.m in Sources */,
+				126FE23613D9C28E00D72D46 /* iOSSServicesViewController.m in Sources */,
+				126FE24813D9C57100D72D46 /* GTMHTTPFetcher.m in Sources */,
+				126FE24A13D9C57100D72D46 /* GTMOAuthAuthentication.m in Sources */,
+				126FE24C13D9C57100D72D46 /* GTMOAuthSignIn.m in Sources */,
+				126FE24E13D9C57100D72D46 /* GTMOAuthViewControllerTouch.m in Sources */,
+				126FE25413D9C7DF00D72D46 /* LocalTwitterUser.m in Sources */,
+				126FE25813D9C7F000D72D46 /* TwitterUser.m in Sources */,
+				126FE25C13D9CBEC00D72D46 /* Twitter.m in Sources */,
+				126FE28213D9F72B00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m in Sources */,
+				126FE2C313DA214000D72D46 /* Foursquare.m in Sources */,
+				126FE2C913DA225B00D72D46 /* FoursquareUser.m in Sources */,
+				126FE2CF13DA22FF00D72D46 /* LocalFoursquareUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,26 +1,26 @@
 //
-//  LocalInstagramUser.h
-//  InstaBeta
+//  LocalTwitterUser.h
+//  iOSSocial
 //
-//  Created by Christopher White on 7/14/11.
+//  Created by Christopher White on 7/22/11.
 //  Copyright 2011 Mad Races, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "InstagramUser.h"
+#import "TwitterUser.h"
 
-typedef void(^InstagramAuthenticationHandler)(NSError *error);
+typedef void(^TwitterAuthenticationHandler)(NSError *error);
 
-@interface LocalInstagramUser : InstagramUser
+@interface LocalTwitterUser : TwitterUser
 
-// Obtain the LocalInstagramUser object.
+// Obtain the LocalTwitterUser object.
 // The user is only available for offline use until logged in.
 // A temporary use is created if no account is set up.
-+ (LocalInstagramUser *)localInstagramUser;
++ (LocalTwitterUser *)localTwitterUser;
 
-// This must be called before calling any of the non-class methods on localInstagramUser otherwise it will cause an assertion
-// See InstagramConstants.h for the Keys for this dictionary.
+// This must be called before calling any of the non-class methods on localTwitterUser otherwise it will cause an assertion
+// See TwitterConstants.h for the Keys for this dictionary.
 - (void)assignOAuthParams:(NSDictionary*)params;
 
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
@@ -29,7 +29,7 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
 // The user must be authenticated in order to use other APIs. 
 // This should be called for each launch of the application as soon as the UI is ready.
 // Authentication happens automatically on return to foreground, and the completion handler will be called again. 
-// Instagram UI may be presented during this authentication. 
+// Twitter UI may be presented during this authentication. 
 // Apps should check the local user's authenticated and user ID properties to determine if the local user has changed.
 // The authorization screen, if needed, is show modally so pass in the current view controller.
 // Possible reasons for error:
@@ -38,29 +38,9 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
 // 3. User cancelled
 - (void)authenticateWithScope:(NSString*)scope 
            fromViewController:(UIViewController*)vc 
-        withCompletionHandler:(InstagramAuthenticationHandler)completionHandler;
+        withCompletionHandler:(TwitterAuthenticationHandler)completionHandler;
 
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
-
-- (void)fetchFeedWithCompletionHandler:(FetchMediaHandler)completionHandler;
-
-- (void)fetchLikedMediaWithCompletionHandler:(FetchMediaHandler)completionHandler;
-
-- (void)fetchRelationshipToUser;
-
-- (void)fetchRequestedBy;
-
-- (void)modifyRelationshipToUser;
-
-// These methods make it easy to interact with the instagram app on the user's device.
-+ (void)instagram;
-+ (void)camera;
-+ (void)tagWithName:(NSString*)name;
-+ (void)userWithName:(NSString*)name; 
-+ (void)locationWithID:(NSString*)locationID;
-+ (void)mediaWithID:(NSString*)mediaID;
-+ (void)editPhotoWithURL:(NSURL*)url 
-         andMenuFromView:(UIView*)view;
 
 @end

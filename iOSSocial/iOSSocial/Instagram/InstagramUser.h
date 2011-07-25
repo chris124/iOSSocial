@@ -14,12 +14,12 @@
 @protocol IGUser <NSObject>
 
 /**
- * The photo source that the photo belongs to.
+ * The user source that the user belongs to.
  */
 @property (nonatomic, assign) id<IGUserSource> userSource;
 
 /**
- * The index of the user within its photo source.
+ * The index of the user within its user source.
  */
 @property (nonatomic) NSInteger index;
 
@@ -36,7 +36,7 @@ typedef void(^FetchUsersHandler)(InstagramUserCollection *users, NSError *error)
 @interface InstagramUser : NSObject <IGUser>
 
 //cwnote: should alias be copied?
-@property(nonatomic, readonly, retain)  NSString *userID;               // Invariant user identifier.
+@property(nonatomic, readonly, retain)  NSString *userID;               // User identifier.
 @property(nonatomic, readonly, retain)  NSString *alias;                // The user's alias
 @property(nonatomic, readonly, retain)  NSString *firstName;            // The user's first name
 @property(nonatomic, readonly, retain)  NSString *lastName;             // The user's last name
@@ -49,7 +49,7 @@ typedef void(^FetchUsersHandler)(InstagramUserCollection *users, NSError *error)
 //@property(nonatomic, readonly)          BOOL isFriend;          // True if this user is a friend of the local user
 
 /**
- * The photo source that the photo belongs to.
+ * The user source that the user belongs to.
  */
 @property (nonatomic, assign) id<IGUserSource> userSource;
 

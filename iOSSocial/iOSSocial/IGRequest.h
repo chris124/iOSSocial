@@ -7,9 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Twitter/TWRequest.h>
-
-@class LocalInstagramUser;
 
 enum IGRequestMethod {
     IGRequestMethodGET,
@@ -28,7 +25,6 @@ typedef void(^IGRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlResp
        parameters:(NSDictionary *)parameters 
     requestMethod:(IGRequestMethod)requestMethod;
 
-@property(nonatomic, retain) LocalInstagramUser *user;
 @property(nonatomic, readonly, retain) NSDictionary *parameters;
 @property(nonatomic, readonly, assign) IGRequestMethod requestMethod;
 @property(nonatomic, readonly, retain) NSURL *URL;
