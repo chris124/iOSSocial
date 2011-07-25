@@ -74,7 +74,7 @@
 		12DD953413D617ED00C2AA32 /* InstagramUserCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */; };
 		12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */; };
 		12E0ACCF13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */; };
-		12E0ACD613D0EE710025C3B7 /* InstagramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */; };
+		12E0ACD613D0EE710025C3B7 /* InstagramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		12ECAC5B13D4818300C1297B /* IGRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECAC5913D4818300C1297B /* IGRequest.h */; };
 		12ECAC5C13D4818300C1297B /* IGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ECAC5A13D4818300C1297B /* IGRequest.m */; };
 		12ECAC5F13D4879900C1297B /* InstagramUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECAC5E13D4879900C1297B /* InstagramUser+Private.h */; };
@@ -749,9 +749,9 @@
 			files = (
 				1264A16813D094E70085E394 /* LocalInstagramUser.h in Headers */,
 				1264A16613D094E70085E394 /* InstagramUser.h in Headers */,
+				12E0ACD613D0EE710025C3B7 /* InstagramConstants.h in Headers */,
 				1264A16413D094E70085E394 /* Instagram.h in Headers */,
 				12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */,
-				12E0ACD613D0EE710025C3B7 /* InstagramConstants.h in Headers */,
 				12ECAC5B13D4818300C1297B /* IGRequest.h in Headers */,
 				12ECAC5F13D4879900C1297B /* InstagramUser+Private.h in Headers */,
 				12ECAC6313D4895200C1297B /* UIApplication+iOSSNetworkActivity.h in Headers */,
