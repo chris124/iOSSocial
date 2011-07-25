@@ -178,14 +178,17 @@ static LocalInstagramUser *localInstagramUser = nil;
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
         } else {
-            NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+            //NSDictionary *dictionary = [Instagram JSONFromData:responseData];
             
             //outgoing_status: Your relationship to the user. Can be "follows", "requested", "none". 
             //incoming_status: A user's relationship to you. Can be "followed_by", "requested_by", "blocked_by_you", "none"
-            
-            int i = 0;
         }
     }];
+}
+
+- (void)fetchRelationshipToUser
+{
+    
 }
 
 - (void)fetchRequestedBy

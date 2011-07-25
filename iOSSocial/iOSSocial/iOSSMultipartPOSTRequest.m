@@ -106,6 +106,11 @@
     return [NSString stringWithFormat:boundaryFormat, self.HTTPBoundary];
 }
 
+- (void)finishRequestBody
+{
+    
+}
+
 - (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)eventCode 
 {
     uint8_t buf[1024*100];
