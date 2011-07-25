@@ -1,3 +1,6 @@
 [submodule "three20"]
 	path = three20
 	url = https://github.com/facebook/three20.git
+[submodule "gtm-oauth"]
+	path = gtm-oauth
+	url = https://github.com/chris124/gtm-oauth
