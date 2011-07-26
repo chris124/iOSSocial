@@ -20,7 +20,7 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
 + (LocalInstagramUser *)localInstagramUser;
 
 // This must be called before calling any of the non-class methods on localInstagramUser otherwise it will cause an assertion
-// See InstagramConstants.h for the Keys for this dictionary.
+// See iOSSocialServiceOAuth2ProviderConstants.h for the Keys for this dictionary.
 - (void)assignOAuthParams:(NSDictionary*)params;
 
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state

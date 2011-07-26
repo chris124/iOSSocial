@@ -8,23 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "iOSSocialServiceOAuth2Provider.h"
 
-typedef void(^InstagramAuthorizationHandler)(NSDictionary *userInfo, NSError *error);
-
-@interface Instagram : NSObject
-
-// See InstagramConstants.h for the Keys for this dictionary.
-- (id)initWithDictionary:(NSDictionary*)dictionary;
-
-- (void)authorizeWithScope:(NSString *)scope 
-        fromViewController:(UIViewController*)vc 
-     withCompletionHandler:(InstagramAuthorizationHandler)completionHandler;
-
-- (BOOL)isSessionValid;
-
-- (NSString*)oAuthAccessToken;
-
-- (void)logout;
+@interface Instagram : iOSSocialServiceOAuth2Provider
 
 + (NSURL*)authorizeURL:(NSURL*)URL;
 

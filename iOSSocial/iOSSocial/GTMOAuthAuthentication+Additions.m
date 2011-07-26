@@ -1,12 +1,12 @@
 //
-//  GTMOAuthAuthentication+TwitterAdditions.m
+//  GTMOAuthAuthentication+Additions.m
 //  iOSSocial
 //
-//  Created by Christopher White on 7/22/11.
+//  Created by Christopher White on 7/26/11.
 //  Copyright 2011 Mad Races, Inc. All rights reserved.
 //
 
-#import "GTMOAuthAuthentication+TwitterAdditions.h"
+#import "GTMOAuthAuthentication+Additions.h"
 
 @interface GTMOAuthAuthentication ()
 
@@ -14,17 +14,17 @@
 
 @end
 
-static NSString *const kOAuthTwitterUserIDKey          = @"user_id";
-static NSString *const kOAuthTwitterUserNameKey        = @"screen_name";
+static NSString *const kOAuth1UserIDKey     = @"user_id";
+static NSString *const kOAuth1UserNameKey   = @"screen_name";
 
-@interface GTMOAuthAuthenticationWithTwitterAdditions ()
+@interface GTMOAuthAuthenticationWithAdditions ()
 
 @property(nonatomic, readwrite, retain)  NSString *userID;   // User identifier.
 @property(nonatomic, readwrite, retain)  NSString *username;    // The user's alias
 
 @end
 
-@implementation GTMOAuthAuthenticationWithTwitterAdditions
+@implementation GTMOAuthAuthenticationWithAdditions
 
 @synthesize userID;
 @synthesize username;
@@ -43,12 +43,12 @@ static NSString *const kOAuthTwitterUserNameKey        = @"screen_name";
 {
     [super setKeysForResponseDictionary:dict];
     
-    NSString *newUserID = [dict objectForKey:kOAuthTwitterUserIDKey];
+    NSString *newUserID = [dict objectForKey:kOAuth1UserIDKey];
     if (newUserID) {
         [self setUserID:newUserID];
     }
     
-    NSString *newUsername = [dict objectForKey:kOAuthTwitterUserNameKey];
+    NSString *newUsername = [dict objectForKey:kOAuth1UserNameKey];
     if (newUsername) {
         [self setUsername:newUsername];
     }

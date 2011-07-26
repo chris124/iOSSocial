@@ -20,7 +20,7 @@ typedef void(^TwitterAuthenticationHandler)(NSError *error);
 + (LocalTwitterUser *)localTwitterUser;
 
 // This must be called before calling any of the non-class methods on localTwitterUser otherwise it will cause an assertion
-// See TwitterConstants.h for the Keys for this dictionary.
+// See iOSSocialServiceOAuth1ProviderConstants.h for the Keys for this dictionary.
 - (void)assignOAuthParams:(NSDictionary*)params;
 
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state

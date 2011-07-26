@@ -7,22 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import "iOSSocialServiceOAuth2Provider.h"
 
-typedef void(^FoursquareAuthorizationHandler)(NSDictionary *userInfo, NSError *error);
 
-@interface Foursquare : NSObject
-
-// See InstagramConstants.h for the Keys for this dictionary.
-- (id)initWithDictionary:(NSDictionary*)dictionary;
-
-- (void)authorizeWithScope:(NSString *)scope 
-        fromViewController:(UIViewController*)vc 
-     withCompletionHandler:(FoursquareAuthorizationHandler)completionHandler;
-
-- (BOOL)isSessionValid;
-
-- (void)logout;
+@interface Foursquare : iOSSocialServiceOAuth2Provider
 
 + (NSURL*)authorizeURL:(NSURL*)URL;
 

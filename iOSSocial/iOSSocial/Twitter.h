@@ -7,21 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import "iOSSocialServiceOAuth1Provider.h"
 
-typedef void(^AuthorizationHandler)(NSDictionary *userInfo, NSError *error);
-
-@interface Twitter : NSObject
-
-- (id)initWithDictionary:(NSDictionary*)dictionary;
-
-- (void)authorizeWithScope:(NSString *)scope 
-        fromViewController:(UIViewController*)vc 
-     withCompletionHandler:(AuthorizationHandler)completionHandler;
-
-- (BOOL)isSessionValid;
-
-- (void)logout;
+@interface Twitter : iOSSocialServiceOAuth1Provider
 
 + (void)authorizeURLRequest:(NSMutableURLRequest*)URLRequest;
 

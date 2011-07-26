@@ -42,13 +42,9 @@
 		126FE25813D9C7F000D72D46 /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE25613D9C7F000D72D46 /* TwitterUser.m */; };
 		126FE25B13D9CBEC00D72D46 /* Twitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25913D9CBEB00D72D46 /* Twitter.h */; };
 		126FE25C13D9CBEC00D72D46 /* Twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE25A13D9CBEB00D72D46 /* Twitter.m */; };
-		126FE25E13D9D15600D72D46 /* TwitterConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25D13D9D15500D72D46 /* TwitterConstants.h */; };
 		126FE26013D9D9F100D72D46 /* TwitterUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25F13D9D9F000D72D46 /* TwitterUser+Private.h */; };
-		126FE28113D9F72B00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE27F13D9F72900D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h */; };
-		126FE28213D9F72B00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE28013D9F72A00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m */; };
 		126FE2C213DA214000D72D46 /* Foursquare.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2C013DA214000D72D46 /* Foursquare.h */; };
 		126FE2C313DA214000D72D46 /* Foursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE2C113DA214000D72D46 /* Foursquare.m */; };
-		126FE2C513DA221B00D72D46 /* FoursquareConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2C413DA221A00D72D46 /* FoursquareConstants.h */; };
 		126FE2C813DA225B00D72D46 /* FoursquareUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2C613DA225A00D72D46 /* FoursquareUser.h */; };
 		126FE2C913DA225B00D72D46 /* FoursquareUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE2C713DA225A00D72D46 /* FoursquareUser.m */; };
 		126FE2CB13DA22C500D72D46 /* FoursquareUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2CA13DA22C500D72D46 /* FoursquareUser+Private.h */; };
@@ -70,11 +66,22 @@
 		12AB359B13DDBB1800565332 /* GTMOAuthViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB359413DDBB1800565332 /* GTMOAuthViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		12AB359F13DDBF5700565332 /* GTMHTTPFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB359D13DDBF5700565332 /* GTMHTTPFetcher.h */; };
 		12AB35A013DDBF5700565332 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB359E13DDBF5700565332 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		12AB3A0E13DF13D400565332 /* iOSSocialUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A0C13DF13D300565332 /* iOSSocialUser.h */; };
+		12AB3A0F13DF13D400565332 /* iOSSocialUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A0D13DF13D400565332 /* iOSSocialUser.m */; };
+		12AB3A1213DF13EE00565332 /* iOSSocialLocalUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A1013DF13ED00565332 /* iOSSocialLocalUser.h */; };
+		12AB3A1313DF13EE00565332 /* iOSSocialLocalUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A1113DF13EE00565332 /* iOSSocialLocalUser.m */; };
+		12AB3A1B13DF176900565332 /* iOSSocialServiceOAuth2Provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A1913DF176700565332 /* iOSSocialServiceOAuth2Provider.h */; };
+		12AB3A1C13DF176900565332 /* iOSSocialServiceOAuth2Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A1A13DF176800565332 /* iOSSocialServiceOAuth2Provider.m */; };
+		12AB3A1F13DF178300565332 /* iOSSocialServiceOAuth1Provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A1D13DF178000565332 /* iOSSocialServiceOAuth1Provider.h */; };
+		12AB3A2013DF178300565332 /* iOSSocialServiceOAuth1Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A1E13DF178200565332 /* iOSSocialServiceOAuth1Provider.m */; };
+		12AB3A2213DF1A8100565332 /* iOSSocialServiceOAuth2ProviderConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A2113DF1A7F00565332 /* iOSSocialServiceOAuth2ProviderConstants.h */; };
+		12AB3A2413DF1E7000565332 /* iOSSocialServiceOAuth1ProviderConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A2313DF1E6900565332 /* iOSSocialServiceOAuth1ProviderConstants.h */; };
+		12AB3A2713DF20F700565332 /* GTMOAuthAuthentication+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A2513DF20F000565332 /* GTMOAuthAuthentication+Additions.h */; };
+		12AB3A2813DF20F700565332 /* GTMOAuthAuthentication+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A2613DF20F200565332 /* GTMOAuthAuthentication+Additions.m */; };
 		12DD953313D617ED00C2AA32 /* InstagramUserCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */; };
 		12DD953413D617ED00C2AA32 /* InstagramUserCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */; };
 		12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */; };
 		12E0ACCF13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */; };
-		12E0ACD613D0EE710025C3B7 /* InstagramConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		12ECAC5B13D4818300C1297B /* IGRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECAC5913D4818300C1297B /* IGRequest.h */; };
 		12ECAC5C13D4818300C1297B /* IGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ECAC5A13D4818300C1297B /* IGRequest.m */; };
 		12ECAC5F13D4879900C1297B /* InstagramUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECAC5E13D4879900C1297B /* InstagramUser+Private.h */; };
@@ -307,13 +314,9 @@
 		126FE25613D9C7F000D72D46 /* TwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterUser.m; sourceTree = "<group>"; };
 		126FE25913D9CBEB00D72D46 /* Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twitter.h; sourceTree = "<group>"; };
 		126FE25A13D9CBEB00D72D46 /* Twitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Twitter.m; sourceTree = "<group>"; };
-		126FE25D13D9D15500D72D46 /* TwitterConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterConstants.h; sourceTree = "<group>"; };
 		126FE25F13D9D9F000D72D46 /* TwitterUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TwitterUser+Private.h"; sourceTree = "<group>"; };
-		126FE27F13D9F72900D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMOAuthAuthentication+TwitterAdditions.h"; sourceTree = "<group>"; };
-		126FE28013D9F72A00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMOAuthAuthentication+TwitterAdditions.m"; sourceTree = "<group>"; };
 		126FE2C013DA214000D72D46 /* Foursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foursquare.h; sourceTree = "<group>"; };
 		126FE2C113DA214000D72D46 /* Foursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foursquare.m; sourceTree = "<group>"; };
-		126FE2C413DA221A00D72D46 /* FoursquareConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareConstants.h; sourceTree = "<group>"; };
 		126FE2C613DA225A00D72D46 /* FoursquareUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareUser.h; sourceTree = "<group>"; };
 		126FE2C713DA225A00D72D46 /* FoursquareUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareUser.m; sourceTree = "<group>"; };
 		126FE2CA13DA22C500D72D46 /* FoursquareUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FoursquareUser+Private.h"; sourceTree = "<group>"; };
@@ -337,11 +340,22 @@
 		12AB359513DDBB1800565332 /* GTMOAuthViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuthViewTouch.xib; sourceTree = "<group>"; };
 		12AB359D13DDBF5700565332 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcher.h; path = "../../gtm-http-fetcher/Source/GTMHTTPFetcher.h"; sourceTree = "<group>"; };
 		12AB359E13DDBF5700565332 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcher.m; path = "../../gtm-http-fetcher/Source/GTMHTTPFetcher.m"; sourceTree = "<group>"; };
+		12AB3A0C13DF13D300565332 /* iOSSocialUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialUser.h; sourceTree = "<group>"; };
+		12AB3A0D13DF13D400565332 /* iOSSocialUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialUser.m; sourceTree = "<group>"; };
+		12AB3A1013DF13ED00565332 /* iOSSocialLocalUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialLocalUser.h; sourceTree = "<group>"; };
+		12AB3A1113DF13EE00565332 /* iOSSocialLocalUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialLocalUser.m; sourceTree = "<group>"; };
+		12AB3A1913DF176700565332 /* iOSSocialServiceOAuth2Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth2Provider.h; sourceTree = "<group>"; };
+		12AB3A1A13DF176800565332 /* iOSSocialServiceOAuth2Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialServiceOAuth2Provider.m; sourceTree = "<group>"; };
+		12AB3A1D13DF178000565332 /* iOSSocialServiceOAuth1Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth1Provider.h; sourceTree = "<group>"; };
+		12AB3A1E13DF178200565332 /* iOSSocialServiceOAuth1Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialServiceOAuth1Provider.m; sourceTree = "<group>"; };
+		12AB3A2113DF1A7F00565332 /* iOSSocialServiceOAuth2ProviderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth2ProviderConstants.h; sourceTree = "<group>"; };
+		12AB3A2313DF1E6900565332 /* iOSSocialServiceOAuth1ProviderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth1ProviderConstants.h; sourceTree = "<group>"; };
+		12AB3A2513DF20F000565332 /* GTMOAuthAuthentication+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMOAuthAuthentication+Additions.h"; sourceTree = "<group>"; };
+		12AB3A2613DF20F200565332 /* GTMOAuthAuthentication+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMOAuthAuthentication+Additions.m"; sourceTree = "<group>"; };
 		12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramUserCollection.h; sourceTree = "<group>"; };
 		12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUserCollection.m; sourceTree = "<group>"; };
 		12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+iOSSSubviewTraversal.h"; sourceTree = "<group>"; };
 		12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+iOSSSubviewTraversal.m"; sourceTree = "<group>"; };
-		12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramConstants.h; sourceTree = "<group>"; };
 		12ECAC5913D4818300C1297B /* IGRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRequest.h; sourceTree = "<group>"; };
 		12ECAC5A13D4818300C1297B /* IGRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRequest.m; sourceTree = "<group>"; };
 		12ECAC5E13D4879900C1297B /* InstagramUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InstagramUser+Private.h"; sourceTree = "<group>"; };
@@ -458,6 +472,18 @@
 				1264A15913D08CA80085E394 /* Instagram */,
 				1264A13413D08B900085E394 /* iOSSocial.h */,
 				1264A13513D08B900085E394 /* iOSSocial.m */,
+				12AB3A0C13DF13D300565332 /* iOSSocialUser.h */,
+				12AB3A0D13DF13D400565332 /* iOSSocialUser.m */,
+				12AB3A1013DF13ED00565332 /* iOSSocialLocalUser.h */,
+				12AB3A1113DF13EE00565332 /* iOSSocialLocalUser.m */,
+				12AB3A1913DF176700565332 /* iOSSocialServiceOAuth2Provider.h */,
+				12AB3A1A13DF176800565332 /* iOSSocialServiceOAuth2Provider.m */,
+				12AB3A2113DF1A7F00565332 /* iOSSocialServiceOAuth2ProviderConstants.h */,
+				12AB3A1D13DF178000565332 /* iOSSocialServiceOAuth1Provider.h */,
+				12AB3A1E13DF178200565332 /* iOSSocialServiceOAuth1Provider.m */,
+				12AB3A2313DF1E6900565332 /* iOSSocialServiceOAuth1ProviderConstants.h */,
+				12AB3A2513DF20F000565332 /* GTMOAuthAuthentication+Additions.h */,
+				12AB3A2613DF20F200565332 /* GTMOAuthAuthentication+Additions.m */,
 				1264A13213D08B900085E394 /* Supporting Files */,
 			);
 			path = iOSSocial;
@@ -500,7 +526,6 @@
 				12ECAC5E13D4879900C1297B /* InstagramUser+Private.h */,
 				1264A16213D094E70085E394 /* LocalInstagramUser.h */,
 				1264A16313D094E70085E394 /* LocalInstagramUser.m */,
-				12E0ACD513D0EE710025C3B7 /* InstagramConstants.h */,
 				12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */,
 				12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */,
 				12ECAC5913D4818300C1297B /* IGRequest.h */,
@@ -577,10 +602,7 @@
 				126FE25613D9C7F000D72D46 /* TwitterUser.m */,
 				126FE25913D9CBEB00D72D46 /* Twitter.h */,
 				126FE25A13D9CBEB00D72D46 /* Twitter.m */,
-				126FE25D13D9D15500D72D46 /* TwitterConstants.h */,
 				126FE25F13D9D9F000D72D46 /* TwitterUser+Private.h */,
-				126FE27F13D9F72900D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h */,
-				126FE28013D9F72A00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m */,
 			);
 			name = Twitter;
 			sourceTree = "<group>";
@@ -590,7 +612,6 @@
 			children = (
 				126FE2C013DA214000D72D46 /* Foursquare.h */,
 				126FE2C113DA214000D72D46 /* Foursquare.m */,
-				126FE2C413DA221A00D72D46 /* FoursquareConstants.h */,
 				126FE2C613DA225A00D72D46 /* FoursquareUser.h */,
 				126FE2C713DA225A00D72D46 /* FoursquareUser.m */,
 				126FE2CA13DA22C500D72D46 /* FoursquareUser+Private.h */,
@@ -749,7 +770,6 @@
 			files = (
 				1264A16813D094E70085E394 /* LocalInstagramUser.h in Headers */,
 				1264A16613D094E70085E394 /* InstagramUser.h in Headers */,
-				12E0ACD613D0EE710025C3B7 /* InstagramConstants.h in Headers */,
 				1264A16413D094E70085E394 /* Instagram.h in Headers */,
 				12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */,
 				12ECAC5B13D4818300C1297B /* IGRequest.h in Headers */,
@@ -770,11 +790,8 @@
 				126FE25313D9C7DF00D72D46 /* LocalTwitterUser.h in Headers */,
 				126FE25713D9C7F000D72D46 /* TwitterUser.h in Headers */,
 				126FE25B13D9CBEC00D72D46 /* Twitter.h in Headers */,
-				126FE25E13D9D15600D72D46 /* TwitterConstants.h in Headers */,
 				126FE26013D9D9F100D72D46 /* TwitterUser+Private.h in Headers */,
-				126FE28113D9F72B00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.h in Headers */,
 				126FE2C213DA214000D72D46 /* Foursquare.h in Headers */,
-				126FE2C513DA221B00D72D46 /* FoursquareConstants.h in Headers */,
 				126FE2C813DA225B00D72D46 /* FoursquareUser.h in Headers */,
 				126FE2CB13DA22C500D72D46 /* FoursquareUser+Private.h in Headers */,
 				126FE2CE13DA22FF00D72D46 /* LocalFoursquareUser.h in Headers */,
@@ -785,6 +802,13 @@
 				12AB359813DDBB1800565332 /* GTMOAuthSignIn.h in Headers */,
 				12AB359A13DDBB1800565332 /* GTMOAuthViewControllerTouch.h in Headers */,
 				12AB359F13DDBF5700565332 /* GTMHTTPFetcher.h in Headers */,
+				12AB3A0E13DF13D400565332 /* iOSSocialUser.h in Headers */,
+				12AB3A1213DF13EE00565332 /* iOSSocialLocalUser.h in Headers */,
+				12AB3A1B13DF176900565332 /* iOSSocialServiceOAuth2Provider.h in Headers */,
+				12AB3A1F13DF178300565332 /* iOSSocialServiceOAuth1Provider.h in Headers */,
+				12AB3A2213DF1A8100565332 /* iOSSocialServiceOAuth2ProviderConstants.h in Headers */,
+				12AB3A2413DF1E7000565332 /* iOSSocialServiceOAuth1ProviderConstants.h in Headers */,
+				12AB3A2713DF20F700565332 /* GTMOAuthAuthentication+Additions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,7 +1085,6 @@
 				126FE25413D9C7DF00D72D46 /* LocalTwitterUser.m in Sources */,
 				126FE25813D9C7F000D72D46 /* TwitterUser.m in Sources */,
 				126FE25C13D9CBEC00D72D46 /* Twitter.m in Sources */,
-				126FE28213D9F72B00D72D46 /* GTMOAuthAuthentication+TwitterAdditions.m in Sources */,
 				126FE2C313DA214000D72D46 /* Foursquare.m in Sources */,
 				126FE2C913DA225B00D72D46 /* FoursquareUser.m in Sources */,
 				126FE2CF13DA22FF00D72D46 /* LocalFoursquareUser.m in Sources */,
@@ -1072,6 +1095,11 @@
 				12AB359913DDBB1800565332 /* GTMOAuthSignIn.m in Sources */,
 				12AB359B13DDBB1800565332 /* GTMOAuthViewControllerTouch.m in Sources */,
 				12AB35A013DDBF5700565332 /* GTMHTTPFetcher.m in Sources */,
+				12AB3A0F13DF13D400565332 /* iOSSocialUser.m in Sources */,
+				12AB3A1313DF13EE00565332 /* iOSSocialLocalUser.m in Sources */,
+				12AB3A1C13DF176900565332 /* iOSSocialServiceOAuth2Provider.m in Sources */,
+				12AB3A2013DF178300565332 /* iOSSocialServiceOAuth1Provider.m in Sources */,
+				12AB3A2813DF20F700565332 /* GTMOAuthAuthentication+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
