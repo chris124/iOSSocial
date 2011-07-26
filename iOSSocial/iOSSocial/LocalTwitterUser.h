@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "TwitterUser.h"
+#import "iOSSocialServiceOAuth1ProviderConstants.h"
 
 typedef void(^TwitterAuthenticationHandler)(NSError *error);
 

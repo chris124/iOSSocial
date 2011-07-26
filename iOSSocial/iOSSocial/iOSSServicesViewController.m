@@ -301,7 +301,7 @@ enum iOSSDoneRows {
                     break;
                 case iOSSServicesSecServicesRowFoursquare: 
                 {
-                    NSString *scope = @"basic comments relationships likes";
+                    NSString *scope = @"";
                     [[LocalFoursquareUser localFoursquareUser] authenticateWithScope:scope 
                                                                   fromViewController:self 
                                                                withCompletionHandler:^(NSError *error){

@@ -25,9 +25,9 @@
 		1264A15013D08B900085E394 /* iOSSocialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A14F13D08B900085E394 /* iOSSocialTests.m */; };
 		1264A16413D094E70085E394 /* Instagram.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A15E13D094E70085E394 /* Instagram.h */; };
 		1264A16513D094E70085E394 /* Instagram.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A15F13D094E70085E394 /* Instagram.m */; };
-		1264A16613D094E70085E394 /* InstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A16013D094E70085E394 /* InstagramUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1264A16613D094E70085E394 /* InstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A16013D094E70085E394 /* InstagramUser.h */; settings = {ATTRIBUTES = (); }; };
 		1264A16713D094E70085E394 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A16113D094E70085E394 /* InstagramUser.m */; };
-		1264A16813D094E70085E394 /* LocalInstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A16213D094E70085E394 /* LocalInstagramUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1264A16813D094E70085E394 /* LocalInstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A16213D094E70085E394 /* LocalInstagramUser.h */; settings = {ATTRIBUTES = (); }; };
 		1264A16913D094E70085E394 /* LocalInstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A16313D094E70085E394 /* LocalInstagramUser.m */; };
 		1264A16B13D0951E0085E394 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A16A13D0951E0085E394 /* UIKit.framework */; };
 		126FE23113D9C28E00D72D46 /* iOSSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE22B13D9C28E00D72D46 /* iOSSLog.h */; };

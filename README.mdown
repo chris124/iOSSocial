@@ -5,6 +5,8 @@ iOSSocial is a collection of classes that makes it easy to integrate with one or
 
 Supported services: Instagram (OAuth2), Twitter (OAuth1), Foursquare (OAuth 2)
 
+Coming soon: Facebook (OAuth2)!
+
 Supported iOS platforms: iOS 4, iOS 5
 
 Community
@@ -15,7 +17,15 @@ Hopefully coming soon!
 Adding iOSSocial to your project
 ==============================
 
-iOSSocial is compiled as a static library. Instructions coming soon!
+iOSSocial is compiled as a static library. To use it in your project, do the following:
+
+- Build the project on its own or add it to your application's project/workspace.
+- Link your application against libiOSSocial.a, Security.framework, and SystemConfiguration.framework
+- Include the appropriate headers: LocalInstagramUser.h, LocalFoursquareUser.h, and/or LocalTwitterUser.h
+- Call assignOAuthParams: on the local user object of the service that you want to integrate with.
+- Call isAuthenticated on the local user object of the service to see if the user has already authorized your app.
+- Call authenticateWithScope:fromViewController:withCompletionHandler: on the local user object of the service to present the OAuth Login View Controller to the user. If successful, the error returned by the completion handler will be nil.
+- Call logout on the local user object of the service to blow out the local OAuth goodies.
   
 An Overview of iOSSocial
 ======================
@@ -27,6 +37,11 @@ http://instagram.com/developer/auth/
 <pre><code>
 #import "LocalInstagramUser.h"
 
+// Note: For Instagram, when setting the object for the kSMOAuth2RedirectURI key in the OAuth params
+// dictionary, the URL specified MUST match the callback URL you specified when you created your 
+// Instagram application on their site. It doesn't matter what the URL actually points to, but 
+// the value specified here HAS to match what you specified when you created your Instagram app.
+
 NSMutableDictionary *params = [NSMutableDictionary dictionary];
 [params setObject:@"Instagram Client ID for your Application" forKey:kSMOAuth2ClientID];
 [params setObject:@"Instagram Client Secret for your Application" forKey:kSMOAuth2ClientSecret];
@@ -37,8 +52,11 @@ NSMutableDictionary *params = [NSMutableDictionary dictionary];
 [params setObject:@"Instagram Service name of your choosing" forKey:kSMOAuth2ServiceProviderName];
 [[LocalInstagramUser localInstagramUser] assignOAuthParams:params];
 
+BOOL isAuthenticated = [[LocalInstagramUser localInstagramUser] isAuthenticated];
+
 // The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
 
+// These are the available scopes for Instagram. They MUST be separated by a space!!!
 NSString *scope = @"basic comments relationships likes";
 [[LocalInstagramUser localInstagramUser] authenticateWithScope:scope  
                                             fromViewController:self 
@@ -46,10 +64,17 @@ NSString *scope = @"basic comments relationships likes";
                                              if (!error) {
                                                  NSString *accessToken = [[LocalInstagramUser localInstagramUser] oAuthAccessToken];
                                              }}];
+
+// Logging out is easy peasy. Note that this does NOT revoke the user's access to the actual service on their site. It just clears out 
+// all of the local OAuth goodies.
+[[LocalInstagramUser localInstagramUser] logout];
+
 </pre></code>
 
 Twitter
 -----------------------
+
+https://dev.twitter.com/docs/auth
 <pre><code>
 #import "LocalTwitterUser.h"
 
@@ -64,6 +89,8 @@ NSMutableDictionary *params = [NSMutableDictionary dictionary];
 [params setObject:@"Twitter Service" forKey:kSMOAuth1ServiceProviderName];
 [[LocalTwitterUser localTwitterUser] assignOAuthParams:params];
 
+BOOL isAuthenticated = [[LocalTwitterUser localTwitterUser] isAuthenticated];
+
 // The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
 // The scope for Twitter is set via their website so you can configure permissions there.
 
@@ -73,6 +100,10 @@ NSMutableDictionary *params = [NSMutableDictionary dictionary];
                                          if (!error) {
 										     NSString *accessToken = [[LocalTwitterUser localTwitterUser] oAuthAccessToken];
                                          }}];
+
+// Logging out is easy peasy. Note that this does NOT revoke the user's access to the actual service on their site. It just clears out 
+// all of the local OAuth goodies.
+[[LocalTwitterUser localTwitterUser] logout];
 </pre></code>
 
 Foursquare
@@ -92,13 +123,20 @@ NSMutableDictionary *params = [NSMutableDictionary dictionary];
 [params setObject:@"Foursquare Service name of your choosing" forKey:kSMOAuth2ServiceProviderName];
 [[LocalFoursquareUser localFoursquareUser] assignOAuthParams:params];
 
+BOOL isAuthenticated = [[LocalFoursquareUser localFoursquareUser] isAuthenticated];
+
 // The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
 
-NSString *scope = @"basic comments relationships likes";
+NSString *scope = @"";
 [[LocalFoursquareUser localFoursquareUser] authenticateWithScope:scope 
                                               fromViewController:self 
                                            withCompletionHandler:^(NSError *error){
                                                if (!error) {
                                                    NSString *accessToken = [[LocalFoursquareUser localFoursquareUser] oAuthAccessToken];
                                                }}];
+
+// Logging out is easy peasy. Note that this does NOT revoke the user's access to the actual service on their site. It just clears out 
+// all of the local OAuth goodies.
+[[LocalFoursquareUser localFoursquareUser] logout];
+
 </pre></code>

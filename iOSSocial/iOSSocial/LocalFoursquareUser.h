@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "FoursquareUser.h"
+#import "iOSSocialServiceOAuth2ProviderConstants.h"
 
 typedef void(^FoursquareAuthenticationHandler)(NSError *error);
 
