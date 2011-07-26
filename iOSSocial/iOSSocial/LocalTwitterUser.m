@@ -131,6 +131,11 @@ static LocalTwitterUser *localTwitterUser = nil;
     }
 }
 
+- (NSString*)oAuthAccessToken
+{
+    return [self.twitter oAuthAccessToken];
+}
+
 - (void)logout
 {
     //assert if instagram is nil. params have not been set!

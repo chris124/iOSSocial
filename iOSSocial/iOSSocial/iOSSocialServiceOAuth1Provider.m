@@ -195,6 +195,11 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
     auth = newAuth;
 }
 
+- (NSString*)oAuthAccessToken
+{
+    return auth.accessToken;
+}
+
 - (void)logout
 {
     if ([auth.serviceProvider isEqual:kGTMOAuthServiceProviderGoogle]) {

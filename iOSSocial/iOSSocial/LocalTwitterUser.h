@@ -40,6 +40,8 @@ typedef void(^TwitterAuthenticationHandler)(NSError *error);
            fromViewController:(UIViewController*)vc 
         withCompletionHandler:(TwitterAuthenticationHandler)completionHandler;
 
+- (NSString*)oAuthAccessToken;
+
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 

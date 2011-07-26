@@ -21,6 +21,8 @@ typedef void(^AuthorizationHandler)(NSDictionary *userInfo, NSError *error);
 
 - (BOOL)isSessionValid;
 
+- (NSString*)oAuthAccessToken;
+
 - (void)logout;
 
 @end

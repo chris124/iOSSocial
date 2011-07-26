@@ -131,6 +131,11 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     }
 }
 
+- (NSString*)oAuthAccessToken
+{
+    return [self.foursquare oAuthAccessToken];
+}
+
 - (void)logout
 {
     //assert if foursquare is nil. params have not been set!

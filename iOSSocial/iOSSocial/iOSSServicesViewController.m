@@ -285,9 +285,7 @@ enum iOSSDoneRows {
                                                                  if (!error) {
                                                                      NSString *accessToken = [[LocalInstagramUser localInstagramUser] oAuthAccessToken];
                                                                      accessToken = nil;
-                                                                 }
-                                                                 //[self updateUI];
-                                                             }];
+                                                                 }}];
                 }
                     break;
                 case iOSSServicesSecServicesRowTwitter: 
@@ -297,9 +295,8 @@ enum iOSSDoneRows {
                                                             fromViewController:self 
                                                          withCompletionHandler:^(NSError *error){
                                                              if (!error) {
-                                                             }
-                                                             //[self updateUI];
-                                                         }];
+                                                                 NSString *accessToken = [[LocalTwitterUser localTwitterUser] oAuthAccessToken];
+                                                             }}];
                 }
                     break;
                 case iOSSServicesSecServicesRowFoursquare: 
@@ -309,9 +306,8 @@ enum iOSSDoneRows {
                                                                   fromViewController:self 
                                                                withCompletionHandler:^(NSError *error){
                                                              if (!error) {
-                                                             }
-                                                             //[self updateUI];
-                                                         }];
+                                                                 NSString *accessToken = [[LocalFoursquareUser localFoursquareUser] oAuthAccessToken];
+                                                             }}];
                 }
                     break;
                 default:
