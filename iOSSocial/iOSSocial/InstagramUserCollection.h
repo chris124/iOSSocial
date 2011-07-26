@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
-// UI
 #import "Three20/Three20.h"
 
 @protocol IGUser;

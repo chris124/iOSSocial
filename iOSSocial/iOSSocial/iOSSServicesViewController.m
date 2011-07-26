@@ -283,6 +283,8 @@ enum iOSSDoneRows {
                                                                 fromViewController:self 
                                                              withCompletionHandler:^(NSError *error){
                                                                  if (!error) {
+                                                                     NSString *accessToken = [[LocalInstagramUser localInstagramUser] oAuthAccessToken];
+                                                                     accessToken = nil;
                                                                  }
                                                                  //[self updateUI];
                                                              }];
@@ -302,8 +304,8 @@ enum iOSSDoneRows {
                     break;
                 case iOSSServicesSecServicesRowFoursquare: 
                 {
-                    //NSString *scope = @"basic comments relationships likes";
-                    [[LocalFoursquareUser localFoursquareUser] authenticateWithScope:nil/*scope*/  
+                    NSString *scope = @"basic comments relationships likes";
+                    [[LocalFoursquareUser localFoursquareUser] authenticateWithScope:scope 
                                                                   fromViewController:self 
                                                                withCompletionHandler:^(NSError *error){
                                                              if (!error) {

@@ -22,6 +22,8 @@ typedef void(^InstagramAuthorizationHandler)(NSDictionary *userInfo, NSError *er
 
 - (BOOL)isSessionValid;
 
+- (NSString*)oAuthAccessToken;
+
 - (void)logout;
 
 + (NSURL*)authorizeURL:(NSURL*)URL;

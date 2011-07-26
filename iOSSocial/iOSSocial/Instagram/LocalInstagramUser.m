@@ -155,7 +155,7 @@ static LocalInstagramUser *localInstagramUser = nil;
             }
         } else {
             NSDictionary *dictionary = [Instagram JSONFromData:responseData];
-            self.userDictionary = dictionary;
+            self.userDictionary = [dictionary objectForKey:@"data"];
             
             if (self.fetchUserDataHandler) {
                 self.fetchUserDataHandler(nil);
@@ -249,6 +249,11 @@ static LocalInstagramUser *localInstagramUser = nil;
     } else {
         [self fetchLocalUserDataWithCompletionHandler:nil];
     }
+}
+
+- (NSString*)oAuthAccessToken
+{
+    return [self.instagram oAuthAccessToken];
 }
 
 - (void)logout

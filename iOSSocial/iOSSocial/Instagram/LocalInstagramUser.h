@@ -40,6 +40,8 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
            fromViewController:(UIViewController*)vc 
         withCompletionHandler:(InstagramAuthenticationHandler)completionHandler;
 
+- (NSString*)oAuthAccessToken;
+
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 
