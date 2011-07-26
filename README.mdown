@@ -1,7 +1,16 @@
 iOSSocial
 =======
 
-iOSSocial is a collection of classes that makes it easy to integrate with one or multiple popular social networks. Includes OAuth authentication support for each view out-of-the box via view controllers and saving of OAuth tokens in the keychain.
+iOSSocial is a collection of classes that makes it easy to integrate with one or more popular social networks. Includes OAuth authentication support for each service out-of-the box via view controllers and saving of OAuth tokens in the keychain.
+
+Supported services
+- Instagram (OAuth2)
+- Twitter (OAuth1)
+- Foursquare (OAuth 2)
+
+Supported iOS platforms: 
+- iOS 4
+- iOS 5
 
 Community
 =========
@@ -11,7 +20,7 @@ Hopefully coming soon!
 Adding iOSSocial to your project
 ==============================
 
-iOSSocial is compiled as static libraries. Instructions coming soon!
+iOSSocial is compiled as a static library. Instructions coming soon!
   
 An Overview of iOSSocial
 ======================
@@ -19,8 +28,8 @@ An Overview of iOSSocial
 Instagram
 ------------
 
-Facebook
-----------------
-
 Twitter
+-----------------------
+
+Foursquare
 -----------------------
