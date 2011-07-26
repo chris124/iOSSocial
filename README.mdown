@@ -3,14 +3,9 @@ iOSSocial
 
 iOSSocial is a collection of classes that makes it easy to integrate with one or more popular social networks. Includes OAuth authentication support for each service out-of-the box via view controllers and saving of OAuth tokens in the keychain.
 
-Supported services
-- Instagram (OAuth2)
-- Twitter (OAuth1)
-- Foursquare (OAuth 2)
+Supported services: Instagram (OAuth2), Twitter (OAuth1), Foursquare (OAuth 2)
 
-Supported iOS platforms: 
-- iOS 4
-- iOS 5
+Supported iOS platforms: iOS 4, iOS 5
 
 Community
 =========
@@ -27,6 +22,18 @@ An Overview of iOSSocial
                   
 Instagram
 ------------
+
+http://instagram.com/developer/auth/
+
+NSMutableDictionary *params = [NSMutableDictionary dictionary];
+[params setObject:@"Instagram Client ID for your Application" forKey:kSMOAuth2ClientID];
+[params setObject:@"Instagram Client Secret for your Application" forKey:kSMOAuth2ClientSecret];
+[params setObject:@"Instagram Callback for your Application" forKey:kSMOAuth2RedirectURI];
+[params setObject:@"InstaBeta_Instagram_Service" forKey:kSMOAuth2KeychainItemName];
+[params setObject:@"Instagram Authorize URL" forKey:kSMOAuth2AuthorizeURL];
+[params setObject:@"Instagram Access Token URL" forKey:kSMOAuth2AccessTokenURL];
+[params setObject:@"Instagram Service" forKey:kSMOAuth2ServiceProviderName];
+[[LocalInstagramUser localInstagramUser] assignOAuthParams:params];
 
 Twitter
 -----------------------
