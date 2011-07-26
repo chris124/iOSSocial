@@ -24,19 +24,81 @@ Instagram
 ------------
 
 http://instagram.com/developer/auth/
+<pre><code>
+#import "LocalInstagramUser.h"
 
 NSMutableDictionary *params = [NSMutableDictionary dictionary];
 [params setObject:@"Instagram Client ID for your Application" forKey:kSMOAuth2ClientID];
 [params setObject:@"Instagram Client Secret for your Application" forKey:kSMOAuth2ClientSecret];
 [params setObject:@"Instagram Callback for your Application" forKey:kSMOAuth2RedirectURI];
-[params setObject:@"InstaBeta_Instagram_Service" forKey:kSMOAuth2KeychainItemName];
+[params setObject:@"Instagram Keychain name of your choosing" forKey:kSMOAuth2KeychainItemName];
 [params setObject:@"Instagram Authorize URL" forKey:kSMOAuth2AuthorizeURL];
 [params setObject:@"Instagram Access Token URL" forKey:kSMOAuth2AccessTokenURL];
-[params setObject:@"Instagram Service" forKey:kSMOAuth2ServiceProviderName];
+[params setObject:@"Instagram Service name of your choosing" forKey:kSMOAuth2ServiceProviderName];
 [[LocalInstagramUser localInstagramUser] assignOAuthParams:params];
+
+// The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
+
+NSString *scope = @"basic comments relationships likes";
+[[LocalInstagramUser localInstagramUser] authenticateWithScope:scope  
+                                            fromViewController:self 
+                                         withCompletionHandler:^(NSError *error){
+                                             if (!error) {
+                                                 NSString *accessToken = [[LocalInstagramUser localInstagramUser] oAuthAccessToken];
+                                             }}];
+</pre></code>
 
 Twitter
 -----------------------
+<pre><code>
+#import "LocalTwitterUser.h"
+
+NSMutableDictionary *params = [NSMutableDictionary dictionary];
+[params setObject:@"Z9AO3zqCciZdrtHhiNn44A" forKey:kSMOAuth1ClientID];
+[params setObject:@"2sCNA9kvREvJrV3CBGFEIMSoh5Ps6ZCe1dHi0uLSU" forKey:kSMOAuth1ClientSecret];
+[params setObject:@"http://www.betaworks.com/twitter/callback" forKey:kSMOAuth1RedirectURI];
+[params setObject:@"InstaBeta_Twitter_Service" forKey:kSMOAuth1KeychainItemName];
+[params setObject:@"https://api.twitter.com/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
+[params setObject:@"https://api.twitter.com/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
+[params setObject:@"https://api.twitter.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
+[params setObject:@"Twitter Service" forKey:kSMOAuth1ServiceProviderName];
+[[LocalTwitterUser localTwitterUser] assignOAuthParams:params];
+
+// The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
+// The scope for Twitter is set via their website so you can configure permissions there.
+
+[[LocalTwitterUser localTwitterUser] authenticateWithScope:nil  
+                                        fromViewController:self 
+                                     withCompletionHandler:^(NSError *error){
+                                         if (!error) {
+										     NSString *accessToken = [[LocalTwitterUser localTwitterUser] oAuthAccessToken];
+                                         }}];
+</pre></code>
 
 Foursquare
 -----------------------
+
+https://developer.foursquare.com/merchant/oauth.html
+<pre><code>
+#import "LocalFoursquareUser.h"
+
+NSMutableDictionary *params = [NSMutableDictionary dictionary];
+[params setObject:@"Foursquare Client ID for your Application"" forKey:kSMOAuth2ClientID];
+[params setObject:@"Foursquare Client Secret for your Application" forKey:kSMOAuth2ClientSecret];
+[params setObject:@"Foursquare Callback for your Application" forKey:kSMOAuth2RedirectURI];
+[params setObject:@""Foursquare Keychain name of your choosing" forKey:kSMOAuth2KeychainItemName];
+[params setObject:@"Foursquare Authorize URL" forKey:kSMOAuth2AuthorizeURL];
+[params setObject:@"Foursquare Access Token URL" forKey:kSMOAuth2AccessTokenURL];
+[params setObject:@"Foursquare Service name of your choosing" forKey:kSMOAuth2ServiceProviderName];
+[[LocalFoursquareUser localFoursquareUser] assignOAuthParams:params];
+
+// The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
+
+NSString *scope = @"basic comments relationships likes";
+[[LocalFoursquareUser localFoursquareUser] authenticateWithScope:scope 
+                                              fromViewController:self 
+                                           withCompletionHandler:^(NSError *error){
+                                               if (!error) {
+                                                   NSString *accessToken = [[LocalFoursquareUser localFoursquareUser] oAuthAccessToken];
+                                               }}];
+</pre></code>
