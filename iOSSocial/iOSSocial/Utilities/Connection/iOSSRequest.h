@@ -16,7 +16,7 @@ enum iOSSRequestMethod {
 };
 typedef enum iOSSRequestMethod iOSSRequestMethod;
 
-typedef void(^iOSSRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error);
+typedef void(^iOSSRequestHandler)(NSString *responseString, NSError *error);
 
 @interface iOSSRequest : NSObject {
     BOOL    requiresAuthentication;

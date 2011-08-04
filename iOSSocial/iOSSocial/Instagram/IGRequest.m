@@ -7,7 +7,7 @@
 //
 
 #import "IGRequest.h"
-#import "UIApplication+iOSSNetworkActivity.h"
+//#import "UIApplication+iOSSNetworkActivity.h"
 #import "iOSSConnection.h"
 #import "Instagram.h"
 

@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		120888D913D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 120888D713D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h */; };
-		120888DA13D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 120888D813D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m */; };
-		120888DE13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 120888DC13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h */; };
-		120888DF13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 120888DD13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m */; };
-		120888E213D7819300C0FB68 /* iOSSMultipartPOSTRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 120888E013D7819300C0FB68 /* iOSSMultipartPOSTRequest.h */; };
-		120888E313D7819300C0FB68 /* iOSSMultipartPOSTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 120888E113D7819300C0FB68 /* iOSSMultipartPOSTRequest.m */; };
 		1264A13013D08B900085E394 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A12F13D08B900085E394 /* Foundation.framework */; };
 		1264A13613D08B900085E394 /* iOSSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A13513D08B900085E394 /* iOSSocial.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1264A13E13D08B900085E394 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A13D13D08B900085E394 /* SenTestingKit.framework */; };
@@ -23,35 +17,9 @@
 		1264A14C13D08B900085E394 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1264A14A13D08B900085E394 /* InfoPlist.strings */; };
 		1264A14E13D08B900085E394 /* iOSSocialTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1264A14D13D08B900085E394 /* iOSSocialTests.h */; };
 		1264A15013D08B900085E394 /* iOSSocialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A14F13D08B900085E394 /* iOSSocialTests.m */; };
-		1264A16413D094E70085E394 /* Instagram.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A15E13D094E70085E394 /* Instagram.h */; };
-		1264A16513D094E70085E394 /* Instagram.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A15F13D094E70085E394 /* Instagram.m */; };
-		1264A16613D094E70085E394 /* InstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A16013D094E70085E394 /* InstagramUser.h */; settings = {ATTRIBUTES = (); }; };
-		1264A16713D094E70085E394 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A16113D094E70085E394 /* InstagramUser.m */; };
-		1264A16813D094E70085E394 /* LocalInstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1264A16213D094E70085E394 /* LocalInstagramUser.h */; settings = {ATTRIBUTES = (); }; };
-		1264A16913D094E70085E394 /* LocalInstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A16313D094E70085E394 /* LocalInstagramUser.m */; };
 		1264A16B13D0951E0085E394 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A16A13D0951E0085E394 /* UIKit.framework */; };
-		126FE23113D9C28E00D72D46 /* iOSSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE22B13D9C28E00D72D46 /* iOSSLog.h */; };
-		126FE23213D9C28E00D72D46 /* iOSSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE22C13D9C28E00D72D46 /* iOSSLog.m */; };
-		126FE23313D9C28E00D72D46 /* iOSSRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE22D13D9C28E00D72D46 /* iOSSRequest.h */; };
-		126FE23413D9C28E00D72D46 /* iOSSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE22E13D9C28E00D72D46 /* iOSSRequest.m */; };
 		126FE23513D9C28E00D72D46 /* iOSSServicesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */; };
 		126FE23613D9C28E00D72D46 /* iOSSServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */; };
-		126FE25313D9C7DF00D72D46 /* LocalTwitterUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25113D9C7DF00D72D46 /* LocalTwitterUser.h */; };
-		126FE25413D9C7DF00D72D46 /* LocalTwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE25213D9C7DF00D72D46 /* LocalTwitterUser.m */; };
-		126FE25713D9C7F000D72D46 /* TwitterUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25513D9C7F000D72D46 /* TwitterUser.h */; };
-		126FE25813D9C7F000D72D46 /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE25613D9C7F000D72D46 /* TwitterUser.m */; };
-		126FE25B13D9CBEC00D72D46 /* Twitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25913D9CBEB00D72D46 /* Twitter.h */; };
-		126FE25C13D9CBEC00D72D46 /* Twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE25A13D9CBEB00D72D46 /* Twitter.m */; };
-		126FE26013D9D9F100D72D46 /* TwitterUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE25F13D9D9F000D72D46 /* TwitterUser+Private.h */; };
-		126FE2C213DA214000D72D46 /* Foursquare.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2C013DA214000D72D46 /* Foursquare.h */; };
-		126FE2C313DA214000D72D46 /* Foursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE2C113DA214000D72D46 /* Foursquare.m */; };
-		126FE2C813DA225B00D72D46 /* FoursquareUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2C613DA225A00D72D46 /* FoursquareUser.h */; };
-		126FE2C913DA225B00D72D46 /* FoursquareUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE2C713DA225A00D72D46 /* FoursquareUser.m */; };
-		126FE2CB13DA22C500D72D46 /* FoursquareUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2CA13DA22C500D72D46 /* FoursquareUser+Private.h */; };
-		126FE2CE13DA22FF00D72D46 /* LocalFoursquareUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE2CC13DA22FD00D72D46 /* LocalFoursquareUser.h */; };
-		126FE2CF13DA22FF00D72D46 /* LocalFoursquareUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE2CD13DA22FD00D72D46 /* LocalFoursquareUser.m */; };
-		1299F1F813D8724F0065735C /* iOSSUploadFileInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1299F1F613D8724E0065735C /* iOSSUploadFileInfo.h */; };
-		1299F1F913D8724F0065735C /* iOSSUploadFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1299F1F713D8724E0065735C /* iOSSUploadFileInfo.m */; };
 		12AB358813DDBAE100565332 /* GTMOAuth2Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB358013DDBAE100565332 /* GTMOAuth2Authentication.h */; };
 		12AB358913DDBAE100565332 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB358113DDBAE100565332 /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		12AB358A13DDBAE100565332 /* GTMOAuth2SignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB358213DDBAE100565332 /* GTMOAuth2SignIn.h */; };
@@ -70,29 +38,63 @@
 		12AB3A0F13DF13D400565332 /* iOSSocialUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A0D13DF13D400565332 /* iOSSocialUser.m */; };
 		12AB3A1213DF13EE00565332 /* iOSSocialLocalUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A1013DF13ED00565332 /* iOSSocialLocalUser.h */; };
 		12AB3A1313DF13EE00565332 /* iOSSocialLocalUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A1113DF13EE00565332 /* iOSSocialLocalUser.m */; };
-		12AB3A1B13DF176900565332 /* iOSSocialServiceOAuth2Provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A1913DF176700565332 /* iOSSocialServiceOAuth2Provider.h */; };
-		12AB3A1C13DF176900565332 /* iOSSocialServiceOAuth2Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A1A13DF176800565332 /* iOSSocialServiceOAuth2Provider.m */; };
-		12AB3A1F13DF178300565332 /* iOSSocialServiceOAuth1Provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A1D13DF178000565332 /* iOSSocialServiceOAuth1Provider.h */; };
-		12AB3A2013DF178300565332 /* iOSSocialServiceOAuth1Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A1E13DF178200565332 /* iOSSocialServiceOAuth1Provider.m */; };
-		12AB3A2213DF1A8100565332 /* iOSSocialServiceOAuth2ProviderConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A2113DF1A7F00565332 /* iOSSocialServiceOAuth2ProviderConstants.h */; };
-		12AB3A2413DF1E7000565332 /* iOSSocialServiceOAuth1ProviderConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A2313DF1E6900565332 /* iOSSocialServiceOAuth1ProviderConstants.h */; };
-		12AB3A2713DF20F700565332 /* GTMOAuthAuthentication+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3A2513DF20F000565332 /* GTMOAuthAuthentication+Additions.h */; };
-		12AB3A2813DF20F700565332 /* GTMOAuthAuthentication+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A2613DF20F200565332 /* GTMOAuthAuthentication+Additions.m */; };
-		12DD953313D617ED00C2AA32 /* InstagramUserCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */; };
-		12DD953413D617ED00C2AA32 /* InstagramUserCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */; };
-		12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */; };
-		12E0ACCF13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */; };
-		12ECAC5B13D4818300C1297B /* IGRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECAC5913D4818300C1297B /* IGRequest.h */; };
-		12ECAC5C13D4818300C1297B /* IGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ECAC5A13D4818300C1297B /* IGRequest.m */; };
-		12ECAC5F13D4879900C1297B /* InstagramUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECAC5E13D4879900C1297B /* InstagramUser+Private.h */; };
-		12ECAC6313D4895200C1297B /* UIApplication+iOSSNetworkActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECAC6113D4895200C1297B /* UIApplication+iOSSNetworkActivity.h */; };
-		12ECAC6413D4895200C1297B /* UIApplication+iOSSNetworkActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ECAC6213D4895200C1297B /* UIApplication+iOSSNetworkActivity.m */; };
-		12ECAC6813D4905800C1297B /* iOSSConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECAC6613D4905800C1297B /* iOSSConnection.h */; };
-		12ECAC6913D4905800C1297B /* iOSSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ECAC6713D4905800C1297B /* iOSSConnection.m */; };
-		12ECACE313D4D39200C1297B /* InstagramMedia.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECACE113D4D39200C1297B /* InstagramMedia.h */; };
-		12ECACE413D4D39200C1297B /* InstagramMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ECACE213D4D39200C1297B /* InstagramMedia.m */; };
-		12ECACE813D4D3A300C1297B /* InstagramMediaCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECACE613D4D3A300C1297B /* InstagramMediaCollection.h */; };
-		12ECACE913D4D3A300C1297B /* InstagramMediaCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ECACE713D4D3A300C1297B /* InstagramMediaCollection.m */; };
+		12AB3B8413DF842500565332 /* Foursquare.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B7D13DF842500565332 /* Foursquare.h */; };
+		12AB3B8513DF842500565332 /* Foursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3B7E13DF842500565332 /* Foursquare.m */; };
+		12AB3B8613DF842500565332 /* FoursquareUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B7F13DF842500565332 /* FoursquareUser.h */; };
+		12AB3B8713DF842500565332 /* FoursquareUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3B8013DF842500565332 /* FoursquareUser.m */; };
+		12AB3B8813DF842500565332 /* FoursquareUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B8113DF842500565332 /* FoursquareUser+Private.h */; };
+		12AB3B8913DF842500565332 /* LocalFoursquareUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B8213DF842500565332 /* LocalFoursquareUser.h */; };
+		12AB3B8A13DF842500565332 /* LocalFoursquareUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3B8313DF842500565332 /* LocalFoursquareUser.m */; };
+		12AB3B9313DF843E00565332 /* LocalTwitterUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B8B13DF843E00565332 /* LocalTwitterUser.h */; };
+		12AB3B9413DF843E00565332 /* LocalTwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3B8C13DF843E00565332 /* LocalTwitterUser.m */; };
+		12AB3B9513DF843E00565332 /* Twitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B8E13DF843E00565332 /* Twitter.h */; };
+		12AB3B9613DF843E00565332 /* Twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3B8F13DF843E00565332 /* Twitter.m */; };
+		12AB3B9713DF843E00565332 /* TwitterUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B9013DF843E00565332 /* TwitterUser.h */; };
+		12AB3B9813DF843E00565332 /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3B9113DF843E00565332 /* TwitterUser.m */; };
+		12AB3B9913DF843E00565332 /* TwitterUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B9213DF843E00565332 /* TwitterUser+Private.h */; };
+		12AB3BAA13DF846B00565332 /* IGRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B9A13DF846B00565332 /* IGRequest.h */; };
+		12AB3BAB13DF846B00565332 /* IGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3B9B13DF846B00565332 /* IGRequest.m */; };
+		12AB3BAC13DF846B00565332 /* Instagram.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B9D13DF846B00565332 /* Instagram.h */; };
+		12AB3BAD13DF846B00565332 /* Instagram.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3B9E13DF846B00565332 /* Instagram.m */; };
+		12AB3BAE13DF846B00565332 /* InstagramMedia.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B9F13DF846B00565332 /* InstagramMedia.h */; };
+		12AB3BAF13DF846B00565332 /* InstagramMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA013DF846B00565332 /* InstagramMedia.m */; };
+		12AB3BB013DF846B00565332 /* InstagramMediaCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA113DF846B00565332 /* InstagramMediaCollection.h */; };
+		12AB3BB113DF846B00565332 /* InstagramMediaCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA213DF846B00565332 /* InstagramMediaCollection.m */; };
+		12AB3BB213DF846B00565332 /* InstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA313DF846B00565332 /* InstagramUser.h */; };
+		12AB3BB313DF846B00565332 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA413DF846B00565332 /* InstagramUser.m */; };
+		12AB3BB413DF846B00565332 /* InstagramUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA513DF846B00565332 /* InstagramUser+Private.h */; };
+		12AB3BB513DF846B00565332 /* InstagramUserCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA613DF846B00565332 /* InstagramUserCollection.h */; };
+		12AB3BB613DF846B00565332 /* InstagramUserCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA713DF846B00565332 /* InstagramUserCollection.m */; };
+		12AB3BB713DF846B00565332 /* LocalInstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA813DF846B00565332 /* LocalInstagramUser.h */; };
+		12AB3BB813DF846B00565332 /* LocalInstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA913DF846B00565332 /* LocalInstagramUser.m */; };
+		12AB3BC313DF849500565332 /* GTMOAuthAuthentication+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BBB13DF849500565332 /* GTMOAuthAuthentication+Additions.h */; };
+		12AB3BC413DF849500565332 /* GTMOAuthAuthentication+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BBC13DF849500565332 /* GTMOAuthAuthentication+Additions.m */; };
+		12AB3BC513DF849500565332 /* iOSSocialServiceOAuth1Provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BBD13DF849500565332 /* iOSSocialServiceOAuth1Provider.h */; };
+		12AB3BC613DF849500565332 /* iOSSocialServiceOAuth1Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BBE13DF849500565332 /* iOSSocialServiceOAuth1Provider.m */; };
+		12AB3BC713DF849500565332 /* iOSSocialServiceOAuth1ProviderConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BBF13DF849500565332 /* iOSSocialServiceOAuth1ProviderConstants.h */; };
+		12AB3BC813DF849500565332 /* iOSSocialServiceOAuth2Provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BC013DF849500565332 /* iOSSocialServiceOAuth2Provider.h */; };
+		12AB3BC913DF849500565332 /* iOSSocialServiceOAuth2Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BC113DF849500565332 /* iOSSocialServiceOAuth2Provider.m */; };
+		12AB3BCA13DF849500565332 /* iOSSocialServiceOAuth2ProviderConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BC213DF849500565332 /* iOSSocialServiceOAuth2ProviderConstants.h */; };
+		12AB3BCD13DF84AC00565332 /* iOSSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BCB13DF84AC00565332 /* iOSSLog.h */; };
+		12AB3BCE13DF84AC00565332 /* iOSSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BCC13DF84AC00565332 /* iOSSLog.m */; };
+		12AB3BD113DF84B900565332 /* NSString+iOSSURLAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BCF13DF84B900565332 /* NSString+iOSSURLAdditions.h */; };
+		12AB3BD213DF84B900565332 /* NSString+iOSSURLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BD013DF84B900565332 /* NSString+iOSSURLAdditions.m */; };
+		12AB3BD513DF84C800565332 /* NSUserDefaults+iOSSAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BD313DF84C800565332 /* NSUserDefaults+iOSSAdditions.h */; };
+		12AB3BD613DF84C800565332 /* NSUserDefaults+iOSSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BD413DF84C800565332 /* NSUserDefaults+iOSSAdditions.m */; };
+		12AB3BE113DF84D800565332 /* iOSSConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BD713DF84D800565332 /* iOSSConnection.h */; };
+		12AB3BE213DF84D800565332 /* iOSSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BD813DF84D800565332 /* iOSSConnection.m */; };
+		12AB3BE313DF84D800565332 /* iOSSFormEncodedPOSTRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BD913DF84D800565332 /* iOSSFormEncodedPOSTRequest.h */; };
+		12AB3BE413DF84D800565332 /* iOSSFormEncodedPOSTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BDA13DF84D800565332 /* iOSSFormEncodedPOSTRequest.m */; };
+		12AB3BE513DF84D800565332 /* iOSSMultipartPOSTRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BDB13DF84D800565332 /* iOSSMultipartPOSTRequest.h */; };
+		12AB3BE613DF84D800565332 /* iOSSMultipartPOSTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BDC13DF84D800565332 /* iOSSMultipartPOSTRequest.m */; };
+		12AB3BE713DF84D800565332 /* iOSSRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BDD13DF84D800565332 /* iOSSRequest.h */; };
+		12AB3BE813DF84D800565332 /* iOSSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BDE13DF84D800565332 /* iOSSRequest.m */; };
+		12AB3BE913DF84D800565332 /* iOSSUploadFileInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BDF13DF84D800565332 /* iOSSUploadFileInfo.h */; };
+		12AB3BEA13DF84D800565332 /* iOSSUploadFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BE013DF84D800565332 /* iOSSUploadFileInfo.m */; };
+		12AB3BED13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BEB13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h */; };
+		12AB3BEE13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BEC13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m */; };
+		12AB3BF113DF84F500565332 /* UIView+iOSSSubviewTraversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BEF13DF84F500565332 /* UIView+iOSSSubviewTraversal.h */; };
+		12AB3BF213DF84F500565332 /* UIView+iOSSSubviewTraversal.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BF013DF84F500565332 /* UIView+iOSSSubviewTraversal.m */; };
 		12ECAE4013D5D3E700C1297B /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECADFE13D5BDD200C1297B /* libThree20.a */; };
 		12ECAE4113D5D3E700C1297B /* libThree20Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE0A13D5BF0700C1297B /* libThree20Core.a */; };
 		12ECAE4213D5D3E700C1297B /* libThree20Network.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE1513D5BF1100C1297B /* libThree20Network.a */; };
@@ -100,8 +102,6 @@
 		12ECAE4413D5D3E700C1297B /* libThree20UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE3D13D5BF7D00C1297B /* libThree20UI.a */; };
 		12ECAE4513D5D3E700C1297B /* libThree20UICommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE2B13D5BF6B00C1297B /* libThree20UICommon.a */; };
 		12ECAE4613D5D3E700C1297B /* libThree20UINavigator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE3413D5BF7000C1297B /* libThree20UINavigator.a */; };
-		12ECAF7713D5F38100C1297B /* NSUserDefaults+iOSSAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 12ECAF7513D5F38100C1297B /* NSUserDefaults+iOSSAdditions.h */; };
-		12ECAF7813D5F38100C1297B /* NSUserDefaults+iOSSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 12ECAF7613D5F38100C1297B /* NSUserDefaults+iOSSAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -276,12 +276,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		120888D713D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSFormEncodedPOSTRequest.h; sourceTree = "<group>"; };
-		120888D813D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSFormEncodedPOSTRequest.m; sourceTree = "<group>"; };
-		120888DC13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+iOSSURLAdditions.h"; sourceTree = "<group>"; };
-		120888DD13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+iOSSURLAdditions.m"; sourceTree = "<group>"; };
-		120888E013D7819300C0FB68 /* iOSSMultipartPOSTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSMultipartPOSTRequest.h; sourceTree = "<group>"; };
-		120888E113D7819300C0FB68 /* iOSSMultipartPOSTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSMultipartPOSTRequest.m; sourceTree = "<group>"; };
 		1264A12C13D08B900085E394 /* libiOSSocial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiOSSocial.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1264A12F13D08B900085E394 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1264A13313D08B900085E394 /* iOSSocial-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSSocial-Prefix.pch"; sourceTree = "<group>"; };
@@ -295,35 +289,9 @@
 		1264A14B13D08B900085E394 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1264A14D13D08B900085E394 /* iOSSocialTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSSocialTests.h; sourceTree = "<group>"; };
 		1264A14F13D08B900085E394 /* iOSSocialTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSSocialTests.m; sourceTree = "<group>"; };
-		1264A15E13D094E70085E394 /* Instagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Instagram.h; path = Instagram/Instagram.h; sourceTree = "<group>"; };
-		1264A15F13D094E70085E394 /* Instagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Instagram.m; path = Instagram/Instagram.m; sourceTree = "<group>"; };
-		1264A16013D094E70085E394 /* InstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramUser.h; path = Instagram/InstagramUser.h; sourceTree = "<group>"; };
-		1264A16113D094E70085E394 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramUser.m; path = Instagram/InstagramUser.m; sourceTree = "<group>"; };
-		1264A16213D094E70085E394 /* LocalInstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalInstagramUser.h; path = Instagram/LocalInstagramUser.h; sourceTree = "<group>"; };
-		1264A16313D094E70085E394 /* LocalInstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalInstagramUser.m; path = Instagram/LocalInstagramUser.m; sourceTree = "<group>"; };
 		1264A16A13D0951E0085E394 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		126FE22B13D9C28E00D72D46 /* iOSSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSLog.h; sourceTree = "<group>"; };
-		126FE22C13D9C28E00D72D46 /* iOSSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSLog.m; sourceTree = "<group>"; };
-		126FE22D13D9C28E00D72D46 /* iOSSRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSRequest.h; sourceTree = "<group>"; };
-		126FE22E13D9C28E00D72D46 /* iOSSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSRequest.m; sourceTree = "<group>"; };
 		126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSServicesViewController.h; sourceTree = "<group>"; };
 		126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSServicesViewController.m; sourceTree = "<group>"; };
-		126FE25113D9C7DF00D72D46 /* LocalTwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalTwitterUser.h; sourceTree = "<group>"; };
-		126FE25213D9C7DF00D72D46 /* LocalTwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalTwitterUser.m; sourceTree = "<group>"; };
-		126FE25513D9C7F000D72D46 /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUser.h; sourceTree = "<group>"; };
-		126FE25613D9C7F000D72D46 /* TwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterUser.m; sourceTree = "<group>"; };
-		126FE25913D9CBEB00D72D46 /* Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twitter.h; sourceTree = "<group>"; };
-		126FE25A13D9CBEB00D72D46 /* Twitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Twitter.m; sourceTree = "<group>"; };
-		126FE25F13D9D9F000D72D46 /* TwitterUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TwitterUser+Private.h"; sourceTree = "<group>"; };
-		126FE2C013DA214000D72D46 /* Foursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foursquare.h; sourceTree = "<group>"; };
-		126FE2C113DA214000D72D46 /* Foursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foursquare.m; sourceTree = "<group>"; };
-		126FE2C613DA225A00D72D46 /* FoursquareUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareUser.h; sourceTree = "<group>"; };
-		126FE2C713DA225A00D72D46 /* FoursquareUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareUser.m; sourceTree = "<group>"; };
-		126FE2CA13DA22C500D72D46 /* FoursquareUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FoursquareUser+Private.h"; sourceTree = "<group>"; };
-		126FE2CC13DA22FD00D72D46 /* LocalFoursquareUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalFoursquareUser.h; sourceTree = "<group>"; };
-		126FE2CD13DA22FD00D72D46 /* LocalFoursquareUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalFoursquareUser.m; sourceTree = "<group>"; };
-		1299F1F613D8724E0065735C /* iOSSUploadFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSUploadFileInfo.h; sourceTree = "<group>"; };
-		1299F1F713D8724E0065735C /* iOSSUploadFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSUploadFileInfo.m; sourceTree = "<group>"; };
 		12AB358013DDBAE100565332 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2Authentication.h; path = "../../gtm-oauth2/Source/GTMOAuth2Authentication.h"; sourceTree = "<group>"; };
 		12AB358113DDBAE100565332 /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2Authentication.m; path = "../../gtm-oauth2/Source/GTMOAuth2Authentication.m"; sourceTree = "<group>"; };
 		12AB358213DDBAE100565332 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2SignIn.h; path = "../../gtm-oauth2/Source/GTMOAuth2SignIn.h"; sourceTree = "<group>"; };
@@ -344,29 +312,66 @@
 		12AB3A0D13DF13D400565332 /* iOSSocialUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialUser.m; sourceTree = "<group>"; };
 		12AB3A1013DF13ED00565332 /* iOSSocialLocalUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialLocalUser.h; sourceTree = "<group>"; };
 		12AB3A1113DF13EE00565332 /* iOSSocialLocalUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialLocalUser.m; sourceTree = "<group>"; };
-		12AB3A1913DF176700565332 /* iOSSocialServiceOAuth2Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth2Provider.h; sourceTree = "<group>"; };
-		12AB3A1A13DF176800565332 /* iOSSocialServiceOAuth2Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialServiceOAuth2Provider.m; sourceTree = "<group>"; };
-		12AB3A1D13DF178000565332 /* iOSSocialServiceOAuth1Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth1Provider.h; sourceTree = "<group>"; };
-		12AB3A1E13DF178200565332 /* iOSSocialServiceOAuth1Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialServiceOAuth1Provider.m; sourceTree = "<group>"; };
-		12AB3A2113DF1A7F00565332 /* iOSSocialServiceOAuth2ProviderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth2ProviderConstants.h; sourceTree = "<group>"; };
-		12AB3A2313DF1E6900565332 /* iOSSocialServiceOAuth1ProviderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth1ProviderConstants.h; sourceTree = "<group>"; };
-		12AB3A2513DF20F000565332 /* GTMOAuthAuthentication+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMOAuthAuthentication+Additions.h"; sourceTree = "<group>"; };
-		12AB3A2613DF20F200565332 /* GTMOAuthAuthentication+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMOAuthAuthentication+Additions.m"; sourceTree = "<group>"; };
-		12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramUserCollection.h; sourceTree = "<group>"; };
-		12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramUserCollection.m; sourceTree = "<group>"; };
-		12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+iOSSSubviewTraversal.h"; sourceTree = "<group>"; };
-		12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+iOSSSubviewTraversal.m"; sourceTree = "<group>"; };
-		12ECAC5913D4818300C1297B /* IGRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRequest.h; sourceTree = "<group>"; };
-		12ECAC5A13D4818300C1297B /* IGRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRequest.m; sourceTree = "<group>"; };
-		12ECAC5E13D4879900C1297B /* InstagramUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "InstagramUser+Private.h"; sourceTree = "<group>"; };
-		12ECAC6113D4895200C1297B /* UIApplication+iOSSNetworkActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+iOSSNetworkActivity.h"; sourceTree = "<group>"; };
-		12ECAC6213D4895200C1297B /* UIApplication+iOSSNetworkActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+iOSSNetworkActivity.m"; sourceTree = "<group>"; };
-		12ECAC6613D4905800C1297B /* iOSSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSConnection.h; sourceTree = "<group>"; };
-		12ECAC6713D4905800C1297B /* iOSSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSConnection.m; sourceTree = "<group>"; };
-		12ECACE113D4D39200C1297B /* InstagramMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramMedia.h; sourceTree = "<group>"; };
-		12ECACE213D4D39200C1297B /* InstagramMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramMedia.m; sourceTree = "<group>"; };
-		12ECACE613D4D3A300C1297B /* InstagramMediaCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramMediaCollection.h; sourceTree = "<group>"; };
-		12ECACE713D4D3A300C1297B /* InstagramMediaCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramMediaCollection.m; sourceTree = "<group>"; };
+		12AB3B7C13DF842500565332 /* foursquare_trans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = foursquare_trans.png; path = Foursquare/foursquare_trans.png; sourceTree = "<group>"; };
+		12AB3B7D13DF842500565332 /* Foursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Foursquare.h; path = Foursquare/Foursquare.h; sourceTree = "<group>"; };
+		12AB3B7E13DF842500565332 /* Foursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Foursquare.m; path = Foursquare/Foursquare.m; sourceTree = "<group>"; };
+		12AB3B7F13DF842500565332 /* FoursquareUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoursquareUser.h; path = Foursquare/FoursquareUser.h; sourceTree = "<group>"; };
+		12AB3B8013DF842500565332 /* FoursquareUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoursquareUser.m; path = Foursquare/FoursquareUser.m; sourceTree = "<group>"; };
+		12AB3B8113DF842500565332 /* FoursquareUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FoursquareUser+Private.h"; path = "Foursquare/FoursquareUser+Private.h"; sourceTree = "<group>"; };
+		12AB3B8213DF842500565332 /* LocalFoursquareUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalFoursquareUser.h; path = Foursquare/LocalFoursquareUser.h; sourceTree = "<group>"; };
+		12AB3B8313DF842500565332 /* LocalFoursquareUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalFoursquareUser.m; path = Foursquare/LocalFoursquareUser.m; sourceTree = "<group>"; };
+		12AB3B8B13DF843E00565332 /* LocalTwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalTwitterUser.h; path = Twitter/LocalTwitterUser.h; sourceTree = "<group>"; };
+		12AB3B8C13DF843E00565332 /* LocalTwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalTwitterUser.m; path = Twitter/LocalTwitterUser.m; sourceTree = "<group>"; };
+		12AB3B8D13DF843E00565332 /* twitter-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-logo.png"; path = "Twitter/twitter-logo.png"; sourceTree = "<group>"; };
+		12AB3B8E13DF843E00565332 /* Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Twitter.h; path = Twitter/Twitter.h; sourceTree = "<group>"; };
+		12AB3B8F13DF843E00565332 /* Twitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Twitter.m; path = Twitter/Twitter.m; sourceTree = "<group>"; };
+		12AB3B9013DF843E00565332 /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterUser.h; path = Twitter/TwitterUser.h; sourceTree = "<group>"; };
+		12AB3B9113DF843E00565332 /* TwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterUser.m; path = Twitter/TwitterUser.m; sourceTree = "<group>"; };
+		12AB3B9213DF843E00565332 /* TwitterUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TwitterUser+Private.h"; path = "Twitter/TwitterUser+Private.h"; sourceTree = "<group>"; };
+		12AB3B9A13DF846B00565332 /* IGRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGRequest.h; path = Instagram/IGRequest.h; sourceTree = "<group>"; };
+		12AB3B9B13DF846B00565332 /* IGRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGRequest.m; path = Instagram/IGRequest.m; sourceTree = "<group>"; };
+		12AB3B9C13DF846B00565332 /* instagram_trans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = instagram_trans.png; path = Instagram/instagram_trans.png; sourceTree = "<group>"; };
+		12AB3B9D13DF846B00565332 /* Instagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Instagram.h; path = Instagram/Instagram.h; sourceTree = "<group>"; };
+		12AB3B9E13DF846B00565332 /* Instagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Instagram.m; path = Instagram/Instagram.m; sourceTree = "<group>"; };
+		12AB3B9F13DF846B00565332 /* InstagramMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramMedia.h; path = Instagram/InstagramMedia.h; sourceTree = "<group>"; };
+		12AB3BA013DF846B00565332 /* InstagramMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramMedia.m; path = Instagram/InstagramMedia.m; sourceTree = "<group>"; };
+		12AB3BA113DF846B00565332 /* InstagramMediaCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramMediaCollection.h; path = Instagram/InstagramMediaCollection.h; sourceTree = "<group>"; };
+		12AB3BA213DF846B00565332 /* InstagramMediaCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramMediaCollection.m; path = Instagram/InstagramMediaCollection.m; sourceTree = "<group>"; };
+		12AB3BA313DF846B00565332 /* InstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramUser.h; path = Instagram/InstagramUser.h; sourceTree = "<group>"; };
+		12AB3BA413DF846B00565332 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramUser.m; path = Instagram/InstagramUser.m; sourceTree = "<group>"; };
+		12AB3BA513DF846B00565332 /* InstagramUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "InstagramUser+Private.h"; path = "Instagram/InstagramUser+Private.h"; sourceTree = "<group>"; };
+		12AB3BA613DF846B00565332 /* InstagramUserCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramUserCollection.h; path = Instagram/InstagramUserCollection.h; sourceTree = "<group>"; };
+		12AB3BA713DF846B00565332 /* InstagramUserCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramUserCollection.m; path = Instagram/InstagramUserCollection.m; sourceTree = "<group>"; };
+		12AB3BA813DF846B00565332 /* LocalInstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalInstagramUser.h; path = Instagram/LocalInstagramUser.h; sourceTree = "<group>"; };
+		12AB3BA913DF846B00565332 /* LocalInstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalInstagramUser.m; path = Instagram/LocalInstagramUser.m; sourceTree = "<group>"; };
+		12AB3BBB13DF849500565332 /* GTMOAuthAuthentication+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GTMOAuthAuthentication+Additions.h"; path = "OAuth/GTMOAuthAuthentication+Additions.h"; sourceTree = "<group>"; };
+		12AB3BBC13DF849500565332 /* GTMOAuthAuthentication+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GTMOAuthAuthentication+Additions.m"; path = "OAuth/GTMOAuthAuthentication+Additions.m"; sourceTree = "<group>"; };
+		12AB3BBD13DF849500565332 /* iOSSocialServiceOAuth1Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSocialServiceOAuth1Provider.h; path = OAuth/iOSSocialServiceOAuth1Provider.h; sourceTree = "<group>"; };
+		12AB3BBE13DF849500565332 /* iOSSocialServiceOAuth1Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSocialServiceOAuth1Provider.m; path = OAuth/iOSSocialServiceOAuth1Provider.m; sourceTree = "<group>"; };
+		12AB3BBF13DF849500565332 /* iOSSocialServiceOAuth1ProviderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSocialServiceOAuth1ProviderConstants.h; path = OAuth/iOSSocialServiceOAuth1ProviderConstants.h; sourceTree = "<group>"; };
+		12AB3BC013DF849500565332 /* iOSSocialServiceOAuth2Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSocialServiceOAuth2Provider.h; path = OAuth/iOSSocialServiceOAuth2Provider.h; sourceTree = "<group>"; };
+		12AB3BC113DF849500565332 /* iOSSocialServiceOAuth2Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSocialServiceOAuth2Provider.m; path = OAuth/iOSSocialServiceOAuth2Provider.m; sourceTree = "<group>"; };
+		12AB3BC213DF849500565332 /* iOSSocialServiceOAuth2ProviderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSocialServiceOAuth2ProviderConstants.h; path = OAuth/iOSSocialServiceOAuth2ProviderConstants.h; sourceTree = "<group>"; };
+		12AB3BCB13DF84AC00565332 /* iOSSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSLog.h; path = Utilities/Log/iOSSLog.h; sourceTree = "<group>"; };
+		12AB3BCC13DF84AC00565332 /* iOSSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSLog.m; path = Utilities/Log/iOSSLog.m; sourceTree = "<group>"; };
+		12AB3BCF13DF84B900565332 /* NSString+iOSSURLAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+iOSSURLAdditions.h"; path = "Utilities/String/NSString+iOSSURLAdditions.h"; sourceTree = "<group>"; };
+		12AB3BD013DF84B900565332 /* NSString+iOSSURLAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+iOSSURLAdditions.m"; path = "Utilities/String/NSString+iOSSURLAdditions.m"; sourceTree = "<group>"; };
+		12AB3BD313DF84C800565332 /* NSUserDefaults+iOSSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+iOSSAdditions.h"; path = "Utilities/UserDefaults/NSUserDefaults+iOSSAdditions.h"; sourceTree = "<group>"; };
+		12AB3BD413DF84C800565332 /* NSUserDefaults+iOSSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+iOSSAdditions.m"; path = "Utilities/UserDefaults/NSUserDefaults+iOSSAdditions.m"; sourceTree = "<group>"; };
+		12AB3BD713DF84D800565332 /* iOSSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSConnection.h; path = Utilities/Connection/iOSSConnection.h; sourceTree = "<group>"; };
+		12AB3BD813DF84D800565332 /* iOSSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSConnection.m; path = Utilities/Connection/iOSSConnection.m; sourceTree = "<group>"; };
+		12AB3BD913DF84D800565332 /* iOSSFormEncodedPOSTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSFormEncodedPOSTRequest.h; path = Utilities/Connection/iOSSFormEncodedPOSTRequest.h; sourceTree = "<group>"; };
+		12AB3BDA13DF84D800565332 /* iOSSFormEncodedPOSTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSFormEncodedPOSTRequest.m; path = Utilities/Connection/iOSSFormEncodedPOSTRequest.m; sourceTree = "<group>"; };
+		12AB3BDB13DF84D800565332 /* iOSSMultipartPOSTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSMultipartPOSTRequest.h; path = Utilities/Connection/iOSSMultipartPOSTRequest.h; sourceTree = "<group>"; };
+		12AB3BDC13DF84D800565332 /* iOSSMultipartPOSTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSMultipartPOSTRequest.m; path = Utilities/Connection/iOSSMultipartPOSTRequest.m; sourceTree = "<group>"; };
+		12AB3BDD13DF84D800565332 /* iOSSRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSRequest.h; path = Utilities/Connection/iOSSRequest.h; sourceTree = "<group>"; };
+		12AB3BDE13DF84D800565332 /* iOSSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSRequest.m; path = Utilities/Connection/iOSSRequest.m; sourceTree = "<group>"; };
+		12AB3BDF13DF84D800565332 /* iOSSUploadFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSUploadFileInfo.h; path = Utilities/Connection/iOSSUploadFileInfo.h; sourceTree = "<group>"; };
+		12AB3BE013DF84D800565332 /* iOSSUploadFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSUploadFileInfo.m; path = Utilities/Connection/iOSSUploadFileInfo.m; sourceTree = "<group>"; };
+		12AB3BEB13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+iOSSNetworkActivity.h"; path = "Utilities/Application/UIApplication+iOSSNetworkActivity.h"; sourceTree = "<group>"; };
+		12AB3BEC13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+iOSSNetworkActivity.m"; path = "Utilities/Application/UIApplication+iOSSNetworkActivity.m"; sourceTree = "<group>"; };
+		12AB3BEF13DF84F500565332 /* UIView+iOSSSubviewTraversal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+iOSSSubviewTraversal.h"; path = "Utilities/View/UIView+iOSSSubviewTraversal.h"; sourceTree = "<group>"; };
+		12AB3BF013DF84F500565332 /* UIView+iOSSSubviewTraversal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+iOSSSubviewTraversal.m"; path = "Utilities/View/UIView+iOSSSubviewTraversal.m"; sourceTree = "<group>"; };
 		12ECADD213D5BDD100C1297B /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../three20/src/Three20/Three20.xcodeproj; sourceTree = "<group>"; };
 		12ECAE0413D5BF0700C1297B /* Three20Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Core.xcodeproj; path = ../three20/src/Three20Core/Three20Core.xcodeproj; sourceTree = "<group>"; };
 		12ECAE0D13D5BF1100C1297B /* Three20Network.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Network.xcodeproj; path = ../three20/src/Three20Network/Three20Network.xcodeproj; sourceTree = "<group>"; };
@@ -375,8 +380,6 @@
 		12ECAE2E13D5BF7000C1297B /* Three20UINavigator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UINavigator.xcodeproj; path = "/Users/christopherwhite/Documents/iOSSocial/iOSSocial-master/iOSSocial/three20/src/Three20/../Three20UINavigator/Three20UINavigator.xcodeproj"; sourceTree = "<absolute>"; };
 		12ECAE3713D5BF7D00C1297B /* Three20UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UI.xcodeproj; path = "/Users/christopherwhite/Documents/iOSSocial/iOSSocial-master/iOSSocial/three20/src/Three20/../Three20UI/Three20UI.xcodeproj"; sourceTree = "<absolute>"; };
 		12ECAE5513D5D46D00C1297B /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = "<group>"; };
-		12ECAF7513D5F38100C1297B /* NSUserDefaults+iOSSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+iOSSAdditions.h"; sourceTree = "<group>"; };
-		12ECAF7613D5F38100C1297B /* NSUserDefaults+iOSSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+iOSSAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,8 +417,8 @@
 		120888DB13D77ADB00C0FB68 /* String */ = {
 			isa = PBXGroup;
 			children = (
-				120888DC13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h */,
-				120888DD13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m */,
+				12AB3BCF13DF84B900565332 /* NSString+iOSSURLAdditions.h */,
+				12AB3BD013DF84B900565332 /* NSString+iOSSURLAdditions.m */,
 			);
 			name = String;
 			sourceTree = "<group>";
@@ -462,6 +465,8 @@
 		1264A13113D08B900085E394 /* iOSSocial */ = {
 			isa = PBXGroup;
 			children = (
+				12AB3BBA13DF848500565332 /* OAuth */,
+				12AB3BB913DF847800565332 /* Facebook */,
 				12AB359C13DDBF4700565332 /* gtm-http-fetcher */,
 				126FE2BF13DA20C600D72D46 /* Foursquare */,
 				126FE24F13D9C7C400D72D46 /* Twitter */,
@@ -476,14 +481,6 @@
 				12AB3A0D13DF13D400565332 /* iOSSocialUser.m */,
 				12AB3A1013DF13ED00565332 /* iOSSocialLocalUser.h */,
 				12AB3A1113DF13EE00565332 /* iOSSocialLocalUser.m */,
-				12AB3A1913DF176700565332 /* iOSSocialServiceOAuth2Provider.h */,
-				12AB3A1A13DF176800565332 /* iOSSocialServiceOAuth2Provider.m */,
-				12AB3A2113DF1A7F00565332 /* iOSSocialServiceOAuth2ProviderConstants.h */,
-				12AB3A1D13DF178000565332 /* iOSSocialServiceOAuth1Provider.h */,
-				12AB3A1E13DF178200565332 /* iOSSocialServiceOAuth1Provider.m */,
-				12AB3A2313DF1E6900565332 /* iOSSocialServiceOAuth1ProviderConstants.h */,
-				12AB3A2513DF20F000565332 /* GTMOAuthAuthentication+Additions.h */,
-				12AB3A2613DF20F200565332 /* GTMOAuthAuthentication+Additions.m */,
 				1264A13213D08B900085E394 /* Supporting Files */,
 			);
 			path = iOSSocial;
@@ -519,21 +516,22 @@
 		1264A15913D08CA80085E394 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
-				1264A15E13D094E70085E394 /* Instagram.h */,
-				1264A15F13D094E70085E394 /* Instagram.m */,
-				1264A16013D094E70085E394 /* InstagramUser.h */,
-				1264A16113D094E70085E394 /* InstagramUser.m */,
-				12ECAC5E13D4879900C1297B /* InstagramUser+Private.h */,
-				1264A16213D094E70085E394 /* LocalInstagramUser.h */,
-				1264A16313D094E70085E394 /* LocalInstagramUser.m */,
-				12DD953113D617ED00C2AA32 /* InstagramUserCollection.h */,
-				12DD953213D617ED00C2AA32 /* InstagramUserCollection.m */,
-				12ECAC5913D4818300C1297B /* IGRequest.h */,
-				12ECAC5A13D4818300C1297B /* IGRequest.m */,
-				12ECACE113D4D39200C1297B /* InstagramMedia.h */,
-				12ECACE213D4D39200C1297B /* InstagramMedia.m */,
-				12ECACE613D4D3A300C1297B /* InstagramMediaCollection.h */,
-				12ECACE713D4D3A300C1297B /* InstagramMediaCollection.m */,
+				12AB3B9A13DF846B00565332 /* IGRequest.h */,
+				12AB3B9B13DF846B00565332 /* IGRequest.m */,
+				12AB3B9C13DF846B00565332 /* instagram_trans.png */,
+				12AB3B9D13DF846B00565332 /* Instagram.h */,
+				12AB3B9E13DF846B00565332 /* Instagram.m */,
+				12AB3B9F13DF846B00565332 /* InstagramMedia.h */,
+				12AB3BA013DF846B00565332 /* InstagramMedia.m */,
+				12AB3BA113DF846B00565332 /* InstagramMediaCollection.h */,
+				12AB3BA213DF846B00565332 /* InstagramMediaCollection.m */,
+				12AB3BA313DF846B00565332 /* InstagramUser.h */,
+				12AB3BA413DF846B00565332 /* InstagramUser.m */,
+				12AB3BA513DF846B00565332 /* InstagramUser+Private.h */,
+				12AB3BA613DF846B00565332 /* InstagramUserCollection.h */,
+				12AB3BA713DF846B00565332 /* InstagramUserCollection.m */,
+				12AB3BA813DF846B00565332 /* LocalInstagramUser.h */,
+				12AB3BA913DF846B00565332 /* LocalInstagramUser.m */,
 			);
 			name = Instagram;
 			sourceTree = "<group>";
@@ -553,8 +551,8 @@
 		126FE22113D9C13600D72D46 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				126FE22B13D9C28E00D72D46 /* iOSSLog.h */,
-				126FE22C13D9C28E00D72D46 /* iOSSLog.m */,
+				12AB3BCB13DF84AC00565332 /* iOSSLog.h */,
+				12AB3BCC13DF84AC00565332 /* iOSSLog.m */,
 			);
 			name = Log;
 			sourceTree = "<group>";
@@ -596,13 +594,14 @@
 		126FE24F13D9C7C400D72D46 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
-				126FE25113D9C7DF00D72D46 /* LocalTwitterUser.h */,
-				126FE25213D9C7DF00D72D46 /* LocalTwitterUser.m */,
-				126FE25513D9C7F000D72D46 /* TwitterUser.h */,
-				126FE25613D9C7F000D72D46 /* TwitterUser.m */,
-				126FE25913D9CBEB00D72D46 /* Twitter.h */,
-				126FE25A13D9CBEB00D72D46 /* Twitter.m */,
-				126FE25F13D9D9F000D72D46 /* TwitterUser+Private.h */,
+				12AB3B8B13DF843E00565332 /* LocalTwitterUser.h */,
+				12AB3B8C13DF843E00565332 /* LocalTwitterUser.m */,
+				12AB3B8D13DF843E00565332 /* twitter-logo.png */,
+				12AB3B8E13DF843E00565332 /* Twitter.h */,
+				12AB3B8F13DF843E00565332 /* Twitter.m */,
+				12AB3B9013DF843E00565332 /* TwitterUser.h */,
+				12AB3B9113DF843E00565332 /* TwitterUser.m */,
+				12AB3B9213DF843E00565332 /* TwitterUser+Private.h */,
 			);
 			name = Twitter;
 			sourceTree = "<group>";
@@ -610,13 +609,14 @@
 		126FE2BF13DA20C600D72D46 /* Foursquare */ = {
 			isa = PBXGroup;
 			children = (
-				126FE2C013DA214000D72D46 /* Foursquare.h */,
-				126FE2C113DA214000D72D46 /* Foursquare.m */,
-				126FE2C613DA225A00D72D46 /* FoursquareUser.h */,
-				126FE2C713DA225A00D72D46 /* FoursquareUser.m */,
-				126FE2CA13DA22C500D72D46 /* FoursquareUser+Private.h */,
-				126FE2CC13DA22FD00D72D46 /* LocalFoursquareUser.h */,
-				126FE2CD13DA22FD00D72D46 /* LocalFoursquareUser.m */,
+				12AB3B7C13DF842500565332 /* foursquare_trans.png */,
+				12AB3B7D13DF842500565332 /* Foursquare.h */,
+				12AB3B7E13DF842500565332 /* Foursquare.m */,
+				12AB3B7F13DF842500565332 /* FoursquareUser.h */,
+				12AB3B8013DF842500565332 /* FoursquareUser.m */,
+				12AB3B8113DF842500565332 /* FoursquareUser+Private.h */,
+				12AB3B8213DF842500565332 /* LocalFoursquareUser.h */,
+				12AB3B8313DF842500565332 /* LocalFoursquareUser.m */,
 			);
 			name = Foursquare;
 			sourceTree = "<group>";
@@ -652,11 +652,33 @@
 			name = "gtm-http-fetcher";
 			sourceTree = "<group>";
 		};
+		12AB3BB913DF847800565332 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
+		12AB3BBA13DF848500565332 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				12AB3BBB13DF849500565332 /* GTMOAuthAuthentication+Additions.h */,
+				12AB3BBC13DF849500565332 /* GTMOAuthAuthentication+Additions.m */,
+				12AB3BBD13DF849500565332 /* iOSSocialServiceOAuth1Provider.h */,
+				12AB3BBE13DF849500565332 /* iOSSocialServiceOAuth1Provider.m */,
+				12AB3BBF13DF849500565332 /* iOSSocialServiceOAuth1ProviderConstants.h */,
+				12AB3BC013DF849500565332 /* iOSSocialServiceOAuth2Provider.h */,
+				12AB3BC113DF849500565332 /* iOSSocialServiceOAuth2Provider.m */,
+				12AB3BC213DF849500565332 /* iOSSocialServiceOAuth2ProviderConstants.h */,
+			);
+			name = OAuth;
+			sourceTree = "<group>";
+		};
 		12E0ACCB13D0D28B0025C3B7 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
-				12E0ACCC13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h */,
-				12E0ACCD13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m */,
+				12AB3BEF13DF84F500565332 /* UIView+iOSSSubviewTraversal.h */,
+				12AB3BF013DF84F500565332 /* UIView+iOSSSubviewTraversal.m */,
 			);
 			name = UIView;
 			sourceTree = "<group>";
@@ -664,8 +686,8 @@
 		12ECAC6013D4892C00C1297B /* UIApplication */ = {
 			isa = PBXGroup;
 			children = (
-				12ECAC6113D4895200C1297B /* UIApplication+iOSSNetworkActivity.h */,
-				12ECAC6213D4895200C1297B /* UIApplication+iOSSNetworkActivity.m */,
+				12AB3BEB13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h */,
+				12AB3BEC13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m */,
 			);
 			name = UIApplication;
 			sourceTree = "<group>";
@@ -673,16 +695,16 @@
 		12ECAC6513D4904400C1297B /* Connection */ = {
 			isa = PBXGroup;
 			children = (
-				126FE22D13D9C28E00D72D46 /* iOSSRequest.h */,
-				126FE22E13D9C28E00D72D46 /* iOSSRequest.m */,
-				12ECAC6613D4905800C1297B /* iOSSConnection.h */,
-				12ECAC6713D4905800C1297B /* iOSSConnection.m */,
-				120888D713D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h */,
-				120888D813D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m */,
-				120888E013D7819300C0FB68 /* iOSSMultipartPOSTRequest.h */,
-				120888E113D7819300C0FB68 /* iOSSMultipartPOSTRequest.m */,
-				1299F1F613D8724E0065735C /* iOSSUploadFileInfo.h */,
-				1299F1F713D8724E0065735C /* iOSSUploadFileInfo.m */,
+				12AB3BD713DF84D800565332 /* iOSSConnection.h */,
+				12AB3BD813DF84D800565332 /* iOSSConnection.m */,
+				12AB3BD913DF84D800565332 /* iOSSFormEncodedPOSTRequest.h */,
+				12AB3BDA13DF84D800565332 /* iOSSFormEncodedPOSTRequest.m */,
+				12AB3BDB13DF84D800565332 /* iOSSMultipartPOSTRequest.h */,
+				12AB3BDC13DF84D800565332 /* iOSSMultipartPOSTRequest.m */,
+				12AB3BDD13DF84D800565332 /* iOSSRequest.h */,
+				12AB3BDE13DF84D800565332 /* iOSSRequest.m */,
+				12AB3BDF13DF84D800565332 /* iOSSUploadFileInfo.h */,
+				12AB3BE013DF84D800565332 /* iOSSUploadFileInfo.m */,
 			);
 			name = Connection;
 			sourceTree = "<group>";
@@ -755,8 +777,8 @@
 		12ECAF7413D5F32300C1297B /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
-				12ECAF7513D5F38100C1297B /* NSUserDefaults+iOSSAdditions.h */,
-				12ECAF7613D5F38100C1297B /* NSUserDefaults+iOSSAdditions.m */,
+				12AB3BD313DF84C800565332 /* NSUserDefaults+iOSSAdditions.h */,
+				12AB3BD413DF84C800565332 /* NSUserDefaults+iOSSAdditions.m */,
 			);
 			name = UserDefaults;
 			sourceTree = "<group>";
@@ -768,33 +790,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1264A16813D094E70085E394 /* LocalInstagramUser.h in Headers */,
-				1264A16613D094E70085E394 /* InstagramUser.h in Headers */,
-				1264A16413D094E70085E394 /* Instagram.h in Headers */,
-				12E0ACCE13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.h in Headers */,
-				12ECAC5B13D4818300C1297B /* IGRequest.h in Headers */,
-				12ECAC5F13D4879900C1297B /* InstagramUser+Private.h in Headers */,
-				12ECAC6313D4895200C1297B /* UIApplication+iOSSNetworkActivity.h in Headers */,
-				12ECAC6813D4905800C1297B /* iOSSConnection.h in Headers */,
-				12ECACE313D4D39200C1297B /* InstagramMedia.h in Headers */,
-				12ECACE813D4D3A300C1297B /* InstagramMediaCollection.h in Headers */,
-				12ECAF7713D5F38100C1297B /* NSUserDefaults+iOSSAdditions.h in Headers */,
-				12DD953313D617ED00C2AA32 /* InstagramUserCollection.h in Headers */,
-				120888D913D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.h in Headers */,
-				120888DE13D77AF700C0FB68 /* NSString+iOSSURLAdditions.h in Headers */,
-				120888E213D7819300C0FB68 /* iOSSMultipartPOSTRequest.h in Headers */,
-				1299F1F813D8724F0065735C /* iOSSUploadFileInfo.h in Headers */,
-				126FE23113D9C28E00D72D46 /* iOSSLog.h in Headers */,
-				126FE23313D9C28E00D72D46 /* iOSSRequest.h in Headers */,
 				126FE23513D9C28E00D72D46 /* iOSSServicesViewController.h in Headers */,
-				126FE25313D9C7DF00D72D46 /* LocalTwitterUser.h in Headers */,
-				126FE25713D9C7F000D72D46 /* TwitterUser.h in Headers */,
-				126FE25B13D9CBEC00D72D46 /* Twitter.h in Headers */,
-				126FE26013D9D9F100D72D46 /* TwitterUser+Private.h in Headers */,
-				126FE2C213DA214000D72D46 /* Foursquare.h in Headers */,
-				126FE2C813DA225B00D72D46 /* FoursquareUser.h in Headers */,
-				126FE2CB13DA22C500D72D46 /* FoursquareUser+Private.h in Headers */,
-				126FE2CE13DA22FF00D72D46 /* LocalFoursquareUser.h in Headers */,
 				12AB358813DDBAE100565332 /* GTMOAuth2Authentication.h in Headers */,
 				12AB358A13DDBAE100565332 /* GTMOAuth2SignIn.h in Headers */,
 				12AB358C13DDBAE100565332 /* GTMOAuth2ViewControllerTouch.h in Headers */,
@@ -804,11 +800,37 @@
 				12AB359F13DDBF5700565332 /* GTMHTTPFetcher.h in Headers */,
 				12AB3A0E13DF13D400565332 /* iOSSocialUser.h in Headers */,
 				12AB3A1213DF13EE00565332 /* iOSSocialLocalUser.h in Headers */,
-				12AB3A1B13DF176900565332 /* iOSSocialServiceOAuth2Provider.h in Headers */,
-				12AB3A1F13DF178300565332 /* iOSSocialServiceOAuth1Provider.h in Headers */,
-				12AB3A2213DF1A8100565332 /* iOSSocialServiceOAuth2ProviderConstants.h in Headers */,
-				12AB3A2413DF1E7000565332 /* iOSSocialServiceOAuth1ProviderConstants.h in Headers */,
-				12AB3A2713DF20F700565332 /* GTMOAuthAuthentication+Additions.h in Headers */,
+				12AB3B8413DF842500565332 /* Foursquare.h in Headers */,
+				12AB3B8613DF842500565332 /* FoursquareUser.h in Headers */,
+				12AB3B8813DF842500565332 /* FoursquareUser+Private.h in Headers */,
+				12AB3B8913DF842500565332 /* LocalFoursquareUser.h in Headers */,
+				12AB3B9313DF843E00565332 /* LocalTwitterUser.h in Headers */,
+				12AB3B9513DF843E00565332 /* Twitter.h in Headers */,
+				12AB3B9713DF843E00565332 /* TwitterUser.h in Headers */,
+				12AB3B9913DF843E00565332 /* TwitterUser+Private.h in Headers */,
+				12AB3BAA13DF846B00565332 /* IGRequest.h in Headers */,
+				12AB3BAC13DF846B00565332 /* Instagram.h in Headers */,
+				12AB3BAE13DF846B00565332 /* InstagramMedia.h in Headers */,
+				12AB3BB013DF846B00565332 /* InstagramMediaCollection.h in Headers */,
+				12AB3BB213DF846B00565332 /* InstagramUser.h in Headers */,
+				12AB3BB413DF846B00565332 /* InstagramUser+Private.h in Headers */,
+				12AB3BB513DF846B00565332 /* InstagramUserCollection.h in Headers */,
+				12AB3BB713DF846B00565332 /* LocalInstagramUser.h in Headers */,
+				12AB3BC313DF849500565332 /* GTMOAuthAuthentication+Additions.h in Headers */,
+				12AB3BC513DF849500565332 /* iOSSocialServiceOAuth1Provider.h in Headers */,
+				12AB3BC713DF849500565332 /* iOSSocialServiceOAuth1ProviderConstants.h in Headers */,
+				12AB3BC813DF849500565332 /* iOSSocialServiceOAuth2Provider.h in Headers */,
+				12AB3BCA13DF849500565332 /* iOSSocialServiceOAuth2ProviderConstants.h in Headers */,
+				12AB3BCD13DF84AC00565332 /* iOSSLog.h in Headers */,
+				12AB3BD113DF84B900565332 /* NSString+iOSSURLAdditions.h in Headers */,
+				12AB3BD513DF84C800565332 /* NSUserDefaults+iOSSAdditions.h in Headers */,
+				12AB3BE113DF84D800565332 /* iOSSConnection.h in Headers */,
+				12AB3BE313DF84D800565332 /* iOSSFormEncodedPOSTRequest.h in Headers */,
+				12AB3BE513DF84D800565332 /* iOSSMultipartPOSTRequest.h in Headers */,
+				12AB3BE713DF84D800565332 /* iOSSRequest.h in Headers */,
+				12AB3BE913DF84D800565332 /* iOSSUploadFileInfo.h in Headers */,
+				12AB3BED13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h in Headers */,
+				12AB3BF113DF84F500565332 /* UIView+iOSSSubviewTraversal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,30 +1086,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1264A13613D08B900085E394 /* iOSSocial.m in Sources */,
-				1264A16513D094E70085E394 /* Instagram.m in Sources */,
-				1264A16713D094E70085E394 /* InstagramUser.m in Sources */,
-				1264A16913D094E70085E394 /* LocalInstagramUser.m in Sources */,
-				12E0ACCF13D0D2D40025C3B7 /* UIView+iOSSSubviewTraversal.m in Sources */,
-				12ECAC5C13D4818300C1297B /* IGRequest.m in Sources */,
-				12ECAC6413D4895200C1297B /* UIApplication+iOSSNetworkActivity.m in Sources */,
-				12ECAC6913D4905800C1297B /* iOSSConnection.m in Sources */,
-				12ECACE413D4D39200C1297B /* InstagramMedia.m in Sources */,
-				12ECACE913D4D3A300C1297B /* InstagramMediaCollection.m in Sources */,
-				12ECAF7813D5F38100C1297B /* NSUserDefaults+iOSSAdditions.m in Sources */,
-				12DD953413D617ED00C2AA32 /* InstagramUserCollection.m in Sources */,
-				120888DA13D7752F00C0FB68 /* iOSSFormEncodedPOSTRequest.m in Sources */,
-				120888DF13D77AF700C0FB68 /* NSString+iOSSURLAdditions.m in Sources */,
-				120888E313D7819300C0FB68 /* iOSSMultipartPOSTRequest.m in Sources */,
-				1299F1F913D8724F0065735C /* iOSSUploadFileInfo.m in Sources */,
-				126FE23213D9C28E00D72D46 /* iOSSLog.m in Sources */,
-				126FE23413D9C28E00D72D46 /* iOSSRequest.m in Sources */,
 				126FE23613D9C28E00D72D46 /* iOSSServicesViewController.m in Sources */,
-				126FE25413D9C7DF00D72D46 /* LocalTwitterUser.m in Sources */,
-				126FE25813D9C7F000D72D46 /* TwitterUser.m in Sources */,
-				126FE25C13D9CBEC00D72D46 /* Twitter.m in Sources */,
-				126FE2C313DA214000D72D46 /* Foursquare.m in Sources */,
-				126FE2C913DA225B00D72D46 /* FoursquareUser.m in Sources */,
-				126FE2CF13DA22FF00D72D46 /* LocalFoursquareUser.m in Sources */,
 				12AB358913DDBAE100565332 /* GTMOAuth2Authentication.m in Sources */,
 				12AB358B13DDBAE100565332 /* GTMOAuth2SignIn.m in Sources */,
 				12AB358D13DDBAE100565332 /* GTMOAuth2ViewControllerTouch.m in Sources */,
@@ -1097,9 +1096,32 @@
 				12AB35A013DDBF5700565332 /* GTMHTTPFetcher.m in Sources */,
 				12AB3A0F13DF13D400565332 /* iOSSocialUser.m in Sources */,
 				12AB3A1313DF13EE00565332 /* iOSSocialLocalUser.m in Sources */,
-				12AB3A1C13DF176900565332 /* iOSSocialServiceOAuth2Provider.m in Sources */,
-				12AB3A2013DF178300565332 /* iOSSocialServiceOAuth1Provider.m in Sources */,
-				12AB3A2813DF20F700565332 /* GTMOAuthAuthentication+Additions.m in Sources */,
+				12AB3B8513DF842500565332 /* Foursquare.m in Sources */,
+				12AB3B8713DF842500565332 /* FoursquareUser.m in Sources */,
+				12AB3B8A13DF842500565332 /* LocalFoursquareUser.m in Sources */,
+				12AB3B9413DF843E00565332 /* LocalTwitterUser.m in Sources */,
+				12AB3B9613DF843E00565332 /* Twitter.m in Sources */,
+				12AB3B9813DF843E00565332 /* TwitterUser.m in Sources */,
+				12AB3BAB13DF846B00565332 /* IGRequest.m in Sources */,
+				12AB3BAD13DF846B00565332 /* Instagram.m in Sources */,
+				12AB3BAF13DF846B00565332 /* InstagramMedia.m in Sources */,
+				12AB3BB113DF846B00565332 /* InstagramMediaCollection.m in Sources */,
+				12AB3BB313DF846B00565332 /* InstagramUser.m in Sources */,
+				12AB3BB613DF846B00565332 /* InstagramUserCollection.m in Sources */,
+				12AB3BB813DF846B00565332 /* LocalInstagramUser.m in Sources */,
+				12AB3BC413DF849500565332 /* GTMOAuthAuthentication+Additions.m in Sources */,
+				12AB3BC613DF849500565332 /* iOSSocialServiceOAuth1Provider.m in Sources */,
+				12AB3BC913DF849500565332 /* iOSSocialServiceOAuth2Provider.m in Sources */,
+				12AB3BCE13DF84AC00565332 /* iOSSLog.m in Sources */,
+				12AB3BD213DF84B900565332 /* NSString+iOSSURLAdditions.m in Sources */,
+				12AB3BD613DF84C800565332 /* NSUserDefaults+iOSSAdditions.m in Sources */,
+				12AB3BE213DF84D800565332 /* iOSSConnection.m in Sources */,
+				12AB3BE413DF84D800565332 /* iOSSFormEncodedPOSTRequest.m in Sources */,
+				12AB3BE613DF84D800565332 /* iOSSMultipartPOSTRequest.m in Sources */,
+				12AB3BE813DF84D800565332 /* iOSSRequest.m in Sources */,
+				12AB3BEA13DF84D800565332 /* iOSSUploadFileInfo.m in Sources */,
+				12AB3BEE13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m in Sources */,
+				12AB3BF213DF84F500565332 /* UIView+iOSSSubviewTraversal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
