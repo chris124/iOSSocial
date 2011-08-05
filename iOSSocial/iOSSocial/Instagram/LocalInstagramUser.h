@@ -10,10 +10,11 @@
 #import <UIKit/UIKit.h>
 #import "InstagramUser.h"
 #import "iOSSocialServiceOAuth2ProviderConstants.h"
+#import "iOSSocialLocalUser.h"
 
 typedef void(^InstagramAuthenticationHandler)(NSError *error);
 
-@interface LocalInstagramUser : InstagramUser
+@interface LocalInstagramUser : InstagramUser <iOSSocialLocalUserProtocol>
 
 // Obtain the LocalInstagramUser object.
 // The user is only available for offline use until logged in.
@@ -26,6 +27,8 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
 
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
 
+@property(nonatomic, readonly, retain)  NSString *scope; // Authentication state
+
 // Authenticate the user for access to user details. This may present a UI to the user if necessary to login or create an account. 
 // The user must be authenticated in order to use other APIs. 
 // This should be called for each launch of the application as soon as the UI is ready.
@@ -37,9 +40,8 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
 // 1. Communications problem
 // 2. User credentials invalid
 // 3. User cancelled
-- (void)authenticateWithScope:(NSString*)scope 
-           fromViewController:(UIViewController*)vc 
-        withCompletionHandler:(InstagramAuthenticationHandler)completionHandler;
+- (void)authenticateFromViewController:(UIViewController*)vc 
+                 withCompletionHandler:(AuthenticationHandler)completionHandler;
 
 - (NSString*)oAuthAccessToken;
 

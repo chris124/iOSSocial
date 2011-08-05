@@ -10,10 +10,11 @@
 #import <UIKit/UIKit.h>
 #import "TwitterUser.h"
 #import "iOSSocialServiceOAuth1ProviderConstants.h"
+#import "iOSSocialLocalUser.h"
 
 typedef void(^TwitterAuthenticationHandler)(NSError *error);
 
-@interface LocalTwitterUser : TwitterUser
+@interface LocalTwitterUser : TwitterUser <iOSSocialLocalUserProtocol> 
 
 // Obtain the LocalTwitterUser object.
 // The user is only available for offline use until logged in.
@@ -37,9 +38,8 @@ typedef void(^TwitterAuthenticationHandler)(NSError *error);
 // 1. Communications problem
 // 2. User credentials invalid
 // 3. User cancelled
-- (void)authenticateWithScope:(NSString*)scope 
-           fromViewController:(UIViewController*)vc 
-        withCompletionHandler:(TwitterAuthenticationHandler)completionHandler;
+- (void)authenticateFromViewController:(UIViewController*)vc 
+                 withCompletionHandler:(AuthenticationHandler)completionHandler;
 
 - (NSString*)oAuthAccessToken;
 

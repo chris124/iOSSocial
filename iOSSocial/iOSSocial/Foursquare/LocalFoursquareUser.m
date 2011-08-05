@@ -17,6 +17,7 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 
 @property(nonatomic, copy)      FoursquareAuthenticationHandler authenticationHandler;
 @property(nonatomic, retain)    Foursquare *foursquare;
+@property(nonatomic, readwrite, retain)  NSString *scope;
 
 @end
 
@@ -25,8 +26,18 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 @synthesize authenticated;
 @synthesize authenticationHandler;
 @synthesize foursquare;
+@synthesize scope;
 
 + (LocalFoursquareUser *)localFoursquareUser
+{
+    @synchronized(self) {
+        if(localFoursquareUser == nil)
+            localFoursquareUser = [[super allocWithZone:NULL] init];
+    }
+    return localFoursquareUser;
+}
+
++ (id<iOSSocialLocalUserProtocol>)localUser
 {
     @synchronized(self) {
         if(localFoursquareUser == nil)
@@ -52,6 +63,8 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 - (void)assignOAuthParams:(NSDictionary*)params
 {
     self.foursquare = [[Foursquare alloc] initWithDictionary:params];
+    
+    self.scope = [params objectForKey:@"scope"];
 }
 
 - (BOOL)isAuthenticated
@@ -101,9 +114,8 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     */
 }
 
-- (void)authenticateWithScope:(NSString*)scope 
-           fromViewController:(UIViewController*)vc 
-        withCompletionHandler:(FoursquareAuthenticationHandler)completionHandler
+- (void)authenticateFromViewController:(UIViewController*)vc 
+                 withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
     //assert if foursquare is nil. params have not been set!
     
@@ -112,7 +124,7 @@ static LocalFoursquareUser *localFoursquareUser = nil;
         
         self.authenticationHandler = completionHandler;
         
-        [self.foursquare authorizeWithScope:scope 
+        [self.foursquare authorizeWithScope:self.scope 
                         fromViewController:vc withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
                             if (error) {
                                 

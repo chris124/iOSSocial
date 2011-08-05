@@ -17,6 +17,7 @@ static LocalTwitterUser *localTwitterUser = nil;
 
 @property(nonatomic, copy)      TwitterAuthenticationHandler authenticationHandler;
 @property(nonatomic, retain)    Twitter *twitter;
+@property(nonatomic, readwrite, retain)  NSString *scope;
 
 @end
 
@@ -25,8 +26,18 @@ static LocalTwitterUser *localTwitterUser = nil;
 @synthesize authenticated;
 @synthesize authenticationHandler;
 @synthesize twitter;
+@synthesize scope;
 
 + (LocalTwitterUser *)localTwitterUser
+{
+    @synchronized(self) {
+        if(localTwitterUser == nil)
+            localTwitterUser = [[super allocWithZone:NULL] init];
+    }
+    return localTwitterUser;
+}
+
++ (id<iOSSocialLocalUserProtocol>)localUser
 {
     @synchronized(self) {
         if(localTwitterUser == nil)
@@ -59,6 +70,8 @@ static LocalTwitterUser *localTwitterUser = nil;
 - (void)assignOAuthParams:(NSDictionary*)params
 {
     self.twitter = [[Twitter alloc] initWithDictionary:params];
+    
+    self.scope = [params objectForKey:@"scope"];
 }
 
 - (BOOL)isAuthenticated
@@ -100,9 +113,8 @@ static LocalTwitterUser *localTwitterUser = nil;
     */
 }
 
-- (void)authenticateWithScope:(NSString*)scope 
-           fromViewController:(UIViewController*)vc 
-        withCompletionHandler:(TwitterAuthenticationHandler)completionHandler
+- (void)authenticateFromViewController:(UIViewController*)vc 
+                 withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
     //assert if instagram is nil. params have not been set!
     
@@ -111,7 +123,7 @@ static LocalTwitterUser *localTwitterUser = nil;
         
         self.authenticationHandler = completionHandler;
 
-        [self.twitter authorizeWithScope:scope 
+        [self.twitter authorizeWithScope:self.scope 
                       fromViewController:vc 
                    withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
                             if (error) {

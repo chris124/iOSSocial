@@ -7,8 +7,11 @@
 //
 
 #import "iOSSocialUser.h"
-
+/*
 @implementation iOSSocialUser
+
+@synthesize index;
+@synthesize userSource;
 
 - (id)init
 {
@@ -20,4 +23,16 @@
     return self;
 }
 
+- (id)initWithDictionary:(NSDictionary*)theUserDictionary
+{
+    self = [self init];
+    if (self) {
+        // Initialization code here.
+        //self.userDictionary = theUserDictionary;
+    }
+    
+    return self;
+}
+
 @end
+*/

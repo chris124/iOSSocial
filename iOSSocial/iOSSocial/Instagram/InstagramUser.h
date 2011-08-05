@@ -8,22 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-@protocol IGUserSource;
-
-@protocol IGUser <NSObject>
-
-/**
- * The user source that the user belongs to.
- */
-@property (nonatomic, assign) id<IGUserSource> userSource;
-
-/**
- * The index of the user within its user source.
- */
-@property (nonatomic) NSInteger index;
-
-@end
+#import "iOSSocialUser.h"
 
 @class InstagramMediaCollection;
 @class InstagramUserCollection;
@@ -33,7 +18,7 @@ typedef void(^LoadPhotoHandler)(UIImage *photo, NSError *error);
 typedef void(^FetchMediaHandler)(InstagramMediaCollection *collection, NSError *error);
 typedef void(^FetchUsersHandler)(InstagramUserCollection *users, NSError *error);
 
-@interface InstagramUser : NSObject <IGUser>
+@interface InstagramUser : NSObject <iOSSUserProtocol>
 
 //cwnote: should alias be copied?
 @property(nonatomic, readonly, retain)  NSString *userID;               // User identifier.
@@ -51,7 +36,7 @@ typedef void(^FetchUsersHandler)(InstagramUserCollection *users, NSError *error)
 /**
  * The user source that the user belongs to.
  */
-@property (nonatomic, assign) id<IGUserSource> userSource;
+//@property (nonatomic, assign) id<iOSSUserSourceProtocol> userSource;
 
 // Initialize a user with a dictionary object. The definition for the dictionary can be found here:
 // http://instagram.com/developer/endpoints/users/

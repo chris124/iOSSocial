@@ -8,16 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+//#import "iOSSocialUser.h"
 
-typedef void(^AuthenticationHandler)(NSError *error);
+typedef void(^AuthenticationHandler)(NSError *error); 
 
-@interface iOSSocialLocalUser : NSObject
+//@protocol iOSSUserProtocol <NSObject>
+@protocol iOSSocialLocalUserProtocol <NSObject>
+
++ (id<iOSSocialLocalUserProtocol>)localUser;
 
 // This must be called before calling any of the non-class methods on localInstagramUser otherwise it will cause an assertion
-// See iOSSocialServiceOAuth2ProviderConstants.h for the Keys for this dictionary.
+// See iOSSocialServiceOAuth2ProviderConstants.h or iOSSocialServiceOAuthProviderConstants.h for the Keys for this dictionary.
 - (void)assignOAuthParams:(NSDictionary*)params;
 
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
+
+@property(nonatomic, readonly, retain)  NSString *scope; // Authentication state
 
 // Authenticate the user for access to user details. This may present a UI to the user if necessary to login or create an account. 
 // The user must be authenticated in order to use other APIs. 
@@ -30,9 +36,8 @@ typedef void(^AuthenticationHandler)(NSError *error);
 // 1. Communications problem
 // 2. User credentials invalid
 // 3. User cancelled
-- (void)authenticateWithScope:(NSString*)scope 
-           fromViewController:(UIViewController*)vc 
-        withCompletionHandler:(AuthenticationHandler)completionHandler;
+- (void)authenticateFromViewController:(UIViewController*)vc 
+                 withCompletionHandler:(AuthenticationHandler)completionHandler;
 
 - (NSString*)oAuthAccessToken;
 
@@ -40,3 +45,4 @@ typedef void(^AuthenticationHandler)(NSError *error);
 - (void)logout;
 
 @end
+

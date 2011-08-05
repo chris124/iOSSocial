@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "iOSSocialUser.h"
 
 typedef void(^FetchFoursquareUserDataHandler)(NSError *error);
 
-@interface FoursquareUser : NSObject
+@interface FoursquareUser : NSObject <iOSSUserProtocol>
 
 @property(nonatomic, readonly, retain)  NSString *userID;   // User identifier.
 @property(nonatomic, readonly, retain)  NSString *alias;    // The user's alias

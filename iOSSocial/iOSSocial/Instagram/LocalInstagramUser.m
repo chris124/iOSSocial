@@ -20,6 +20,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 @property(nonatomic, copy)      InstagramAuthenticationHandler authenticationHandler;
 @property(nonatomic, retain)    Instagram *instagram;
+@property(nonatomic, readwrite, retain)  NSString *scope;
 
 @end
 
@@ -28,8 +29,18 @@ static LocalInstagramUser *localInstagramUser = nil;
 @synthesize authenticated;
 @synthesize authenticationHandler;
 @synthesize instagram;
+@synthesize scope;
 
 + (LocalInstagramUser *)localInstagramUser
+{
+    @synchronized(self) {
+        if(localInstagramUser == nil)
+            localInstagramUser = [[super allocWithZone:NULL] init];
+    }
+    return localInstagramUser;
+}
+
++ (id<iOSSocialLocalUserProtocol>)localUser
 {
     @synchronized(self) {
         if(localInstagramUser == nil)
@@ -55,6 +66,8 @@ static LocalInstagramUser *localInstagramUser = nil;
 - (void)assignOAuthParams:(NSDictionary*)params
 {
     self.instagram = [[Instagram alloc] initWithDictionary:params];
+    
+    self.scope = [params objectForKey:@"scope"];
 }
 
 - (BOOL)isAuthenticated
@@ -221,9 +234,8 @@ static LocalInstagramUser *localInstagramUser = nil;
     [[NSUserDefaults standardUserDefaults] ioss_setInstagramUserDictionary:theUserDictionary];
 }
 
-- (void)authenticateWithScope:(NSString*)scope 
-           fromViewController:(UIViewController*)vc 
-        withCompletionHandler:(InstagramAuthenticationHandler)completionHandler
+- (void)authenticateFromViewController:(UIViewController*)vc 
+                 withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
     //assert if instagram is nil. params have not been set!
     
@@ -232,7 +244,7 @@ static LocalInstagramUser *localInstagramUser = nil;
         
         self.authenticationHandler = completionHandler;
         
-        [self.instagram authorizeWithScope:scope 
+        [self.instagram authorizeWithScope:self.scope 
                                         fromViewController:vc withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
                                             if (error) {
                                                 

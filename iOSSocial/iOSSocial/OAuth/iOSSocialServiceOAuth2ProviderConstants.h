@@ -28,4 +28,6 @@ static NSString *const kSMOAuth2AccessTokenURL       = @"accessTokenURL";
 
 static NSString *const kSMOAuth2ServiceProviderName  = @"serviceProviderName";
 
+static NSString *const kSMOAuth2Scope  = @"scope";
+
 #endif

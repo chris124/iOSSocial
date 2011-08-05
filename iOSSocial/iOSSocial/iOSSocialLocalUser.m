@@ -7,7 +7,7 @@
 //
 
 #import "iOSSocialLocalUser.h"
-
+/*
 @interface iOSSocialLocalUser () 
 
 @property(nonatomic, copy)      AuthenticationHandler authenticationHandler;
@@ -28,6 +28,11 @@
     }
     
     return self;
+}
+
++ (iOSSocialLocalUser *)localUser
+{
+    return nil;
 }
 
 - (void)assignOAuthParams:(NSDictionary*)params
@@ -55,8 +60,7 @@
         
         self.authenticationHandler = completionHandler;
         
-        /*
-        [self.instagram authorizeWithScope:scope 
+        //[self.instagram authorizeWithScope:scope 
                         fromViewController:vc withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
                             if (error) {
                                 
@@ -70,7 +74,6 @@
                                 self.authenticationHandler = nil;
                             }
                         }];
-         */
     } else {
         //[self fetchLocalUserDataWithCompletionHandler:nil];
     }
@@ -90,3 +93,4 @@
 }
 
 @end
+*/

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Three20/Three20.h"
 
-@interface iOSSServicesViewController : UITableViewController
+@interface iOSSServicesViewController : TTTableViewController <UITableViewDelegate>
 
 @end

@@ -11,6 +11,8 @@
 #import "LocalInstagramUser.h"
 #import "LocalTwitterUser.h"
 #import "LocalFoursquareUser.h"
+#import "iOSServicesDataSource.h"
+#import "iOSSService.h"
 
 enum iOSSServicesTableSections { 
     iOSSServicesTableSectionServices = 0, 
@@ -37,6 +39,9 @@ enum iOSSDoneRows {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         // Custom initialization
+        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] init];
+        self.dataSource = servicesDataSource;
+        self.variableHeightRows = YES;
     }
     return self;
 }
@@ -46,6 +51,9 @@ enum iOSSDoneRows {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] init];
+        self.dataSource = servicesDataSource;
+        self.variableHeightRows = YES;
     }
     return self;
 }
@@ -105,15 +113,19 @@ enum iOSSDoneRows {
 }
 
 #pragma mark - Table view data source
-
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    //cwnote: what if no nav controller? showing modally and need to add done button?
+ 
     // Return the number of sections.
     return iOSSServicesTableNumSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //cwnote: what if no nav controller? showing modally and need to add done button?
+ 
     switch (section) {
         case iOSSServicesTableSectionServices:
             return iOSSServicesSecServicesNumRows; 
@@ -128,6 +140,8 @@ enum iOSSDoneRows {
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    //cwnote: what if no nav controller? showing modally and need to add done button?
+ 
     switch (section) {
         case iOSSServicesTableSectionServices:
             return @"Services"; 
@@ -139,9 +153,12 @@ enum iOSSDoneRows {
     
     return nil;
 }
+*/
 /*
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
+    //cwnote: what if no nav controller? showing modally and need to add done button?
+ 
     switch (section) {
         case iOSSServicesTableSectionServices:
             return @"Bada"; 
@@ -154,6 +171,7 @@ enum iOSSDoneRows {
     return nil;
 }
 */
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -166,37 +184,6 @@ enum iOSSDoneRows {
     // Configure the cell...
     
     switch (indexPath.section) {
-        case iOSSServicesTableSectionServices:
-        {
-            //cell = [PRPBasicSettingsCell cellForTableView:tableView]; 
-            switch (indexPath.row) {
-                case iOSSServicesSecServicesRowInstagram: 
-                {
-                    cell.textLabel.text = @"Instagram";
-                    NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"instagram_trans" withExtension:@"png"];
-                    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:photoURL]];
-                }
-                    break;
-                case iOSSServicesSecServicesRowTwitter: 
-                {
-                    cell.textLabel.text = @"Twitter"; 
-                    NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
-                    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:photoURL]]; 
-                }
-                    break;
-                case iOSSServicesSecServicesRowFoursquare: 
-                {
-                    cell.textLabel.text = @"Foursquare"; 
-                    NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
-                    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:photoURL]]; 
-                }
-                    break;
-                default:
-                    NSAssert1(NO, @"Unexpected row in Favorites section: %d", indexPath.row);
-                    break; 
-            }
-        }
-            break;
         case iOSSServicesTableSectionDoneButton:
         {
             //cell = [PRPBasicSettingsCell cellForTableView:tableView]; 
@@ -217,32 +204,63 @@ enum iOSSDoneRows {
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
 */
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+#pragma mark - Table view delegate
 
-/*
-// Override to support rearranging the table view.
+- (id<UITableViewDelegate>)createDelegate
+{
+    return self;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    iOSSService *service = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
+    id<iOSSocialLocalUserProtocol> localUser = service.localUser;
+    
+    if ([service isConnected]) {
+        [localUser logout];
+        [tableView reloadData];
+    } else {
+        [localUser authenticateFromViewController:self 
+                            withCompletionHandler:^(NSError *error){
+                       if (!error) {
+                           NSString *accessToken = [[LocalInstagramUser localInstagramUser] oAuthAccessToken];
+                           accessToken = nil;
+                           [tableView reloadData];
+                       }}];
+    }
+    
+    //cwnote: done button if no navigation controller?
+    /*
+    switch (indexPath.section) {
+        case iOSSServicesTableSectionDoneButton:
+        {
+            //cell = [PRPBasicSettingsCell cellForTableView:tableView]; 
+            switch (indexPath.row) {
+                case iOSSServicesSecDoneRowDoneButton: 
+                    [self dismissModalViewControllerAnimated:YES];
+                    break;
+                default:
+                    NSAssert1(NO, @"Unexpected row in Favorites section: %d", indexPath.row);
+                    break; 
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    */
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //cwnote: need to make this dynamic some how
+    return 150.0f;
+}
+
+@end
+support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
