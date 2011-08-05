@@ -8,9 +8,6 @@
 
 #import "iOSSServicesViewController.h"
 #import "iOSSocial.h"
-#import "LocalInstagramUser.h"
-#import "LocalTwitterUser.h"
-#import "LocalFoursquareUser.h"
 #import "iOSServicesDataSource.h"
 #import "iOSSService.h"
 
@@ -256,100 +253,11 @@ enum iOSSDoneRows {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //cwnote: need to make this dynamic some how
-    return 150.0f;
-}
-
-@end
-support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-    
-    switch (indexPath.section) {
-        case iOSSServicesTableSectionServices:
-        {
-            //cell = [PRPBasicSettingsCell cellForTableView:tableView]; 
-            switch (indexPath.row) {
-                case iOSSServicesSecServicesRowInstagram: 
-                {
-                    //basic comments relationships likes
-                    NSString *scope = @"basic comments relationships likes";
-                    [[LocalInstagramUser localInstagramUser] authenticateWithScope:scope  
-                                                                fromViewController:self 
-                                                             withCompletionHandler:^(NSError *error){
-                                                                 if (!error) {
-                                                                     NSString *accessToken = [[LocalInstagramUser localInstagramUser] oAuthAccessToken];
-                                                                     accessToken = nil;
-                                                                 }}];
-                }
-                    break;
-                case iOSSServicesSecServicesRowTwitter: 
-                {
-                    //NSString *scope = @"basic comments relationships likes";
-                    [[LocalTwitterUser localTwitterUser] authenticateWithScope:nil /*scope*/  
-                                                            fromViewController:self 
-                                                         withCompletionHandler:^(NSError *error){
-                                                             if (!error) {
-                                                                 NSString *accessToken = [[LocalTwitterUser localTwitterUser] oAuthAccessToken];
-                                                             }}];
-                }
-                    break;
-                case iOSSServicesSecServicesRowFoursquare: 
-                {
-                    NSString *scope = @"";
-                    [[LocalFoursquareUser localFoursquareUser] authenticateWithScope:scope 
-                                                                  fromViewController:self 
-                                                               withCompletionHandler:^(NSError *error){
-                                                             if (!error) {
-                                                                 NSString *accessToken = [[LocalFoursquareUser localFoursquareUser] oAuthAccessToken];
-                                                             }}];
-                }
-                    break;
-                default:
-                    NSAssert1(NO, @"Unexpected row in Favorites section: %d", indexPath.row);
-                    break; 
-            }
-        }
-            break;
-        case iOSSServicesTableSectionDoneButton:
-        {
-            //cell = [PRPBasicSettingsCell cellForTableView:tableView]; 
-            switch (indexPath.row) {
-                case iOSSServicesSecDoneRowDoneButton: 
-                    [self dismissModalViewControllerAnimated:YES];
-                    break;
-                default:
-                    NSAssert1(NO, @"Unexpected row in Favorites section: %d", indexPath.row);
-                    break; 
-            }
-        }
-            break;
-        default:
-            break;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPhone) {
+        return 100.0f;
     }
+    
+    return 75.0f;
 }
 
 @end
