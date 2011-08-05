@@ -10,3 +10,6 @@
 [submodule "gtm-http-fetcher"]
 	path = gtm-http-fetcher
 	url = git@github.com:chris124/gtm-http-fetcher.git
+[submodule "asi-http-request"]
+	path = asi-http-request
+	url = git@github.com:chris124/asi-http-request.git
