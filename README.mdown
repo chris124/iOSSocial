@@ -41,7 +41,7 @@ iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewContr
            
 </pre></code>
 
-[![](http://farm4.static.flickr.com/3447/3378092101_40a62a04b2_m.jpg)](http://farm4.static.flickr.com/3447/3378092101_b064d8e339_o.jpg)
+[![](http://dl.dropbox.com/u/5390704/Screenshot_1.png)](http://dl.dropbox.com/u/5390704/Screenshot_1.png)
    
 Instagram
 ------------
@@ -63,6 +63,7 @@ NSMutableDictionary *params = [NSMutableDictionary dictionary];
 [params setObject:@"Instagram Authorize URL" forKey:kSMOAuth2AuthorizeURL];
 [params setObject:@"Instagram Access Token URL" forKey:kSMOAuth2AccessTokenURL];
 [params setObject:@"Instagram Service name of your choosing" forKey:kSMOAuth2ServiceProviderName];
+[params setObject:@"basic comments relationships likes" forKey:kSMOAuth2Scope];
 [[LocalInstagramUser localInstagramUser] assignOAuthParams:params];
 
 BOOL isAuthenticated = [[LocalInstagramUser localInstagramUser] isAuthenticated];
