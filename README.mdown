@@ -29,7 +29,20 @@ iOSSocial is compiled as a static library. To use it in your project, do the fol
   
 An Overview of iOSSocial
 ======================
-                  
+    
+iOSSServicesViewController
+------------
+
+Use iOSSServicesViewController to present a list of supported services to the user. The controller is evolving, but for now, for each service, it shows the name, whether the user is authenticated, and let's the user select a service to authenticate via OAuth or logout.
+
+<pre><code>
+iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
+[self.navigationController pushViewController:iossServicesViewController animated:YES];
+           
+</pre></code>
+
+[![](http://farm4.static.flickr.com/3447/3378092101_40a62a04b2_m.jpg)](http://farm4.static.flickr.com/3447/3378092101_b064d8e339_o.jpg)
+   
 Instagram
 ------------
 
