@@ -115,20 +115,21 @@
         case iOSSRequestMethodGET:
         {
             self.request = [ASIHTTPRequest requestWithURL:self.URL];
-            request.completionBlock = ^(void) {
+            self.request.completionBlock = ^(void) {
                 if (theRequest.requestHandler) {
                     //NSError *error = nil;
                     //NSDictionary *response = [NSDictionary dictionaryWithJSONString:[self.request responseString] error:&error];
-                    NSString *response = [theRequest.request responseString];
-                    theRequest.requestHandler(response, theRequest.request.error);
+                   // NSString *response = [theRequest.request responseString];
+                    theRequest.requestHandler([theRequest.request responseData], nil, theRequest.request.error);
                 }
             };
             
-            [request setFailedBlock:^(void) {
-                int i = 0;
-                //if (self.requestHandler) {
+            [self.request setFailedBlock:^(void) {
+                NSLog(@"failed");
+                if (theRequest.requestHandler) {
                     //self.requestHandler(nil, self.request.error);
-               // }
+                    theRequest.requestHandler(nil, nil, theRequest.request.error);
+                }
             } ];
             /*
             ASIDataBlock dataBlock = ^(NSData *data) {
@@ -167,19 +168,29 @@
                 [self.request addPostValue:[self.parameters objectForKey:key] forKey:key];
             }
             
-            request.completionBlock = ^(void) {
-                NSData *data = self.request.responseData;
+            self.request.completionBlock = ^(void) {
+                if (theRequest.requestHandler) {
+                    //NSError *error = nil;
+                    //NSDictionary *response = [NSDictionary dictionaryWithJSONString:[self.request responseString] error:&error];
+                    //NSString *response = [theRequest.request responseString];
+                    theRequest.requestHandler([theRequest.request responseData], nil, theRequest.request.error);
+                }
+                
+                /*
+                NSData *data = theRequest.request.responseData;
                 data = nil;
                 //if (self.requestHandler) {
                 //self.requestHandler(self.request.responseData, self.request.error);
                 //}
+                */
             };
             
-            [request setFailedBlock:^(void) {
-                int i = 0;
-                //if (self.requestHandler) {
-                //self.requestHandler(nil, self.request.error);
-                // }
+            [self.request setFailedBlock:^(void) {
+                NSLog(@"failed");
+                if (theRequest.requestHandler) {
+                    //self.requestHandler(nil, self.request.error);
+                    theRequest.requestHandler(nil, nil, theRequest.request.error);
+                }
             } ];
             
             //self.request.delegate = self;

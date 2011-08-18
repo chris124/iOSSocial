@@ -13,7 +13,6 @@
 #import "iOSSocial.h"
 #import "iOSSocialServiceOAuth2ProviderConstants.h"
 
-static GTMOAuth2Authentication *auth = nil;
 
 @interface iOSSocialServiceOAuth2Provider ()
 
@@ -26,6 +25,7 @@ static GTMOAuth2Authentication *auth = nil;
 @property(nonatomic, readwrite, retain) NSString *serviceProviderName;
 @property(nonatomic, readwrite, retain) UIViewController *viewController;
 @property(nonatomic, copy)              AuthorizationHandler authenticationHandler;
+@property(nonatomic, retain) GTMOAuth2Authentication *auth;
 
 - (void)checkAuthentication;
 - (GTMOAuth2Authentication *)authForCustomService;
@@ -43,6 +43,7 @@ static GTMOAuth2Authentication *auth = nil;
 @synthesize serviceProviderName;
 @synthesize viewController;
 @synthesize authenticationHandler;
+@synthesize auth;
 
 - (id)init
 {
@@ -84,12 +85,11 @@ static GTMOAuth2Authentication *auth = nil;
         NSData *responseData = [[error userInfo] objectForKey:@"data"]; // kGTMHTTPFetcherStatusDataKey
         if ([responseData length] > 0) {
             // show the body of the server's authentication failure response
-            NSString *str = [[NSString alloc] initWithData:responseData
-                                                  encoding:NSUTF8StringEncoding];
-            iOSSLog(@"%@", str);
+            //NSString *str = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            //iOSSLog(@"%@", str);
         }
         
-        auth = nil;
+        self.auth = nil;
         
         [self.viewController dismissModalViewControllerAnimated:YES];
         
@@ -99,10 +99,10 @@ static GTMOAuth2Authentication *auth = nil;
         }
     } else {
         // Authentication succeeded
-        auth = newAuth;
+        self.auth = newAuth;
         [self.viewController dismissModalViewControllerAnimated:YES];
         
-        NSDictionary *dictionary = auth.parameters;
+        NSDictionary *dictionary = self.auth.parameters;
         if (self.authenticationHandler) {
             self.authenticationHandler(dictionary, nil);
             self.authenticationHandler = nil;
@@ -118,14 +118,14 @@ static GTMOAuth2Authentication *auth = nil;
     self.viewController = vc;
     self.authenticationHandler = completionHandler;
     
-    auth = [self authForCustomService];
-    auth.scope = scope;
+    self.auth = [self authForCustomService];
+    self.auth.scope = scope;
 
     NSURL *authURL = [NSURL URLWithString:self.authorizeURL];
     
     // Display the authentication view
     GTMOAuth2ViewControllerTouch *oaViewController;
-    oaViewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:auth
+    oaViewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:self.auth
                                                                    authorizationURL:authURL
                                                                    keychainItemName:self.keychainItemName
                                                                            delegate:self
@@ -144,7 +144,7 @@ static GTMOAuth2Authentication *auth = nil;
 
 - (BOOL)isSessionValid
 {
-    BOOL isSignedIn = auth.canAuthorize;;
+    BOOL isSignedIn = self.auth.canAuthorize;;
     return isSignedIn;
 }
 
@@ -179,26 +179,26 @@ static GTMOAuth2Authentication *auth = nil;
                                                     authentication:newAuth];
     }
     
-    auth = newAuth;
+    self.auth = newAuth;
 }
 
 - (NSString*)oAuthAccessToken
 {
-    return auth.accessToken;
+    return self.auth.accessToken;
 }
 
 - (void)logout
 {
-    if ([auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
+    if ([self.auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
         // remove the token from Google's servers
-        [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:auth];
+        [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.auth];
     }
     
     // remove the stored Google authentication from the keychain, if any
     [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:self.keychainItemName];
     
     // Discard our retained authentication object.
-    auth = nil;
+    self.auth = nil;
 }
 
 @end

@@ -8,10 +8,12 @@
 
 #import "iOSSocialLocalUser.h"
 /*
+#import "iOSSService.h"
+
 @interface iOSSocialLocalUser () 
 
 @property(nonatomic, copy)      AuthenticationHandler authenticationHandler;
-//@property(nonatomic, retain)    Instagram *instagram; //cwnote: make parent class for services? factory?
+@property(nonatomic, retain)    id<iOSSServiceProtocol> service; //cwnote: make parent class for services? factory?
 
 @end
 
@@ -19,6 +21,8 @@
 
 @synthesize authenticated;
 @synthesize authenticationHandler;
+@synthesize scope;
+@synthesize service;
 
 - (id)init
 {
@@ -82,14 +86,13 @@
 
 - (NSString*)oAuthAccessToken
 {
-    //return [self.instagram oAuthAccessToken];
-    return nil;
+    return [self.service oAuthAccessToken];
 }
 
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout
 {
-    //[self.instagram logout];
+    [self.service logout];
 }
 
 @end

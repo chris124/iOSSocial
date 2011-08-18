@@ -9,6 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "Three20/Three20.h"
 
-@interface iOSSServicesViewController : TTTableViewController <UITableViewDelegate>
+@class iOSSServicesViewController;
+@class iOSSService;
+
+@protocol iOSSServicesViewControllerDelegate <NSObject>
+
+@optional
+
+-(void)servicesViewController:(iOSSServicesViewController*)servicesController 
+             didSelectService:(iOSSService*)service;
+
+@end
+
+@interface iOSSServicesViewController : TTTableViewController <UITableViewDelegate> {
+    id _serviceControllerDelegate;
+}
+
+@property(nonatomic, retain)    id<iOSSServicesViewControllerDelegate> serviceControllerDelegate;
 
 @end

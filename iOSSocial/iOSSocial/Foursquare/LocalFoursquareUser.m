@@ -10,6 +10,7 @@
 #import "Foursquare.h"
 #import "FoursquareUser+Private.h"
 #import "NSUserDefaults+iOSSAdditions.h"
+#import "FoursquareRequest.h"
 
 static LocalFoursquareUser *localFoursquareUser = nil;
 
@@ -83,17 +84,21 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     [[NSUserDefaults standardUserDefaults] ioss_setFoursquareUserDictionary:theUserDictionary];
 }
 
-- (void)fetchLocalUserDataWithCompletionHandler:(FetchFoursquareUserDataHandler)completionHandler
-{
-    /*
+- (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
+{    
+    //response https://developer.foursquare.com/docs/responses/user.html
+
     self.fetchUserDataHandler = completionHandler;
     
-    NSString *urlString = @"https://api.instagram.com/v1/users/self/";
+    //cwnote: can specify user id instead of self.
+    NSString *urlString = @"https://api.foursquare.com/v2/users/self";
     NSURL *url = [NSURL URLWithString:urlString];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+    FoursquareRequest *request = [[FoursquareRequest alloc] initWithURL:url  
+                                                             parameters:nil 
+                                                          requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -102,16 +107,18 @@ static LocalFoursquareUser *localFoursquareUser = nil;
                 self.fetchUserDataHandler = nil;
             }
         } else {
-            NSDictionary *dictionary = [Instagram JSONFromData:responseData];
-            self.userDictionary = dictionary;
-            
+
+            if (responseData) {
+                NSDictionary *dictionary = [Foursquare JSONFromData:responseData];
+                self.userDictionary = dictionary;
+            }
+
             if (self.fetchUserDataHandler) {
                 self.fetchUserDataHandler(nil);
                 self.fetchUserDataHandler = nil;
             }
         }
     }];
-    */
 }
 
 - (void)authenticateFromViewController:(UIViewController*)vc 
@@ -119,32 +126,49 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 {
     //assert if foursquare is nil. params have not been set!
     
+    self.authenticationHandler = completionHandler;
+    
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
-        
-        self.authenticationHandler = completionHandler;
-        
+
         [self.foursquare authorizeWithScope:self.scope 
                         fromViewController:vc withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
                             if (error) {
-                                
+                                if (self.authenticationHandler) {
+                                    self.authenticationHandler(error);
+                                    self.authenticationHandler = nil;
+                                }
                             } else {
-                                NSDictionary *user = [userInfo objectForKey:@"user"];
-                                self.userDictionary = user;
-                            }
-                            
-                            if (self.authenticationHandler) {
-                                self.authenticationHandler(error);
-                                self.authenticationHandler = nil;
+                                [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+                                    if (!error) {
+                                        //
+                                    }
+                                    
+                                    if (self.authenticationHandler) {
+                                        self.authenticationHandler(error);
+                                        self.authenticationHandler = nil;
+                                    }
+                                }];
                             }
                         }];
     } else {
-        [self fetchLocalUserDataWithCompletionHandler:nil];
+        [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+            if (!error) {
+                //
+            }
+            
+            if (self.authenticationHandler) {
+                self.authenticationHandler(error);
+                self.authenticationHandler = nil;
+            }
+        }];
     }
 }
 
 - (NSString*)oAuthAccessToken
 {
+    //assert if foursquare is nil. params have not been set!
+    
     return [self.foursquare oAuthAccessToken];
 }
 
@@ -153,6 +177,16 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     //assert if foursquare is nil. params have not been set!
     
     [self.foursquare logout];
+}
+
+- (NSString*)userId
+{
+    return self.userID;
+}
+
+- (NSString*)username
+{
+    return self.alias;
 }
 
 @end

@@ -44,10 +44,8 @@
                                        error:&error];
 #if DEBUG
         if (error) {
-            NSString *str = [[NSString alloc] initWithData:data
-                                                  encoding:NSUTF8StringEncoding];
-            iOSSLog(@"NSJSONSerialization error %@ parsing %@",
-                    error, str);
+            //NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            //iOSSLog(@"NSJSONSerialization error %@ parsing %@", error, str);
         }
 #endif
         return obj;

@@ -1,30 +1,40 @@
 //
-//  InstagramUserCollection.m
-//  iOSSocial
+//  IGUserFollowsDataSource.m
+//  PhotoStream
 //
-//  Created by Christopher White on 7/19/11.
+//  Created by Christopher White on 8/8/11.
 //  Copyright 2011 Mad Races, Inc. All rights reserved.
 //
 
-#import "InstagramUserCollection.h"
-#import "iOSSocial.h"
+#import "IGUserFollowsDataSource.h"
+#import "iOSSLog.h"
+#import "LocalInstagramUser.h"
 
-@interface InstagramUserCollection ()
+typedef enum _FBPhotoAlbumLoadState {
+	FBPhotoAlbumLoadStateIdle = 0,
+    FBPhotoAlbumLoadStateLoading = 1,
+    FBPhotoAlbumLoadStateLoaded
+} FBPhotoAlbumLoadState;
 
-//@property(nonatomic, readwrite, retain) NSString *description;
+@interface IGUserFollowsDataSource ()
+
 @property(nonatomic, readwrite, assign) NSInteger count;
 @property(nonatomic, retain)            NSMutableArray *psDelegates;
-@property(nonatomic, retain)            NSMutableArray *users;
+@property(nonatomic, retain)            NSArray *items;
+@property(nonatomic, assign)            FBPhotoAlbumLoadState loadState;
 
 @end
 
-@implementation InstagramUserCollection
+@implementation IGUserFollowsDataSource
 
+@synthesize title;
 @synthesize count;
 @synthesize psDelegates;
-@synthesize users;
-@synthesize title;
 @synthesize model;
+@synthesize items;
+@synthesize loadState;
+@synthesize numberOfObjects;
+@synthesize maxObjectIndex;
 
 - (id)init
 {
@@ -40,21 +50,7 @@
 {
     self = [self init];
     if (self) {
-        self.users = [NSMutableArray array];
-
-        if (collectionDictionary) {
-            NSInteger index = 0;
-            NSArray *userDictionaries = [collectionDictionary objectForKey:@"data"];
-            for (NSDictionary *userDictionary in userDictionaries) {
-                InstagramUser *user = [[InstagramUser alloc] initWithDictionary:userDictionary];
-                user.index = index;
-                user.dataSource = /*id<>*/self;
-                [self.users addObject:user];
-                index++;
-            }
-            
-            //pagination!!!
-        }
+        // Initialization code here.
     }
     
     return self;
@@ -70,24 +66,24 @@
     return nil;
 }
 
-- (id<IGUser>)userAtIndex:(NSInteger)index
+- (id<iOSSUserProtocol>)objectAtIndex:(NSInteger)index
 {
-    if (index <= self.maxUserIndex) {
-        return [self.users objectAtIndex:index];
+    if (index <= self.maxObjectIndex) {
+        return [self.items objectAtIndex:index];
     }
     return nil;
 }
 
-- (NSInteger)numberOfUsers
+- (NSInteger)numberOfObjects
 {
-    iOSSLog(@"media count: %d", [self.users count]);
-    return [self.users count];
+    iOSSLog(@"count: %d", [self.items count]);
+    return [self.items count];
 }
 
-- (NSInteger)maxUserIndex
+- (NSInteger)maxObjectIndex
 {
-    iOSSLog(@"media photo index: %d", [self.users count]-1);
-    return [self.users count]-1;
+    iOSSLog(@"index: %d", [self.items count]-1);
+    return [self.items count]-1;
 }
 
 /**
@@ -101,6 +97,7 @@
     return self.psDelegates;
 }
 
+
 /**
  * Indicates that the data has been loaded.
  *
@@ -108,7 +105,7 @@
  */
 - (BOOL)isLoaded
 {
-    return YES;
+    return (FBPhotoAlbumLoadStateLoaded == self.loadState);
 }
 
 /**
@@ -118,7 +115,7 @@
  */
 - (BOOL)isLoading
 {
-    return NO;
+    return (FBPhotoAlbumLoadStateLoading == self.loadState);
 }
 
 /**
@@ -150,6 +147,33 @@
 - (void)load:(TTURLRequestCachePolicy)cachePolicy more:(BOOL)more
 {
     iOSSLog(@"load");
+    
+    self.loadState = FBPhotoAlbumLoadStateLoading;
+    
+    [[LocalInstagramUser localInstagramUser] fetchFollowsWithCompletionHandler:^(NSArray *users, NSError *error) {
+        
+        //set the items from the dictionary
+        if (error) {
+            self.loadState = FBPhotoAlbumLoadStateLoaded;
+            
+            for (id<TTModelDelegate> delegate in self.psDelegates) {
+                [delegate model:self didFailLoadWithError:error];
+            }
+        } else {
+            //
+            self.items = users;
+            
+            for (InstagramUser *user in self.items) {
+                user.dataSource = self;
+            }
+            
+            self.loadState = FBPhotoAlbumLoadStateLoaded;
+            
+            for (id<TTModelDelegate> delegate in self.psDelegates) {
+                [delegate modelDidFinishLoad:self];
+            }
+        }
+    }];
 }
 
 /**
@@ -190,7 +214,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self numberOfUsers];
+    return [self numberOfObjects];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -198,6 +222,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //cwnote: make a table view cell for this!!!
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -205,7 +231,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    InstagramUser *user = (InstagramUser*)[self userAtIndex:[indexPath row]];
+    InstagramUser *user = (InstagramUser*)[self.items objectAtIndex:[indexPath row]];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", user.alias, user.website];
     cell.imageView.image = nil;
     [user loadPhotoWithCompletionHandler:^(UIImage *photo, NSError *error) {
@@ -213,12 +239,12 @@
         [cell setNeedsLayout];
     }];
     
+    /*
     [user fetchUserDataWithCompletionHandler:^(NSError *error) {
         [cell setNeedsLayout];
     }];
+    */
     
-    [[LocalInstagramUser localInstagramUser] fetchRelationshipToUser];
-
     return cell;
 }
 
@@ -229,7 +255,8 @@
 
 - (id)tableView:(UITableView*)tableView objectForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return nil;
+    InstagramUser *user = [self.items objectAtIndex:[indexPath row]];
+    return user;
 }
 
 - (Class)tableView:(UITableView*)tableView cellClassForObject:(id)object
@@ -323,46 +350,3 @@ willAppearAtIndexPath:(NSIndexPath*)indexPath
 }
 
 @end
-
-/*
- - (void)modelDidStartLoad:(id<TTModel>)model;
- 
- - (void)modelDidFinishLoad:(id<TTModel>)model;
- 
- - (void)model:(id<TTModel>)model didFailLoadWithError:(NSError*)error;
- 
- - (void)modelDidCancelLoad:(id<TTModel>)model;
- */
-
-/**
- * Informs the delegate that the model has changed in some fundamental way.
- *
- * The change is not described specifically, so the delegate must assume that the entire
- * contents of the model may have changed, and react almost as if it was given a new model.
- */
-/*
- - (void)modelDidChange:(id<TTModel>)model;
- 
- - (void)model:(id<TTModel>)model didUpdateObject:(id)object atIndexPath:(NSIndexPath*)indexPath;
- 
- - (void)model:(id<TTModel>)model didInsertObject:(id)object atIndexPath:(NSIndexPath*)indexPath;
- 
- - (void)model:(id<TTModel>)model didDeleteObject:(id)object atIndexPath:(NSIndexPath*)indexPath;
- */
-
-/**
- * Informs the delegate that the model is about to begin a multi-stage update.
- *
- * Models should use this method to condense multiple updates into a single visible update.
- * This avoids having the view update multiple times for each change.  Instead, the user will
- * only see the end result of all of your changes when you call modelDidEndUpdates.
- */
-//- (void)modelDidBeginUpdates:(id<TTModel>)model;
-
-/**
- * Informs the delegate that the model has completed a multi-stage update.
- *
- * The exact nature of the change is not specified, so the receiver should investigate the
- * new state of the model by examining its properties.
- */
-//- (void)modelDidEndUpdates:(id<TTModel>)model;

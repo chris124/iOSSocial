@@ -11,6 +11,7 @@
 #import "iOSServicesDataSource.h"
 #import "iOSSService.h"
 
+/*
 enum iOSSServicesTableSections { 
     iOSSServicesTableSectionServices = 0, 
     iOSSServicesTableSectionDoneButton,
@@ -28,8 +29,11 @@ enum iOSSDoneRows {
     iOSSServicesSecDoneRowDoneButton = 0,
     iOSSServicesSecDoneNumRows,
 };
+*/
 
 @implementation iOSSServicesViewController
+
+@synthesize serviceControllerDelegate=_serviceControllerDelegate;
 
 - (id)init
 {
@@ -203,6 +207,15 @@ enum iOSSDoneRows {
 }
 */
 
+- (void)addService:(iOSSService*)service
+{
+    //notify delegate
+    if ([self.serviceControllerDelegate respondsToSelector:@selector(servicesViewController:didSelectService:)]) {
+        [self.serviceControllerDelegate servicesViewController:self 
+                                              didSelectService:service];
+    }
+}
+
 #pragma mark - Table view delegate
 
 - (id<UITableViewDelegate>)createDelegate
@@ -216,14 +229,15 @@ enum iOSSDoneRows {
     id<iOSSocialLocalUserProtocol> localUser = service.localUser;
     
     if ([service isConnected]) {
-        [localUser logout];
-        [tableView reloadData];
+        //[self addService:service];
+        
+        //[localUser logout];
+        //[tableView reloadData];
     } else {
         [localUser authenticateFromViewController:self 
                             withCompletionHandler:^(NSError *error){
                        if (!error) {
-                           NSString *accessToken = [[LocalInstagramUser localInstagramUser] oAuthAccessToken];
-                           accessToken = nil;
+                           [self addService:service];
                            [tableView reloadData];
                        }}];
     }

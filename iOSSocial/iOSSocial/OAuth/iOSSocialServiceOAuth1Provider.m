@@ -12,7 +12,6 @@
 #import "iOSSocial.h"
 #import "iOSSocialServiceOAuth1ProviderConstants.h"
 
-static GTMOAuthAuthenticationWithAdditions *auth = nil;
 
 @interface iOSSocialServiceOAuth1Provider ()
 
@@ -26,6 +25,7 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
 @property(nonatomic, readwrite, retain) NSString *serviceProviderName;
 @property(nonatomic, readwrite, retain) UIViewController *viewController;
 @property(nonatomic, copy)              AuthorizationHandler authenticationHandler;
+@property(nonatomic, retain)            GTMOAuthAuthenticationWithAdditions *auth;
 
 - (void)checkAuthentication;
 - (GTMOAuthAuthenticationWithAdditions *)authForCustomService;
@@ -44,6 +44,7 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
 @synthesize serviceProviderName;
 @synthesize viewController;
 @synthesize authenticationHandler;
+@synthesize auth;
 
 - (id)init
 {
@@ -86,12 +87,11 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
         NSData *responseData = [[error userInfo] objectForKey:@"data"]; // kGTMHTTPFetcherStatusDataKey
         if ([responseData length] > 0) {
             // show the body of the server's authentication failure response
-            NSString *str = [[NSString alloc] initWithData:responseData
-                                                  encoding:NSUTF8StringEncoding];
-            iOSSLog(@"%@", str);
+            //NSString *str = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            //iOSSLog(@"%@", str);
         }
         
-        auth = nil;
+        self.auth = nil;
         
         [self.viewController dismissModalViewControllerAnimated:YES];
         
@@ -100,7 +100,7 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
             self.authenticationHandler = nil;
         }
     } else {
-        auth = newAuth;
+        self.auth = newAuth;
         [self.viewController dismissModalViewControllerAnimated:YES];
         
         //cwnote: make these keys constants!!!
@@ -124,8 +124,8 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
     self.viewController = vc;
     self.authenticationHandler = completionHandler;
     
-    auth = [self authForCustomService];
-    auth.scope = scope;
+    self.auth = [self authForCustomService];
+    self.auth.scope = scope;
     
     NSURL *requestURL = [NSURL URLWithString:self.requestTokenURL];
     NSURL *accessURL = [NSURL URLWithString:self.accessTokenURL];
@@ -138,7 +138,7 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
     // finished or been canceled
     //
     // This URL does not need to be for an actual web page
-    [auth setCallback:self.redirectURI];
+    [self.auth setCallback:self.redirectURI];
     
     // Display the autentication view
     GTMOAuthViewControllerTouch *oaViewController;
@@ -147,7 +147,7 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
                                                           requestTokenURL:requestURL
                                                         authorizeTokenURL:authorizationURL
                                                            accessTokenURL:accessURL
-                                                           authentication:auth
+                                                           authentication:self.auth
                                                            appServiceName:self.keychainItemName
                                                                  delegate:self
                                                          finishedSelector:@selector(viewController:finishedWithAuth:error:)];
@@ -157,7 +157,7 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
 
 - (BOOL)isSessionValid
 {
-    BOOL isSignedIn = auth.canAuthorize;;
+    BOOL isSignedIn = self.auth.canAuthorize;;
     return isSignedIn;
 }
 
@@ -170,7 +170,7 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
     
     // setting the service name lets us inspect the auth object later to know
     // what service it is for
-    auth.serviceProvider = self.serviceProviderName;
+    self.auth.serviceProvider = self.serviceProviderName;
     
     return newAuth;
 }
@@ -192,26 +192,26 @@ static GTMOAuthAuthenticationWithAdditions *auth = nil;
                                                    authentication:newAuth];
     }
     
-    auth = newAuth;
+    self.auth = newAuth;
 }
 
 - (NSString*)oAuthAccessToken
 {
-    return auth.accessToken;
+    return self.auth.accessToken;
 }
 
 - (void)logout
 {
-    if ([auth.serviceProvider isEqual:kGTMOAuthServiceProviderGoogle]) {
+    if ([self.auth.serviceProvider isEqual:kGTMOAuthServiceProviderGoogle]) {
         // remove the token from Google's servers
-        [GTMOAuthViewControllerTouch revokeTokenForGoogleAuthentication:auth];
+        [GTMOAuthViewControllerTouch revokeTokenForGoogleAuthentication:self.auth];
     }
     
     // remove the stored Google authentication from the keychain, if any
     [GTMOAuthViewControllerTouch removeParamsFromKeychainForName:self.keychainItemName];
     
     // Discard our retained authentication object.
-    auth = nil;
+    self.auth = nil;
 }
 
 @end

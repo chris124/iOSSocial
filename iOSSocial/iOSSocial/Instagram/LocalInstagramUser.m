@@ -88,7 +88,9 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+                                          requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -123,7 +125,9 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+                                          requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -158,7 +162,9 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+                                          requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -186,7 +192,9 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+                                          requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -212,7 +220,9 @@ static LocalInstagramUser *localInstagramUser = nil;
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+                                          requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -239,11 +249,11 @@ static LocalInstagramUser *localInstagramUser = nil;
 {
     //assert if instagram is nil. params have not been set!
     
+    self.authenticationHandler = completionHandler;
+    
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
-        
-        self.authenticationHandler = completionHandler;
-        
+
         [self.instagram authorizeWithScope:self.scope 
                                         fromViewController:vc withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
                                             if (error) {
@@ -259,12 +269,23 @@ static LocalInstagramUser *localInstagramUser = nil;
                                             }
                                         }];
     } else {
-        [self fetchLocalUserDataWithCompletionHandler:nil];
+        [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+            if (!error) {
+                //
+            }
+            
+            if (self.authenticationHandler) {
+                self.authenticationHandler(error);
+                self.authenticationHandler = nil;
+            }
+        }];
     }
 }
 
 - (NSString*)oAuthAccessToken
 {
+    //assert if instagram is nil. params have not been set!
+    
     return [self.instagram oAuthAccessToken];
 }
 
@@ -273,6 +294,16 @@ static LocalInstagramUser *localInstagramUser = nil;
     //assert if instagram is nil. params have not been set!
     
     [self.instagram logout];
+}
+
+- (NSString*)userId
+{
+    return self.userID;
+}
+
+- (NSString*)username
+{
+    return self.alias;
 }
 
 + (void)instagram

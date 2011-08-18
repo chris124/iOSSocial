@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-//#import "iOSSocialUser.h"
 
 typedef void(^AuthenticationHandler)(NSError *error); 
 
-//@protocol iOSSUserProtocol <NSObject>
 @protocol iOSSocialLocalUserProtocol <NSObject>
 
 + (id<iOSSocialLocalUserProtocol>)localUser;
@@ -44,5 +42,15 @@ typedef void(^AuthenticationHandler)(NSError *error);
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 
-@end
+- (NSString*)userId;
 
+- (NSString*)username;
+
+@end
+/*
+@interface iOSSocialLocalUser : NSObject <iOSSocialLocalUserProtocol> {
+@private
+    //
+}
+@end
+*/

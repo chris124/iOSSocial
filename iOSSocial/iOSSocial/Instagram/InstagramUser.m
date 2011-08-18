@@ -11,7 +11,7 @@
 #import "IGRequest.h"
 #import "Instagram.h"
 #import "InstagramMediaCollection.h"
-#import "InstagramUserCollection.h"
+#import "iOSSRequest.h"
 
 @interface InstagramUser ()
 
@@ -38,7 +38,7 @@
 @synthesize fetchUsersHandler;
 @synthesize fetchUserDataHandler;
 @synthesize index;
-@synthesize userSource;
+@synthesize dataSource;
 
 - (id)init
 {
@@ -91,9 +91,8 @@
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
-    //turn off authentication
-    request.requiresAuthentication = NO;
+                                          requestMethod:iOSSRequestMethodGET];
+    
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
             if (self.loadPhotoHandler) {
@@ -120,7 +119,9 @@
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+                                          requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -149,7 +150,9 @@
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+                                          requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -184,8 +187,10 @@
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+                                          requestMethod:iOSSRequestMethodGET];
     
+    request.requiresAuthentication = YES;
+
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
             if (self.fetchUsersHandler) {
@@ -193,18 +198,27 @@
                 self.fetchUsersHandler = nil;
             }
         } else {
+            NSMutableArray *users = nil;
             if (responseData) {
                 NSDictionary *dictionary = [Instagram JSONFromData:responseData];
                 
-                InstagramUserCollection *collection = [[InstagramUserCollection alloc] initWithDictionary:dictionary];
-                //collection.name = [NSString stringWithFormat:@"%@ Feed", self.alias];
+                NSArray *data = [dictionary objectForKey:@"data"];
                 
-                //call completion handler with error
-                if (self.fetchUsersHandler) {
-                    self.fetchUsersHandler(collection, nil);
-                    self.fetchUsersHandler = nil;
+                users = [NSMutableArray arrayWithCapacity:[data count]];
+                
+                NSInteger userIndex = 0;
+                for (NSDictionary *feedItemDictionary in data) {
+                    InstagramUser *user = [[InstagramUser alloc] initWithDictionary:feedItemDictionary];
+                    user.index = userIndex;
+                    [users addObject:user];
+                    userIndex++;
                 }
-                
+            }
+            
+            //call completion handler with error
+            if (self.fetchUsersHandler) {
+                self.fetchUsersHandler(users, nil);
+                self.fetchUsersHandler = nil;
             }
         }
     }];
@@ -219,7 +233,9 @@
     
     IGRequest *request = [[IGRequest alloc] initWithURL:url  
                                              parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+                                          requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -231,12 +247,12 @@
             if (responseData) {
                 NSDictionary *dictionary = [Instagram JSONFromData:responseData];
                 
-                InstagramUserCollection *collection = [[InstagramUserCollection alloc] initWithDictionary:dictionary];
+                //InstagramUserCollection *collection = [[InstagramUserCollection alloc] initWithDictionary:dictionary];
                 //collection.name = [NSString stringWithFormat:@"%@ Feed", self.alias];
                 
                 //call completion handler with error
                 if (self.fetchUsersHandler) {
-                    self.fetchUsersHandler(collection, nil);
+                    self.fetchUsersHandler(nil /*collection*/, nil);
                     self.fetchUsersHandler = nil;
                 }
                 

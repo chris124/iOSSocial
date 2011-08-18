@@ -7,15 +7,39 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Three20/Three20.h"
 
-@protocol iOSSUserSourceProtocol;
+typedef void(^FetchUserDataHandler)(NSError *error);
+
+@protocol iOSSUserProtocol;
+
+@protocol iOSSUserSourceProtocol <TTModel>
+
+/**
+ * The title of this collection of photos.
+ */
+@property (nonatomic, copy) NSString* title;
+
+/**
+ * The total number of users in the source, independent of the number that have been loaded.
+ */
+@property (nonatomic, readonly) NSInteger numberOfObjects;
+
+/**
+ * The maximum index of users that have already been loaded.
+ */
+@property (nonatomic, readonly) NSInteger maxObjectIndex;
+
+- (id<iOSSUserProtocol>)objectAtIndex:(NSInteger)index;
+
+@end
 
 @protocol iOSSUserProtocol <NSObject>
 
 /**
  * The user source that the user belongs to.
  */
-@property (nonatomic, assign) id<iOSSUserSourceProtocol> userSource;
+@property (nonatomic, assign) id<iOSSUserSourceProtocol> dataSource;
 
 /**
  * The index of the user within its user source.

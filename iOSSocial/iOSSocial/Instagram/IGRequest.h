@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "iOSSRequest.h"
+/*
 enum IGRequestMethod {
     IGRequestMethodGET,
     IGRequestMethodPOST,
@@ -37,5 +38,9 @@ typedef void(^IGRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlResp
 - (NSURL *)authorizedURL;
 
 - (void)performRequestWithHandler:(IGRequestHandler)handler;
+
+@end
+*/
+@interface IGRequest : iOSSRequest
 
 @end

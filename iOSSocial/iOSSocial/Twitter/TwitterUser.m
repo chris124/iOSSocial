@@ -14,6 +14,7 @@
 @synthesize userDictionary;
 @synthesize userID;
 @synthesize alias;
+@synthesize fetchUserDataHandler;
 
 - (id)init
 {

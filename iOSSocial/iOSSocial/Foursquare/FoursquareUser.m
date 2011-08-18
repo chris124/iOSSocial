@@ -9,11 +9,15 @@
 #import "FoursquareUser.h"
 #import "FoursquareUser+Private.h"
 
+
 @implementation FoursquareUser
 
 @synthesize userDictionary;
 @synthesize userID;
 @synthesize alias;
+@synthesize firstName;
+@synthesize fetchUserDataHandler;
+@synthesize profilePictureURL;
 
 - (id)init
 {
@@ -40,10 +44,19 @@
 {
     userDictionary = theUserDictionary;
     
-    self.userID = [theUserDictionary objectForKey:@"id"];
-    self.alias = [theUserDictionary objectForKey:@"username"];
+    NSDictionary *responseDict = [theUserDictionary objectForKey:@"response"];
+    if (responseDict) {
+        NSDictionary *userDict = [responseDict objectForKey:@"user"];
+        if (userDict) {
+            self.userID = [userDict objectForKey:@"id"];
+            self.alias = [userDict objectForKey:@"firstName"];
+            self.firstName = [userDict objectForKey:@"firstName"];
+            self.profilePictureURL = [userDict objectForKey:@"photo"];
+        }
+    }
+    
+    
     /*
-     self.firstName = [theUserDictionary objectForKey:@"first_name"];
      self.lastName = [theUserDictionary objectForKey:@"last_name"];
      self.profilePictureURL = [theUserDictionary objectForKey:@"profile_picture"];
      self.bio = [theUserDictionary objectForKey:@"bio"];

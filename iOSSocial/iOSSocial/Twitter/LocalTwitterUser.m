@@ -10,6 +10,7 @@
 #import "Twitter.h"
 #import "TwitterUser+Private.h"
 #import "NSUserDefaults+iOSSAdditions.h"
+#import "TwitterRequest.h"
 
 static LocalTwitterUser *localTwitterUser = nil;
 
@@ -82,17 +83,22 @@ static LocalTwitterUser *localTwitterUser = nil;
     return YES;
 }
 
-- (void)fetchLocalUserDataWithCompletionHandler:(FetchTwitterUserDataHandler)completionHandler
+- (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
-    /*
+    //GET users/show
+    //https://dev.twitter.com/docs/api/1/get/users/show
+
     self.fetchUserDataHandler = completionHandler;
     
+    //cwnote: fix this url!! dev.twitter.com is down. ugh.
     NSString *urlString = @"https://api.instagram.com/v1/users/self/";
     NSURL *url = [NSURL URLWithString:urlString];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:IGRequestMethodGET];
+    TwitterRequest *request = [[TwitterRequest alloc] initWithURL:url  
+                                                       parameters:nil 
+                                                    requestMethod:iOSSRequestMethodGET];
+    
+    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -101,7 +107,7 @@ static LocalTwitterUser *localTwitterUser = nil;
                 self.fetchUserDataHandler = nil;
             }
         } else {
-            NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+            NSDictionary *dictionary = [Twitter JSONFromData:responseData];
             self.userDictionary = dictionary;
             
             if (self.fetchUserDataHandler) {
@@ -110,49 +116,78 @@ static LocalTwitterUser *localTwitterUser = nil;
             }
         }
     }];
-    */
 }
 
 - (void)authenticateFromViewController:(UIViewController*)vc 
                  withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
-    //assert if instagram is nil. params have not been set!
+    //assert if twitter is nil. params have not been set!
+    
+    self.authenticationHandler = completionHandler;
     
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
-        
-        self.authenticationHandler = completionHandler;
 
         [self.twitter authorizeWithScope:self.scope 
                       fromViewController:vc 
                    withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
                             if (error) {
-                                
+                                if (self.authenticationHandler) {
+                                    self.authenticationHandler(error);
+                                    self.authenticationHandler = nil;
+                                }
                             } else {
                                 NSDictionary *user = [userInfo objectForKey:@"user"];
                                 self.userDictionary = user;
-                            }
-                            
-                            if (self.authenticationHandler) {
-                                self.authenticationHandler(error);
-                                self.authenticationHandler = nil;
+                                
+                                [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+                                    if (!error) {
+                                        //
+                                    }
+                                    
+                                    if (self.authenticationHandler) {
+                                        self.authenticationHandler(error);
+                                        self.authenticationHandler = nil;
+                                    }
+                                }];
                             }
                         }];
     } else {
-        [self fetchLocalUserDataWithCompletionHandler:nil];
+        [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+            if (!error) {
+                //
+            }
+            
+            if (self.authenticationHandler) {
+                self.authenticationHandler(error);
+                self.authenticationHandler = nil;
+            }
+        }];
     }
 }
 
 - (NSString*)oAuthAccessToken
 {
+    //assert if twitter is nil. params have not been set!
+    
     return [self.twitter oAuthAccessToken];
 }
 
 - (void)logout
 {
-    //assert if instagram is nil. params have not been set!
+    //assert if twitter is nil. params have not been set!
     
     [self.twitter logout];
+}
+
+- (NSString*)userId
+{
+    return self.userID;
+}
+
+- (NSString*)username
+{
+    return self.alias;
 }
 
 @end

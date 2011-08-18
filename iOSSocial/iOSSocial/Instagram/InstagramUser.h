@@ -13,10 +13,9 @@
 @class InstagramMediaCollection;
 @class InstagramUserCollection;
 
-typedef void(^FetchUserDataHandler)(NSError *error);
 typedef void(^LoadPhotoHandler)(UIImage *photo, NSError *error);
 typedef void(^FetchMediaHandler)(InstagramMediaCollection *collection, NSError *error);
-typedef void(^FetchUsersHandler)(InstagramUserCollection *users, NSError *error);
+typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 
 @interface InstagramUser : NSObject <iOSSUserProtocol>
 

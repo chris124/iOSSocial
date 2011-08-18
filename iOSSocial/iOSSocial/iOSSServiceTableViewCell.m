@@ -8,6 +8,7 @@
 
 #import "iOSSServiceTableViewCell.h"
 #import "iOSSService.h"
+#import "iOSSocialLocalUser.h"
 
 @interface iOSSServiceTableViewCell () {
     iOSSService *_service;
@@ -41,6 +42,7 @@
                              dequeueReusableCellWithIdentifier:cellID];
     if (cell == nil) {
         cell = [[self alloc] initWithCellIdentifier:cellID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;    
 }
@@ -54,10 +56,11 @@
 - (void)setService:(iOSSService*)theService
 {
     _service = theService;
-    
+
     self.textLabel.text = self.service.name;
     if ([self.service isConnected]) {
-        self.detailTextLabel.text = @"connected";
+        id<iOSSocialLocalUserProtocol> localUser = self.service.localUser;
+        self.detailTextLabel.text = [NSString stringWithFormat:@"connected as %@", [localUser username]];
     } else {
         self.detailTextLabel.text = @"not connected";
     }

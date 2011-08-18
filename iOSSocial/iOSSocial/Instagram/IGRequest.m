@@ -7,9 +7,26 @@
 //
 
 #import "IGRequest.h"
+//#import "Instagram.h"
+
+@implementation IGRequest
+
+#import "LocalInstagramUser.h"
+- (NSURL *)authorizedURL
+{
+    NSString *access_token = [NSString stringWithFormat:@"?access_token=%@", [[LocalInstagramUser localInstagramUser] oAuthAccessToken]];
+    NSURL *url = [NSURL URLWithString:access_token relativeToURL:self.URL];
+    
+    return url;
+    
+    //return [Instagram authorizeURL:self.URL];
+}
+
+@end
+
+/*
 //#import "UIApplication+iOSSNetworkActivity.h"
 #import "iOSSConnection.h"
-#import "Instagram.h"
 
 @interface IGRequest () {
     NSDictionary *_parameters;
@@ -66,10 +83,15 @@
 {
     
 }
-
+#import "LocalInstagramUser.h"
 - (NSURL *)authorizedURL
 {
-    return [Instagram authorizeURL:self.URL];
+    NSString *access_token = [NSString stringWithFormat:@"?access_token=%@", [[LocalInstagramUser localInstagramUser] oAuthAccessToken]];
+    NSURL *url = [NSURL URLWithString:access_token relativeToURL:self.URL];
+    
+    return url;
+    
+    //return [Instagram authorizeURL:self.URL];
 }
 
 - (void)performRequestWithHandler:(IGRequestHandler)handler
@@ -123,3 +145,4 @@
 }
 
 @end
+*/
