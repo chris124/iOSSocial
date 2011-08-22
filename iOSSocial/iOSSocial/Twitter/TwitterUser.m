@@ -42,7 +42,12 @@
     userDictionary = theUserDictionary;
     
     self.userID = [theUserDictionary objectForKey:@"id"];
-    self.alias = [theUserDictionary objectForKey:@"username"];
+    NSString *username = [theUserDictionary objectForKey:@"username"];
+    if (username) {
+        self.alias = username;
+    } else {
+        self.alias = [theUserDictionary objectForKey:@"screen_name"];
+    }
 }
 
 @end
