@@ -37,5 +37,9 @@
 }
 
 @property(nonatomic, readonly, assign)  NSInteger count;
+@property(nonatomic, retain)    NSString *message;
+@property(nonatomic, assign)    BOOL displayDoneButton;
+
+- (id)initWithSources:(NSArray*)sources;
 
 @end

@@ -43,20 +43,6 @@
     
     self.userID = [theUserDictionary objectForKey:@"id"];
     self.alias = [theUserDictionary objectForKey:@"username"];
-    /*
-    self.firstName = [theUserDictionary objectForKey:@"first_name"];
-    self.lastName = [theUserDictionary objectForKey:@"last_name"];
-    self.profilePictureURL = [theUserDictionary objectForKey:@"profile_picture"];
-    self.bio = [theUserDictionary objectForKey:@"bio"];
-    self.website = [theUserDictionary objectForKey:@"website"];
-    
-    NSDictionary *counts = [userDictionary objectForKey:@"counts"];
-    if (counts) {
-        //self.mediaCount = [counts objectForKey:@"media"];
-        //self.followsCount = [counts objectForKey:@"follows"];
-        //self.followedByCount = [counts objectForKey:@"followed_by"];
-    }
-    */
 }
 
 @end

@@ -10,15 +10,34 @@
 #import "iOSSLog.h"
 #import "iOSSServiceTableViewCell.h"
 #import "iOSSService.h"
-#import "LocalInstagramUser.h"
-#import "LocalTwitterUser.h"
-#import "LocalFoursquareUser.h"
+
+/*
+ enum iOSSServicesTableSections { 
+ iOSSServicesTableSectionServices = 0, 
+ iOSSServicesTableSectionDoneButton,
+ iOSSServicesTableNumSections,
+ };
+ 
+ enum iOSSServicesRows { 
+ iOSSServicesSecServicesRowInstagram = 0, 
+ iOSSServicesSecServicesRowTwitter, 
+ iOSSServicesSecServicesRowFoursquare, 
+ iOSSServicesSecServicesNumRows,
+ };
+ 
+ enum iOSSDoneRows {
+ iOSSServicesSecDoneRowDoneButton = 0,
+ iOSSServicesSecDoneNumRows,
+ };
+ */
+
+static iOSServicesDataSource *servicesDataSource = nil;
 
 @interface iOSServicesDataSource ()
 
 @property(nonatomic, readwrite, assign) NSInteger count;
 @property(nonatomic, retain)            NSMutableArray *psDelegates;
-@property(nonatomic, retain)            NSArray *items;
+@property(nonatomic, copy)            NSArray *items;
 
 @end
 
@@ -29,45 +48,34 @@
 @synthesize psDelegates;
 @synthesize model;
 @synthesize items;
+@synthesize message;
+@synthesize displayDoneButton;
+
++ (iOSServicesDataSource *)servicesDataStore
+{
+    @synchronized(self) {
+        if(servicesDataSource == nil)
+            servicesDataSource = [[super allocWithZone:NULL] init];
+    }
+    return servicesDataSource;
+}
 
 - (id)init
 {
     self = [super init];
     if (self) {
         // Initialization code here.
+    }
+    
+    return self;
+}
+
+- (id)initWithSources:(NSArray*)sources
+{
+    self = [self init];
+    if (self) {
         
-        NSMutableArray *services = [NSMutableArray array];
-        
-        NSMutableDictionary *serviceDictionary = [NSMutableDictionary dictionary];
-        [serviceDictionary setObject:@"Instagram" forKey:@"name"];
-        NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"instagram_trans" withExtension:@"png"];
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-        [serviceDictionary setObject:[LocalInstagramUser localInstagramUser] forKey:@"localUser"];
-        
-        iOSSService *instagram = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-        [services addObject:instagram];
-        
-        
-        [serviceDictionary removeAllObjects];
-        [serviceDictionary setObject:@"Twitter" forKey:@"name"];
-        photoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-        [serviceDictionary setObject:[LocalTwitterUser localTwitterUser] forKey:@"localUser"];
-        
-        iOSSService *twitter = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-        [services addObject:twitter];
-        
-        
-        [serviceDictionary removeAllObjects];
-        [serviceDictionary setObject:@"Foursquare" forKey:@"name"];
-        photoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-        [serviceDictionary setObject:[LocalFoursquareUser localFoursquareUser] forKey:@"localUser"];
-        
-        iOSSService *foursquare = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-        [services addObject:foursquare];
-        
-        self.items = services;
+        self.items = sources;
     }
     
     return self;
@@ -201,27 +209,173 @@
     return nil;
 }
 
+/*
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    //cwnote: what if no nav controller? showing modally and need to add done button?
+    
+    switch (section) {
+        case iOSSServicesTableSectionServices:
+            return iOSSServicesSecServicesNumRows; 
+        case iOSSServicesTableSectionDoneButton:
+            return iOSSServicesSecDoneNumRows; 
+        default:
+            iOSSLog(@"Unexpected section (%d)", section); break;
+    }
+    
+    return 0;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    //cwnote: what if no nav controller? showing modally and need to add done button?
+    
+    switch (section) {
+        case iOSSServicesTableSectionServices:
+            return @"Services"; 
+        case iOSSServicesTableSectionDoneButton:
+            return @"Done"; 
+        default:
+            iOSSLog(@"Unexpected section (%d)", section); break;
+    }
+    
+    return nil;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    //cwnote: what if no nav controller? showing modally and need to add done button?
+    
+    switch (section) {
+        case iOSSServicesTableSectionServices:
+            return @"Bada"; 
+        case iOSSServicesTableSectionDoneButton:
+            return @"Bip"; 
+        default:
+            iOSSLog(@"Unexpected section (%d)", section); break;
+    }
+    
+    return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    // Configure the cell...
+    
+    switch (indexPath.section) {
+        case iOSSServicesTableSectionDoneButton:
+        {
+            //cell = [PRPBasicSettingsCell cellForTableView:tableView]; 
+            switch (indexPath.row) {
+                case iOSSServicesSecDoneRowDoneButton: 
+                    cell.textLabel.text = @"Done"; 
+                    //cell.detailTextLabel.text = @"Mets"; 
+                    break;
+                default:
+                    NSAssert1(NO, @"Unexpected row in Favorites section: %d", indexPath.row);
+                    break; 
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+    return cell;
+}
+*/
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
+    if (self.displayDoneButton) {
+        return 2;
+    }
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self numberOfObjects];
+    NSInteger rowsInSection = [self numberOfObjects];
+
+    if (self.displayDoneButton) {
+        //return for each section
+        switch (section) {
+            case 0:
+                break;
+            case 1:
+                rowsInSection = 1;
+            default:
+                break;
+        }
+    }
+    return rowsInSection;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
+-(IBAction) doneButtonPressed:(id)sender
+{
+    NSLog(@"");
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    iOSSService *service = [self.items objectAtIndex:[indexPath row]];
+    UITableViewCell *theCell = nil;
     
-    iOSSServiceTableViewCell *cell = [iOSSServiceTableViewCell cellForTableView:tableView];
-    cell.service = service;
-    return cell;
+    if (self.displayDoneButton) {
+        switch (indexPath.section) {
+            case 0:
+            {
+                iOSSService *service = [self.items objectAtIndex:[indexPath row]];
+                
+                iOSSServiceTableViewCell *cell = [iOSSServiceTableViewCell cellForTableView:tableView];
+                cell.service = service;
+                
+                theCell = cell;
+            }
+                break;
+            case 1:
+            {
+                static NSString *CellIdentifier = @"Cell";
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                if (cell == nil) {
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                }
+                cell.textLabel.text = @"Done";
+                
+                /*
+                UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+                [doneButton setFrame:cell.frame];
+                [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+                [cell.contentView addSubview:doneButton];
+                [doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                */
+                
+                theCell = cell;
+            }
+                break;
+            default:
+                break;
+        }
+    } else {
+        iOSSService *service = [self.items objectAtIndex:[indexPath row]];
+        
+        iOSSServiceTableViewCell *cell = [iOSSServiceTableViewCell cellForTableView:tableView];
+        cell.service = service;
+        
+        theCell = cell;
+    }
+    
+    return theCell;
 }
 
 + (NSArray*)lettersForSectionsWithSearch:(BOOL)search summary:(BOOL)summary
@@ -324,48 +478,5 @@ willAppearAtIndexPath:(NSIndexPath*)indexPath
 {
     iOSSLog(@"bah");
 }
-
-/*
- - (void)modelDidStartLoad:(id<TTModel>)model;
- 
- - (void)modelDidFinishLoad:(id<TTModel>)model;
- 
- - (void)model:(id<TTModel>)model didFailLoadWithError:(NSError*)error;
- 
- - (void)modelDidCancelLoad:(id<TTModel>)model;
- */
-
-/**
- * Informs the delegate that the model has changed in some fundamental way.
- *
- * The change is not described specifically, so the delegate must assume that the entire
- * contents of the model may have changed, and react almost as if it was given a new model.
- */
-/*
- - (void)modelDidChange:(id<TTModel>)model;
- 
- - (void)model:(id<TTModel>)model didUpdateObject:(id)object atIndexPath:(NSIndexPath*)indexPath;
- 
- - (void)model:(id<TTModel>)model didInsertObject:(id)object atIndexPath:(NSIndexPath*)indexPath;
- 
- - (void)model:(id<TTModel>)model didDeleteObject:(id)object atIndexPath:(NSIndexPath*)indexPath;
- */
-
-/**
- * Informs the delegate that the model is about to begin a multi-stage update.
- *
- * Models should use this method to condense multiple updates into a single visible update.
- * This avoids having the view update multiple times for each change.  Instead, the user will
- * only see the end result of all of your changes when you call modelDidEndUpdates.
- */
-//- (void)modelDidBeginUpdates:(id<TTModel>)model;
-
-/**
- * Informs the delegate that the model has completed a multi-stage update.
- *
- * The exact nature of the change is not specified, so the receiver should investigate the
- * new state of the model by examining its properties.
- */
-//- (void)modelDidEndUpdates:(id<TTModel>)model;
 
 @end

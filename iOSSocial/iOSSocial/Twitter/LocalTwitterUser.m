@@ -85,20 +85,15 @@ static LocalTwitterUser *localTwitterUser = nil;
 
 - (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
-    //GET users/show
-    //https://dev.twitter.com/docs/api/1/get/users/show
-
     self.fetchUserDataHandler = completionHandler;
     
     //cwnote: fix this url!! dev.twitter.com is down. ugh.
-    NSString *urlString = @"https://api.instagram.com/v1/users/self/";
+    NSString *urlString = [NSString stringWithFormat:@"http://api.twitter.com/1/users/show.json?user_id=%@", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
     TwitterRequest *request = [[TwitterRequest alloc] initWithURL:url  
                                                        parameters:nil 
                                                     requestMethod:iOSSRequestMethodGET];
-    
-    request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {

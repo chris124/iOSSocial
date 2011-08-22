@@ -10,21 +10,27 @@
 #import "Three20/Three20.h"
 
 @class iOSSServicesViewController;
-@class iOSSService;
+@protocol iOSSServiceProtocol;
 
 @protocol iOSSServicesViewControllerDelegate <NSObject>
 
 @optional
 
 -(void)servicesViewController:(iOSSServicesViewController*)servicesController 
-             didSelectService:(iOSSService*)service;
+             didSelectService:(id<iOSSServiceProtocol>)service;
+
+-(void)servicesViewControllerDidSelectDoneButton:(iOSSServicesViewController*)servicesController;
 
 @end
+
+@class iOSServicesDataSource;
 
 @interface iOSSServicesViewController : TTTableViewController <UITableViewDelegate> {
     id _serviceControllerDelegate;
 }
 
 @property(nonatomic, retain)    id<iOSSServicesViewControllerDelegate> serviceControllerDelegate;
+
+- (id)initWithDataSource:(iOSServicesDataSource*)servicesDataSource;
 
 @end

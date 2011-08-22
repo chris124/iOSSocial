@@ -8,8 +8,8 @@
 
 #import "NSUserDefaults+iOSSAdditions.h"
 
-NSString *const iOSSDefaultsKeyInstagramUserDictionary = @"ioss_instagramUserDictionary";
-NSString *const iOSSDefaultsKeyTwitterUserDictionary = @"ioss_twitterUserDictionary";
+NSString *const iOSSDefaultsKeyInstagramUserDictionary  = @"ioss_instagramUserDictionary";
+NSString *const iOSSDefaultsKeyTwitterUserDictionary    = @"ioss_twitterUserDictionary";
 NSString *const iOSSDefaultsKeyFoursquareUserDictionary = @"ioss_foursquareUserDictionary";
 
 @implementation NSUserDefaults (iOSSAdditions)

@@ -10,26 +10,8 @@
 #import "iOSSocial.h"
 #import "iOSServicesDataSource.h"
 #import "iOSSService.h"
-
-/*
-enum iOSSServicesTableSections { 
-    iOSSServicesTableSectionServices = 0, 
-    iOSSServicesTableSectionDoneButton,
-    iOSSServicesTableNumSections,
-};
-
-enum iOSSServicesRows { 
-    iOSSServicesSecServicesRowInstagram = 0, 
-    iOSSServicesSecServicesRowTwitter, 
-    iOSSServicesSecServicesRowFoursquare, 
-    iOSSServicesSecServicesNumRows,
-};
-
-enum iOSSDoneRows {
-    iOSSServicesSecDoneRowDoneButton = 0,
-    iOSSServicesSecDoneNumRows,
-};
-*/
+#import "LocalTwitterUser.h"
+#import "LocalFoursquareUser.h"
 
 @implementation iOSSServicesViewController
 
@@ -40,7 +22,40 @@ enum iOSSDoneRows {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         // Custom initialization
-        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] init];
+        
+        NSMutableArray *services = [NSMutableArray array];
+        
+        NSMutableDictionary *serviceDictionary = [NSMutableDictionary dictionary];
+        [serviceDictionary setObject:@"Instagram" forKey:@"name"];
+        NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"instagram_trans" withExtension:@"png"];
+        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
+        [serviceDictionary setObject:[LocalInstagramUser localInstagramUser] forKey:@"localUser"];
+        
+        iOSSService *instagram = [[iOSSService alloc] initWithDictionary:serviceDictionary];
+        [services addObject:instagram];
+        
+        
+        [serviceDictionary removeAllObjects];
+        [serviceDictionary setObject:@"Twitter" forKey:@"name"];
+        photoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
+        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
+        [serviceDictionary setObject:[LocalTwitterUser localTwitterUser] forKey:@"localUser"];
+        
+        iOSSService *twitter = [[iOSSService alloc] initWithDictionary:serviceDictionary];
+        [services addObject:twitter];
+        
+        
+        [serviceDictionary removeAllObjects];
+        [serviceDictionary setObject:@"Foursquare" forKey:@"name"];
+        photoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
+        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
+        [serviceDictionary setObject:[LocalFoursquareUser localFoursquareUser] forKey:@"localUser"];
+        
+        iOSSService *foursquare = [[iOSSService alloc] initWithDictionary:serviceDictionary];
+        [services addObject:foursquare];
+        
+        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] initWithSources:services];
+        servicesDataSource.displayDoneButton = YES;
         self.dataSource = servicesDataSource;
         self.variableHeightRows = YES;
     }
@@ -52,10 +67,53 @@ enum iOSSDoneRows {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] init];
+        
+        NSMutableArray *services = [NSMutableArray array];
+        
+        NSMutableDictionary *serviceDictionary = [NSMutableDictionary dictionary];
+        [serviceDictionary setObject:@"Instagram" forKey:@"name"];
+        NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"instagram_trans" withExtension:@"png"];
+        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
+        [serviceDictionary setObject:[LocalInstagramUser localInstagramUser] forKey:@"localUser"];
+        
+        iOSSService *instagram = [[iOSSService alloc] initWithDictionary:serviceDictionary];
+        [services addObject:instagram];
+        
+        
+        [serviceDictionary removeAllObjects];
+        [serviceDictionary setObject:@"Twitter" forKey:@"name"];
+        photoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
+        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
+        [serviceDictionary setObject:[LocalTwitterUser localTwitterUser] forKey:@"localUser"];
+        
+        iOSSService *twitter = [[iOSSService alloc] initWithDictionary:serviceDictionary];
+        [services addObject:twitter];
+        
+        
+        [serviceDictionary removeAllObjects];
+        [serviceDictionary setObject:@"Foursquare" forKey:@"name"];
+        photoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
+        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
+        [serviceDictionary setObject:[LocalFoursquareUser localFoursquareUser] forKey:@"localUser"];
+        
+        iOSSService *foursquare = [[iOSSService alloc] initWithDictionary:serviceDictionary];
+        [services addObject:foursquare];
+        
+        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] initWithSources:services];
         self.dataSource = servicesDataSource;
         self.variableHeightRows = YES;
     }
+    return self;
+}
+
+- (id)initWithDataSource:(iOSServicesDataSource*)servicesDataSource
+{
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    if (self) {
+        self.dataSource = servicesDataSource;
+        self.variableHeightRows = YES;
+    }
+    
     return self;
 }
 
@@ -114,98 +172,6 @@ enum iOSSDoneRows {
 }
 
 #pragma mark - Table view data source
-/*
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    //cwnote: what if no nav controller? showing modally and need to add done button?
- 
-    // Return the number of sections.
-    return iOSSServicesTableNumSections;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    //cwnote: what if no nav controller? showing modally and need to add done button?
- 
-    switch (section) {
-        case iOSSServicesTableSectionServices:
-            return iOSSServicesSecServicesNumRows; 
-        case iOSSServicesTableSectionDoneButton:
-            return iOSSServicesSecDoneNumRows; 
-        default:
-            iOSSLog(@"Unexpected section (%d)", section); break;
-    }
-    
-    return 0;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    //cwnote: what if no nav controller? showing modally and need to add done button?
- 
-    switch (section) {
-        case iOSSServicesTableSectionServices:
-            return @"Services"; 
-        case iOSSServicesTableSectionDoneButton:
-            return @"Done"; 
-        default:
-            iOSSLog(@"Unexpected section (%d)", section); break;
-    }
-    
-    return nil;
-}
-*/
-/*
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-    //cwnote: what if no nav controller? showing modally and need to add done button?
- 
-    switch (section) {
-        case iOSSServicesTableSectionServices:
-            return @"Bada"; 
-        case iOSSServicesTableSectionDoneButton:
-            return @"Bip"; 
-        default:
-            iOSSLog(@"Unexpected section (%d)", section); break;
-    }
-    
-    return nil;
-}
-*/
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    // Configure the cell...
-    
-    switch (indexPath.section) {
-        case iOSSServicesTableSectionDoneButton:
-        {
-            //cell = [PRPBasicSettingsCell cellForTableView:tableView]; 
-            switch (indexPath.row) {
-                case iOSSServicesSecDoneRowDoneButton: 
-                    cell.textLabel.text = @"Done"; 
-                    //cell.detailTextLabel.text = @"Mets"; 
-                    break;
-                default:
-                    NSAssert1(NO, @"Unexpected row in Favorites section: %d", indexPath.row);
-                    break; 
-            }
-        }
-            break;
-        default:
-            break;
-    }
-    
-    return cell;
-}
-*/
 
 - (void)addService:(iOSSService*)service
 {
@@ -225,7 +191,32 @@ enum iOSSDoneRows {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    iOSSService *service = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
+    switch (indexPath.section) {
+            case 0:
+        {
+            if ([self.serviceControllerDelegate respondsToSelector:@selector(servicesViewController:didSelectService:)]) {
+                iOSSService *service = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
+                
+                //cwnote: this probably needs to take a completion handler.
+                [self.serviceControllerDelegate servicesViewController:self 
+                                                      didSelectService:service];
+                [tableView reloadData];
+            }
+        }
+            break;
+        case 1:
+        {
+            //tell delegate done button was pressed!
+            if ([self.serviceControllerDelegate respondsToSelector:@selector(servicesViewControllerDidSelectDoneButton:)]) {
+                [self.serviceControllerDelegate servicesViewControllerDidSelectDoneButton:self];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+    /*
     id<iOSSocialLocalUserProtocol> localUser = service.localUser;
     
     if ([service isConnected]) {
@@ -241,7 +232,7 @@ enum iOSSDoneRows {
                            [tableView reloadData];
                        }}];
     }
-    
+    */
     //cwnote: done button if no navigation controller?
     /*
     switch (indexPath.section) {
