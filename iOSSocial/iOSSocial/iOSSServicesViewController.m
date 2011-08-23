@@ -265,4 +265,9 @@
     return 75.0f;
 }
 
+- (void)refreshUI
+{
+    [self.tableView reloadData];
+}
+
 @end

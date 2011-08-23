@@ -33,4 +33,6 @@
 
 - (id)initWithDataSource:(iOSServicesDataSource*)servicesDataSource;
 
+- (void)refreshUI;
+
 @end
