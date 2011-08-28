@@ -9,8 +9,9 @@
 #import "LocalTwitterUser.h"
 #import "Twitter.h"
 #import "TwitterUser+Private.h"
-#import "NSUserDefaults+iOSSAdditions.h"
 #import "TwitterRequest.h"
+
+NSString *const iOSSDefaultsKeyTwitterUserDictionary    = @"ioss_twitterUserDictionary";
 
 static LocalTwitterUser *localTwitterUser = nil;
 
@@ -47,12 +48,23 @@ static LocalTwitterUser *localTwitterUser = nil;
     return localTwitterUser;
 }
 
+- (NSDictionary *)ioss_twitterUserDictionary 
+{ 
+    return [[NSUserDefaults standardUserDefaults] objectForKey:iOSSDefaultsKeyTwitterUserDictionary];
+}
+
+- (void)ioss_setTwitterUserDictionary:(NSDictionary *)username 
+{ 
+    [[NSUserDefaults standardUserDefaults] setObject:username forKey:iOSSDefaultsKeyTwitterUserDictionary];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (id)init
 {
     self = [super init];
     if (self) {
         // Initialization code here.
-        NSDictionary *localUserDictionary = [[NSUserDefaults standardUserDefaults] ioss_twitterUserDictionary];
+        NSDictionary *localUserDictionary = [self ioss_twitterUserDictionary];
         if (localUserDictionary) {
             self.userDictionary = localUserDictionary;
         }
@@ -65,7 +77,7 @@ static LocalTwitterUser *localTwitterUser = nil;
 {
     [super setUserDictionary:theUserDictionary];
     
-    [[NSUserDefaults standardUserDefaults] ioss_setTwitterUserDictionary:theUserDictionary];
+    [self ioss_setTwitterUserDictionary:theUserDictionary];
 }
 
 - (void)assignOAuthParams:(NSDictionary*)params

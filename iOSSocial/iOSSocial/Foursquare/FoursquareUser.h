@@ -10,7 +10,7 @@
 #import "iOSSocialUser.h"
 
 
-@interface FoursquareUser : NSObject <iOSSUserProtocol>
+@interface FoursquareUser : NSObject <iOSSocialUserProtocol>
 
 @property(nonatomic, readonly, retain)  NSString *userID;   // User identifier.
 @property(nonatomic, readonly, retain)  NSString *alias;    // The user's alias

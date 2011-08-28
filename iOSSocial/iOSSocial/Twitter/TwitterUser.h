@@ -10,7 +10,7 @@
 #import "iOSSocialUser.h"
 
 
-@interface TwitterUser : NSObject <iOSSUserProtocol>
+@interface TwitterUser : NSObject <iOSSocialUserProtocol>
 
 @property(nonatomic, readonly, retain)  NSString *userID;   // User identifier.
 @property(nonatomic, readonly, retain)  NSString *alias;    // The user's alias

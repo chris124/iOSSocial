@@ -107,10 +107,6 @@
 		12AB3BCA13DF849500565332 /* iOSSocialServiceOAuth2ProviderConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BC213DF849500565332 /* iOSSocialServiceOAuth2ProviderConstants.h */; };
 		12AB3BCD13DF84AC00565332 /* iOSSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BCB13DF84AC00565332 /* iOSSLog.h */; };
 		12AB3BCE13DF84AC00565332 /* iOSSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BCC13DF84AC00565332 /* iOSSLog.m */; };
-		12AB3BD113DF84B900565332 /* NSString+iOSSURLAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BCF13DF84B900565332 /* NSString+iOSSURLAdditions.h */; };
-		12AB3BD213DF84B900565332 /* NSString+iOSSURLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BD013DF84B900565332 /* NSString+iOSSURLAdditions.m */; };
-		12AB3BD513DF84C800565332 /* NSUserDefaults+iOSSAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BD313DF84C800565332 /* NSUserDefaults+iOSSAdditions.h */; };
-		12AB3BD613DF84C800565332 /* NSUserDefaults+iOSSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BD413DF84C800565332 /* NSUserDefaults+iOSSAdditions.m */; };
 		12AB3BE113DF84D800565332 /* iOSSConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BD713DF84D800565332 /* iOSSConnection.h */; };
 		12AB3BE213DF84D800565332 /* iOSSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BD813DF84D800565332 /* iOSSConnection.m */; };
 		12AB3BE313DF84D800565332 /* iOSSFormEncodedPOSTRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BD913DF84D800565332 /* iOSSFormEncodedPOSTRequest.h */; };
@@ -121,10 +117,10 @@
 		12AB3BE813DF84D800565332 /* iOSSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BDE13DF84D800565332 /* iOSSRequest.m */; };
 		12AB3BE913DF84D800565332 /* iOSSUploadFileInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BDF13DF84D800565332 /* iOSSUploadFileInfo.h */; };
 		12AB3BEA13DF84D800565332 /* iOSSUploadFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BE013DF84D800565332 /* iOSSUploadFileInfo.m */; };
-		12AB3BED13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BEB13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h */; };
-		12AB3BEE13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BEC13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m */; };
-		12AB3BF113DF84F500565332 /* UIView+iOSSSubviewTraversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BEF13DF84F500565332 /* UIView+iOSSSubviewTraversal.h */; };
-		12AB3BF213DF84F500565332 /* UIView+iOSSSubviewTraversal.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BF013DF84F500565332 /* UIView+iOSSSubviewTraversal.m */; };
+		12B4F0A91409ECA5002E98A6 /* TwitterRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12B4F0A71409ECA5002E98A6 /* TwitterRequest.h */; };
+		12B4F0AA1409ECA5002E98A6 /* TwitterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F0A81409ECA5002E98A6 /* TwitterRequest.m */; };
+		12B4F0AD1409ECC0002E98A6 /* FoursquareRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 12B4F0AB1409ECC0002E98A6 /* FoursquareRequest.h */; };
+		12B4F0AE1409ECC0002E98A6 /* FoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F0AC1409ECC0002E98A6 /* FoursquareRequest.m */; };
 		12ECAE4013D5D3E700C1297B /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECADFE13D5BDD200C1297B /* libThree20.a */; };
 		12ECAE4113D5D3E700C1297B /* libThree20Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE0A13D5BF0700C1297B /* libThree20Core.a */; };
 		12ECAE4213D5D3E700C1297B /* libThree20Network.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE1513D5BF1100C1297B /* libThree20Network.a */; };
@@ -414,10 +410,6 @@
 		12AB3BC213DF849500565332 /* iOSSocialServiceOAuth2ProviderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSocialServiceOAuth2ProviderConstants.h; path = OAuth/iOSSocialServiceOAuth2ProviderConstants.h; sourceTree = "<group>"; };
 		12AB3BCB13DF84AC00565332 /* iOSSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSLog.h; path = Utilities/Log/iOSSLog.h; sourceTree = "<group>"; };
 		12AB3BCC13DF84AC00565332 /* iOSSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSLog.m; path = Utilities/Log/iOSSLog.m; sourceTree = "<group>"; };
-		12AB3BCF13DF84B900565332 /* NSString+iOSSURLAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+iOSSURLAdditions.h"; path = "Utilities/String/NSString+iOSSURLAdditions.h"; sourceTree = "<group>"; };
-		12AB3BD013DF84B900565332 /* NSString+iOSSURLAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+iOSSURLAdditions.m"; path = "Utilities/String/NSString+iOSSURLAdditions.m"; sourceTree = "<group>"; };
-		12AB3BD313DF84C800565332 /* NSUserDefaults+iOSSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+iOSSAdditions.h"; path = "Utilities/UserDefaults/NSUserDefaults+iOSSAdditions.h"; sourceTree = "<group>"; };
-		12AB3BD413DF84C800565332 /* NSUserDefaults+iOSSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+iOSSAdditions.m"; path = "Utilities/UserDefaults/NSUserDefaults+iOSSAdditions.m"; sourceTree = "<group>"; };
 		12AB3BD713DF84D800565332 /* iOSSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSConnection.h; path = Utilities/Connection/iOSSConnection.h; sourceTree = "<group>"; };
 		12AB3BD813DF84D800565332 /* iOSSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSConnection.m; path = Utilities/Connection/iOSSConnection.m; sourceTree = "<group>"; };
 		12AB3BD913DF84D800565332 /* iOSSFormEncodedPOSTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSFormEncodedPOSTRequest.h; path = Utilities/Connection/iOSSFormEncodedPOSTRequest.h; sourceTree = "<group>"; };
@@ -428,10 +420,10 @@
 		12AB3BDE13DF84D800565332 /* iOSSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSRequest.m; path = Utilities/Connection/iOSSRequest.m; sourceTree = "<group>"; };
 		12AB3BDF13DF84D800565332 /* iOSSUploadFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSUploadFileInfo.h; path = Utilities/Connection/iOSSUploadFileInfo.h; sourceTree = "<group>"; };
 		12AB3BE013DF84D800565332 /* iOSSUploadFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iOSSUploadFileInfo.m; path = Utilities/Connection/iOSSUploadFileInfo.m; sourceTree = "<group>"; };
-		12AB3BEB13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+iOSSNetworkActivity.h"; path = "Utilities/Application/UIApplication+iOSSNetworkActivity.h"; sourceTree = "<group>"; };
-		12AB3BEC13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+iOSSNetworkActivity.m"; path = "Utilities/Application/UIApplication+iOSSNetworkActivity.m"; sourceTree = "<group>"; };
-		12AB3BEF13DF84F500565332 /* UIView+iOSSSubviewTraversal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+iOSSSubviewTraversal.h"; path = "Utilities/View/UIView+iOSSSubviewTraversal.h"; sourceTree = "<group>"; };
-		12AB3BF013DF84F500565332 /* UIView+iOSSSubviewTraversal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+iOSSSubviewTraversal.m"; path = "Utilities/View/UIView+iOSSSubviewTraversal.m"; sourceTree = "<group>"; };
+		12B4F0A71409ECA5002E98A6 /* TwitterRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterRequest.h; path = Twitter/TwitterRequest.h; sourceTree = "<group>"; };
+		12B4F0A81409ECA5002E98A6 /* TwitterRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterRequest.m; path = Twitter/TwitterRequest.m; sourceTree = "<group>"; };
+		12B4F0AB1409ECC0002E98A6 /* FoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoursquareRequest.h; path = Foursquare/FoursquareRequest.h; sourceTree = "<group>"; };
+		12B4F0AC1409ECC0002E98A6 /* FoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoursquareRequest.m; path = Foursquare/FoursquareRequest.m; sourceTree = "<group>"; };
 		12ECADD213D5BDD100C1297B /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../three20/src/Three20/Three20.xcodeproj; sourceTree = "<group>"; };
 		12ECAE0413D5BF0700C1297B /* Three20Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Core.xcodeproj; path = ../three20/src/Three20Core/Three20Core.xcodeproj; sourceTree = "<group>"; };
 		12ECAE0D13D5BF1100C1297B /* Three20Network.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Network.xcodeproj; path = ../three20/src/Three20Network/Three20Network.xcodeproj; sourceTree = "<group>"; };
@@ -474,15 +466,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		120888DB13D77ADB00C0FB68 /* String */ = {
-			isa = PBXGroup;
-			children = (
-				12AB3BCF13DF84B900565332 /* NSString+iOSSURLAdditions.h */,
-				12AB3BD013DF84B900565332 /* NSString+iOSSURLAdditions.m */,
-			);
-			name = String;
-			sourceTree = "<group>";
-		};
 		1264A12113D08B900085E394 = {
 			isa = PBXGroup;
 			children = (
@@ -638,11 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				126FE22113D9C13600D72D46 /* Log */,
-				120888DB13D77ADB00C0FB68 /* String */,
-				12ECAF7413D5F32300C1297B /* UserDefaults */,
 				12ECAC6513D4904400C1297B /* Connection */,
-				12ECAC6013D4892C00C1297B /* UIApplication */,
-				12E0ACCB13D0D28B0025C3B7 /* UIView */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -662,6 +641,8 @@
 		126FE24F13D9C7C400D72D46 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				12B4F0A71409ECA5002E98A6 /* TwitterRequest.h */,
+				12B4F0A81409ECA5002E98A6 /* TwitterRequest.m */,
 				12AB3B8B13DF843E00565332 /* LocalTwitterUser.h */,
 				12AB3B8C13DF843E00565332 /* LocalTwitterUser.m */,
 				12AB3B8D13DF843E00565332 /* twitter-logo.png */,
@@ -677,6 +658,8 @@
 		126FE2BF13DA20C600D72D46 /* Foursquare */ = {
 			isa = PBXGroup;
 			children = (
+				12B4F0AB1409ECC0002E98A6 /* FoursquareRequest.h */,
+				12B4F0AC1409ECC0002E98A6 /* FoursquareRequest.m */,
 				12AB3B7C13DF842500565332 /* foursquare_trans.png */,
 				12AB3B7D13DF842500565332 /* Foursquare.h */,
 				12AB3B7E13DF842500565332 /* Foursquare.m */,
@@ -788,24 +771,6 @@
 			name = OAuth;
 			sourceTree = "<group>";
 		};
-		12E0ACCB13D0D28B0025C3B7 /* UIView */ = {
-			isa = PBXGroup;
-			children = (
-				12AB3BEF13DF84F500565332 /* UIView+iOSSSubviewTraversal.h */,
-				12AB3BF013DF84F500565332 /* UIView+iOSSSubviewTraversal.m */,
-			);
-			name = UIView;
-			sourceTree = "<group>";
-		};
-		12ECAC6013D4892C00C1297B /* UIApplication */ = {
-			isa = PBXGroup;
-			children = (
-				12AB3BEB13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h */,
-				12AB3BEC13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m */,
-			);
-			name = UIApplication;
-			sourceTree = "<group>";
-		};
 		12ECAC6513D4904400C1297B /* Connection */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,15 +853,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		12ECAF7413D5F32300C1297B /* UserDefaults */ = {
-			isa = PBXGroup;
-			children = (
-				12AB3BD313DF84C800565332 /* NSUserDefaults+iOSSAdditions.h */,
-				12AB3BD413DF84C800565332 /* NSUserDefaults+iOSSAdditions.m */,
-			);
-			name = UserDefaults;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -936,15 +892,11 @@
 				12AB3BC813DF849500565332 /* iOSSocialServiceOAuth2Provider.h in Headers */,
 				12AB3BCA13DF849500565332 /* iOSSocialServiceOAuth2ProviderConstants.h in Headers */,
 				12AB3BCD13DF84AC00565332 /* iOSSLog.h in Headers */,
-				12AB3BD113DF84B900565332 /* NSString+iOSSURLAdditions.h in Headers */,
-				12AB3BD513DF84C800565332 /* NSUserDefaults+iOSSAdditions.h in Headers */,
 				12AB3BE113DF84D800565332 /* iOSSConnection.h in Headers */,
 				12AB3BE313DF84D800565332 /* iOSSFormEncodedPOSTRequest.h in Headers */,
 				12AB3BE513DF84D800565332 /* iOSSMultipartPOSTRequest.h in Headers */,
 				12AB3BE713DF84D800565332 /* iOSSRequest.h in Headers */,
 				12AB3BE913DF84D800565332 /* iOSSUploadFileInfo.h in Headers */,
-				12AB3BED13DF84E500565332 /* UIApplication+iOSSNetworkActivity.h in Headers */,
-				12AB3BF113DF84F500565332 /* UIView+iOSSSubviewTraversal.h in Headers */,
 				1286BC9D13EC560400A12786 /* iOSServicesDataSource.h in Headers */,
 				1286BC9F13EC560400A12786 /* iOSSService.h in Headers */,
 				1286BCA113EC560400A12786 /* iOSSServiceTableViewCell.h in Headers */,
@@ -962,6 +914,8 @@
 				1286BCCB13EC56EF00A12786 /* ASIProgressDelegate.h in Headers */,
 				1286BCCF13EC570100A12786 /* Reachability.h in Headers */,
 				1286BCD413EC576600A12786 /* PRPSmartTableViewCell.h in Headers */,
+				12B4F0A91409ECA5002E98A6 /* TwitterRequest.h in Headers */,
+				12B4F0AD1409ECC0002E98A6 /* FoursquareRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1244,15 +1198,11 @@
 				12AB3BC613DF849500565332 /* iOSSocialServiceOAuth1Provider.m in Sources */,
 				12AB3BC913DF849500565332 /* iOSSocialServiceOAuth2Provider.m in Sources */,
 				12AB3BCE13DF84AC00565332 /* iOSSLog.m in Sources */,
-				12AB3BD213DF84B900565332 /* NSString+iOSSURLAdditions.m in Sources */,
-				12AB3BD613DF84C800565332 /* NSUserDefaults+iOSSAdditions.m in Sources */,
 				12AB3BE213DF84D800565332 /* iOSSConnection.m in Sources */,
 				12AB3BE413DF84D800565332 /* iOSSFormEncodedPOSTRequest.m in Sources */,
 				12AB3BE613DF84D800565332 /* iOSSMultipartPOSTRequest.m in Sources */,
 				12AB3BE813DF84D800565332 /* iOSSRequest.m in Sources */,
 				12AB3BEA13DF84D800565332 /* iOSSUploadFileInfo.m in Sources */,
-				12AB3BEE13DF84E500565332 /* UIApplication+iOSSNetworkActivity.m in Sources */,
-				12AB3BF213DF84F500565332 /* UIView+iOSSSubviewTraversal.m in Sources */,
 				1286BC9E13EC560400A12786 /* iOSServicesDataSource.m in Sources */,
 				1286BCA013EC560400A12786 /* iOSSService.m in Sources */,
 				1286BCA213EC560400A12786 /* iOSSServiceTableViewCell.m in Sources */,
@@ -1266,6 +1216,8 @@
 				1286BCCA13EC56EF00A12786 /* ASINetworkQueue.m in Sources */,
 				1286BCD013EC570100A12786 /* Reachability.m in Sources */,
 				1286BCD513EC576600A12786 /* PRPSmartTableViewCell.m in Sources */,
+				12B4F0AA1409ECA5002E98A6 /* TwitterRequest.m in Sources */,
+				12B4F0AE1409ECC0002E98A6 /* FoursquareRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,8 +11,9 @@
 #import "iOSSocial.h"
 #import "IGRequest.h"
 #import "InstagramUser+Private.h"
-#import "NSUserDefaults+iOSSAdditions.h"
 #import "InstagramMediaCollection.h"
+
+NSString *const iOSSDefaultsKeyInstagramUserDictionary  = @"ioss_instagramUserDictionary";
 
 static LocalInstagramUser *localInstagramUser = nil;
 
@@ -49,12 +50,23 @@ static LocalInstagramUser *localInstagramUser = nil;
     return localInstagramUser;
 }
 
+- (NSDictionary *)ioss_instagramUserDictionary 
+{ 
+    return [[NSUserDefaults standardUserDefaults] objectForKey:iOSSDefaultsKeyInstagramUserDictionary];
+}
+
+- (void)ioss_setInstagramUserDictionary:(NSDictionary *)username 
+{ 
+    [[NSUserDefaults standardUserDefaults] setObject:username forKey:iOSSDefaultsKeyInstagramUserDictionary];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (id)init
 {
     self = [super init];
     if (self) {
         // Initialization code here.
-        NSDictionary *localUserDictionary = [[NSUserDefaults standardUserDefaults] ioss_instagramUserDictionary];
+        NSDictionary *localUserDictionary = [self ioss_instagramUserDictionary];
         if (localUserDictionary) {
             self.userDictionary = localUserDictionary;
         }
@@ -241,7 +253,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 {
     [super setUserDictionary:theUserDictionary];
     
-    [[NSUserDefaults standardUserDefaults] ioss_setInstagramUserDictionary:theUserDictionary];
+    [self ioss_setInstagramUserDictionary:theUserDictionary];
 }
 
 - (void)authenticateFromViewController:(UIViewController*)vc 

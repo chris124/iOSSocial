@@ -131,7 +131,7 @@
     NSURL *accessURL = [NSURL URLWithString:self.accessTokenURL];
     NSURL *authorizationURL = [NSURL URLWithString:self.authorizeURL];
     
-    GTMOAuthAuthenticationWithAdditions *auth = [self authForCustomService];
+    self.auth = [self authForCustomService];
     
     // set the callback URL to which the site should redirect, and for which
     // the OAuth controller should look to determine when sign-in has
@@ -170,7 +170,7 @@
     
     // setting the service name lets us inspect the auth object later to know
     // what service it is for
-    self.auth.serviceProvider = self.serviceProviderName;
+    newAuth.serviceProvider = self.serviceProviderName;
     
     return newAuth;
 }

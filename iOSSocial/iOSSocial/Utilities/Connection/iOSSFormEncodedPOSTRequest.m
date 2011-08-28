@@ -8,7 +8,7 @@
 
 #import "iOSSFormEncodedPOSTRequest.h"
 #import "iOSSocial.h"
-#import "NSString+iOSSURLAdditions.h"
+//#import "NSString+iOSSURLAdditions.h"
 
 @implementation iOSSFormEncodedPOSTRequest
 
@@ -30,6 +30,7 @@
 
 - (void)setFormParameters:(NSDictionary *)params
 {
+    /*
     NSStringEncoding enc = NSUTF8StringEncoding; 
     NSMutableString *postBody = [NSMutableString string];
     for (NSString *paramKey in params) {
@@ -43,6 +44,7 @@
     }
     iOSSLog(@"postBody is now %@", postBody); 
     [self setHTTPBody:[postBody dataUsingEncoding:enc]];
+    */
 }
 
 @end

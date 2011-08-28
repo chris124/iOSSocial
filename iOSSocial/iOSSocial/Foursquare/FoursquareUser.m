@@ -18,6 +18,8 @@
 @synthesize firstName;
 @synthesize fetchUserDataHandler;
 @synthesize profilePictureURL;
+@synthesize dataSource;
+@synthesize index;
 
 - (id)init
 {

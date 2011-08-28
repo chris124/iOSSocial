@@ -245,7 +245,7 @@
             }
         } else {
             if (responseData) {
-                NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+                //NSDictionary *dictionary = [Instagram JSONFromData:responseData];
                 
                 //InstagramUserCollection *collection = [[InstagramUserCollection alloc] initWithDictionary:dictionary];
                 //collection.name = [NSString stringWithFormat:@"%@ Feed", self.alias];

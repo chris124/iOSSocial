@@ -1,0 +1,917 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		12AB3A8213DF6D4F00565332 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB3A8113DF6D4F00565332 /* UIKit.framework */; };
+		12AB3A8413DF6D4F00565332 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB3A8313DF6D4F00565332 /* Foundation.framework */; };
+		12AB3A8613DF6D4F00565332 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB3A8513DF6D4F00565332 /* CoreGraphics.framework */; };
+		12AB3A8C13DF6D4F00565332 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12AB3A8A13DF6D4F00565332 /* InfoPlist.strings */; };
+		12AB3A8E13DF6D4F00565332 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A8D13DF6D4F00565332 /* main.m */; };
+		12AB3A9213DF6D4F00565332 /* InstaBetaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A9113DF6D4F00565332 /* InstaBetaAppDelegate.m */; };
+		12AB3A9513DF6D5000565332 /* InstaBetaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3A9413DF6D4F00565332 /* InstaBetaViewController.m */; };
+		12AB3A9813DF6D5000565332 /* InstaBetaViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12AB3A9613DF6D5000565332 /* InstaBetaViewController_iPhone.xib */; };
+		12AB3A9B13DF6D5000565332 /* InstaBetaViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12AB3A9913DF6D5000565332 /* InstaBetaViewController_iPad.xib */; };
+		12AB3AA313DF6D5100565332 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB3AA213DF6D5100565332 /* SenTestingKit.framework */; };
+		12AB3AA413DF6D5100565332 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB3A8113DF6D4F00565332 /* UIKit.framework */; };
+		12AB3AA513DF6D5100565332 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB3A8313DF6D4F00565332 /* Foundation.framework */; };
+		12AB3AA613DF6D5100565332 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB3A8513DF6D4F00565332 /* CoreGraphics.framework */; };
+		12AB3AAE13DF6D5100565332 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 12AB3AAC13DF6D5100565332 /* InfoPlist.strings */; };
+		12AB3AB113DF6D5200565332 /* InstaBetaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3AB013DF6D5200565332 /* InstaBetaTests.m */; };
+		12AB3B0613DF726E00565332 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB3B0513DF726E00565332 /* Security.framework */; };
+		12AB3B0813DF72A600565332 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AB3B0713DF72A600565332 /* SystemConfiguration.framework */; };
+		12B4F0651409EA73002E98A6 /* libiOSSocial.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B4F0641409EA73002E98A6 /* libiOSSocial.a */; };
+		12B4F0671409EB04002E98A6 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B4F0661409EB04002E98A6 /* libz.1.2.5.dylib */; };
+		12B4F0691409EB6B002E98A6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B4F0681409EB6B002E98A6 /* CFNetwork.framework */; };
+		12B4F0A61409EC52002E98A6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B4F0A51409EC52002E98A6 /* MobileCoreServices.framework */; };
+		12B4F0B01409EEA7002E98A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B4F0AF1409EEA7002E98A6 /* QuartzCore.framework */; };
+		12B4F0B51409F8E7002E98A6 /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 12B4F0B41409F8E7002E98A6 /* Three20.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		12AB3AA713DF6D5100565332 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12AB3A7413DF6D4E00565332 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12AB3A7C13DF6D4F00565332;
+			remoteInfo = InstaBeta;
+		};
+		12B4F01F1409E957002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F01A1409E957002E98A6 /* Three20.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
+			remoteInfo = Three20;
+		};
+		12B4F0211409E957002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F01A1409E957002E98A6 /* Three20.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
+			remoteInfo = Three20UnitTests;
+		};
+		12B4F0281409E961002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F0231409E961002E98A6 /* Three20Core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
+			remoteInfo = Three20Core;
+		};
+		12B4F02A1409E961002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F0231409E961002E98A6 /* Three20Core.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
+			remoteInfo = Three20CoreUnitTests;
+		};
+		12B4F0331409E967002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F02C1409E966002E98A6 /* Three20Network.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
+			remoteInfo = Three20Network;
+		};
+		12B4F0351409E967002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F02C1409E966002E98A6 /* Three20Network.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 662D81EF12630516005851C2;
+			remoteInfo = "Three20Network-Xcode3.2.5";
+		};
+		12B4F0371409E967002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F02C1409E966002E98A6 /* Three20Network.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
+			remoteInfo = Three20NetworkUnitTests;
+		};
+		12B4F0391409E967002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F02C1409E966002E98A6 /* Three20Network.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 662D81B2126304EB005851C2;
+			remoteInfo = "Three20NetworkUnitTests-Xcode3.2.5";
+		};
+		12B4F0401409E96C002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F03B1409E96C002E98A6 /* Three20Style.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
+			remoteInfo = Three20Style;
+		};
+		12B4F0421409E96C002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F03B1409E96C002E98A6 /* Three20Style.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
+			remoteInfo = Three20StyleUnitTests;
+		};
+		12B4F0491409E971002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F0441409E971002E98A6 /* Three20UICommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
+			remoteInfo = Three20UICommon;
+		};
+		12B4F04B1409E971002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F0441409E971002E98A6 /* Three20UICommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
+			remoteInfo = Three20UICommonUnitTests;
+		};
+		12B4F0521409E976002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F04D1409E975002E98A6 /* Three20UINavigator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
+			remoteInfo = Three20UINavigator;
+		};
+		12B4F0541409E976002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F04D1409E975002E98A6 /* Three20UINavigator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
+			remoteInfo = Three20UINavigatorUnitTests;
+		};
+		12B4F05B1409E97B002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F0561409E97A002E98A6 /* Three20UI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
+			remoteInfo = Three20UI;
+		};
+		12B4F05D1409E97B002E98A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12B4F0561409E97A002E98A6 /* Three20UI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
+			remoteInfo = Three20UIUnitTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		12AB3A7D13DF6D4F00565332 /* InstaBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12AB3A8113DF6D4F00565332 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		12AB3A8313DF6D4F00565332 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		12AB3A8513DF6D4F00565332 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		12AB3A8913DF6D4F00565332 /* InstaBeta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InstaBeta-Info.plist"; sourceTree = "<group>"; };
+		12AB3A8B13DF6D4F00565332 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		12AB3A8D13DF6D4F00565332 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		12AB3A8F13DF6D4F00565332 /* InstaBeta-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InstaBeta-Prefix.pch"; sourceTree = "<group>"; };
+		12AB3A9013DF6D4F00565332 /* InstaBetaAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstaBetaAppDelegate.h; sourceTree = "<group>"; };
+		12AB3A9113DF6D4F00565332 /* InstaBetaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstaBetaAppDelegate.m; sourceTree = "<group>"; };
+		12AB3A9313DF6D4F00565332 /* InstaBetaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstaBetaViewController.h; sourceTree = "<group>"; };
+		12AB3A9413DF6D4F00565332 /* InstaBetaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstaBetaViewController.m; sourceTree = "<group>"; };
+		12AB3A9713DF6D5000565332 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InstaBetaViewController_iPhone.xib; sourceTree = "<group>"; };
+		12AB3A9A13DF6D5000565332 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InstaBetaViewController_iPad.xib; sourceTree = "<group>"; };
+		12AB3AA113DF6D5100565332 /* InstaBetaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstaBetaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		12AB3AA213DF6D5100565332 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		12AB3AAB13DF6D5100565332 /* InstaBetaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InstaBetaTests-Info.plist"; sourceTree = "<group>"; };
+		12AB3AAD13DF6D5100565332 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		12AB3AAF13DF6D5100565332 /* InstaBetaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstaBetaTests.h; sourceTree = "<group>"; };
+		12AB3AB013DF6D5200565332 /* InstaBetaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstaBetaTests.m; sourceTree = "<group>"; };
+		12AB3B0513DF726E00565332 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		12AB3B0713DF72A600565332 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		12B4F00F1409E571002E98A6 /* InstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramUser.h; sourceTree = "<group>"; };
+		12B4F0101409E571002E98A6 /* LocalInstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalInstagramUser.h; sourceTree = "<group>"; };
+		12B4F0111409E571002E98A6 /* iOSSocialUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSocialUser.h; path = ../Headers/iOSSocialUser.h; sourceTree = "<group>"; };
+		12B4F0131409E5C7002E98A6 /* LocalTwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalTwitterUser.h; sourceTree = "<group>"; };
+		12B4F0141409E5C7002E98A6 /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUser.h; sourceTree = "<group>"; };
+		12B4F0171409E5EC002E98A6 /* FoursquareUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareUser.h; sourceTree = "<group>"; };
+		12B4F01A1409E957002E98A6 /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../../three20/src/Three20/Three20.xcodeproj; sourceTree = "<group>"; };
+		12B4F0231409E961002E98A6 /* Three20Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Core.xcodeproj; path = ../../three20/src/Three20Core/Three20Core.xcodeproj; sourceTree = "<group>"; };
+		12B4F02C1409E966002E98A6 /* Three20Network.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Network.xcodeproj; path = ../../three20/src/Three20Network/Three20Network.xcodeproj; sourceTree = "<group>"; };
+		12B4F03B1409E96C002E98A6 /* Three20Style.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Style.xcodeproj; path = ../../three20/src/Three20Style/Three20Style.xcodeproj; sourceTree = "<group>"; };
+		12B4F0441409E971002E98A6 /* Three20UICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UICommon.xcodeproj; path = "/Users/christopherwhite/Documents/iOSSocial/iOSSocial-master/iOSSocial/three20/src/Three20/../Three20UICommon/Three20UICommon.xcodeproj"; sourceTree = "<absolute>"; };
+		12B4F04D1409E975002E98A6 /* Three20UINavigator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UINavigator.xcodeproj; path = "/Users/christopherwhite/Documents/iOSSocial/iOSSocial-master/iOSSocial/three20/src/Three20/../Three20UINavigator/Three20UINavigator.xcodeproj"; sourceTree = "<absolute>"; };
+		12B4F0561409E97A002E98A6 /* Three20UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UI.xcodeproj; path = "/Users/christopherwhite/Documents/iOSSocial/iOSSocial-master/iOSSocial/three20/src/Three20/../Three20UI/Three20UI.xcodeproj"; sourceTree = "<absolute>"; };
+		12B4F0601409E9FE002E98A6 /* iOSSocialServiceOAuth1ProviderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth1ProviderConstants.h; sourceTree = "<group>"; };
+		12B4F0611409E9FE002E98A6 /* iOSSocialServiceOAuth2ProviderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServiceOAuth2ProviderConstants.h; sourceTree = "<group>"; };
+		12B4F0621409EA18002E98A6 /* iOSSocialLocalUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSocialLocalUser.h; path = ../Headers/iOSSocialLocalUser.h; sourceTree = "<group>"; };
+		12B4F0631409EA52002E98A6 /* LocalFoursquareUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalFoursquareUser.h; sourceTree = "<group>"; };
+		12B4F0641409EA73002E98A6 /* libiOSSocial.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libiOSSocial.a; path = "../build/Release-iphoneos/libiOSSocial.a"; sourceTree = "<group>"; };
+		12B4F0661409EB04002E98A6 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		12B4F0681409EB6B002E98A6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		12B4F0A51409EC52002E98A6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		12B4F0AF1409EEA7002E98A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		12B4F0B11409F66E002E98A6 /* iOSSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSService.h; path = ../Headers/iOSSService.h; sourceTree = "<group>"; };
+		12B4F0B21409F6AA002E98A6 /* iOSServicesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSServicesDataSource.h; path = ../Headers/iOSServicesDataSource.h; sourceTree = "<group>"; };
+		12B4F0B31409F6E7002E98A6 /* iOSSServicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSServicesViewController.h; path = ../Headers/iOSSServicesViewController.h; sourceTree = "<group>"; };
+		12B4F0B41409F8E7002E98A6 /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../../three20/src/Three20.bundle; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		12AB3A7A13DF6D4F00565332 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12B4F0B01409EEA7002E98A6 /* QuartzCore.framework in Frameworks */,
+				12B4F0A61409EC52002E98A6 /* MobileCoreServices.framework in Frameworks */,
+				12B4F0691409EB6B002E98A6 /* CFNetwork.framework in Frameworks */,
+				12B4F0671409EB04002E98A6 /* libz.1.2.5.dylib in Frameworks */,
+				12B4F0651409EA73002E98A6 /* libiOSSocial.a in Frameworks */,
+				12AB3B0813DF72A600565332 /* SystemConfiguration.framework in Frameworks */,
+				12AB3B0613DF726E00565332 /* Security.framework in Frameworks */,
+				12AB3A8213DF6D4F00565332 /* UIKit.framework in Frameworks */,
+				12AB3A8413DF6D4F00565332 /* Foundation.framework in Frameworks */,
+				12AB3A8613DF6D4F00565332 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12AB3A9D13DF6D5100565332 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12AB3AA313DF6D5100565332 /* SenTestingKit.framework in Frameworks */,
+				12AB3AA413DF6D5100565332 /* UIKit.framework in Frameworks */,
+				12AB3AA513DF6D5100565332 /* Foundation.framework in Frameworks */,
+				12AB3AA613DF6D5100565332 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		12AB3A7213DF6D4E00565332 = {
+			isa = PBXGroup;
+			children = (
+				12B4F0AF1409EEA7002E98A6 /* QuartzCore.framework */,
+				12B4F0A51409EC52002E98A6 /* MobileCoreServices.framework */,
+				12B4F0681409EB6B002E98A6 /* CFNetwork.framework */,
+				12B4F0661409EB04002E98A6 /* libz.1.2.5.dylib */,
+				12B4F0641409EA73002E98A6 /* libiOSSocial.a */,
+				12B4F0191409E94C002E98A6 /* Three20 */,
+				12B4F0091409E45D002E98A6 /* iOSSocial */,
+				12AB3B0713DF72A600565332 /* SystemConfiguration.framework */,
+				12AB3B0513DF726E00565332 /* Security.framework */,
+				12AB3A8713DF6D4F00565332 /* InstaBeta */,
+				12AB3AA913DF6D5100565332 /* InstaBetaTests */,
+				12AB3A8013DF6D4F00565332 /* Frameworks */,
+				12AB3A7E13DF6D4F00565332 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		12AB3A7E13DF6D4F00565332 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12AB3A7D13DF6D4F00565332 /* InstaBeta.app */,
+				12AB3AA113DF6D5100565332 /* InstaBetaTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12AB3A8013DF6D4F00565332 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				12AB3A8113DF6D4F00565332 /* UIKit.framework */,
+				12AB3A8313DF6D4F00565332 /* Foundation.framework */,
+				12AB3A8513DF6D4F00565332 /* CoreGraphics.framework */,
+				12AB3AA213DF6D5100565332 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		12AB3A8713DF6D4F00565332 /* InstaBeta */ = {
+			isa = PBXGroup;
+			children = (
+				12AB3A9013DF6D4F00565332 /* InstaBetaAppDelegate.h */,
+				12AB3A9113DF6D4F00565332 /* InstaBetaAppDelegate.m */,
+				12AB3A9313DF6D4F00565332 /* InstaBetaViewController.h */,
+				12AB3A9413DF6D4F00565332 /* InstaBetaViewController.m */,
+				12AB3A9613DF6D5000565332 /* InstaBetaViewController_iPhone.xib */,
+				12AB3A9913DF6D5000565332 /* InstaBetaViewController_iPad.xib */,
+				12AB3A8813DF6D4F00565332 /* Supporting Files */,
+			);
+			path = InstaBeta;
+			sourceTree = "<group>";
+		};
+		12AB3A8813DF6D4F00565332 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				12AB3A8913DF6D4F00565332 /* InstaBeta-Info.plist */,
+				12AB3A8A13DF6D4F00565332 /* InfoPlist.strings */,
+				12AB3A8D13DF6D4F00565332 /* main.m */,
+				12AB3A8F13DF6D4F00565332 /* InstaBeta-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		12AB3AA913DF6D5100565332 /* InstaBetaTests */ = {
+			isa = PBXGroup;
+			children = (
+				12AB3AAF13DF6D5100565332 /* InstaBetaTests.h */,
+				12AB3AB013DF6D5200565332 /* InstaBetaTests.m */,
+				12AB3AAA13DF6D5100565332 /* Supporting Files */,
+			);
+			path = InstaBetaTests;
+			sourceTree = "<group>";
+		};
+		12AB3AAA13DF6D5100565332 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				12AB3AAB13DF6D5100565332 /* InstaBetaTests-Info.plist */,
+				12AB3AAC13DF6D5100565332 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		12B4F0091409E45D002E98A6 /* iOSSocial */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0B31409F6E7002E98A6 /* iOSSServicesViewController.h */,
+				12B4F0B21409F6AA002E98A6 /* iOSServicesDataSource.h */,
+				12B4F0B11409F66E002E98A6 /* iOSSService.h */,
+				12B4F05F1409E9FE002E98A6 /* OAuth */,
+				12B4F0151409E5EC002E98A6 /* Foursquare */,
+				12B4F0121409E5C7002E98A6 /* Twitter */,
+				12B4F00E1409E571002E98A6 /* Instagram */,
+				12B4F0111409E571002E98A6 /* iOSSocialUser.h */,
+				12B4F0621409EA18002E98A6 /* iOSSocialLocalUser.h */,
+			);
+			name = iOSSocial;
+			sourceTree = "<group>";
+		};
+		12B4F00E1409E571002E98A6 /* Instagram */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F00F1409E571002E98A6 /* InstagramUser.h */,
+				12B4F0101409E571002E98A6 /* LocalInstagramUser.h */,
+			);
+			name = Instagram;
+			path = ../Headers/Instagram;
+			sourceTree = "<group>";
+		};
+		12B4F0121409E5C7002E98A6 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0131409E5C7002E98A6 /* LocalTwitterUser.h */,
+				12B4F0141409E5C7002E98A6 /* TwitterUser.h */,
+			);
+			name = Twitter;
+			path = ../Headers/Twitter;
+			sourceTree = "<group>";
+		};
+		12B4F0151409E5EC002E98A6 /* Foursquare */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0171409E5EC002E98A6 /* FoursquareUser.h */,
+				12B4F0631409EA52002E98A6 /* LocalFoursquareUser.h */,
+			);
+			name = Foursquare;
+			path = ../Headers/Foursquare;
+			sourceTree = "<group>";
+		};
+		12B4F0191409E94C002E98A6 /* Three20 */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0B41409F8E7002E98A6 /* Three20.bundle */,
+				12B4F0561409E97A002E98A6 /* Three20UI.xcodeproj */,
+				12B4F04D1409E975002E98A6 /* Three20UINavigator.xcodeproj */,
+				12B4F0441409E971002E98A6 /* Three20UICommon.xcodeproj */,
+				12B4F03B1409E96C002E98A6 /* Three20Style.xcodeproj */,
+				12B4F02C1409E966002E98A6 /* Three20Network.xcodeproj */,
+				12B4F0231409E961002E98A6 /* Three20Core.xcodeproj */,
+				12B4F01A1409E957002E98A6 /* Three20.xcodeproj */,
+			);
+			name = Three20;
+			sourceTree = "<group>";
+		};
+		12B4F01B1409E957002E98A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0201409E957002E98A6 /* libThree20.a */,
+				12B4F0221409E957002E98A6 /* Three20UnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12B4F0241409E961002E98A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0291409E961002E98A6 /* libThree20Core.a */,
+				12B4F02B1409E961002E98A6 /* CoreUnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12B4F02D1409E966002E98A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0341409E967002E98A6 /* libThree20Network.a */,
+				12B4F0361409E967002E98A6 /* libThree20Network-Xcode3.2.5.a */,
+				12B4F0381409E967002E98A6 /* NetworkUnitTests.octest */,
+				12B4F03A1409E967002E98A6 /* NetworkUnitTests-Xcode3.2.5.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12B4F03C1409E96C002E98A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0411409E96C002E98A6 /* libThree20Style.a */,
+				12B4F0431409E96C002E98A6 /* StyleUnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12B4F0451409E971002E98A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F04A1409E971002E98A6 /* libThree20UICommon.a */,
+				12B4F04C1409E971002E98A6 /* UICommonUnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12B4F04E1409E975002E98A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0531409E976002E98A6 /* libThree20UINavigator.a */,
+				12B4F0551409E976002E98A6 /* UINavigatorUnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12B4F0571409E97A002E98A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F05C1409E97B002E98A6 /* libThree20UI.a */,
+				12B4F05E1409E97B002E98A6 /* UIUnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12B4F05F1409E9FE002E98A6 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				12B4F0601409E9FE002E98A6 /* iOSSocialServiceOAuth1ProviderConstants.h */,
+				12B4F0611409E9FE002E98A6 /* iOSSocialServiceOAuth2ProviderConstants.h */,
+			);
+			name = OAuth;
+			path = ../Headers/OAuth;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		12AB3A7C13DF6D4F00565332 /* InstaBeta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12AB3AB413DF6D5200565332 /* Build configuration list for PBXNativeTarget "InstaBeta" */;
+			buildPhases = (
+				12AB3A7913DF6D4F00565332 /* Sources */,
+				12AB3A7A13DF6D4F00565332 /* Frameworks */,
+				12AB3A7B13DF6D4F00565332 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InstaBeta;
+			productName = InstaBeta;
+			productReference = 12AB3A7D13DF6D4F00565332 /* InstaBeta.app */;
+			productType = "com.apple.product-type.application";
+		};
+		12AB3AA013DF6D5100565332 /* InstaBetaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12AB3AB713DF6D5200565332 /* Build configuration list for PBXNativeTarget "InstaBetaTests" */;
+			buildPhases = (
+				12AB3A9C13DF6D5100565332 /* Sources */,
+				12AB3A9D13DF6D5100565332 /* Frameworks */,
+				12AB3A9E13DF6D5100565332 /* Resources */,
+				12AB3A9F13DF6D5100565332 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				12AB3AA813DF6D5100565332 /* PBXTargetDependency */,
+			);
+			name = InstaBetaTests;
+			productName = InstaBetaTests;
+			productReference = 12AB3AA113DF6D5100565332 /* InstaBetaTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		12AB3A7413DF6D4E00565332 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Mad Races, Inc.";
+			};
+			buildConfigurationList = 12AB3A7713DF6D4E00565332 /* Build configuration list for PBXProject "InstaBeta" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 12AB3A7213DF6D4E00565332;
+			productRefGroup = 12AB3A7E13DF6D4F00565332 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 12B4F01B1409E957002E98A6 /* Products */;
+					ProjectRef = 12B4F01A1409E957002E98A6 /* Three20.xcodeproj */;
+				},
+				{
+					ProductGroup = 12B4F0241409E961002E98A6 /* Products */;
+					ProjectRef = 12B4F0231409E961002E98A6 /* Three20Core.xcodeproj */;
+				},
+				{
+					ProductGroup = 12B4F02D1409E966002E98A6 /* Products */;
+					ProjectRef = 12B4F02C1409E966002E98A6 /* Three20Network.xcodeproj */;
+				},
+				{
+					ProductGroup = 12B4F03C1409E96C002E98A6 /* Products */;
+					ProjectRef = 12B4F03B1409E96C002E98A6 /* Three20Style.xcodeproj */;
+				},
+				{
+					ProductGroup = 12B4F0571409E97A002E98A6 /* Products */;
+					ProjectRef = 12B4F0561409E97A002E98A6 /* Three20UI.xcodeproj */;
+				},
+				{
+					ProductGroup = 12B4F0451409E971002E98A6 /* Products */;
+					ProjectRef = 12B4F0441409E971002E98A6 /* Three20UICommon.xcodeproj */;
+				},
+				{
+					ProductGroup = 12B4F04E1409E975002E98A6 /* Products */;
+					ProjectRef = 12B4F04D1409E975002E98A6 /* Three20UINavigator.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				12AB3A7C13DF6D4F00565332 /* InstaBeta */,
+				12AB3AA013DF6D5100565332 /* InstaBetaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		12B4F0201409E957002E98A6 /* libThree20.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThree20.a;
+			remoteRef = 12B4F01F1409E957002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F0221409E957002E98A6 /* Three20UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Three20UnitTests.octest;
+			remoteRef = 12B4F0211409E957002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F0291409E961002E98A6 /* libThree20Core.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThree20Core.a;
+			remoteRef = 12B4F0281409E961002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F02B1409E961002E98A6 /* CoreUnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CoreUnitTests.octest;
+			remoteRef = 12B4F02A1409E961002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F0341409E967002E98A6 /* libThree20Network.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThree20Network.a;
+			remoteRef = 12B4F0331409E967002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F0361409E967002E98A6 /* libThree20Network-Xcode3.2.5.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libThree20Network-Xcode3.2.5.a";
+			remoteRef = 12B4F0351409E967002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F0381409E967002E98A6 /* NetworkUnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NetworkUnitTests.octest;
+			remoteRef = 12B4F0371409E967002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F03A1409E967002E98A6 /* NetworkUnitTests-Xcode3.2.5.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "NetworkUnitTests-Xcode3.2.5.octest";
+			remoteRef = 12B4F0391409E967002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F0411409E96C002E98A6 /* libThree20Style.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThree20Style.a;
+			remoteRef = 12B4F0401409E96C002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F0431409E96C002E98A6 /* StyleUnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = StyleUnitTests.octest;
+			remoteRef = 12B4F0421409E96C002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F04A1409E971002E98A6 /* libThree20UICommon.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThree20UICommon.a;
+			remoteRef = 12B4F0491409E971002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F04C1409E971002E98A6 /* UICommonUnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UICommonUnitTests.octest;
+			remoteRef = 12B4F04B1409E971002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F0531409E976002E98A6 /* libThree20UINavigator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThree20UINavigator.a;
+			remoteRef = 12B4F0521409E976002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F0551409E976002E98A6 /* UINavigatorUnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UINavigatorUnitTests.octest;
+			remoteRef = 12B4F0541409E976002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F05C1409E97B002E98A6 /* libThree20UI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThree20UI.a;
+			remoteRef = 12B4F05B1409E97B002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12B4F05E1409E97B002E98A6 /* UIUnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UIUnitTests.octest;
+			remoteRef = 12B4F05D1409E97B002E98A6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		12AB3A7B13DF6D4F00565332 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12AB3A8C13DF6D4F00565332 /* InfoPlist.strings in Resources */,
+				12AB3A9813DF6D5000565332 /* InstaBetaViewController_iPhone.xib in Resources */,
+				12AB3A9B13DF6D5000565332 /* InstaBetaViewController_iPad.xib in Resources */,
+				12B4F0B51409F8E7002E98A6 /* Three20.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12AB3A9E13DF6D5100565332 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12AB3AAE13DF6D5100565332 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		12AB3A9F13DF6D5100565332 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		12AB3A7913DF6D4F00565332 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12AB3A8E13DF6D4F00565332 /* main.m in Sources */,
+				12AB3A9213DF6D4F00565332 /* InstaBetaAppDelegate.m in Sources */,
+				12AB3A9513DF6D5000565332 /* InstaBetaViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12AB3A9C13DF6D5100565332 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12AB3AB113DF6D5200565332 /* InstaBetaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		12AB3AA813DF6D5100565332 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12AB3A7C13DF6D4F00565332 /* InstaBeta */;
+			targetProxy = 12AB3AA713DF6D5100565332 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		12AB3A8A13DF6D4F00565332 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				12AB3A8B13DF6D4F00565332 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		12AB3A9613DF6D5000565332 /* InstaBetaViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				12AB3A9713DF6D5000565332 /* en */,
+			);
+			name = InstaBetaViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		12AB3A9913DF6D5000565332 /* InstaBetaViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				12AB3A9A13DF6D5000565332 /* en */,
+			);
+			name = InstaBetaViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		12AB3AAC13DF6D5100565332 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				12AB3AAD13DF6D5100565332 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		12AB3AB213DF6D5200565332 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		12AB3AB313DF6D5200565332 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		12AB3AB513DF6D5200565332 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "InstaBeta/InstaBeta-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../three20\"";
+				INFOPLIST_FILE = "InstaBeta/InstaBeta-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		12AB3AB613DF6D5200565332 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "InstaBeta/InstaBeta-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../three20\"";
+				INFOPLIST_FILE = "InstaBeta/InstaBeta-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		12AB3AB813DF6D5200565332 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/InstaBeta.app/InstaBeta";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "InstaBeta/InstaBeta-Prefix.pch";
+				INFOPLIST_FILE = "InstaBetaTests/InstaBetaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		12AB3AB913DF6D5200565332 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/InstaBeta.app/InstaBeta";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "InstaBeta/InstaBeta-Prefix.pch";
+				INFOPLIST_FILE = "InstaBetaTests/InstaBetaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		12AB3A7713DF6D4E00565332 /* Build configuration list for PBXProject "InstaBeta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12AB3AB213DF6D5200565332 /* Debug */,
+				12AB3AB313DF6D5200565332 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12AB3AB413DF6D5200565332 /* Build configuration list for PBXNativeTarget "InstaBeta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12AB3AB513DF6D5200565332 /* Debug */,
+				12AB3AB613DF6D5200565332 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12AB3AB713DF6D5200565332 /* Build configuration list for PBXNativeTarget "InstaBetaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12AB3AB813DF6D5200565332 /* Debug */,
+				12AB3AB913DF6D5200565332 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 12AB3A7413DF6D4E00565332 /* Project object */;
+}

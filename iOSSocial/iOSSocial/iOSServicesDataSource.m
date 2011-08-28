@@ -324,7 +324,7 @@ static iOSServicesDataSource *servicesDataSource = nil;
 
 -(IBAction) doneButtonPressed:(id)sender
 {
-    NSLog(@"");
+    NSLog(@"doneButtonPressed");
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

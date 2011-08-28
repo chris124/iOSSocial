@@ -11,7 +11,7 @@
 
 typedef void(^FetchUserDataHandler)(NSError *error);
 
-@protocol iOSSUserProtocol;
+@protocol iOSSocialUserProtocol;
 
 @protocol iOSSUserSourceProtocol <TTModel>
 
@@ -30,11 +30,11 @@ typedef void(^FetchUserDataHandler)(NSError *error);
  */
 @property (nonatomic, readonly) NSInteger maxObjectIndex;
 
-- (id<iOSSUserProtocol>)objectAtIndex:(NSInteger)index;
+- (id<iOSSocialUserProtocol>)objectAtIndex:(NSInteger)index;
 
 @end
 
-@protocol iOSSUserProtocol <NSObject>
+@protocol iOSSocialUserProtocol <NSObject>
 
 /**
  * The user source that the user belongs to.
@@ -50,7 +50,7 @@ typedef void(^FetchUserDataHandler)(NSError *error);
 
 @end
 /*
-@interface iOSSocialUser : NSObject <iOSSUserProtocol>
+@interface iOSSocialUser : NSObject <iOSSocialUserProtocol>
 
 @property (nonatomic, assign) id<iOSSUserSourceProtocol> userSource;
 

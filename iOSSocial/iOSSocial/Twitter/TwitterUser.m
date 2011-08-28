@@ -15,6 +15,8 @@
 @synthesize userID;
 @synthesize alias;
 @synthesize fetchUserDataHandler;
+@synthesize index;
+@synthesize dataSource;
 
 - (id)init
 {

@@ -17,7 +17,7 @@ typedef void(^LoadPhotoHandler)(UIImage *photo, NSError *error);
 typedef void(^FetchMediaHandler)(InstagramMediaCollection *collection, NSError *error);
 typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 
-@interface InstagramUser : NSObject <iOSSUserProtocol>
+@interface InstagramUser : NSObject <iOSSocialUserProtocol>
 
 //cwnote: should alias be copied?
 @property(nonatomic, readonly, retain)  NSString *userID;               // User identifier.

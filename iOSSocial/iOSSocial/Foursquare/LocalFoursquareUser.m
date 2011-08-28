@@ -9,8 +9,9 @@
 #import "LocalFoursquareUser.h"
 #import "Foursquare.h"
 #import "FoursquareUser+Private.h"
-#import "NSUserDefaults+iOSSAdditions.h"
 #import "FoursquareRequest.h"
+
+NSString *const iOSSDefaultsKeyFoursquareUserDictionary = @"ioss_foursquareUserDictionary";
 
 static LocalFoursquareUser *localFoursquareUser = nil;
 
@@ -47,12 +48,23 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     return localFoursquareUser;
 }
 
+- (NSDictionary *)ioss_foursquareUserDictionary 
+{ 
+    return [[NSUserDefaults standardUserDefaults] objectForKey:iOSSDefaultsKeyFoursquareUserDictionary];
+}
+
+- (void)ioss_setFoursquareUserDictionary:(NSDictionary *)username 
+{ 
+    [[NSUserDefaults standardUserDefaults] setObject:username forKey:iOSSDefaultsKeyFoursquareUserDictionary];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (id)init
 {
     self = [super init];
     if (self) {
         // Initialization code here.
-        NSDictionary *localUserDictionary = [[NSUserDefaults standardUserDefaults] ioss_foursquareUserDictionary];
+        NSDictionary *localUserDictionary = [self ioss_foursquareUserDictionary];
         if (localUserDictionary) {
             self.userDictionary = localUserDictionary;
         }
@@ -81,7 +93,7 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 {
     [super setUserDictionary:theUserDictionary];
     
-    [[NSUserDefaults standardUserDefaults] ioss_setFoursquareUserDictionary:theUserDictionary];
+    [self ioss_setFoursquareUserDictionary:theUserDictionary];
 }
 
 - (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
