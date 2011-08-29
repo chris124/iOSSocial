@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "iOSSocialServiceOAuth1Provider.h"
+#import "iOSSocialServicesStore.h"
 
-@interface Twitter : iOSSocialServiceOAuth1Provider
-
-+ (void)authorizeURLRequest:(NSMutableURLRequest*)URLRequest;
+@interface Twitter : iOSSocialServiceOAuth1Provider <iOSSocialServiceProtocol>
 
 + (id)JSONFromData:(NSData*)data;
 

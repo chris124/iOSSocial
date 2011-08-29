@@ -9,7 +9,9 @@
 #import "iOSServicesDataSource.h"
 #import "iOSSLog.h"
 #import "iOSSServiceTableViewCell.h"
-#import "iOSSService.h"
+//#import "iOSSService.h"
+#import "iOSSocialServicesStore.h"
+#import "iOSSocialAccountTableViewCell.h"
 
 /*
  enum iOSSServicesTableSections { 
@@ -225,23 +227,21 @@ static iOSServicesDataSource *servicesDataSource = nil;
     
     return 0;
 }
-
+*/
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    //cwnote: what if no nav controller? showing modally and need to add done button?
-    
     switch (section) {
-        case iOSSServicesTableSectionServices:
-            return @"Services"; 
-        case iOSSServicesTableSectionDoneButton:
-            return @"Done"; 
+        case 0:
+            return @"YOUR ACCOUNTS";
+        case 1:
+            return @"ADD AN ACCOUNT";
         default:
             iOSSLog(@"Unexpected section (%d)", section); break;
     }
     
     return nil;
 }
-
+/*
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     //cwnote: what if no nav controller? showing modally and need to add done button?
@@ -296,22 +296,39 @@ static iOSServicesDataSource *servicesDataSource = nil;
 {
     // Return the number of sections.
     if (self.displayDoneButton) {
-        return 2;
+        return 3;
     }
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger rowsInSection = [self numberOfObjects];
+    NSInteger rowsInSection = 0;
 
     if (self.displayDoneButton) {
         //return for each section
         switch (section) {
             case 0:
+                rowsInSection = [[iOSSocialServicesStore sharedServiceStore].accounts count];
                 break;
             case 1:
+                rowsInSection = [[iOSSocialServicesStore sharedServiceStore].services count];
+                break;
+            case 2:
                 rowsInSection = 1;
+                break;
+            default:
+                break;
+        }
+    } else {
+        //return for each section
+        switch (section) {
+            case 0:
+                rowsInSection = [[iOSSocialServicesStore sharedServiceStore].accounts count];
+                break;
+            case 1:
+                rowsInSection = [[iOSSocialServicesStore sharedServiceStore].services count];
+                break;
             default:
                 break;
         }
@@ -335,7 +352,17 @@ static iOSServicesDataSource *servicesDataSource = nil;
         switch (indexPath.section) {
             case 0:
             {
-                iOSSService *service = [self.items objectAtIndex:[indexPath row]];
+                id<iOSSocialLocalUserProtocol> localUser = [[iOSSocialServicesStore sharedServiceStore].accounts objectAtIndex:[indexPath row]];
+                 
+                iOSSocialAccountTableViewCell *cell = [iOSSocialAccountTableViewCell cellForTableView:tableView];
+                cell.localUser = localUser;
+                 
+                theCell = cell;
+            }
+                break;
+            case 1:
+            {
+                id<iOSSocialServiceProtocol> service = [[iOSSocialServicesStore sharedServiceStore].services objectAtIndex:[indexPath row]];
                 
                 iOSSServiceTableViewCell *cell = [iOSSServiceTableViewCell cellForTableView:tableView];
                 cell.service = service;
@@ -343,7 +370,7 @@ static iOSServicesDataSource *servicesDataSource = nil;
                 theCell = cell;
             }
                 break;
-            case 1:
+            case 2:
             {
                 static NSString *CellIdentifier = @"Cell";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -367,12 +394,30 @@ static iOSServicesDataSource *servicesDataSource = nil;
                 break;
         }
     } else {
-        iOSSService *service = [self.items objectAtIndex:[indexPath row]];
-        
-        iOSSServiceTableViewCell *cell = [iOSSServiceTableViewCell cellForTableView:tableView];
-        cell.service = service;
-        
-        theCell = cell;
+        switch (indexPath.section) {
+            case 0:
+            {
+                id<iOSSocialLocalUserProtocol> localUser = [[iOSSocialServicesStore sharedServiceStore].accounts objectAtIndex:[indexPath row]];
+                
+                iOSSocialAccountTableViewCell *cell = [iOSSocialAccountTableViewCell cellForTableView:tableView];
+                cell.localUser = localUser;
+                
+                theCell = cell;
+            }
+                break;
+            case 1:
+            {
+                id<iOSSocialServiceProtocol> service = [[iOSSocialServicesStore sharedServiceStore].services objectAtIndex:[indexPath row]];
+                
+                iOSSServiceTableViewCell *cell = [iOSSServiceTableViewCell cellForTableView:tableView];
+                cell.service = service;
+                
+                theCell = cell;
+            }
+                break;
+            default:
+                break;
+        }
     }
     
     return theCell;
@@ -385,8 +430,26 @@ static iOSServicesDataSource *servicesDataSource = nil;
 
 - (id)tableView:(UITableView*)tableView objectForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    iOSSService *service = [self.items objectAtIndex:[indexPath row]];
-    return service;
+    switch (indexPath.section) {
+        case 0:
+        {
+            id<iOSSocialLocalUserProtocol> localUser = [[iOSSocialServicesStore sharedServiceStore].accounts objectAtIndex:[indexPath row]];
+            
+            return localUser;
+        }
+            break;
+        case 1:
+        {
+            id<iOSSocialServiceProtocol> service = [[iOSSocialServicesStore sharedServiceStore].services objectAtIndex:[indexPath row]];
+            
+            return service;
+        }
+            break;
+        default:
+            break;
+    }
+    
+    return nil;
 }
 
 - (Class)tableView:(UITableView*)tableView cellClassForObject:(id)object

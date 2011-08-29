@@ -8,13 +8,30 @@
 
 #import "Instagram.h"
 #import "iOSSLog.h"
+#import "LocalInstagramUser.h"
 
 @interface IOSSOAuth2ParserClass : NSObject
 // just enough of SBJSON to be able to parse
 - (id)objectWithString:(NSString*)repr error:(NSError**)error;
 @end
 
+static Instagram *instagramService = nil;
+
 @implementation Instagram
+
+@synthesize name;
+@synthesize logoImage;
+
++ (id<iOSSocialServiceProtocol>)sharedService;
+{
+    @synchronized(self) {
+        if(instagramService == nil) {
+            instagramService = [[super allocWithZone:NULL] init];
+            [[iOSSocialServicesStore sharedServiceStore] registerService:instagramService];
+        }
+    }
+    return instagramService;
+}
 
 - (id)init
 {
@@ -25,15 +42,26 @@
     return self;
 }
 
-+ (NSURL*)authorizeURL:(NSURL*)URL
+- (NSString*)name
 {
-    /*
-    NSString *access_token = [NSString stringWithFormat:@"?access_token=%@", auth.accessToken];
-    NSURL *url = [NSURL URLWithString:access_token relativeToURL:URL];
-    
-    return url;
-    */
-    return nil;
+    return @"Instagram";
+}
+
+- (UIImage*)logoImage
+{
+    NSURL *logoURL = [[NSBundle mainBundle] URLForResource:@"instagram_trans" withExtension:@"png"];
+    UIImage *theLogoImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:logoURL]];
+    return theLogoImage;
+}
+
+- (id<iOSSocialLocalUserProtocol>)localUser
+{
+    return [[LocalInstagramUser alloc] init];
+}
+
+- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
+{
+    return [[LocalInstagramUser alloc] initWithUUID:uuid];
 }
 
 + (id)JSONFromData:(NSData*)data

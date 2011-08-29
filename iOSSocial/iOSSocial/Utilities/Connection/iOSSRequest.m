@@ -33,7 +33,6 @@
 @synthesize URL=_URL;
 @synthesize requestHandler;
 @synthesize connection;
-@synthesize requiresAuthentication;
 @synthesize request;
 
 - (id)init
@@ -41,7 +40,6 @@
     self = [super init];
     if (self) {
         // Initialization code here.
-        requiresAuthentication = NO;
     }
     
     return self;
@@ -69,11 +67,6 @@
     
 }
 
-- (NSURL *)authorizedURL
-{
-    return nil;
-    //return [Instagram authorizeURL:self.URL];
-}
 /*
 - (void)requestFinished:(ASIHTTPRequest *)req
 {    
@@ -104,10 +97,6 @@
 - (void)performRequestWithHandler:(iOSSRequestHandler)handler
 {
     self.requestHandler = handler;
-    
-    if (self.requiresAuthentication) {
-        self.URL = [self authorizedURL];
-    }
     
     iOSSRequest *theRequest = self;
     

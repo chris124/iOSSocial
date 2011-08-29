@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Three20/Three20.h"
 
+
 @class iOSSServicesViewController;
+
 @protocol iOSSServiceProtocol;
 
 @protocol iOSSServicesViewControllerDelegate <NSObject>
@@ -23,15 +25,13 @@
 
 @end
 
-@class iOSServicesDataSource;
+
 
 @interface iOSSServicesViewController : TTTableViewController <UITableViewDelegate> {
     id _serviceControllerDelegate;
 }
 
 @property(nonatomic, retain)    id<iOSSServicesViewControllerDelegate> serviceControllerDelegate;
-
-- (id)initWithDataSource:(iOSServicesDataSource*)servicesDataSource;
 
 - (void)refreshUI;
 

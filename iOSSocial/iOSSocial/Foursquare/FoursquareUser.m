@@ -8,6 +8,13 @@
 
 #import "FoursquareUser.h"
 #import "FoursquareUser+Private.h"
+#import "iOSSRequest.h"
+
+@interface FoursquareUser ()
+
+@property(nonatomic, copy)      LoadPhotoHandler loadPhotoHandler;
+
+@end
 
 
 @implementation FoursquareUser
@@ -20,6 +27,7 @@
 @synthesize profilePictureURL;
 @synthesize dataSource;
 @synthesize index;
+@synthesize loadPhotoHandler;
 
 - (id)init
 {
@@ -71,6 +79,34 @@
      //self.followedByCount = [counts objectForKey:@"followed_by"];
      }
      */
+}
+
+- (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler
+{
+    self.loadPhotoHandler = completionHandler;
+    
+    NSString *urlString = self.profilePictureURL;
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            if (self.loadPhotoHandler) {
+                self.loadPhotoHandler(nil, error);
+                self.loadPhotoHandler = nil;
+            }
+        } else {
+            UIImage *image = [UIImage imageWithData:responseData];
+            
+            if (self.loadPhotoHandler) {
+                self.loadPhotoHandler(image, nil);
+                self.loadPhotoHandler = nil;
+            }
+        }
+    }];
 }
 
 @end

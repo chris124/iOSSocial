@@ -9,7 +9,9 @@
 #import "LocalTwitterUser.h"
 #import "Twitter.h"
 #import "TwitterUser+Private.h"
-#import "TwitterRequest.h"
+#import "iOSSRequest.h"
+#import "GTMOAuthAuthentication.h"
+
 
 NSString *const iOSSDefaultsKeyTwitterUserDictionary    = @"ioss_twitterUserDictionary";
 
@@ -18,8 +20,9 @@ static LocalTwitterUser *localTwitterUser = nil;
 @interface LocalTwitterUser () 
 
 @property(nonatomic, copy)      TwitterAuthenticationHandler authenticationHandler;
-@property(nonatomic, retain)    Twitter *twitter;
-@property(nonatomic, readwrite, retain)  NSString *scope;
+@property(nonatomic, retain)    GTMOAuthAuthentication *auth;
+@property(nonatomic, retain)    NSString *keychainItemName;
+@property(nonatomic, retain)    NSString *uuidString;
 
 @end
 
@@ -27,8 +30,11 @@ static LocalTwitterUser *localTwitterUser = nil;
 
 @synthesize authenticated;
 @synthesize authenticationHandler;
-@synthesize twitter;
-@synthesize scope;
+@synthesize username;
+@synthesize servicename;
+@synthesize auth;
+@synthesize keychainItemName;
+@synthesize uuidString;
 
 + (LocalTwitterUser *)localTwitterUser
 {
@@ -50,12 +56,12 @@ static LocalTwitterUser *localTwitterUser = nil;
 
 - (NSDictionary *)ioss_twitterUserDictionary 
 { 
-    return [[NSUserDefaults standardUserDefaults] objectForKey:iOSSDefaultsKeyTwitterUserDictionary];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyTwitterUserDictionary, self.uuidString]];
 }
 
-- (void)ioss_setTwitterUserDictionary:(NSDictionary *)username 
+- (void)ioss_setTwitterUserDictionary:(NSDictionary *)theUserDictionary 
 { 
-    [[NSUserDefaults standardUserDefaults] setObject:username forKey:iOSSDefaultsKeyTwitterUserDictionary];
+    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyTwitterUserDictionary, self.uuidString]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -63,6 +69,34 @@ static LocalTwitterUser *localTwitterUser = nil;
 {
     self = [super init];
     if (self) {
+        CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+        CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+        self.uuidString = (__bridge NSString *)uuidStr;
+        CFRelease(uuidStr);
+        CFRelease(uuid); 
+        
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Twitter_Service-%@", self.uuidString];
+        self.auth = [[Twitter sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+        
+        // Initialization code here.
+        NSDictionary *localUserDictionary = [self ioss_twitterUserDictionary];
+        if (localUserDictionary) {
+            self.userDictionary = localUserDictionary;
+        }
+    }
+    
+    return self;
+}
+
+- (id)initWithUUID:(NSString*)uuid
+{
+    self = [super init];
+    if (self) {
+        self.uuidString = uuid;
+        
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Twitter_Service-%@", self.uuidString];
+        self.auth = [[Twitter sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+        
         // Initialization code here.
         NSDictionary *localUserDictionary = [self ioss_twitterUserDictionary];
         if (localUserDictionary) {
@@ -80,32 +114,31 @@ static LocalTwitterUser *localTwitterUser = nil;
     [self ioss_setTwitterUserDictionary:theUserDictionary];
 }
 
-- (void)assignOAuthParams:(NSDictionary*)params
-{
-    self.twitter = [[Twitter alloc] initWithDictionary:params];
-    
-    self.scope = [params objectForKey:@"scope"];
-}
-
 - (BOOL)isAuthenticated
 {
-    //assert if instagram is nil. params have not been set!
-    if (NO == [self.twitter isSessionValid])
+    if (NO == self.auth.canAuthorize)
         return NO;
     return YES;
+}
+
+- (NSURL*)authorizedURL:(NSURL*)theURL
+{
+    NSString *access_token = [NSString stringWithFormat:@"?oauth_token=%@", [self oAuthAccessToken]];
+    NSURL *url = [NSURL URLWithString:access_token relativeToURL:theURL];
+    
+    return url;
 }
 
 - (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
     self.fetchUserDataHandler = completionHandler;
-    
-    //cwnote: fix this url!! dev.twitter.com is down. ugh.
+
     NSString *urlString = [NSString stringWithFormat:@"http://api.twitter.com/1/users/show.json?user_id=%@", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    TwitterRequest *request = [[TwitterRequest alloc] initWithURL:url  
-                                                       parameters:nil 
-                                                    requestMethod:iOSSRequestMethodGET];
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -135,30 +168,33 @@ static LocalTwitterUser *localTwitterUser = nil;
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
 
-        [self.twitter authorizeWithScope:self.scope 
-                      fromViewController:vc 
-                   withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
-                            if (error) {
-                                if (self.authenticationHandler) {
-                                    self.authenticationHandler(error);
-                                    self.authenticationHandler = nil;
-                                }
-                            } else {
-                                NSDictionary *user = [userInfo objectForKey:@"user"];
-                                self.userDictionary = user;
-                                
-                                [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
-                                    if (!error) {
-                                        //
-                                    }
-                                    
-                                    if (self.authenticationHandler) {
-                                        self.authenticationHandler(error);
-                                        self.authenticationHandler = nil;
-                                    }
-                                }];
-                            }
-                        }];
+        [[Twitter sharedService] authorizeFromViewController:vc 
+                                                     forAuth:self.auth 
+                                         andKeychainItemName:self.keychainItemName 
+                                             andCookieDomain:@"twitter.com" 
+                                       withCompletionHandler:^(GTMOAuthAuthentication *theAuth, NSDictionary *userInfo, NSError *error) {
+            self.auth = theAuth;
+            if (error) {
+                if (self.authenticationHandler) {
+                    self.authenticationHandler(error);
+                    self.authenticationHandler = nil;
+                }
+            } else {
+                NSDictionary *user = [userInfo objectForKey:@"user"];
+                self.userDictionary = user;
+                
+                [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+                    if (!error) {
+                        [[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
+                    }
+                    
+                    if (self.authenticationHandler) {
+                        self.authenticationHandler(error);
+                        self.authenticationHandler = nil;
+                    }
+                }];
+            }
+        }];
     } else {
         [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
             if (!error) {
@@ -175,16 +211,14 @@ static LocalTwitterUser *localTwitterUser = nil;
 
 - (NSString*)oAuthAccessToken
 {
-    //assert if twitter is nil. params have not been set!
-    
-    return [self.twitter oAuthAccessToken];
+    return self.auth.accessToken;
 }
 
 - (void)logout
 {
-    //assert if twitter is nil. params have not been set!
+    [[Twitter sharedService] logout:self.auth forKeychainItemName:self.keychainItemName];
     
-    [self.twitter logout];
+    self.auth = nil;
 }
 
 - (NSString*)userId
@@ -195,6 +229,11 @@ static LocalTwitterUser *localTwitterUser = nil;
 - (NSString*)username
 {
     return self.alias;
+}
+
+- (NSString*)servicename
+{
+    return [Twitter sharedService].name;
 }
 
 @end

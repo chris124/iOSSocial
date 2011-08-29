@@ -8,9 +8,9 @@
 
 #import "PRPSmartTableViewCell.h"
 
-@class iOSSService;
+@protocol iOSSocialServiceProtocol;
 @interface iOSSServiceTableViewCell : PRPSmartTableViewCell
 
-@property(nonatomic, retain)    iOSSService *service;
+@property(nonatomic, retain)   id<iOSSocialServiceProtocol> service;
 
 @end

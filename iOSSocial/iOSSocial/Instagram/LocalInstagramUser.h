@@ -21,13 +21,7 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
 // A temporary use is created if no account is set up.
 + (LocalInstagramUser *)localInstagramUser;
 
-// This must be called before calling any of the non-class methods on localInstagramUser otherwise it will cause an assertion
-// See iOSSocialServiceOAuth2ProviderConstants.h for the Keys for this dictionary.
-- (void)assignOAuthParams:(NSDictionary*)params;
-
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
-
-@property(nonatomic, readonly, retain)  NSString *scope; // Authentication state
 
 // Authenticate the user for access to user details. This may present a UI to the user if necessary to login or create an account. 
 // The user must be authenticated in order to use other APIs. 

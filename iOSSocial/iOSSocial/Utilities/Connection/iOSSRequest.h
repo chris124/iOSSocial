@@ -20,7 +20,6 @@ typedef enum iOSSRequestMethod iOSSRequestMethod;
 typedef void(^iOSSRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error);
 
 @interface iOSSRequest : NSObject {
-    BOOL    requiresAuthentication;
 }
 
 - (id)initWithURL:(NSURL *)url 
@@ -30,13 +29,10 @@ typedef void(^iOSSRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlRe
 @property(nonatomic, readonly, retain) NSDictionary *parameters;
 @property(nonatomic, readonly, assign) iOSSRequestMethod requestMethod;
 @property(nonatomic, readonly, retain) NSURL *URL;
-@property(nonatomic, assign)    BOOL requiresAuthentication;
 
 - (void)addMultiPartData:(NSData *)data 
                 withName:(NSString *)name 
                     type:(NSString *)type;
-
-- (NSURL *)authorizedURL;
 
 - (void)performRequestWithHandler:(iOSSRequestHandler)handler;
 

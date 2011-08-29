@@ -8,21 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "iOSSocialOAuth.h"
 
-typedef void(^AuthorizationHandler)(NSDictionary *userInfo, NSError *error);
-
+@class GTMOAuthAuthentication;
 @interface iOSSocialServiceOAuth1Provider : NSObject
 
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 
-- (void)authorizeWithScope:(NSString *)scope 
-        fromViewController:(UIViewController*)vc 
-     withCompletionHandler:(AuthorizationHandler)completionHandler;
+- (GTMOAuthAuthentication*)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
 
-- (BOOL)isSessionValid;
+- (void)assignOAuthParams:(NSDictionary*)params;
 
-- (NSString*)oAuthAccessToken;
+- (void)authorizeFromViewController:(UIViewController*)vc 
+                            forAuth:(GTMOAuthAuthentication*)theAuth 
+                andKeychainItemName:(NSString*)theKeychainItemName 
+                    andCookieDomain:(NSString*)cookieDomain
+              withCompletionHandler:(AuthorizationHandler)completionHandler;
 
-- (void)logout;
+- (void)logout:(GTMOAuthAuthentication*)theAuth forKeychainItemName:(NSString*)theKeychainItemName;
 
 @end

@@ -8,26 +8,28 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "iOSSocialConstants.h"
 
-typedef void(^AuthenticationHandler)(NSError *error); 
+typedef void(^AuthenticationHandler)(NSError *error);
 
 @protocol iOSSocialLocalUserProtocol <NSObject>
 
-+ (id<iOSSocialLocalUserProtocol>)localUser;
+- (id)initWithUUID:(NSString*)uuid;
 
-// This must be called before calling any of the non-class methods on localInstagramUser otherwise it will cause an assertion
-// See iOSSocialServiceOAuth2ProviderConstants.h or iOSSocialServiceOAuthProviderConstants.h for the Keys for this dictionary.
-- (void)assignOAuthParams:(NSDictionary*)params;
+//cwnote: still need this
++ (id<iOSSocialLocalUserProtocol>)localUser;
 
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
 
-@property(nonatomic, readonly, retain)  NSString *scope; // Authentication state
+@property(nonatomic, readonly, retain)  NSString *username;
+@property(nonatomic, readonly, retain)  NSString *servicename;
+@property(nonatomic, readonly, retain)  NSString *uuidString;
 
 // Authenticate the user for access to user details. This may present a UI to the user if necessary to login or create an account. 
-// The user must be authenticated in order to use other APIs. 
+// The user must be authenticated in order to use some other APIs (on a per-service basis). 
 // This should be called for each launch of the application as soon as the UI is ready.
 // Authentication happens automatically on return to foreground, and the completion handler will be called again. 
-// Instagram UI may be presented during this authentication. 
+// The UI may be presented during this authentication. 
 // Apps should check the local user's authenticated and user ID properties to determine if the local user has changed.
 // The authorization screen, if needed, is show modally so pass in the current view controller.
 // Possible reasons for error:
@@ -44,13 +46,8 @@ typedef void(^AuthenticationHandler)(NSError *error);
 
 - (NSString*)userId;
 
-- (NSString*)username;
+- (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler;
+
+- (NSURL*)authorizedURL:(NSURL*)theURL;
 
 @end
-/*
-@interface iOSSocialLocalUser : NSObject <iOSSocialLocalUserProtocol> {
-@private
-    //
-}
-@end
-*/

@@ -8,7 +8,6 @@
 
 #import "InstagramUser.h"
 #import "InstagramUser+Private.h"
-#import "IGRequest.h"
 #import "Instagram.h"
 #import "InstagramMediaCollection.h"
 #import "iOSSRequest.h"
@@ -89,9 +88,9 @@
     NSString *urlString = self.profilePictureURL;
     NSURL *url = [NSURL URLWithString:urlString];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -117,11 +116,12 @@
     NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
-    request.requiresAuthentication = YES;
+    //cwnote: fix this!!
+    //request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -148,11 +148,12 @@
     NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
-    request.requiresAuthentication = YES;
+    //cwnote: fix this!!!
+    //request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -185,11 +186,12 @@
     NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/follows", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
-    request.requiresAuthentication = YES;
+    //cwnote: fix this!!!
+    //request.requiresAuthentication = YES;
 
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -231,11 +233,12 @@
     NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/followed-by", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
-    request.requiresAuthentication = YES;
+    //cwnote: fix this!!
+    //request.requiresAuthentication = YES;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {

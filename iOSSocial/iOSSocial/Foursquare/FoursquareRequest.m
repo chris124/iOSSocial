@@ -17,8 +17,6 @@
     NSURL *url = [NSURL URLWithString:access_token relativeToURL:self.URL];
     
     return url;
-    
-    //return [Instagram authorizeURL:self.URL];
 }
 
 @end

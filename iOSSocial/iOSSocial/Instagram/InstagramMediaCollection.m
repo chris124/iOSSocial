@@ -8,7 +8,7 @@
 
 #import "InstagramMediaCollection.h"
 #import "InstagramMedia.h"
-#import "iOSSocial.h"
+#import "iOSSLog.h"
 
 @interface InstagramMediaCollection ()
 

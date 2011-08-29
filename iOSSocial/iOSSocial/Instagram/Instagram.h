@@ -7,12 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "iOSSocialServiceOAuth2Provider.h"
+#import "iOSSocialServicesStore.h"
 
-@interface Instagram : iOSSocialServiceOAuth2Provider
-
-+ (NSURL*)authorizeURL:(NSURL*)URL;
+@interface Instagram : iOSSocialServiceOAuth2Provider <iOSSocialServiceProtocol>
 
 + (id)JSONFromData:(NSData*)data;
 

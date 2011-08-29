@@ -7,7 +7,9 @@
 //
 
 #import "InstagramUserCollection.h"
-#import "iOSSocial.h"
+#import "InstagramUser.h"
+#import "LocalInstagramUser.h"
+#import "iOSSLog.h"
 
 @interface InstagramUserCollection ()
 

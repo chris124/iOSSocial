@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "iOSSocialServiceOAuth2Provider.h"
+#import "iOSSocialServicesStore.h"
 
 
-@interface Foursquare : iOSSocialServiceOAuth2Provider
-
-+ (NSURL*)authorizeURL:(NSURL*)URL;
+@interface Foursquare : iOSSocialServiceOAuth2Provider <iOSSocialServiceProtocol>
 
 + (id)JSONFromData:(NSData*)data;
 

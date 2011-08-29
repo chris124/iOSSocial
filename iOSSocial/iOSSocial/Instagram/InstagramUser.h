@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "iOSSocialUser.h"
+#import "iOSSocialConstants.h"
 
 @class InstagramMediaCollection;
 @class InstagramUserCollection;
 
-typedef void(^LoadPhotoHandler)(UIImage *photo, NSError *error);
 typedef void(^FetchMediaHandler)(InstagramMediaCollection *collection, NSError *error);
 typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 

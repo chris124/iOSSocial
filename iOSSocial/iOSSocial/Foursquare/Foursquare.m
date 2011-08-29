@@ -7,7 +7,8 @@
 //
 
 #import "Foursquare.h"
-#import "iOSSocial.h"
+#import "iOSSLog.h"
+#import "LocalFoursquareUser.h"
 
 
 @interface IOSSOAuth2ParserClass : NSObject
@@ -15,7 +16,23 @@
 - (id)objectWithString:(NSString*)repr error:(NSError**)error;
 @end
 
+static Foursquare *foursquareService = nil;
+
 @implementation Foursquare
+
+@synthesize name;
+@synthesize logoImage;
+
++ (id<iOSSocialServiceProtocol>)sharedService;
+{
+    @synchronized(self) {
+        if(foursquareService == nil) {
+            foursquareService = [[super allocWithZone:NULL] init];
+            [[iOSSocialServicesStore sharedServiceStore] registerService:foursquareService];
+        }
+    }
+    return foursquareService;
+}
 
 - (id)init
 {
@@ -26,15 +43,26 @@
     return self;
 }
 
-+ (NSURL*)authorizeURL:(NSURL*)URL
+- (NSString*)name
 {
-    /*
-    NSString *access_token = [NSString stringWithFormat:@"?access_token=%@", auth.accessToken];
-    NSURL *url = [NSURL URLWithString:access_token relativeToURL:URL];
-    
-    return url;
-    */
-    return nil;
+    return @"Foursquare";
+}
+
+- (UIImage*)logoImage
+{
+    NSURL *logoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
+    UIImage *theLogoImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:logoURL]];
+    return theLogoImage;
+}
+
+- (id<iOSSocialLocalUserProtocol>)localUser
+{
+    return [[LocalFoursquareUser alloc] init];
+}
+
+- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
+{
+    return [[LocalFoursquareUser alloc] initWithUUID:uuid];
 }
 
 + (id)JSONFromData:(NSData*)data

@@ -7,7 +7,7 @@
 //
 
 #import "iOSSFormEncodedPOSTRequest.h"
-#import "iOSSocial.h"
+#import "iOSSLog.h"
 //#import "NSString+iOSSURLAdditions.h"
 
 @implementation iOSSFormEncodedPOSTRequest

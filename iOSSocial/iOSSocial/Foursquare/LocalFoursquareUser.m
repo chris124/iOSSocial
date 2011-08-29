@@ -9,7 +9,9 @@
 #import "LocalFoursquareUser.h"
 #import "Foursquare.h"
 #import "FoursquareUser+Private.h"
-#import "FoursquareRequest.h"
+#import "iOSSRequest.h"
+#import "GTMOAuth2Authentication.h"
+
 
 NSString *const iOSSDefaultsKeyFoursquareUserDictionary = @"ioss_foursquareUserDictionary";
 
@@ -18,8 +20,9 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 @interface LocalFoursquareUser () 
 
 @property(nonatomic, copy)      FoursquareAuthenticationHandler authenticationHandler;
-@property(nonatomic, retain)    Foursquare *foursquare;
-@property(nonatomic, readwrite, retain)  NSString *scope;
+@property(nonatomic, retain)    GTMOAuth2Authentication *auth;
+@property(nonatomic, retain)    NSString *keychainItemName;
+@property(nonatomic, retain)    NSString *uuidString;
 
 @end
 
@@ -27,8 +30,11 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 
 @synthesize authenticated;
 @synthesize authenticationHandler;
-@synthesize foursquare;
-@synthesize scope;
+@synthesize username;
+@synthesize servicename;
+@synthesize auth;
+@synthesize keychainItemName;
+@synthesize uuidString;
 
 + (LocalFoursquareUser *)localFoursquareUser
 {
@@ -50,12 +56,12 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 
 - (NSDictionary *)ioss_foursquareUserDictionary 
 { 
-    return [[NSUserDefaults standardUserDefaults] objectForKey:iOSSDefaultsKeyFoursquareUserDictionary];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFoursquareUserDictionary, self.uuidString]];
 }
 
-- (void)ioss_setFoursquareUserDictionary:(NSDictionary *)username 
+- (void)ioss_setFoursquareUserDictionary:(NSDictionary *)theUserDictionary 
 { 
-    [[NSUserDefaults standardUserDefaults] setObject:username forKey:iOSSDefaultsKeyFoursquareUserDictionary];
+    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFoursquareUserDictionary, self.uuidString]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -63,6 +69,15 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 {
     self = [super init];
     if (self) {
+        CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+        CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+        self.uuidString = (__bridge NSString *)uuidStr;
+        CFRelease(uuidStr);
+        CFRelease(uuid); 
+        
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Foursquare_Service-%@", self.uuidString];
+        self.auth = [[Foursquare sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+        
         // Initialization code here.
         NSDictionary *localUserDictionary = [self ioss_foursquareUserDictionary];
         if (localUserDictionary) {
@@ -73,18 +88,28 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     return self;
 }
 
-- (void)assignOAuthParams:(NSDictionary*)params
+- (id)initWithUUID:(NSString*)uuid
 {
-    self.foursquare = [[Foursquare alloc] initWithDictionary:params];
+    self = [super init];
+    if (self) {
+        self.uuidString = uuid;
+        
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Foursquare_Service-%@", self.uuidString];
+        self.auth = [[Foursquare sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+        
+        // Initialization code here.
+        NSDictionary *localUserDictionary = [self ioss_foursquareUserDictionary];
+        if (localUserDictionary) {
+            self.userDictionary = localUserDictionary;
+        }
+    }
     
-    self.scope = [params objectForKey:@"scope"];
+    return self;
 }
 
 - (BOOL)isAuthenticated
 {
-    //assert if foursquare is nil. params have not been set!
-    
-    if (NO == [self.foursquare isSessionValid])
+    if (NO == self.auth.canAuthorize)
         return NO;
     return YES;
 }
@@ -96,6 +121,14 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     [self ioss_setFoursquareUserDictionary:theUserDictionary];
 }
 
+- (NSURL*)authorizedURL:(NSURL*)theURL
+{
+    NSString *access_token = [NSString stringWithFormat:@"?oauth_token=%@", [self oAuthAccessToken]];
+    NSURL *url = [NSURL URLWithString:access_token relativeToURL:theURL];
+    
+    return url;
+}
+
 - (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {    
     //response https://developer.foursquare.com/docs/responses/user.html
@@ -104,13 +137,11 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     
     //cwnote: can specify user id instead of self.
     NSString *urlString = @"https://api.foursquare.com/v2/users/self";
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
     
-    FoursquareRequest *request = [[FoursquareRequest alloc] initWithURL:url  
-                                                             parameters:nil 
-                                                          requestMethod:iOSSRequestMethodGET];
-    
-    request.requiresAuthentication = YES;
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -143,26 +174,32 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
 
-        [self.foursquare authorizeWithScope:self.scope 
-                        fromViewController:vc withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
-                            if (error) {
-                                if (self.authenticationHandler) {
-                                    self.authenticationHandler(error);
-                                    self.authenticationHandler = nil;
-                                }
-                            } else {
-                                [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
-                                    if (!error) {
-                                        //
-                                    }
-                                    
-                                    if (self.authenticationHandler) {
-                                        self.authenticationHandler(error);
-                                        self.authenticationHandler = nil;
-                                    }
-                                }];
-                            }
-                        }];
+        [[Foursquare sharedService] authorizeFromViewController:vc 
+                                                        forAuth:self.auth 
+                                            andKeychainItemName:self.keychainItemName 
+                                                andCookieDomain:@"foursquare.com" 
+                                          withCompletionHandler:^(GTMOAuth2Authentication *theAuth, NSDictionary *userInfo, NSError *error) {
+            
+            self.auth = theAuth;
+            if (error) {
+                if (self.authenticationHandler) {
+                    self.authenticationHandler(error);
+                    self.authenticationHandler = nil;
+                }
+            } else {
+                [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+                    if (!error) {
+                        //
+                        [[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
+                    }
+                    
+                    if (self.authenticationHandler) {
+                        self.authenticationHandler(error);
+                        self.authenticationHandler = nil;
+                    }
+                }];
+            }
+        }];
     } else {
         [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
             if (!error) {
@@ -179,16 +216,14 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 
 - (NSString*)oAuthAccessToken
 {
-    //assert if foursquare is nil. params have not been set!
-    
-    return [self.foursquare oAuthAccessToken];
+    return self.auth.accessToken;
 }
 
 - (void)logout
 {
-    //assert if foursquare is nil. params have not been set!
+    [[Foursquare sharedService] logout:self.auth forKeychainItemName:self.keychainItemName];
     
-    [self.foursquare logout];
+    self.auth = nil;
 }
 
 - (NSString*)userId
@@ -199,6 +234,11 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 - (NSString*)username
 {
     return self.alias;
+}
+
+- (NSString*)servicename
+{
+    return [Foursquare sharedService].name;
 }
 
 @end

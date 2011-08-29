@@ -7,9 +7,6 @@
 //
 
 #import "InstaBetaViewController.h"
-#import "LocalTwitterUser.h"
-#import "LocalFoursquareUser.h"
-#import "iOSServicesDataSource.h"
 #import "iOSSService.h"
 
 @implementation InstaBetaViewController
@@ -67,37 +64,39 @@
 
 - (IBAction)servicesButtonPressed:(id)sender 
 {
-    NSMutableArray *services = [NSMutableArray array];
-    
-    NSMutableDictionary *serviceDictionary = [NSMutableDictionary dictionary];
-    [serviceDictionary setObject:@"Twitter" forKey:@"name"];
-    NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
-    if (photoURL) {
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-    }
-    [serviceDictionary setObject:[LocalTwitterUser localTwitterUser] forKey:@"localUser"];
-    
-    iOSSService *twitter = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-    [services addObject:twitter];
-    
-    [serviceDictionary removeAllObjects];
-    [serviceDictionary setObject:@"Foursquare" forKey:@"name"];
-    photoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
-    if (photoURL) {
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-    }
-    [serviceDictionary setObject:[LocalFoursquareUser localFoursquareUser] forKey:@"localUser"];
-    
-    iOSSService *foursquare = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-    [services addObject:foursquare];
-    
-    iOSServicesDataSource *dataSource = [[iOSServicesDataSource alloc] initWithSources:services];
-    dataSource.displayDoneButton = YES;
-    dataSource.message = @"Meh";
-    
-    iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] initWithDataSource:dataSource];
+    iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
     iossServicesViewController.serviceControllerDelegate = self;
     [self presentModalViewController:iossServicesViewController animated:YES];
+}
+
+-(void)servicesViewController:(iOSSServicesViewController*)servicesController 
+             didSelectService:(id<iOSSServiceProtocol>)service
+{
+    /*
+    id<iOSSocialLocalUserProtocol> localUser = service.localUser;
+    
+    if ([service isConnected]) {
+        [localUser logout];
+        
+        //cwnote: here we need to remove the service for our user from the server
+        
+    } else {
+        [localUser authenticateFromViewController:self 
+                            withCompletionHandler:^(NSError *error){
+                                if (!error) {
+                                    [servicesController refreshUI];
+                                    //cwnote: here we need to save this service for the user on our server
+                                    [[PSLocalUser localUser] updateUserWithService:service andCompletionHandler:^(NSError *error) {
+                                        NSLog(@"doh!");
+                                    }];
+                                }}];
+    }
+*/
+}
+
+-(void)servicesViewControllerDidSelectDoneButton:(iOSSServicesViewController *)servicesController
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

@@ -7,14 +7,31 @@
 //
 
 #import "Twitter.h"
-#import "iOSSocial.h"
+#import "iOSSLog.h"
+#import "LocalTwitterUser.h"
 
 @interface IOSSOAuthParserClass : NSObject
 // just enough of SBJSON to be able to parse
 - (id)objectWithString:(NSString*)repr error:(NSError**)error;
 @end
 
+static Twitter *twitterService = nil;
+
 @implementation Twitter
+
+@synthesize name;
+@synthesize logoImage;
+
++ (id<iOSSocialServiceProtocol>)sharedService;
+{
+    @synchronized(self) {
+        if(twitterService == nil) {
+            twitterService = [[super allocWithZone:NULL] init];
+            [[iOSSocialServicesStore sharedServiceStore] registerService:twitterService];
+        }
+    }
+    return twitterService;
+}
 
 - (id)init
 {
@@ -26,9 +43,26 @@
     return self;
 }
 
-+ (void)authorizeURLRequest:(NSMutableURLRequest*)URLRequest
+- (NSString*)name
 {
-    //[auth authorizeRequest:URLRequest];
+    return @"Twitter";
+}
+
+- (UIImage*)logoImage
+{
+    NSURL *logoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
+    UIImage *theLogoImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:logoURL]];
+    return theLogoImage;
+}
+
+- (id<iOSSocialLocalUserProtocol>)localUser
+{
+    return [[LocalTwitterUser alloc] init];
+}
+
+- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
+{
+    return [[LocalTwitterUser alloc] initWithUUID:uuid];
 }
 
 + (id)JSONFromData:(NSData*)data

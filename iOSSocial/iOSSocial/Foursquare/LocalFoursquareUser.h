@@ -21,10 +21,6 @@ typedef void(^FoursquareAuthenticationHandler)(NSError *error);
 // A temporary use is created if no account is set up.
 + (LocalFoursquareUser *)localFoursquareUser;
 
-// This must be called before calling any of the non-class methods on localFoursquareUser otherwise it will cause an assertion
-// See iOSSocialServiceOAuth2ProviderConstants.h for the Keys for this dictionary.
-- (void)assignOAuthParams:(NSDictionary*)params;
-
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
 
 // Authenticate the user for access to user details. This may present a UI to the user if necessary to login or create an account. 

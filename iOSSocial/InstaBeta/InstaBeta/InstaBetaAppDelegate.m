@@ -7,9 +7,14 @@
 //
 
 #import "InstaBetaAppDelegate.h"
-#import "LocalInstagramUser.h"
-#import "LocalTwitterUser.h"
-#import "LocalFoursquareUser.h"
+//#import "LocalInstagramUser.h"
+#import "Instagram.h"
+//#import "LocalTwitterUser.h"
+#import "Twitter.h"
+//#import "LocalFoursquareUser.h"
+#import "Foursquare.h"
+#import "iOSSocialServiceOAuth1ProviderConstants.h"
+#import "iOSSocialServiceOAuth2ProviderConstants.h"
 #import "InstaBetaViewController.h"
 
 @implementation InstaBetaAppDelegate
@@ -28,7 +33,8 @@
     [params setObject:@"https://api.instagram.com/oauth/authorize" forKey:kSMOAuth2AuthorizeURL];
     [params setObject:@"https://api.instagram.com/oauth/access_token" forKey:kSMOAuth2AccessTokenURL];
     [params setObject:@"Instagram Service" forKey:kSMOAuth2ServiceProviderName];
-    [[LocalInstagramUser localInstagramUser] assignOAuthParams:params];
+    [params setObject:@"basic comments relationships likes" forKey:kSMOAuth2Scope];
+    [[Instagram sharedService] assignOAuthParams:params];
     
     [params removeAllObjects];
     
@@ -40,7 +46,7 @@
     [params setObject:@"https://api.twitter.com/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
     [params setObject:@"https://api.twitter.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
     [params setObject:@"Twitter Service" forKey:kSMOAuth1ServiceProviderName];
-    [[LocalTwitterUser localTwitterUser] assignOAuthParams:params];
+    [[Twitter sharedService] assignOAuthParams:params];
     
     [params removeAllObjects];
     
@@ -51,7 +57,7 @@
     [params setObject:@"https://foursquare.com/oauth2/authorize" forKey:kSMOAuth2AuthorizeURL];
     [params setObject:@"https://foursquare.com/oauth2/access_token" forKey:kSMOAuth2AccessTokenURL];
     [params setObject:@"Foursquare Service" forKey:kSMOAuth2ServiceProviderName];
-    [[LocalFoursquareUser localFoursquareUser] assignOAuthParams:params];
+    [[Foursquare sharedService] assignOAuthParams:params];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

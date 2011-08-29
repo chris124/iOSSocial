@@ -10,7 +10,7 @@
 #import "GTMOAuth2Authentication.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2SignIn.h"
-#import "iOSSocial.h"
+#import "iOSSLog.h"
 #import "iOSSocialServiceOAuth2ProviderConstants.h"
 
 
@@ -25,9 +25,8 @@
 @property(nonatomic, readwrite, retain) NSString *serviceProviderName;
 @property(nonatomic, readwrite, retain) UIViewController *viewController;
 @property(nonatomic, copy)              AuthorizationHandler authenticationHandler;
-@property(nonatomic, retain) GTMOAuth2Authentication *auth;
+@property(nonatomic, retain)            NSString *scope;
 
-- (void)checkAuthentication;
 - (GTMOAuth2Authentication *)authForCustomService;
 
 @end
@@ -43,7 +42,7 @@
 @synthesize serviceProviderName;
 @synthesize viewController;
 @synthesize authenticationHandler;
-@synthesize auth;
+@synthesize scope;
 
 - (id)init
 {
@@ -67,10 +66,21 @@
         self.authorizeURL           = [dictionary objectForKey:kSMOAuth2AuthorizeURL];
         self.accessTokenURL         = [dictionary objectForKey:kSMOAuth2AccessTokenURL];
         self.serviceProviderName    = [dictionary objectForKey:kSMOAuth2ServiceProviderName];
-        [self checkAuthentication];
     }
     
     return self;
+}
+
+- (void)assignOAuthParams:(NSDictionary*)params
+{
+    self.clientID               = [params objectForKey:kSMOAuth2ClientID];
+    self.clientSecret           = [params objectForKey:kSMOAuth2ClientSecret];
+    self.redirectURI            = [params objectForKey:kSMOAuth2RedirectURI];
+    self.keychainItemName       = [params objectForKey:kSMOAuth2KeychainItemName];
+    self.authorizeURL           = [params objectForKey:kSMOAuth2AuthorizeURL];
+    self.accessTokenURL         = [params objectForKey:kSMOAuth2AccessTokenURL];
+    self.serviceProviderName    = [params objectForKey:kSMOAuth2ServiceProviderName];
+    self.scope                  = [params objectForKey:kSMOAuth2Scope];
 }
 
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
@@ -89,45 +99,53 @@
             //iOSSLog(@"%@", str);
         }
         
-        self.auth = nil;
-        
         [self.viewController dismissModalViewControllerAnimated:YES];
         
         if (self.authenticationHandler) {
-            self.authenticationHandler(nil, error);
+            self.authenticationHandler(nil, nil, error);
             self.authenticationHandler = nil;
         }
     } else {
         // Authentication succeeded
-        self.auth = newAuth;
         [self.viewController dismissModalViewControllerAnimated:YES];
-        
-        NSDictionary *dictionary = self.auth.parameters;
+
+        NSDictionary *dictionary = newAuth.parameters;
         if (self.authenticationHandler) {
-            self.authenticationHandler(dictionary, nil);
+            self.authenticationHandler(newAuth, dictionary, nil);
             self.authenticationHandler = nil;
         }
     }
 }
 
-
-- (void)authorizeWithScope:(NSString *)scope 
-        fromViewController:(UIViewController*)vc 
-     withCompletionHandler:(AuthorizationHandler)completionHandler
+- (void)authorizeFromViewController:(UIViewController*)vc 
+                            forAuth:(GTMOAuth2Authentication*)theAuth 
+                           andKeychainItemName:(NSString*)theKeychainItemName 
+                    andCookieDomain:(NSString*)cookieDomain 
+              withCompletionHandler:(AuthorizationHandler)completionHandler
 {
     self.viewController = vc;
     self.authenticationHandler = completionHandler;
-    
-    self.auth = [self authForCustomService];
-    self.auth.scope = scope;
 
+    theAuth.scope = self.scope;
+    
     NSURL *authURL = [NSURL URLWithString:self.authorizeURL];
+
+    if (cookieDomain) {
+        NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        NSArray *cookies = [cookieStorage cookies];
+        
+        for (NSHTTPCookie *cookie in cookies) {
+            if ([[cookie domain] hasSuffix:cookieDomain]) {
+                [cookieStorage deleteCookie:cookie];
+            }
+        }
+    }
     
     // Display the authentication view
     GTMOAuth2ViewControllerTouch *oaViewController;
-    oaViewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:self.auth
+    oaViewController = [[GTMOAuth2ViewControllerTouch alloc] initWithAuthentication:theAuth
                                                                    authorizationURL:authURL
-                                                                   keychainItemName:self.keychainItemName
+                                                                   keychainItemName:theKeychainItemName
                                                                            delegate:self
                                                                    finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
@@ -139,13 +157,8 @@
     NSString *html = @"<html><body bgcolor=silver><div align=center>Loading sign-in page...</div></body></html>";
     oaViewController.initialHTMLString = html;
     
+    //[self.viewController pushViewController:oaViewController
     [self.viewController presentModalViewController:oaViewController animated:YES];
-}
-
-- (BOOL)isSessionValid
-{
-    BOOL isSignedIn = self.auth.canAuthorize;;
-    return isSignedIn;
 }
 
 - (GTMOAuth2Authentication *)authForCustomService 
@@ -162,7 +175,7 @@
     return newAuth;
 }
 
-- (void)checkAuthentication 
+- (GTMOAuth2Authentication*)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName
 {
     // Listen for network change notifications
     /*
@@ -175,30 +188,25 @@
     
     GTMOAuth2Authentication *newAuth = [self authForCustomService];
     if (newAuth) {
-        [GTMOAuth2ViewControllerTouch authorizeFromKeychainForName:self.keychainItemName 
+        [GTMOAuth2ViewControllerTouch authorizeFromKeychainForName:theKeychainItemName 
                                                     authentication:newAuth];
     }
     
-    self.auth = newAuth;
+    return newAuth;
 }
 
-- (NSString*)oAuthAccessToken
+- (void)logout:(GTMOAuth2Authentication*)theAuth forKeychainItemName:(NSString*)theKeychainItemName
 {
-    return self.auth.accessToken;
-}
-
-- (void)logout
-{
-    if ([self.auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
+    if ([theAuth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
         // remove the token from Google's servers
-        [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.auth];
+        [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:theAuth];
     }
     
     // remove the stored Google authentication from the keychain, if any
-    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:self.keychainItemName];
+    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:theKeychainItemName];
     
     // Discard our retained authentication object.
-    self.auth = nil;
+    //theAuth = nil;
 }
 
 @end

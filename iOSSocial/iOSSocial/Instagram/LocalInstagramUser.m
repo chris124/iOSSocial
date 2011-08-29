@@ -7,11 +7,15 @@
 //
 
 #import "LocalInstagramUser.h"
+#import "iOSSLog.h"
 #import "Instagram.h"
-#import "iOSSocial.h"
-#import "IGRequest.h"
+#import "iOSSRequest.h"
 #import "InstagramUser+Private.h"
 #import "InstagramMediaCollection.h"
+#import "GTMOAuth2Authentication.h"
+#import "GTMOAuth2ViewControllerTouch.h"
+#import "iOSSocialServiceOAuth2Provider.h"
+
 
 NSString *const iOSSDefaultsKeyInstagramUserDictionary  = @"ioss_instagramUserDictionary";
 
@@ -20,8 +24,9 @@ static LocalInstagramUser *localInstagramUser = nil;
 @interface LocalInstagramUser () 
 
 @property(nonatomic, copy)      InstagramAuthenticationHandler authenticationHandler;
-@property(nonatomic, retain)    Instagram *instagram;
-@property(nonatomic, readwrite, retain)  NSString *scope;
+@property(nonatomic, retain)    GTMOAuth2Authentication *auth;
+@property(nonatomic, retain)    NSString *keychainItemName;
+@property(nonatomic, readwrite, retain)    NSString *uuidString;
 
 @end
 
@@ -29,8 +34,11 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 @synthesize authenticated;
 @synthesize authenticationHandler;
-@synthesize instagram;
-@synthesize scope;
+@synthesize username;
+@synthesize servicename;
+@synthesize auth;
+@synthesize keychainItemName;
+@synthesize uuidString;
 
 + (LocalInstagramUser *)localInstagramUser
 {
@@ -52,12 +60,12 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 - (NSDictionary *)ioss_instagramUserDictionary 
 { 
-    return [[NSUserDefaults standardUserDefaults] objectForKey:iOSSDefaultsKeyInstagramUserDictionary];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyInstagramUserDictionary, self.uuidString]];
 }
 
-- (void)ioss_setInstagramUserDictionary:(NSDictionary *)username 
+- (void)ioss_setInstagramUserDictionary:(NSDictionary *)theUserDictionary 
 { 
-    [[NSUserDefaults standardUserDefaults] setObject:username forKey:iOSSDefaultsKeyInstagramUserDictionary];
+    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyInstagramUserDictionary, self.uuidString]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -65,6 +73,16 @@ static LocalInstagramUser *localInstagramUser = nil;
 {
     self = [super init];
     if (self) {
+        
+        CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+        CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+        self.uuidString = (__bridge NSString *)uuidStr;
+        CFRelease(uuidStr);
+        CFRelease(uuid); 
+
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Instagram_Service-%@", self.uuidString];
+        self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+        
         // Initialization code here.
         NSDictionary *localUserDictionary = [self ioss_instagramUserDictionary];
         if (localUserDictionary) {
@@ -75,20 +93,38 @@ static LocalInstagramUser *localInstagramUser = nil;
     return self;
 }
 
-- (void)assignOAuthParams:(NSDictionary*)params
+- (id)initWithUUID:(NSString*)uuid
 {
-    self.instagram = [[Instagram alloc] initWithDictionary:params];
+    self = [super init];
+    if (self) {
+        self.uuidString = uuid;
+        
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Instagram_Service-%@", self.uuidString];
+        self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+        
+        // Initialization code here.
+        NSDictionary *localUserDictionary = [self ioss_instagramUserDictionary];
+        if (localUserDictionary) {
+            self.userDictionary = localUserDictionary;
+        }
+    }
     
-    self.scope = [params objectForKey:@"scope"];
+    return self;
 }
 
 - (BOOL)isAuthenticated
 {
-    //assert if instagram is nil. params have not been set!
-    
-    if (NO == [self.instagram isSessionValid])
+    if (NO == self.auth.canAuthorize)
         return NO;
     return YES;
+}
+
+- (NSURL *)authorizedURL:(NSURL*)theURL
+{
+    NSString *access_token = [NSString stringWithFormat:@"?access_token=%@", [self oAuthAccessToken]];
+    NSURL *url = [NSURL URLWithString:access_token relativeToURL:theURL];
+    
+    return url;
 }
 
 - (void)fetchFeedWithCompletionHandler:(FetchMediaHandler)completionHandler
@@ -96,13 +132,11 @@ static LocalInstagramUser *localInstagramUser = nil;
     self.fetchMediaHandler = completionHandler;
     
     NSString *urlString = @"https://api.instagram.com/v1/users/self/feed";
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
-    
-    request.requiresAuthentication = YES;
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -133,13 +167,11 @@ static LocalInstagramUser *localInstagramUser = nil;
     self.fetchMediaHandler = completionHandler;
     
     NSString *urlString = @"https://api.instagram.com/v1/users/self/media/liked";
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
-    
-    request.requiresAuthentication = YES;
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -170,13 +202,11 @@ static LocalInstagramUser *localInstagramUser = nil;
     self.fetchUserDataHandler = completionHandler;
     
     NSString *urlString = @"https://api.instagram.com/v1/users/self/";
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
-    
-    request.requiresAuthentication = YES;
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -200,13 +230,11 @@ static LocalInstagramUser *localInstagramUser = nil;
 {
     //pass in user object. return relationship
     NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/relationship", user.userID];
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
-    
-    request.requiresAuthentication = YES;
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -228,13 +256,12 @@ static LocalInstagramUser *localInstagramUser = nil;
 {    
     //return InstagramUserCollection
     
-    NSURL *url = [NSURL URLWithString:@"https://api.instagram.com/v1/users/self/requested-by"];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/self/requested-by"];
+    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
     
-    IGRequest *request = [[IGRequest alloc] initWithURL:url  
-                                             parameters:nil 
-                                          requestMethod:iOSSRequestMethodGET];
-    
-    request.requiresAuthentication = YES;
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -266,20 +293,38 @@ static LocalInstagramUser *localInstagramUser = nil;
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
 
-        [self.instagram authorizeWithScope:self.scope 
-                                        fromViewController:vc withCompletionHandler:^(NSDictionary *userInfo, NSError *error) {
-                                            if (error) {
-                                                
-                                            } else {
-                                                NSDictionary *user = [userInfo objectForKey:@"user"];
-                                                self.userDictionary = user;
-                                            }
-                                            
-                                            if (self.authenticationHandler) {
-                                                self.authenticationHandler(error);
-                                                self.authenticationHandler = nil;
-                                            }
-                                        }];
+        if (nil == self.auth) {
+            self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+        }
+        
+        [[Instagram sharedService] authorizeFromViewController:vc 
+                                                       forAuth:self.auth 
+                                           andKeychainItemName:self.keychainItemName 
+                                               andCookieDomain:@"instagram.com" 
+                                         withCompletionHandler:^(GTMOAuth2Authentication *theAuth, NSDictionary *userInfo, NSError *error) {
+            self.auth = theAuth;
+            if (error) {
+                if (self.authenticationHandler) {
+                    self.authenticationHandler(error);
+                    self.authenticationHandler = nil;
+                }
+            } else {
+                NSDictionary *user = [userInfo objectForKey:@"user"];
+                self.userDictionary = user;
+                
+                [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+                    if (!error) {
+                        //
+                        [[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
+                    }
+                    
+                    if (self.authenticationHandler) {
+                        self.authenticationHandler(error);
+                        self.authenticationHandler = nil;
+                    }
+                }];
+            }
+        }];
     } else {
         [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
             if (!error) {
@@ -296,16 +341,14 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 - (NSString*)oAuthAccessToken
 {
-    //assert if instagram is nil. params have not been set!
-    
-    return [self.instagram oAuthAccessToken];
+    return self.auth.accessToken;
 }
 
 - (void)logout
 {
-    //assert if instagram is nil. params have not been set!
+    [[Instagram sharedService] logout:self.auth forKeychainItemName:self.keychainItemName];
     
-    [self.instagram logout];
+    self.auth = nil;
 }
 
 - (NSString*)userId
@@ -316,6 +359,11 @@ static LocalInstagramUser *localInstagramUser = nil;
 - (NSString*)username
 {
     return self.alias;
+}
+
+- (NSString*)servicename
+{
+    return [Instagram sharedService].name;
 }
 
 + (void)instagram

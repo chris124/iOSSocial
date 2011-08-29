@@ -14,17 +14,17 @@
 @protocol iOSServicesDataSourceProtocol <TTModel>
 
 /**
- * The title of this collection of tags.
+ * The title of this collection of services.
  */
 @property (nonatomic, copy) NSString* title;
 
 /**
- * The total number of feed entries in the source, independent of the number that have been loaded.
+ * The total number of services in the source, independent of the number that have been loaded.
  */
 @property (nonatomic, readonly) NSInteger numberOfObjects;
 
 /**
- * The maximum index of feed entries that have already been loaded.
+ * The maximum index of services that have already been loaded.
  */
 @property (nonatomic, readonly) NSInteger maxObjectIndex;
 

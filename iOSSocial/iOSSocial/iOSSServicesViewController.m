@@ -7,11 +7,9 @@
 //
 
 #import "iOSSServicesViewController.h"
-#import "iOSSocial.h"
 #import "iOSServicesDataSource.h"
-#import "iOSSService.h"
-#import "LocalTwitterUser.h"
-#import "LocalFoursquareUser.h"
+#import "iOSSocialServicesStore.h"
+#import "iOSSocialLocalUser.h"
 
 @implementation iOSSServicesViewController
 
@@ -22,98 +20,11 @@
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         // Custom initialization
-        
-        NSMutableArray *services = [NSMutableArray array];
-        
-        NSMutableDictionary *serviceDictionary = [NSMutableDictionary dictionary];
-        [serviceDictionary setObject:@"Instagram" forKey:@"name"];
-        NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"instagram_trans" withExtension:@"png"];
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-        [serviceDictionary setObject:[LocalInstagramUser localInstagramUser] forKey:@"localUser"];
-        
-        iOSSService *instagram = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-        [services addObject:instagram];
-        
-        
-        [serviceDictionary removeAllObjects];
-        [serviceDictionary setObject:@"Twitter" forKey:@"name"];
-        photoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-        [serviceDictionary setObject:[LocalTwitterUser localTwitterUser] forKey:@"localUser"];
-        
-        iOSSService *twitter = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-        [services addObject:twitter];
-        
-        
-        [serviceDictionary removeAllObjects];
-        [serviceDictionary setObject:@"Foursquare" forKey:@"name"];
-        photoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-        [serviceDictionary setObject:[LocalFoursquareUser localFoursquareUser] forKey:@"localUser"];
-        
-        iOSSService *foursquare = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-        [services addObject:foursquare];
-        
-        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] initWithSources:services];
+        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] initWithSources:nil];
         servicesDataSource.displayDoneButton = YES;
         self.dataSource = servicesDataSource;
         self.variableHeightRows = YES;
     }
-    return self;
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-        
-        NSMutableArray *services = [NSMutableArray array];
-        
-        NSMutableDictionary *serviceDictionary = [NSMutableDictionary dictionary];
-        [serviceDictionary setObject:@"Instagram" forKey:@"name"];
-        NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"instagram_trans" withExtension:@"png"];
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-        [serviceDictionary setObject:[LocalInstagramUser localInstagramUser] forKey:@"localUser"];
-        
-        iOSSService *instagram = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-        [services addObject:instagram];
-        
-        
-        [serviceDictionary removeAllObjects];
-        [serviceDictionary setObject:@"Twitter" forKey:@"name"];
-        photoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-        [serviceDictionary setObject:[LocalTwitterUser localTwitterUser] forKey:@"localUser"];
-        
-        iOSSService *twitter = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-        [services addObject:twitter];
-        
-        
-        [serviceDictionary removeAllObjects];
-        [serviceDictionary setObject:@"Foursquare" forKey:@"name"];
-        photoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
-        [serviceDictionary setObject:photoURL forKey:@"photoURL"];
-        [serviceDictionary setObject:[LocalFoursquareUser localFoursquareUser] forKey:@"localUser"];
-        
-        iOSSService *foursquare = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-        [services addObject:foursquare];
-        
-        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] initWithSources:services];
-        self.dataSource = servicesDataSource;
-        self.variableHeightRows = YES;
-    }
-    return self;
-}
-
-- (id)initWithDataSource:(iOSServicesDataSource*)servicesDataSource
-{
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    if (self) {
-        self.dataSource = servicesDataSource;
-        self.variableHeightRows = YES;
-    }
-    
     return self;
 }
 
@@ -173,15 +84,6 @@
 
 #pragma mark - Table view data source
 
-- (void)addService:(iOSSService*)service
-{
-    //notify delegate
-    if ([self.serviceControllerDelegate respondsToSelector:@selector(servicesViewController:didSelectService:)]) {
-        [self.serviceControllerDelegate servicesViewController:self 
-                                              didSelectService:service];
-    }
-}
-
 #pragma mark - Table view delegate
 
 - (id<UITableViewDelegate>)createDelegate
@@ -194,6 +96,27 @@
     switch (indexPath.section) {
             case 0:
         {
+            id<iOSSocialLocalUserProtocol> localUser = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
+
+            if ([localUser isAuthenticated]) {
+                [localUser logout];
+                [self refreshUI];
+            } else {
+                [localUser authenticateFromViewController:self 
+                                    withCompletionHandler:^(NSError *error){
+                                        if (!error) {
+                                            [self refreshUI];
+                                            //cwnote: here we need to save this service for the user on our server
+                                            
+                                             //[[PSLocalUser localUser] updateUserWithService:service andCompletionHandler:^(NSError
+                                                //error) {
+                                             //NSLog(@"doh!");
+                                             //}];
+                                            
+                                        }}];
+            }
+
+            /*
             if ([self.serviceControllerDelegate respondsToSelector:@selector(servicesViewController:didSelectService:)]) {
                 iOSSService *service = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
                 
@@ -202,9 +125,30 @@
                                                       didSelectService:service];
                 [tableView reloadData];
             }
+            */
         }
             break;
         case 1:
+        {
+            //cwnote: get back a service object here. need to then get a local user object for the service and authorize that bad boy? local user object factory that takes a service object? hmmm
+            
+            id<iOSSocialServiceProtocol> service = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
+            
+            id<iOSSocialLocalUserProtocol> localUser = [service localUser];
+            
+            [localUser authenticateFromViewController:self 
+                                withCompletionHandler:^(NSError *error){
+                                    if (!error) {
+                                        [self refreshUI];
+                                        //cwnote: here we need to save this service for the user on our server
+                                        
+                                        //[[PSLocalUser localUser] updateUserWithService:service andCompletionHandler:^(NSError *error) {
+                                        //NSLog(@"doh!");
+                                    //}];
+                                }}];
+        }
+            break;
+        case 2:
         {
             //tell delegate done button was pressed!
             if ([self.serviceControllerDelegate respondsToSelector:@selector(servicesViewControllerDidSelectDoneButton:)]) {
@@ -215,44 +159,6 @@
         default:
             break;
     }
-    
-    /*
-    id<iOSSocialLocalUserProtocol> localUser = service.localUser;
-    
-    if ([service isConnected]) {
-        //[self addService:service];
-        
-        //[localUser logout];
-        //[tableView reloadData];
-    } else {
-        [localUser authenticateFromViewController:self 
-                            withCompletionHandler:^(NSError *error){
-                       if (!error) {
-                           [self addService:service];
-                           [tableView reloadData];
-                       }}];
-    }
-    */
-    //cwnote: done button if no navigation controller?
-    /*
-    switch (indexPath.section) {
-        case iOSSServicesTableSectionDoneButton:
-        {
-            //cell = [PRPBasicSettingsCell cellForTableView:tableView]; 
-            switch (indexPath.row) {
-                case iOSSServicesSecDoneRowDoneButton: 
-                    [self dismissModalViewControllerAnimated:YES];
-                    break;
-                default:
-                    NSAssert1(NO, @"Unexpected row in Favorites section: %d", indexPath.row);
-                    break; 
-            }
-        }
-            break;
-        default:
-            break;
-    }
-    */
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

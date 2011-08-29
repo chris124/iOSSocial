@@ -7,11 +7,12 @@
 //
 
 #import "iOSSServiceTableViewCell.h"
-#import "iOSSService.h"
+//#import "iOSSService.h"
 #import "iOSSocialLocalUser.h"
+#import "iOSSocialServicesStore.h"
 
 @interface iOSSServiceTableViewCell () {
-    iOSSService *_service;
+    id<iOSSocialServiceProtocol> _service;
 }
 
 @end
@@ -36,7 +37,8 @@
     // Configure the view for the selected state
 }
 
-+ (id)cellForTableView:(UITableView *)tableView {
++ (id)cellForTableView:(UITableView *)tableView 
+{
     NSString *cellID = [self cellIdentifier];
     UITableViewCell *cell = [tableView 
                              dequeueReusableCellWithIdentifier:cellID];
@@ -48,22 +50,44 @@
 }
 
 
-- (id)initWithCellIdentifier:(NSString *)cellID {
+- (id)initWithCellIdentifier:(NSString *)cellID 
+{
     return [self initWithStyle:UITableViewCellStyleSubtitle 
                reuseIdentifier:cellID];
 }
 
-- (void)setService:(iOSSService*)theService
+- (void)setService:(id<iOSSocialServiceProtocol>)theService
 {
     _service = theService;
 
-    self.textLabel.text = self.service.name;
+    UIImageView *logoImageView = (UIImageView*)[self viewWithTag:1];
+    if (!logoImageView) {
+        logoImageView = [[UIImageView alloc] initWithImage:self.service.logoImage];
+        [logoImageView setTag:1];
+        [logoImageView setFrame:CGRectMake(5.0f, 5.0f, 25.0f, 25.0f)];
+        [self.contentView addSubview:logoImageView];
+    }
+    logoImageView.image = self.service.logoImage;
+    
+    UILabel *nameLabel = (UILabel*)[self viewWithTag:2];
+    if (!nameLabel) {
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(logoImageView.frame.origin.x+logoImageView.frame.size.width+10.0f, 5.0f, 150.0f, 15.0f)];
+        [nameLabel setTag:2];
+        nameLabel.font = [UIFont systemFontOfSize:10.0f];
+        [self.contentView addSubview:nameLabel];
+    }
+    
+    nameLabel.text = [NSString stringWithFormat:@"%@", self.service.name];
+
+    //self.textLabel.text = self.service.name;
+    /*
     if ([self.service isConnected]) {
         id<iOSSocialLocalUserProtocol> localUser = self.service.localUser;
         self.detailTextLabel.text = [NSString stringWithFormat:@"connected as %@", [localUser username]];
     } else {
         self.detailTextLabel.text = @"not connected";
     }
+    */
     
     /*
     //first item is #name
