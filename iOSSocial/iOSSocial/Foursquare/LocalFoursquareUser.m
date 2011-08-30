@@ -11,6 +11,7 @@
 #import "FoursquareUser+Private.h"
 #import "iOSSRequest.h"
 #import "GTMOAuth2Authentication.h"
+#import "iOSSLog.h"
 
 
 NSString *const iOSSDefaultsKeyFoursquareUserDictionary = @"ioss_foursquareUserDictionary";
@@ -116,9 +117,13 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 
 - (void)setUserDictionary:(NSDictionary *)theUserDictionary
 {
-    [super setUserDictionary:theUserDictionary];
-    
-    [self ioss_setFoursquareUserDictionary:theUserDictionary];
+    if (theUserDictionary) {
+        [super setUserDictionary:theUserDictionary];
+        
+        [self ioss_setFoursquareUserDictionary:theUserDictionary];
+    } else {
+        iOSSLog(@"meh: no user dictionary");
+    }
 }
 
 - (NSURL*)authorizedURL:(NSURL*)theURL

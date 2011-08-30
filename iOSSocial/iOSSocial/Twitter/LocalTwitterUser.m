@@ -11,6 +11,7 @@
 #import "TwitterUser+Private.h"
 #import "iOSSRequest.h"
 #import "GTMOAuthAuthentication.h"
+#import "iOSSLog.h"
 
 
 NSString *const iOSSDefaultsKeyTwitterUserDictionary    = @"ioss_twitterUserDictionary";
@@ -109,9 +110,13 @@ static LocalTwitterUser *localTwitterUser = nil;
 
 - (void)setUserDictionary:(NSDictionary *)theUserDictionary
 {
-    [super setUserDictionary:theUserDictionary];
-    
-    [self ioss_setTwitterUserDictionary:theUserDictionary];
+    if (theUserDictionary) {
+        [super setUserDictionary:theUserDictionary];
+        
+        [self ioss_setTwitterUserDictionary:theUserDictionary];
+    } else {
+        iOSSLog(@"meh: no user dictionary");
+    }
 }
 
 - (BOOL)isAuthenticated

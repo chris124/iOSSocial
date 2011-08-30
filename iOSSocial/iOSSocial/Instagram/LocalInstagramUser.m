@@ -278,9 +278,13 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 - (void)setUserDictionary:(NSDictionary *)theUserDictionary
 {
-    [super setUserDictionary:theUserDictionary];
-    
-    [self ioss_setInstagramUserDictionary:theUserDictionary];
+    if (theUserDictionary) {
+        [super setUserDictionary:theUserDictionary];
+        
+        [self ioss_setInstagramUserDictionary:theUserDictionary];
+    } else {
+        iOSSLog(@"meh: no user dictionary");
+    }
 }
 
 - (void)authenticateFromViewController:(UIViewController*)vc 
