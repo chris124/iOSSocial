@@ -11,9 +11,16 @@
 #import "iOSSocialServicesStore.h"
 #import "iOSSocialLocalUser.h"
 
+@interface iOSSServicesViewController ()
+
+@property(nonatomic, copy)  ServicesViewControllerHandler servicesViewControllerHandler;
+
+@end
+
 @implementation iOSSServicesViewController
 
 @synthesize serviceControllerDelegate=_serviceControllerDelegate;
+@synthesize servicesViewControllerHandler;
 
 - (id)init
 {
@@ -106,14 +113,8 @@
                                     withCompletionHandler:^(NSError *error){
                                         if (!error) {
                                             [self refreshUI];
-                                            //cwnote: here we need to save this service for the user on our server
-                                            
-                                             //[[PSLocalUser localUser] updateUserWithService:service andCompletionHandler:^(NSError
-                                                //error) {
-                                             //NSLog(@"doh!");
-                                             //}];
-                                            
-                                        }}];
+                                        }
+                                    }];
             }
 
             /*
@@ -130,7 +131,8 @@
             break;
         case 1:
         {
-            //cwnote: get back a service object here. need to then get a local user object for the service and authorize that bad boy? local user object factory that takes a service object? hmmm
+            //cwnote: get back a service object here. need to then get a local user object for the service and authorize that bad boy? 
+            //local user object factory that takes a service object? hmmm
             
             id<iOSSocialServiceProtocol> service = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
             
@@ -140,20 +142,24 @@
                                 withCompletionHandler:^(NSError *error){
                                     if (!error) {
                                         [self refreshUI];
-                                        //cwnote: here we need to save this service for the user on our server
-                                        
-                                        //[[PSLocalUser localUser] updateUserWithService:service andCompletionHandler:^(NSError *error) {
-                                        //NSLog(@"doh!");
-                                    //}];
-                                }}];
+                                    }
+                                }];
         }
             break;
         case 2:
         {
             //tell delegate done button was pressed!
+            
+            if (self.servicesViewControllerHandler) {
+                self.servicesViewControllerHandler();
+                self.servicesViewControllerHandler = nil; 
+            }
+            
+            /*
             if ([self.serviceControllerDelegate respondsToSelector:@selector(servicesViewControllerDidSelectDoneButton:)]) {
                 [self.serviceControllerDelegate servicesViewControllerDidSelectDoneButton:self];
             }
+            */
         }
             break;
         default:
@@ -174,6 +180,14 @@
 - (void)refreshUI
 {
     [self.tableView reloadData];
+}
+
+- (void)presentModallyFromViewController:(UIViewController*)vc 
+                   withCompletionHandler:(ServicesViewControllerHandler)completionHandler
+{
+    self.servicesViewControllerHandler = completionHandler;
+    
+    [vc presentModalViewController:self animated:YES];
 }
 
 @end

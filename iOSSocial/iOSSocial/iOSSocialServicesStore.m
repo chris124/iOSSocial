@@ -14,11 +14,13 @@ NSString *const iOSSDefaultsKeyServiceStoreDictionary  = @"ioss_serviceStoreDict
 static iOSSocialServicesStore *serviceStore = nil;
 
 @interface iOSSocialServicesStore () {
+    id<iOSSocialLocalUserProtocol> _defaultAccount;
 }
 
-@property(nonatomic, readwrite, retain)    NSMutableArray *services;
-@property(nonatomic, readwrite, retain)    NSMutableArray *accounts;
-@property(nonatomic, readwrite, retain)    NSDictionary *serviceStoreDictionary;
+@property(nonatomic, readwrite, retain)     NSMutableArray *services;
+@property(nonatomic, readwrite, retain)     NSMutableArray *accounts;
+@property(nonatomic, readwrite, retain)     NSDictionary *serviceStoreDictionary;
+@property(nonatomic, readwrite, retain)     id<iOSSocialLocalUserProtocol> defaultAccount;
 
 - (void)saveAccount:(id<iOSSocialLocalUserProtocol>)theAccount;
 
@@ -29,6 +31,7 @@ static iOSSocialServicesStore *serviceStore = nil;
 @synthesize services;
 @synthesize accounts;
 @synthesize serviceStoreDictionary;
+@synthesize defaultAccount=_defaultAccount;
 
 + (iOSSocialServicesStore*)sharedServiceStore
 {
@@ -74,6 +77,17 @@ static iOSSocialServicesStore *serviceStore = nil;
     return self;
 }
 
+- (id<iOSSocialServiceProtocol>)primaryService
+{
+    id<iOSSocialServiceProtocol> theService = nil;
+    for (id<iOSSocialServiceProtocol> service in self.services) {
+        if (YES == service.primary) {
+            theService = service;
+        }
+    }
+    return theService;
+}
+
 - (void)registerService:(id<iOSSocialServiceProtocol>)theService;
 {
     [self.services addObject:theService];
@@ -86,7 +100,7 @@ static iOSSocialServicesStore *serviceStore = nil;
         id value;
         
         while ((value = [enumerator nextObject])) {
-            /* code that acts on the dictionary’s values */
+
             NSDictionary *theDictionary = (NSDictionary*)value;
             NSString *service_name = [theDictionary objectForKey:@"service_name"];
             
@@ -95,10 +109,26 @@ static iOSSocialServicesStore *serviceStore = nil;
                 if (NSOrderedSame == [service_name compare:service.name]) {
                     id<iOSSocialLocalUserProtocol> account = [service localUserWithUUID:[theDictionary objectForKey:@"account_uuid"]];
                     [self saveAccount:account];
+                    
+                    BOOL isPrimary = [(NSNumber*)[theDictionary objectForKey:@"primary"] boolValue];
+                    if (isPrimary) {
+                        self.defaultAccount = account;
+                    }
                 }
             }
         }
     }
+}
+
+- (id<iOSSocialServiceProtocol>)serviceWithType:(NSString*)serviceName
+{
+    id<iOSSocialServiceProtocol> theService = nil;
+    for (id<iOSSocialServiceProtocol> service in self.services) {
+        if (NSOrderedSame == [serviceName compare:service.name]) {
+            theService = service;
+        }
+    }
+    return theService;
 }
 
 - (void)saveAccount:(id<iOSSocialLocalUserProtocol>)theAccount
@@ -123,12 +153,52 @@ static iOSSocialServicesStore *serviceStore = nil;
 {
     //only add an account once. what to check for? have service name.
     if (![self.accounts containsObject:theAccount]) {
+        
+        if (nil == self.defaultAccount) {
+            //when we register an account and there is no default account, see if there is a primary service. 
+            //if there is a primary service, and this account is from that service, set it as the default
+            id<iOSSocialServiceProtocol> primaryService = [self primaryService];
+            if (NSOrderedSame == [theAccount.servicename compare:primaryService.name]) {
+                self.defaultAccount = theAccount;
+            }
+        }
+        
+        //need to save this for reuse on login
+        
+        /*
+        //when we register an account, see if there is a primary service. 
+        //if there is a primary service, see if there is an account for it.
+        //if no account, then set the account as the main account
+        id<iOSSocialServiceProtocol> primaryService = [self primaryService];
+        
+        if (primaryService) {
+            //if there is a primary service, see if there is an account for it.
+            //if no account, then set the account as the main account
+            BOOL mainAccount = NO;
+            for (id<iOSSocialLocalUserProtocol> account in self.accounts) {
+                
+                if (NSOrderedSame == [account.servicename compare:primaryService.name]) {
+                    mainAccount = YES;
+                }
+            }
+            
+            if (!mainAccount) {
+                //
+            }
+            
+            //does this primary service have any users yet? if so, see if there is a primary one. if not, make one and set it as primary?
+        }
+        */
+        
         [self.accounts addObject:theAccount];
         
         //build the array of account dictionaries and then set the accounts dictionary
         NSMutableArray *theAccounts = [NSMutableArray array];
         for (id<iOSSocialLocalUserProtocol> account in self.accounts) {
-            NSDictionary *accountDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:account.uuidString, account.servicename, nil] forKeys:[NSArray arrayWithObjects:@"account_uuid", @"service_name", nil]];
+            BOOL isPrimary = (account == self.defaultAccount);
+            NSDictionary *accountDictionary = [NSDictionary 
+                                               dictionaryWithObjects:[NSArray arrayWithObjects:account.uuidString, account.servicename, [NSNumber numberWithBool:isPrimary], nil] 
+                                               forKeys:[NSArray arrayWithObjects:@"account_uuid", @"service_name", @"primary", nil]];
             [theAccounts addObject:accountDictionary];
         }
         
@@ -137,14 +207,16 @@ static iOSSocialServicesStore *serviceStore = nil;
     }
 }
 
-/*
-- (NSArray*)accounts
+- (id<iOSSocialLocalUserProtocol>)defaultAccount
 {
-    if (nil == _accounts) {
-        _accounts = [NSMutableArray array];
+    if (nil == _defaultAccount) {
+        //
+        id<iOSSocialServiceProtocol> primaryService = [self primaryService];
+     
+        _defaultAccount = [primaryService localUser];
     }
     
-    return _accounts;
+    return _defaultAccount;
 }
-*/
+
 @end

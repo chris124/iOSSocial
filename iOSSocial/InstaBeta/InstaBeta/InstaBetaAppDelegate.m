@@ -24,7 +24,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //cwnote: do this in init?
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"3f4667293dac44c8bdc304c658cc2904" forKey:kSMOAuth2ClientID];
     [params setObject:@"bf8eeb4494f041d18142da9189895132" forKey:kSMOAuth2ClientSecret];

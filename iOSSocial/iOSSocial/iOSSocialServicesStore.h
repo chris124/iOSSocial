@@ -20,12 +20,13 @@
 
 @property(nonatomic, readonly, retain)  NSString *name;
 @property(nonatomic, readonly, retain)  UIImage *logoImage;
+@property(nonatomic, readonly, assign)  BOOL primary;
 
 + (id<iOSSocialServiceProtocol>)sharedService;
 
 // This must be called before calling any of the non-class methods on a service otherwise it will cause an assertion.
 // See iOSSocialServiceOAuth2ProviderConstants.h or iOSSocialServiceOAuthProviderConstants.h for the Keys for this dictionary.
-- (void)assignOAuthParams:(NSDictionary*)params;
+- (void)assignOAuthParams:(NSDictionary*)params asPrimary:(BOOL)isPrimary;
 
 - (id)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
 
@@ -45,10 +46,13 @@
 
 @interface iOSSocialServicesStore : NSObject
 
-@property(nonatomic, readonly, retain)    NSMutableArray *services;
-@property(nonatomic, readonly, retain)    NSMutableArray *accounts;
+@property(nonatomic, readonly, retain)  NSMutableArray *services;
+@property(nonatomic, readonly, retain)  NSMutableArray *accounts;
+@property(nonatomic, readonly, retain)  id<iOSSocialLocalUserProtocol> defaultAccount;
 
 + (iOSSocialServicesStore*)sharedServiceStore;
+
+- (id<iOSSocialServiceProtocol>)serviceWithType:(NSString*)serviceName;
 
 - (void)registerService:(id<iOSSocialServiceProtocol>)theService;
 

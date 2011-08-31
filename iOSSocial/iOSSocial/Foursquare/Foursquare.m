@@ -16,12 +16,19 @@
 - (id)objectWithString:(NSString*)repr error:(NSError**)error;
 @end
 
+@interface Foursquare ()
+
+@property(nonatomic, readwrite, assign)  BOOL primary;
+
+@end
+
 static Foursquare *foursquareService = nil;
 
 @implementation Foursquare
 
 @synthesize name;
 @synthesize logoImage;
+@synthesize primary;
 
 + (id<iOSSocialServiceProtocol>)sharedService;
 {
@@ -41,6 +48,13 @@ static Foursquare *foursquareService = nil;
     }
     
     return self;
+}
+
+- (void)assignOAuthParams:(NSDictionary*)params asPrimary:(BOOL)isPrimary
+{
+    [super assignOAuthParams:params];
+    
+    self.primary = isPrimary;
 }
 
 - (NSString*)name

@@ -15,12 +15,19 @@
 - (id)objectWithString:(NSString*)repr error:(NSError**)error;
 @end
 
+@interface Twitter ()
+
+@property(nonatomic, readwrite, assign)  BOOL primary;
+
+@end
+
 static Twitter *twitterService = nil;
 
 @implementation Twitter
 
 @synthesize name;
 @synthesize logoImage;
+@synthesize primary;
 
 + (id<iOSSocialServiceProtocol>)sharedService;
 {
@@ -41,6 +48,13 @@ static Twitter *twitterService = nil;
     }
     
     return self;
+}
+
+- (void)assignOAuthParams:(NSDictionary*)params asPrimary:(BOOL)isPrimary
+{
+    [super assignOAuthParams:params];
+    
+    self.primary = isPrimary;
 }
 
 - (NSString*)name
