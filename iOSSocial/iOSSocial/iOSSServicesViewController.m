@@ -27,7 +27,20 @@
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         // Custom initialization
-        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] initWithSources:nil];
+        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] initWithServicesFilter:nil];
+        servicesDataSource.displayDoneButton = YES;
+        self.dataSource = servicesDataSource;
+        self.variableHeightRows = YES;
+    }
+    return self;
+}
+
+- (id)initWithServicesFilter:(NSArray*)filter
+{
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    if (self) {
+        // Custom initialization
+        iOSServicesDataSource *servicesDataSource = [[iOSServicesDataSource alloc] initWithServicesFilter:filter];
         servicesDataSource.displayDoneButton = YES;
         self.dataSource = servicesDataSource;
         self.variableHeightRows = YES;

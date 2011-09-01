@@ -34,6 +34,8 @@ typedef void(^ServicesViewControllerHandler)();
 
 @property(nonatomic, retain)    id<iOSSServicesViewControllerDelegate> serviceControllerDelegate;
 
+- (id)initWithServicesFilter:(NSArray*)filter;
+
 - (void)refreshUI;
 
 - (void)presentModallyFromViewController:(UIViewController*)vc 

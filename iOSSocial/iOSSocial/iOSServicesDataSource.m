@@ -39,7 +39,8 @@ static iOSServicesDataSource *servicesDataSource = nil;
 
 @property(nonatomic, readwrite, assign) NSInteger count;
 @property(nonatomic, retain)            NSMutableArray *psDelegates;
-@property(nonatomic, copy)            NSArray *items;
+@property(nonatomic, copy)              NSArray *items;
+@property(nonatomic, retain)            NSMutableArray *services;
 
 @end
 
@@ -52,15 +53,7 @@ static iOSServicesDataSource *servicesDataSource = nil;
 @synthesize items;
 @synthesize message;
 @synthesize displayDoneButton;
-
-+ (iOSServicesDataSource *)servicesDataStore
-{
-    @synchronized(self) {
-        if(servicesDataSource == nil)
-            servicesDataSource = [[super allocWithZone:NULL] init];
-    }
-    return servicesDataSource;
-}
+@synthesize services;
 
 - (id)init
 {
@@ -72,12 +65,23 @@ static iOSServicesDataSource *servicesDataSource = nil;
     return self;
 }
 
-- (id)initWithSources:(NSArray*)sources
+- (id)initWithServicesFilter:(NSArray*)filter
 {
     self = [self init];
     if (self) {
-        
-        self.items = sources;
+
+        if (filter) {
+            self.services = [NSMutableArray array];
+            
+            //filter out the services based on the filter
+            for (id<iOSSocialServiceProtocol> service in [iOSSocialServicesStore sharedServiceStore].services) {
+                if ([filter containsObject:service.name]) {
+                    [self.services addObject:service];
+                }
+            }
+        } else {
+            self.services = [iOSSocialServicesStore sharedServiceStore].services;
+        }
     }
     
     return self;
@@ -211,23 +215,6 @@ static iOSServicesDataSource *servicesDataSource = nil;
     return nil;
 }
 
-/*
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    //cwnote: what if no nav controller? showing modally and need to add done button?
-    
-    switch (section) {
-        case iOSSServicesTableSectionServices:
-            return iOSSServicesSecServicesNumRows; 
-        case iOSSServicesTableSectionDoneButton:
-            return iOSSServicesSecDoneNumRows; 
-        default:
-            iOSSLog(@"Unexpected section (%d)", section); break;
-    }
-    
-    return 0;
-}
-*/
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     switch (section) {
@@ -241,56 +228,6 @@ static iOSServicesDataSource *servicesDataSource = nil;
     
     return nil;
 }
-/*
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-    //cwnote: what if no nav controller? showing modally and need to add done button?
-    
-    switch (section) {
-        case iOSSServicesTableSectionServices:
-            return @"Bada"; 
-        case iOSSServicesTableSectionDoneButton:
-            return @"Bip"; 
-        default:
-            iOSSLog(@"Unexpected section (%d)", section); break;
-    }
-    
-    return nil;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    // Configure the cell...
-    
-    switch (indexPath.section) {
-        case iOSSServicesTableSectionDoneButton:
-        {
-            //cell = [PRPBasicSettingsCell cellForTableView:tableView]; 
-            switch (indexPath.row) {
-                case iOSSServicesSecDoneRowDoneButton: 
-                    cell.textLabel.text = @"Done"; 
-                    //cell.detailTextLabel.text = @"Mets"; 
-                    break;
-                default:
-                    NSAssert1(NO, @"Unexpected row in Favorites section: %d", indexPath.row);
-                    break; 
-            }
-        }
-            break;
-        default:
-            break;
-    }
-    
-    return cell;
-}
-*/
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -312,7 +249,7 @@ static iOSServicesDataSource *servicesDataSource = nil;
                 rowsInSection = [[iOSSocialServicesStore sharedServiceStore].accounts count];
                 break;
             case 1:
-                rowsInSection = [[iOSSocialServicesStore sharedServiceStore].services count];
+                rowsInSection = [self.services count];
                 break;
             case 2:
                 rowsInSection = 1;
@@ -327,7 +264,7 @@ static iOSServicesDataSource *servicesDataSource = nil;
                 rowsInSection = [[iOSSocialServicesStore sharedServiceStore].accounts count];
                 break;
             case 1:
-                rowsInSection = [[iOSSocialServicesStore sharedServiceStore].services count];
+                rowsInSection = [self.services count];
                 break;
             default:
                 break;
@@ -362,7 +299,7 @@ static iOSServicesDataSource *servicesDataSource = nil;
                 break;
             case 1:
             {
-                id<iOSSocialServiceProtocol> service = [[iOSSocialServicesStore sharedServiceStore].services objectAtIndex:[indexPath row]];
+                id<iOSSocialServiceProtocol> service = [self.services objectAtIndex:[indexPath row]];
                 
                 iOSSServiceTableViewCell *cell = [iOSSServiceTableViewCell cellForTableView:tableView];
                 cell.service = service;
@@ -407,7 +344,7 @@ static iOSServicesDataSource *servicesDataSource = nil;
                 break;
             case 1:
             {
-                id<iOSSocialServiceProtocol> service = [[iOSSocialServicesStore sharedServiceStore].services objectAtIndex:[indexPath row]];
+                id<iOSSocialServiceProtocol> service = [self.services objectAtIndex:[indexPath row]];
                 
                 iOSSServiceTableViewCell *cell = [iOSSServiceTableViewCell cellForTableView:tableView];
                 cell.service = service;
@@ -440,7 +377,7 @@ static iOSServicesDataSource *servicesDataSource = nil;
             break;
         case 1:
         {
-            id<iOSSocialServiceProtocol> service = [[iOSSocialServicesStore sharedServiceStore].services objectAtIndex:[indexPath row]];
+            id<iOSSocialServiceProtocol> service = [self.services objectAtIndex:[indexPath row]];
             
             return service;
         }

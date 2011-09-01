@@ -40,6 +40,6 @@
 @property(nonatomic, retain)    NSString *message;
 @property(nonatomic, assign)    BOOL displayDoneButton;
 
-- (id)initWithSources:(NSArray*)sources;
+- (id)initWithServicesFilter:(NSArray*)filter;
 
 @end
