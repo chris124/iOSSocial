@@ -53,9 +53,9 @@ Selecting an already connected account logs the user out of that account (ie, cl
 
 [![](http://dl.dropbox.com/u/5390704/Screenshot_9.png)](http://dl.dropbox.com/u/5390704/Screenshot_9.png)
 
-<pre><code>
-#import "iOSSServicesViewController.h"
+Here is the code in action:
 
+<pre><code>
 iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
 iossServicesViewController.serviceControllerDelegate = self;
 [self.navigationController pushViewController:iossServicesViewController animated:YES];
