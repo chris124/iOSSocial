@@ -68,44 +68,51 @@ Services
 Which services you want to use is up to you. The underlying code will automatically pick-up which services are available based on what you configure. It is recommended that the services be configured in your application delegate before calling any other code. Here is an example of how the Instagram, Twitter, and Foursquare services are configured in an application delegate:
 
 <pre><code>
-	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-	{
-	    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-		[params setObject:@"instagram app client id" forKey:kSMOAuth2ClientID];
-		[params setObject:@"instagram app client secret" forKey:kSMOAuth2ClientSecret];
-		[params setObject:@"instagram app callback" forKey:kSMOAuth2RedirectURI];
-		[params setObject:@"unique name for keychain item" forKey:kSMOAuth2KeychainItemName];
-	    [params setObject:@"https://api.instagram.com/oauth/authorize" forKey:kSMOAuth2AuthorizeURL];
-	    [params setObject:@"https://api.instagram.com/oauth/access_token" forKey:kSMOAuth2AccessTokenURL];
-	    [params setObject:@"Instagram Service" forKey:kSMOAuth2ServiceProviderName];
-	    [params setObject:@"basic comments relationships likes" forKey:kSMOAuth2Scope];
-	    [[Instagram sharedService] assignOAuthParams:params asPrimary:YES];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+	// Note: For Instagram, when setting the object for the kSMOAuth2RedirectURI key in the OAuth params
+	// dictionary, the URL specified MUST match the callback URL you specified when you created your 
+	// Instagram application on their site. It doesn't matter what the URL actually points to, but 
+	// the value specified here HAS to match what you specified when you created your Instagram app.
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	[params setObject:@"instagram app client id" forKey:kSMOAuth2ClientID];
+	[params setObject:@"instagram app client secret" forKey:kSMOAuth2ClientSecret];
+	[params setObject:@"instagram app callback" forKey:kSMOAuth2RedirectURI];
+	[params setObject:@"unique name for keychain item" forKey:kSMOAuth2KeychainItemName];
+	[params setObject:@"https://api.instagram.com/oauth/authorize" forKey:kSMOAuth2AuthorizeURL];
+	[params setObject:@"https://api.instagram.com/oauth/access_token" forKey:kSMOAuth2AccessTokenURL];
+	[params setObject:@"Instagram Service" forKey:kSMOAuth2ServiceProviderName];
+	[params setObject:@"basic comments relationships likes" forKey:kSMOAuth2Scope];
+	[[Instagram sharedService] assignOAuthParams:params asPrimary:YES];
 
-	    [params removeAllObjects];
+	[params removeAllObjects];
 
-	    [params setObject:@"twitter app client id" forKey:kSMOAuth1ClientID];
-	    [params setObject:@"twitter app client secret" forKey:kSMOAuth1ClientSecret];
-	    [params setObject:@"twitter app callback" forKey:kSMOAuth1RedirectURI];
-	    [params setObject:@"unique name for keychain item" forKey:kSMOAuth1KeychainItemName];
-	    [params setObject:@"https://api.twitter.com/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
-	    [params setObject:@"https://api.twitter.com/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
-	    [params setObject:@"https://api.twitter.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
-	    [params setObject:@"Twitter Service" forKey:kSMOAuth1ServiceProviderName];
-	    [[Twitter sharedService] assignOAuthParams:params asPrimary:NO];
+	[params setObject:@"twitter app client id" forKey:kSMOAuth1ClientID];
+	[params setObject:@"twitter app client secret" forKey:kSMOAuth1ClientSecret];
+	[params setObject:@"twitter app callback" forKey:kSMOAuth1RedirectURI];
+	[params setObject:@"unique name for keychain item" forKey:kSMOAuth1KeychainItemName];
+	[params setObject:@"https://api.twitter.com/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
+	[params setObject:@"https://api.twitter.com/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
+	[params setObject:@"https://api.twitter.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
+	[params setObject:@"Twitter Service" forKey:kSMOAuth1ServiceProviderName];
+	[[Twitter sharedService] assignOAuthParams:params asPrimary:NO];
 
-	    [params removeAllObjects];
+	[params removeAllObjects];
 
-	    [params setObject:@"foursquare app client id" forKey:kSMOAuth2ClientID];
-	    [params setObject:@"foursquare app client secret" forKey:kSMOAuth2ClientSecret];
-	    [params setObject:@"foursquare app callback" forKey:kSMOAuth2RedirectURI];
-	    [params setObject:@"unique name for keychain item" forKey:kSMOAuth2KeychainItemName];
-	    [params setObject:@"https://foursquare.com/oauth2/authorize" forKey:kSMOAuth2AuthorizeURL];
-	    [params setObject:@"https://foursquare.com/oauth2/access_token" forKey:kSMOAuth2AccessTokenURL];
-	    [params setObject:@"Foursquare Service" forKey:kSMOAuth2ServiceProviderName];
-	    [[Foursquare sharedService] assignOAuthParams:params asPrimary:NO];
+	[params setObject:@"foursquare app client id" forKey:kSMOAuth2ClientID];
+	[params setObject:@"foursquare app client secret" forKey:kSMOAuth2ClientSecret];
+	[params setObject:@"foursquare app callback" forKey:kSMOAuth2RedirectURI];
+	[params setObject:@"unique name for keychain item" forKey:kSMOAuth2KeychainItemName];
+	[params setObject:@"https://foursquare.com/oauth2/authorize" forKey:kSMOAuth2AuthorizeURL];
+	[params setObject:@"https://foursquare.com/oauth2/access_token" forKey:kSMOAuth2AccessTokenURL];
+	[params setObject:@"Foursquare Service" forKey:kSMOAuth2ServiceProviderName];
+	[[Foursquare sharedService] assignOAuthParams:params asPrimary:NO];
+
+	...
+}
 </pre></code>
 
-Instagram
+Local User Accounts
 ------------
 
 http://instagram.com/developer/auth/
@@ -144,75 +151,5 @@ NSString *scope = @"basic comments relationships likes";
 // Logging out is easy peasy. Note that this does NOT revoke the user's access to the actual service on their site. It just clears out 
 // all of the local OAuth goodies.
 [[LocalInstagramUser localInstagramUser] logout];
-
-</pre></code>
-
-Twitter
------------------------
-
-https://dev.twitter.com/docs/auth
-<pre><code>
-#import "LocalTwitterUser.h"
-
-NSMutableDictionary *params = [NSMutableDictionary dictionary];
-[params setObject:@"Twitter Client ID for your Application" forKey:kSMOAuth1ClientID];
-[params setObject:@"Twitter Client Secret for your Application" forKey:kSMOAuth1ClientSecret];
-[params setObject:@"Twitter Callback for your Application" forKey:kSMOAuth1RedirectURI];
-[params setObject:@"Twitter Keychain name of your choosing" forKey:kSMOAuth1KeychainItemName];
-[params setObject:@"Twitter OAuth Authorize URL" forKey:kSMOAuth1RequestTokenURL];
-[params setObject:@"Twitter OAuth Access Token URL" forKey:kSMOAuth1AccessTokenURL];
-[params setObject:@"Twitter OAuth name of your choosing" forKey:kSMOAuth1AuthorizeURL];
-[params setObject:@"Twitter Service" forKey:kSMOAuth1ServiceProviderName];
-[[LocalTwitterUser localTwitterUser] assignOAuthParams:params];
-
-BOOL isAuthenticated = [[LocalTwitterUser localTwitterUser] isAuthenticated];
-
-// The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
-// The scope for Twitter is set via their website so you can configure permissions there.
-
-[[LocalTwitterUser localTwitterUser] authenticateWithScope:nil  
-                                        fromViewController:self 
-                                     withCompletionHandler:^(NSError *error){
-                                         if (!error) {
-										     NSString *accessToken = [[LocalTwitterUser localTwitterUser] oAuthAccessToken];
-                                         }}];
-
-// Logging out is easy peasy. Note that this does NOT revoke the user's access to the actual service on their site. It just clears out 
-// all of the local OAuth goodies.
-[[LocalTwitterUser localTwitterUser] logout];
-</pre></code>
-
-Foursquare
------------------------
-
-https://developer.foursquare.com/merchant/oauth.html
-<pre><code>
-#import "LocalFoursquareUser.h"
-
-NSMutableDictionary *params = [NSMutableDictionary dictionary];
-[params setObject:@"Foursquare Client ID for your Application"" forKey:kSMOAuth2ClientID];
-[params setObject:@"Foursquare Client Secret for your Application" forKey:kSMOAuth2ClientSecret];
-[params setObject:@"Foursquare Callback for your Application" forKey:kSMOAuth2RedirectURI];
-[params setObject:@"Foursquare Keychain name of your choosing" forKey:kSMOAuth2KeychainItemName];
-[params setObject:@"Foursquare OAuth Authorize URL" forKey:kSMOAuth2AuthorizeURL];
-[params setObject:@"Foursquare OAuth Access Token URL" forKey:kSMOAuth2AccessTokenURL];
-[params setObject:@"Foursquare Service name of your choosing" forKey:kSMOAuth2ServiceProviderName];
-[[LocalFoursquareUser localFoursquareUser] assignOAuthParams:params];
-
-BOOL isAuthenticated = [[LocalFoursquareUser localFoursquareUser] isAuthenticated];
-
-// The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
-
-NSString *scope = @"";
-[[LocalFoursquareUser localFoursquareUser] authenticateWithScope:scope 
-                                              fromViewController:self 
-                                           withCompletionHandler:^(NSError *error){
-                                               if (!error) {
-                                                   NSString *accessToken = [[LocalFoursquareUser localFoursquareUser] oAuthAccessToken];
-                                               }}];
-
-// Logging out is easy peasy. Note that this does NOT revoke the user's access to the actual service on their site. It just clears out 
-// all of the local OAuth goodies.
-[[LocalFoursquareUser localFoursquareUser] logout];
 
 </pre></code>
