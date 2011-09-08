@@ -141,6 +141,7 @@ iOSServicesDataSource
 
 iOSSServicesViewController is powered by iOSServicesDataSource. If you want to use your own UI, you can take a look at how iOSSServicesViewController uses iOSServicesDataSource.
 
+<code>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
@@ -187,7 +188,7 @@ iOSSServicesViewController is powered by iOSServicesDataSource. If you want to u
             break;
     }
 }
-
+</code>
 
 Adding Support for a New Service
 ------------
