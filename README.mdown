@@ -55,16 +55,18 @@ Selecting an already connected account logs the user out of that account (ie, cl
 
 Here is the code in action:
 
+<pre><code>
 iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
 iossServicesViewController.serviceControllerDelegate = self;
 [self.navigationController pushViewController:iossServicesViewController animated:YES];
-
+</pre></code>
 
 iOSSocialServiceProtocol
 ------------   
 
 Which services you want to use is up to you. The underlying code will automatically pick-up which services are available based on what you configure. It is recommended that the services be configured in your application delegate before calling any other code. Here is an example of how the Instagram, Twitter, and Foursquare services are configured in an application delegate:
 
+<pre><code>
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// Note: For Instagram, when setting the object for the kSMOAuth2RedirectURI key in the OAuth params
@@ -109,13 +111,14 @@ Which services you want to use is up to you. The underlying code will automatica
 
 	...
 }
-
+</pre></code>
 
 iOSSocialLocalUserProtocol
 ------------
 
 Local user account objects are used to represent an authenticated user account for a given service. All of the local user account classes adhere to iOSSocialLocalUserProtocol. The available classes are LocalInstagramUser, LocalTwitterUser, and LocalFoursquareUser (more to come as more services are supported). These derived classes can be created directly or if you just want to get an instance of a local user object for whichever service was set at the primary service you can call [[iOSSocialServicesStore sharedServiceStore] defaultAccount]. Once you have a local user account object, you can authenticate it, query its authentication state, log it out, get its OAuth access token and more. See the code below:
 	
+<pre><code>
 // The defaultAccount method returns an local user object for the service that was set as the primary service.
 id<iOSSocialLocalUserProtocol> localUser = [[iOSSocialServicesStore sharedServiceStore] defaultAccount];
 
@@ -134,14 +137,14 @@ BOOL isAuthenticated = [localUser isAuthenticated];
 // Logging out is easy peasy. Note that this does NOT revoke the user's access to the actual service on their site. It just clears out 
 // all of the local OAuth goodies.
 [localUser logout];
-
+</pre></code>
 
 iOSServicesDataSource
 ------------
 
 iOSSServicesViewController is powered by iOSServicesDataSource. If you want to use your own UI, you can take a look at how iOSSServicesViewController uses iOSServicesDataSource.
 
-<code>
+<pre><code>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
@@ -188,7 +191,7 @@ iOSSServicesViewController is powered by iOSServicesDataSource. If you want to u
             break;
     }
 }
-</code>
+</pre></code>
 
 Adding Support for a New Service
 ------------
