@@ -88,9 +88,9 @@
     }
 
     if ([self.localUser isAuthenticated]) {
-        serviceLabel.text = [NSString stringWithFormat:@"Connected as: %@", self.localUser.servicename];
+        serviceLabel.text = [NSString stringWithFormat:@"Connected to %@", self.localUser.servicename];
     } else {
-        serviceLabel.text = [NSString stringWithFormat:@"Disconnected as: %@", self.localUser.servicename];
+        serviceLabel.text = [NSString stringWithFormat:@"Disconnected from %@", self.localUser.servicename];
     }
 }
 

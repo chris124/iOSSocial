@@ -895,6 +895,7 @@
 				GCC_PREFIX_HEADER = "InstaBeta/InstaBeta-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../three20\"";
 				INFOPLIST_FILE = "InstaBeta/InstaBeta-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -910,6 +911,7 @@
 				GCC_PREFIX_HEADER = "InstaBeta/InstaBeta-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../three20\"";
 				INFOPLIST_FILE = "InstaBeta/InstaBeta-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";

@@ -74,6 +74,7 @@
         nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(logoImageView.frame.origin.x+logoImageView.frame.size.width+10.0f, 5.0f, 150.0f, 15.0f)];
         [nameLabel setTag:2];
         nameLabel.font = [UIFont systemFontOfSize:10.0f];
+        nameLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:nameLabel];
     }
     

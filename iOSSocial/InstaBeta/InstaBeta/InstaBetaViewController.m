@@ -8,8 +8,18 @@
 
 #import "InstaBetaViewController.h"
 #import "iOSSService.h"
+#import "iOSSocialLocalUser.h"
+#import "iOSSocialServicesStore.h"
+
+@interface InstaBetaViewController () 
+
+@property(nonatomic, retain)    id<iOSSocialLocalUserProtocol> localUser;
+
+@end
 
 @implementation InstaBetaViewController
+
+@synthesize localUser;
 
 - (void)didReceiveMemoryWarning
 {
@@ -18,6 +28,24 @@
 }
 
 #pragma mark - View lifecycle
+
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView
+{
+    [super loadView];
+    
+    self.localUser = [[iOSSocialServicesStore sharedServiceStore] defaultAccount];
+    
+    if (![self.localUser isAuthenticated] ) {
+        [self.localUser authenticateFromViewController:self 
+                                          withCompletionHandler:^(NSError *error){
+                                              if (error) {
+                                              } else {
+                                              }
+                                          }];
+    } else {
+    }
+}
 
 - (void)viewDidLoad
 {
