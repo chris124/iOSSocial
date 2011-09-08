@@ -1,9 +1,16 @@
 iOSSocial
 =======
 
-iOSSocial is a collection of classes that makes it easy to integrate with one or more popular social networks. Includes OAuth authentication support for each service out-of-the box via view controllers and saving of OAuth tokens in the keychain.
+iOSSocial is a collection of classes that makes it easy to integrate with one or more popular social networks. Includes OAuth authentication support for each service out-of-the box via view controllers and saving of OAuth tokens in the keychain. The underlying data model makes it possible for you to easily build your own UI as well.
 
-Supported services: Instagram (OAuth2), Twitter (OAuth1), Foursquare (OAuth 2)
+Supported services
+
+OAuth 2
+- Instagram
+- Foursquare
+
+OAuth 1
+- Twitter
 
 Coming soon: Facebook (OAuth2)!
 
@@ -33,44 +40,33 @@ An Overview of iOSSocial
 iOSSServicesViewController
 ------------
 
-Use iOSSServicesViewController to present a list of supported services to the user. The controller is evolving, but for now, for each service, it shows the name, whether the user is authenticated, and lets the user select a service to authenticate via OAuth or logout if they are already authenticated.
+Use iOSSServicesViewController to present a list of supported services to the user. The controller is evolving, but for now, it shows a list of available services to connect to (based on the services you choose to configure. Read below on services.):
+
+[![](http://dl.dropbox.com/u/5390704/Screenshot_6.png)](http://dl.dropbox.com/u/5390704/Screenshot_6.png)
+
+When a service is chosen, the OAuth page for the service is shown:
+
+[![](http://dl.dropbox.com/u/5390704/Screenshot_7.png)](http://dl.dropbox.com/u/5390704/Screenshot_7.png)
+
+If the user authenticates for the service, their user account is shown as connected under the accounts section:
+
+[![](http://dl.dropbox.com/u/5390704/Screenshot_8.png)](http://dl.dropbox.com/u/5390704/Screenshot_8.png)
+
+Selecting an already connected account logs the user out of that account (ie, clears out their locally stored OAuth access token for their account on the given service). Selected a disconnected account will let the user log back in:
+
+[![](http://dl.dropbox.com/u/5390704/Screenshot_9.png)](http://dl.dropbox.com/u/5390704/Screenshot_9.png)
 
 <pre><code>
 #import "iOSSServicesViewController.h"
-#import "iOSServicesDataSource.h"
-#Import "iOSSService.h"
-	
-NSMutableArray *services = [NSMutableArray array];
 
-NSMutableDictionary *serviceDictionary = [NSMutableDictionary dictionary];
-[serviceDictionary setObject:@"Twitter" forKey:@"name"];
-NSURL *photoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
-[serviceDictionary setObject:photoURL forKey:@"photoURL"];
-[serviceDictionary setObject:[LocalTwitterUser localTwitterUser] forKey:@"localUser"];
-
-iOSSService *twitter = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-[services addObject:twitter];
-
-[serviceDictionary removeAllObjects];
-[serviceDictionary setObject:@"Foursquare" forKey:@"name"];
-photoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
-[serviceDictionary setObject:photoURL forKey:@"photoURL"];
-[serviceDictionary setObject:[LocalFoursquareUser localFoursquareUser] forKey:@"localUser"];
-
-iOSSService *foursquare = [[iOSSService alloc] initWithDictionary:serviceDictionary];
-[services addObject:foursquare];
-
-iOSServicesDataSource *dataSource = [[iOSServicesDataSource alloc] initWithSources:services];
-dataSource.displayDoneButton = YES;
-dataSource.message = @"Meh";
-
-iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] initWithDataSource:dataSource];
+iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
 iossServicesViewController.serviceControllerDelegate = self;
 [self.navigationController pushViewController:iossServicesViewController animated:YES];
            
 </pre></code>
 
 [![](http://dl.dropbox.com/u/5390704/Screenshot_1.png)](http://dl.dropbox.com/u/5390704/Screenshot_1.png)
+
    
 Instagram
 ------------
