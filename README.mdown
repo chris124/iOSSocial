@@ -115,41 +115,26 @@ Which services you want to use is up to you. The underlying code will automatica
 Local User Accounts
 ------------
 
-http://instagram.com/developer/auth/
+Local user accounts...blah blah
+
 <pre><code>
-#import "LocalInstagramUser.h"
+	
+id<iOSSocialLocalUserProtocol> localUser = [[iOSSocialServicesStore sharedServiceStore] defaultAccount];
 
-// Note: For Instagram, when setting the object for the kSMOAuth2RedirectURI key in the OAuth params
-// dictionary, the URL specified MUST match the callback URL you specified when you created your 
-// Instagram application on their site. It doesn't matter what the URL actually points to, but 
-// the value specified here HAS to match what you specified when you created your Instagram app.
-
-NSMutableDictionary *params = [NSMutableDictionary dictionary];
-[params setObject:@"Instagram Client ID for your Application" forKey:kSMOAuth2ClientID];
-[params setObject:@"Instagram Client Secret for your Application" forKey:kSMOAuth2ClientSecret];
-[params setObject:@"Instagram Callback for your Application" forKey:kSMOAuth2RedirectURI];
-[params setObject:@"Instagram Keychain name of your choosing" forKey:kSMOAuth2KeychainItemName];
-[params setObject:@"Instagram OAuth Authorize URL" forKey:kSMOAuth2AuthorizeURL];
-[params setObject:@"Instagram OAuth Access Token URL" forKey:kSMOAuth2AccessTokenURL];
-[params setObject:@"Instagram Service name of your choosing" forKey:kSMOAuth2ServiceProviderName];
-[params setObject:@"basic comments relationships likes" forKey:kSMOAuth2Scope];
-[[LocalInstagramUser localInstagramUser] assignOAuthParams:params];
-
-BOOL isAuthenticated = [[LocalInstagramUser localInstagramUser] isAuthenticated];
+BOOL isAuthenticated = [localUser isAuthenticated];
 
 // The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
 
-// These are the available scopes for Instagram. They MUST be separated by a space!!!
-NSString *scope = @"basic comments relationships likes";
-[[LocalInstagramUser localInstagramUser] authenticateWithScope:scope  
-                                            fromViewController:self 
-                                         withCompletionHandler:^(NSError *error){
-                                             if (!error) {
-                                                 NSString *accessToken = [[LocalInstagramUser localInstagramUser] oAuthAccessToken];
-                                             }}];
+[localUser authenticateFromViewController:self 
+                                       withCompletionHandler:^(NSError *error){
+                                              if (error) {
+                                              } else {
+													NSString *accessToken = [localUser oAuthAccessToken];
+                                              }
+                                          }];
 
 // Logging out is easy peasy. Note that this does NOT revoke the user's access to the actual service on their site. It just clears out 
 // all of the local OAuth goodies.
-[[LocalInstagramUser localInstagramUser] logout];
+[localUser logout];
 
 </pre></code>
