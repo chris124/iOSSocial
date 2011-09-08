@@ -7,15 +7,15 @@
 //
 
 #import "InstaBetaAppDelegate.h"
-//#import "LocalInstagramUser.h"
-#import "Instagram.h"
-//#import "LocalTwitterUser.h"
-#import "Twitter.h"
-//#import "LocalFoursquareUser.h"
-#import "Foursquare.h"
-#import "iOSSocialServiceOAuth1ProviderConstants.h"
-#import "iOSSocialServiceOAuth2ProviderConstants.h"
 #import "InstaBetaViewController.h"
+//OAuth 2 Services
+#import "Instagram.h"
+#import "Foursquare.h"
+#import "iOSSocialServiceOAuth2ProviderConstants.h"
+//OAuth 1 Services
+#import "Twitter.h"
+#import "iOSSocialServiceOAuth1ProviderConstants.h"
+
 
 @implementation InstaBetaAppDelegate
 
@@ -25,10 +25,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"3f4667293dac44c8bdc304c658cc2904" forKey:kSMOAuth2ClientID];
-    [params setObject:@"bf8eeb4494f041d18142da9189895132" forKey:kSMOAuth2ClientSecret];
-    [params setObject:@"http://www.betaworks.com/instagram/callback" forKey:kSMOAuth2RedirectURI];
-    [params setObject:@"InstaBeta_Instagram_Service" forKey:kSMOAuth2KeychainItemName];
+    [params setObject:@"" forKey:kSMOAuth2ClientID];
+    [params setObject:@"" forKey:kSMOAuth2ClientSecret];
+    [params setObject:@"" forKey:kSMOAuth2RedirectURI];
+    [params setObject:@"" forKey:kSMOAuth2KeychainItemName];
     [params setObject:@"https://api.instagram.com/oauth/authorize" forKey:kSMOAuth2AuthorizeURL];
     [params setObject:@"https://api.instagram.com/oauth/access_token" forKey:kSMOAuth2AccessTokenURL];
     [params setObject:@"Instagram Service" forKey:kSMOAuth2ServiceProviderName];
@@ -37,10 +37,10 @@
     
     [params removeAllObjects];
     
-    [params setObject:@"Z9AO3zqCciZdrtHhiNn44A" forKey:kSMOAuth1ClientID];
-    [params setObject:@"2sCNA9kvREvJrV3CBGFEIMSoh5Ps6ZCe1dHi0uLSU" forKey:kSMOAuth1ClientSecret];
-    [params setObject:@"http://www.betaworks.com/twitter/callback" forKey:kSMOAuth1RedirectURI];
-    [params setObject:@"InstaBeta_Twitter_Service" forKey:kSMOAuth1KeychainItemName];
+    [params setObject:@"" forKey:kSMOAuth1ClientID];
+    [params setObject:@"" forKey:kSMOAuth1ClientSecret];
+    [params setObject:@"" forKey:kSMOAuth1RedirectURI];
+    [params setObject:@"" forKey:kSMOAuth1KeychainItemName];
     [params setObject:@"https://api.twitter.com/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
     [params setObject:@"https://api.twitter.com/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
     [params setObject:@"https://api.twitter.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
@@ -49,10 +49,10 @@
     
     [params removeAllObjects];
     
-    [params setObject:@"05YJJG1A2AFBRXP0YXIO00LQAVYD32HLEPYIS4RFTPUKFW0M" forKey:kSMOAuth2ClientID];
-    [params setObject:@"0Y043POOM2FTTGWSDSY5CYMTENPLV2EOQXUVG5GFFQ5HXUWD" forKey:kSMOAuth2ClientSecret];
-    [params setObject:@"http://www.betaworks.com/foursquare/callback" forKey:kSMOAuth2RedirectURI];
-    [params setObject:@"InstaBeta_Foursquare_Service" forKey:kSMOAuth2KeychainItemName];
+    [params setObject:@"" forKey:kSMOAuth2ClientID];
+    [params setObject:@"" forKey:kSMOAuth2ClientSecret];
+    [params setObject:@"" forKey:kSMOAuth2RedirectURI];
+    [params setObject:@"" forKey:kSMOAuth2KeychainItemName];
     [params setObject:@"https://foursquare.com/oauth2/authorize" forKey:kSMOAuth2AuthorizeURL];
     [params setObject:@"https://foursquare.com/oauth2/access_token" forKey:kSMOAuth2AccessTokenURL];
     [params setObject:@"Foursquare Service" forKey:kSMOAuth2ServiceProviderName];
