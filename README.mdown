@@ -1,7 +1,7 @@
 iOSSocial
 =======
 
-iOSSocial is a collection of classes that makes it easy to integrate with one or more popular social networks. Includes OAuth authentication support for each service out-of-the box via view controllers and saving of OAuth tokens in the keychain. The underlying data model makes it possible for you to easily build your own UI as well.
+iOSSocial is a collection of classes that makes it easy to integrate with one or more popular social networks. Includes OAuth authentication support for each service out-of-the box via view controllers (The underlying data model makes it possible for you to easily build your own UI as well.) and saving of OAuth tokens in the keychain. The code supports authenticating multiple accounts for a given service and also the concept of setting a particular service as the primary service to be used for authentication.
 
 Supported services:
 
@@ -37,7 +37,7 @@ An Overview of iOSSocial
 iOSSServicesViewController
 ------------
 
-Use iOSSServicesViewController to present a list of supported services to the user. The controller is evolving, but for now, it shows a list of available services to connect to (based on the services you choose to configure. Read below on services.):
+Use iOSSServicesViewController to present a list of supported services to the user. The controller is evolving, but for now, it shows a list of available services to connect to (based on the services you choose to configure. Read below on iOSSocialServiceProtocol.):
 
 [![](http://dl.dropbox.com/u/5390704/Screenshot_6.png)](http://dl.dropbox.com/u/5390704/Screenshot_6.png)
 
@@ -55,25 +55,24 @@ Selecting an already connected account logs the user out of that account (ie, cl
 
 Here is the code in action:
 
-<pre><code>
 iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
 iossServicesViewController.serviceControllerDelegate = self;
 [self.navigationController pushViewController:iossServicesViewController animated:YES];
-           
-</pre></code>
 
-Services
+
+iOSSocialServiceProtocol
 ------------   
 
 Which services you want to use is up to you. The underlying code will automatically pick-up which services are available based on what you configure. It is recommended that the services be configured in your application delegate before calling any other code. Here is an example of how the Instagram, Twitter, and Foursquare services are configured in an application delegate:
 
-<pre><code>
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// Note: For Instagram, when setting the object for the kSMOAuth2RedirectURI key in the OAuth params
 	// dictionary, the URL specified MUST match the callback URL you specified when you created your 
 	// Instagram application on their site. It doesn't matter what the URL actually points to, but 
 	// the value specified here HAS to match what you specified when you created your Instagram app.
+	
+	// Note: Be passing YES to the asPrimary parameter, we are stating that Instagram is going to be the primary service for authentication.
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
 	[params setObject:@"instagram app client id" forKey:kSMOAuth2ClientID];
 	[params setObject:@"instagram app client secret" forKey:kSMOAuth2ClientSecret];
@@ -110,15 +109,14 @@ Which services you want to use is up to you. The underlying code will automatica
 
 	...
 }
-</pre></code>
 
-Local User Accounts
+
+iOSSocialLocalUserProtocol
 ------------
 
-Local user accounts...blah blah
-
-<pre><code>
+Local user account objects are used to represent an authenticated user account for a given service. All of the local user account classes adhere to iOSSocialLocalUserProtocol. The available classes are LocalInstagramUser, LocalTwitterUser, and LocalFoursquareUser (more to come as more services are supported). These derived classes can be created directly or if you just want to get an instance of a local user object for whichever service was set at the primary service you can call [[iOSSocialServicesStore sharedServiceStore] defaultAccount]. Once you have a local user account object, you can authenticate it, query its authentication state, log it out, get its OAuth access token and more. See the code below:
 	
+// The defaultAccount method returns an local user object for the service that was set as the primary service.
 id<iOSSocialLocalUserProtocol> localUser = [[iOSSocialServicesStore sharedServiceStore] defaultAccount];
 
 BOOL isAuthenticated = [localUser isAuthenticated];
@@ -126,15 +124,76 @@ BOOL isAuthenticated = [localUser isAuthenticated];
 // The OAuth View Controller is shown modally from the current view controller so pass in 'self' for the 'fromViewController' param.
 
 [localUser authenticateFromViewController:self 
-                                       withCompletionHandler:^(NSError *error){
-                                              if (error) {
-                                              } else {
-													NSString *accessToken = [localUser oAuthAccessToken];
-                                              }
-                                          }];
+                    withCompletionHandler:^(NSError *error){
+                        if (error) {
+                        } else {
+						    NSString *accessToken = [localUser oAuthAccessToken];
+                        }
+                    }];
 
 // Logging out is easy peasy. Note that this does NOT revoke the user's access to the actual service on their site. It just clears out 
 // all of the local OAuth goodies.
 [localUser logout];
 
-</pre></code>
+
+iOSServicesDataSource
+------------
+
+iOSSServicesViewController is powered by iOSServicesDataSource. If you want to use your own UI, you can take a look at how iOSSServicesViewController uses iOSServicesDataSource.
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+            case 0:
+        {
+			//get back a local user object here. if authenticated, logout and vice versa.
+            id<iOSSocialLocalUserProtocol> localUser = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
+
+            if ([localUser isAuthenticated]) {
+                [localUser logout];
+                [self refreshUI];
+            } else {
+                [localUser authenticateFromViewController:self 
+                                    withCompletionHandler:^(NSError *error){
+                                        if (!error) {
+                                            [self refreshUI];
+                                        }
+                                    }];
+            }
+        }
+            break;
+        case 1:
+        {
+            //get back a service object here.
+            
+            id<iOSSocialServiceProtocol> service = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
+            
+            id<iOSSocialLocalUserProtocol> localUser = [service localUser];
+            
+            [localUser authenticateFromViewController:self 
+                                withCompletionHandler:^(NSError *error){
+                                    if (!error) {
+                                        [self refreshUI];
+                                    }
+                                }];
+        }
+            break;
+        case 2:
+        {
+            //the done button was pressed
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+
+Adding Support for a New Service
+------------
+
+There are a lot of services to support and this is where you come in. :) To add support for a new service, fork the repo, create a branch and give it a good name, create a sub folder and name it after the service and then create the three following files (You can copy and paste the content from one of the other services. Please bare with me for now. Lots of duplicate code. Need to doa major code cleanup.):
+
+1. Service.m/.h: This class must implement iOSSocialServiceProtocol and be derived from iOSSocialServiceProtocol or iOSSocialServiceOAuth2Provider depending on if its an OAuth1 or OAuth2 service. See Instagram.m/.h.
+2. ServiceUser.m/.h: This class must implement iOSSocialUserProtocol. See InstagramUser.m/.h.
+3. LocalServiceUser.m/.h: This class must implement toiOSSocialLocalUserProtocol. See LocalInstagramUser.m/.h.
