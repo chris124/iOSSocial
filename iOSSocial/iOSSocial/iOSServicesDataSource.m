@@ -33,8 +33,6 @@
  };
  */
 
-static iOSServicesDataSource *servicesDataSource = nil;
-
 @interface iOSServicesDataSource ()
 
 @property(nonatomic, readwrite, assign) NSInteger count;

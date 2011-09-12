@@ -11,6 +11,7 @@
 #import "iOSSocialOAuth.h"
 
 @class GTMOAuth2Authentication;
+@class GTMOAuthAuthenticationWithAdditions;
 @interface iOSSocialServiceOAuth2Provider : NSObject
 
 // See iOSSocialServiceOAuth2ProviderConstants.h for the Keys for this dictionary.
@@ -31,5 +32,7 @@
 - (NSString*)apiKey;
 
 - (NSString*)apiSecret;
+
+- (NSString*)authorizationHeaderForRequest:(NSURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth;
 
 @end

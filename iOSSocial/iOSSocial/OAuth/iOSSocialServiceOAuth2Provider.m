@@ -12,6 +12,7 @@
 #import "GTMOAuth2SignIn.h"
 #import "iOSSLog.h"
 #import "iOSSocialServiceOAuth2ProviderConstants.h"
+#import "GTMOAuthAuthentication+Additions.h"
 
 
 @interface iOSSocialServiceOAuth2Provider ()
@@ -217,6 +218,11 @@
 - (NSString*)apiSecret
 {
     return self.clientSecret;
+}
+
+- (NSString*)authorizationHeaderForRequest:(NSURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth;
+{
+    return nil;
 }
 
 @end
