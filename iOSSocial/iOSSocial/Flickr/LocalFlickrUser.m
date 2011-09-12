@@ -12,7 +12,6 @@
 #import "iOSSRequest.h"
 #import "GTMOAuthAuthentication+Additions.h"
 #import "iOSSLog.h"
-#import <CommonCrypto/CommonDigest.h>
 
 NSString *const iOSSDefaultsKeyFlickrUserDictionary    = @"ioss_FlickrUserDictionary";
 
@@ -24,10 +23,6 @@ static LocalFlickrUser *localFlickrUser = nil;
 @property(nonatomic, retain)    GTMOAuthAuthenticationWithAdditions *auth;
 @property(nonatomic, retain)    NSString *keychainItemName;
 @property(nonatomic, retain)    NSString *uuidString;
-
-//+ (NSString *)signedQueryFromArguments:(NSDictionary *)inArguments;
-+ (NSString *)OFMD5HexStringFromNSString:(NSString *)inStr;
-//+ (NSString *)OFEscapedURLStringFromNSString:(NSString *)inStr;
 
 @end
 
@@ -130,103 +125,8 @@ static LocalFlickrUser *localFlickrUser = nil;
     return YES;
 }
 
-+ (NSString *)OFMD5HexStringFromNSString:(NSString *)inStr
-{
-    const char *data = [inStr UTF8String];
-    CC_LONG length = (CC_LONG) strlen(data);
-    
-    unsigned char *md5buf = (unsigned char*)calloc(1, CC_MD5_DIGEST_LENGTH);
-    
-    CC_MD5_CTX md5ctx;
-    CC_MD5_Init(&md5ctx);
-    CC_MD5_Update(&md5ctx, data, length);
-    CC_MD5_Final(md5buf, &md5ctx);
-    
-    NSMutableString *md5hex = [NSMutableString string];
-	size_t i;
-    for (i = 0 ; i < CC_MD5_DIGEST_LENGTH ; i++) {
-        [md5hex appendFormat:@"%02x", md5buf[i]];
-    }
-    free(md5buf);
-    return md5hex;
-}
-
-- (NSArray *)signedArgumentComponentsFromArguments:(NSDictionary *)inArguments useURIEscape:(BOOL)inUseEscape
-{
-    NSMutableDictionary *newArgs = [NSMutableDictionary dictionaryWithDictionary:inArguments];
-    NSString *key = [[Flickr sharedService] apiKey];
-	if ([key length]) {
-		[newArgs setObject:key forKey:@"api_key"];
-	}
-	
-    NSString *authToken = [self oAuthAccessToken];
-	if ([authToken length]) {
-		[newArgs setObject:authToken forKey:@"auth_token"];
-	}
-	
-	// combine the args
-    NSString *sharedSecret = [[Flickr sharedService] apiSecret];
-	NSMutableArray *argArray = [NSMutableArray array];
-	NSMutableString *sigString = [NSMutableString stringWithString:[sharedSecret length] ? sharedSecret : @""];
-	NSArray *sortedArgs = [[newArgs allKeys] sortedArrayUsingSelector:@selector(compare:)];
-	NSEnumerator *argEnumerator = [sortedArgs objectEnumerator];
-	NSString *nextKey;
-	while ((nextKey = [argEnumerator nextObject])) {
-		NSString *value = [newArgs objectForKey:nextKey];
-		[sigString appendFormat:@"%@%@", nextKey, value];
-        
-        CFStringRef escaped = CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)value, NULL, CFSTR("@&"), kCFStringEncodingUTF8);
-
-        NSString *escapedString = (__bridge NSString*)escaped;
-        
-		[argArray addObject:[NSArray arrayWithObjects:nextKey, (inUseEscape ? escapedString : value), nil]];
-        
-        CFRelease(escaped);
-	}
-	
-	NSString *signature = [LocalFlickrUser OFMD5HexStringFromNSString:sigString];    
-    [argArray addObject:[NSArray arrayWithObjects:@"api_sig", signature, nil]];
-	return argArray;
-}
-/*
-+ (NSString *)OFEscapedURLStringFromNSString:(NSString *)inStr
-{
-	CFStringRef escaped = CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)inStr, NULL, CFSTR("&"), kCFStringEncodingUTF8);
-    
-#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4	
-	return (NSString *)[(NSString*)escaped autorelease];			    
-#else
-	return (NSString *)NSMakeCollectable(escaped);			    
-#endif
-}
-*/
-- (NSString *)signedQueryFromArguments:(NSDictionary *)inArguments
-{
-    NSArray *argComponents = [self signedArgumentComponentsFromArguments:inArguments useURIEscape:YES];
-    NSMutableArray *args = [NSMutableArray array];
-    NSEnumerator *componentEnumerator = [argComponents objectEnumerator];
-    NSArray *nextArg;
-    while ((nextArg = [componentEnumerator nextObject])) {
-        [args addObject:[nextArg componentsJoinedByString:@"="]];
-    }
-    
-    return [args componentsJoinedByString:@"&"];
-}
-
 - (NSURL*)authorizedURL:(NSURL*)theURL
 {
-    //add on api_key
-    //add on api_sig
-    //add on 
-    
-    /*
-     // combine the parameters 
-     NSMutableDictionary *newArgs = inArguments ? [NSMutableDictionary dictionaryWithDictionary:inArguments] : [NSMutableDictionary dictionary];
-     [newArgs setObject:inMethodName forKey:@"method"];	
-     NSString *query = [context signedQueryFromArguments:newArgs];
-     NSString *URLString = [NSString stringWithFormat:@"%@?%@", [context RESTAPIEndpoint], query];
-     */
-    
     NSString *access_token = [NSString stringWithFormat:@"?auth_token=%@", [self oAuthAccessToken]];
     NSURL *url = [NSURL URLWithString:access_token relativeToURL:theURL];
     
@@ -285,7 +185,7 @@ static LocalFlickrUser *localFlickrUser = nil;
                                          andKeychainItemName:self.keychainItemName 
                                              andCookieDomain:@"flickr.com" 
                                        withCompletionHandler:^(GTMOAuthAuthentication *theAuth, NSDictionary *userInfo, NSError *error) {
-            self.auth = theAuth;
+            self.auth = (GTMOAuthAuthenticationWithAdditions*)theAuth;
             if (error) {
                 if (self.authenticationHandler) {
                     self.authenticationHandler(error);
