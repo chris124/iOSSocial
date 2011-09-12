@@ -172,8 +172,6 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 - (void)authenticateFromViewController:(UIViewController*)vc 
                  withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
-    //assert if foursquare is nil. params have not been set!
-    
     self.authenticationHandler = completionHandler;
     
     //cwnote: also see if permissions have changed!!!
