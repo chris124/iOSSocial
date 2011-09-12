@@ -10,21 +10,27 @@
 #import <UIKit/UIKit.h>
 #import "iOSSocialOAuth.h"
 
-@class GTMOAuthAuthentication;
+@class GTMOAuthAuthenticationWithAdditions;
 @interface iOSSocialServiceOAuth1Provider : NSObject
 
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 
-- (GTMOAuthAuthentication*)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
+- (GTMOAuthAuthenticationWithAdditions*)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
 
 - (void)assignOAuthParams:(NSDictionary*)params;
 
 - (void)authorizeFromViewController:(UIViewController*)vc 
-                            forAuth:(GTMOAuthAuthentication*)theAuth 
+                            forAuth:(GTMOAuthAuthenticationWithAdditions*)theAuth 
                 andKeychainItemName:(NSString*)theKeychainItemName 
                     andCookieDomain:(NSString*)cookieDomain
               withCompletionHandler:(AuthorizationHandler)completionHandler;
 
-- (void)logout:(GTMOAuthAuthentication*)theAuth forKeychainItemName:(NSString*)theKeychainItemName;
+- (void)logout:(GTMOAuthAuthenticationWithAdditions*)theAuth forKeychainItemName:(NSString*)theKeychainItemName;
+
+- (NSString*)apiKey;
+
+- (NSString*)apiSecret;
+
+- (NSString*)authorizationHeaderForRequest:(NSURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth;
 
 @end

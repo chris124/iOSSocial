@@ -20,9 +20,11 @@
 @property(nonatomic, readwrite, retain) NSDictionary *parameters;
 @property(nonatomic, readwrite, assign) iOSSRequestMethod requestMethod;
 @property(nonatomic, readwrite, retain) NSURL *URL;
-@property(nonatomic, copy)      iOSSRequestHandler requestHandler;
-@property(nonatomic, retain) iOSSConnection *connection;
-@property(nonatomic, retain) ASIFormDataRequest *request;
+@property(nonatomic, copy)              iOSSRequestHandler requestHandler;
+@property(nonatomic, retain)            iOSSConnection *connection;
+@property(nonatomic, retain)            ASIFormDataRequest *request;
+@property(nonatomic, assign)            BOOL requiresAuthentication;
+@property(nonatomic, retain)            NSString *oauth_header;
 
 @end
 
@@ -34,6 +36,8 @@
 @synthesize requestHandler;
 @synthesize connection;
 @synthesize request;
+@synthesize requiresAuthentication;
+@synthesize oauth_header;
 
 - (id)init
 {
@@ -94,6 +98,7 @@
     [self release];
 }
 */
+
 - (void)performRequestWithHandler:(iOSSRequestHandler)handler
 {
     self.requestHandler = handler;
@@ -104,6 +109,10 @@
         case iOSSRequestMethodGET:
         {
             self.request = [ASIHTTPRequest requestWithURL:self.URL];
+            if (self.requiresAuthentication && self.oauth_header) {
+                [request addRequestHeader:@"Authorization" value:self.oauth_header];
+                self.oauth_header = nil;
+            }
             self.request.completionBlock = ^(void) {
                 if (theRequest.requestHandler) {
                     //NSError *error = nil;
@@ -151,6 +160,10 @@
         case iOSSRequestMethodPOST:
         {
             self.request = [ASIFormDataRequest requestWithURL:self.URL];
+            if (self.requiresAuthentication && self.oauth_header) {
+                [request addRequestHeader:@"Authorization" value:self.oauth_header];
+                self.oauth_header = nil;
+            }
             
             NSArray *keys = [self.parameters allKeys];
             for (NSString *key in keys) {
@@ -202,6 +215,12 @@
     
     //now start the connection
     [self.connection start];
+}
+
+- (void)requiresOAuth1AuthenticationWithParams:(NSString*)oauthHeaderString
+{
+    self.requiresAuthentication = YES;
+    self.oauth_header = oauthHeaderString;
 }
 
 @end

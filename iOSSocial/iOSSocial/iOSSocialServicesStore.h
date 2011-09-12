@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "iOSSocialOAuth.h"
 
-@class GTMOAuthAuthentication;
+@class GTMOAuthAuthenticationWithAdditions;
 @class GTMOAuth2Authentication;
 @protocol iOSSocialLocalUserProtocol;
 
@@ -41,6 +41,12 @@
 - (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid;
 
 - (void)logout:(id)theAuth forKeychainItemName:(NSString*)theKeychainItemName;
+
+- (NSString*)apiKey;
+
+- (NSString*)apiSecret;
+
+- (NSString*)authorizationHeaderForRequest:(NSURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth;
 
 @end
 

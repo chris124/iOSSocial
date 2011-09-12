@@ -28,4 +28,8 @@
 
 - (void)logout:(GTMOAuth2Authentication*)theAuth forKeychainItemName:(NSString*)theKeychainItemName;
 
+- (NSString*)apiKey;
+
+- (NSString*)apiSecret;
+
 @end

@@ -209,4 +209,14 @@
     //theAuth = nil;
 }
 
+- (NSString*)apiKey
+{
+    return self.clientID;
+}
+
+- (NSString*)apiSecret
+{
+    return self.clientSecret;
+}
+
 @end

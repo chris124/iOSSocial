@@ -109,11 +109,14 @@
         [self.viewController dismissModalViewControllerAnimated:YES];
         
         //cwnote: make these keys constants!!!
-        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-        [dictionary setObject:newAuth.userID forKey:@"id"];
-        [dictionary setObject:newAuth.username forKey:@"username"];
-        [userInfo setObject:dictionary forKey:@"user"];
+        NSMutableDictionary *userInfo = nil;
+        if (newAuth.userID && newAuth.username) {
+            userInfo = [NSMutableDictionary dictionary];
+            NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+            [dictionary setObject:newAuth.userID forKey:@"id"];
+            [dictionary setObject:newAuth.username forKey:@"username"];
+            [userInfo setObject:dictionary forKey:@"user"];
+        }
         
         if (self.authenticationHandler) {
             self.authenticationHandler(newAuth, userInfo, nil);
@@ -217,6 +220,21 @@
     
     // Discard our retained authentication object.
     //theAuth = nil;
+}
+
+- (NSString*)apiKey
+{
+    return self.clientID;
+}
+
+- (NSString*)apiSecret
+{
+    return self.clientSecret;
+}
+
+- (NSString*)authorizationHeaderForRequest:(NSMutableURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth
+{
+    return [auth authorizationHeaderForRequest:request];
 }
 
 @end

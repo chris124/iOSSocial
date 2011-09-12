@@ -17,6 +17,13 @@
 		1264A14E13D08B900085E394 /* iOSSocialTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1264A14D13D08B900085E394 /* iOSSocialTests.h */; };
 		1264A15013D08B900085E394 /* iOSSocialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1264A14F13D08B900085E394 /* iOSSocialTests.m */; };
 		1264A16B13D0951E0085E394 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A16A13D0951E0085E394 /* UIKit.framework */; };
+		126770E1141A5AD900EB2A3C /* Flickr.h in Headers */ = {isa = PBXBuildFile; fileRef = 126770DA141A5AD900EB2A3C /* Flickr.h */; };
+		126770E2141A5AD900EB2A3C /* Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 126770DB141A5AD900EB2A3C /* Flickr.m */; };
+		126770E3141A5AD900EB2A3C /* FlickrUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126770DC141A5AD900EB2A3C /* FlickrUser.h */; };
+		126770E4141A5AD900EB2A3C /* FlickrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126770DD141A5AD900EB2A3C /* FlickrUser.m */; };
+		126770E5141A5AD900EB2A3C /* FlickrUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 126770DE141A5AD900EB2A3C /* FlickrUser+Private.h */; };
+		126770E6141A5AD900EB2A3C /* LocalFlickrUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126770DF141A5AD900EB2A3C /* LocalFlickrUser.h */; };
+		126770E7141A5AD900EB2A3C /* LocalFlickrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126770E0141A5AD900EB2A3C /* LocalFlickrUser.m */; };
 		126FE23513D9C28E00D72D46 /* iOSSServicesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */; };
 		126FE23613D9C28E00D72D46 /* iOSSServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */; };
 		127E1D3C140A8F1000F815D6 /* iOSSocialAccountTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 127E1D3A140A8F1000F815D6 /* iOSSocialAccountTableViewCell.h */; };
@@ -315,6 +322,13 @@
 		1264A14D13D08B900085E394 /* iOSSocialTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOSSocialTests.h; sourceTree = "<group>"; };
 		1264A14F13D08B900085E394 /* iOSSocialTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSSocialTests.m; sourceTree = "<group>"; };
 		1264A16A13D0951E0085E394 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		126770DA141A5AD900EB2A3C /* Flickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flickr.h; path = Flickr/Flickr.h; sourceTree = "<group>"; };
+		126770DB141A5AD900EB2A3C /* Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Flickr.m; path = Flickr/Flickr.m; sourceTree = "<group>"; };
+		126770DC141A5AD900EB2A3C /* FlickrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlickrUser.h; path = Flickr/FlickrUser.h; sourceTree = "<group>"; };
+		126770DD141A5AD900EB2A3C /* FlickrUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlickrUser.m; path = Flickr/FlickrUser.m; sourceTree = "<group>"; };
+		126770DE141A5AD900EB2A3C /* FlickrUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FlickrUser+Private.h"; path = "Flickr/FlickrUser+Private.h"; sourceTree = "<group>"; };
+		126770DF141A5AD900EB2A3C /* LocalFlickrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalFlickrUser.h; path = Flickr/LocalFlickrUser.h; sourceTree = "<group>"; };
+		126770E0141A5AD900EB2A3C /* LocalFlickrUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalFlickrUser.m; path = Flickr/LocalFlickrUser.m; sourceTree = "<group>"; };
 		126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSServicesViewController.h; sourceTree = "<group>"; };
 		126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSServicesViewController.m; sourceTree = "<group>"; };
 		127E1D3A140A8F1000F815D6 /* iOSSocialAccountTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialAccountTableViewCell.h; sourceTree = "<group>"; };
@@ -505,6 +519,7 @@
 		1264A13113D08B900085E394 /* iOSSocial */ = {
 			isa = PBXGroup;
 			children = (
+				126770CF141A5AC700EB2A3C /* Flickr */,
 				1286BCD113EC575B00A12786 /* prp */,
 				1286BCA313EC568400A12786 /* asi-http-request */,
 				12AB3BBA13DF848500565332 /* OAuth */,
@@ -590,6 +605,20 @@
 				12AB358313DDBAE100565332 /* GTMOAuth2SignIn.m */,
 			);
 			name = "gtm-oauth2";
+			sourceTree = "<group>";
+		};
+		126770CF141A5AC700EB2A3C /* Flickr */ = {
+			isa = PBXGroup;
+			children = (
+				126770DA141A5AD900EB2A3C /* Flickr.h */,
+				126770DB141A5AD900EB2A3C /* Flickr.m */,
+				126770DC141A5AD900EB2A3C /* FlickrUser.h */,
+				126770DD141A5AD900EB2A3C /* FlickrUser.m */,
+				126770DE141A5AD900EB2A3C /* FlickrUser+Private.h */,
+				126770DF141A5AD900EB2A3C /* LocalFlickrUser.h */,
+				126770E0141A5AD900EB2A3C /* LocalFlickrUser.m */,
+			);
+			name = Flickr;
 			sourceTree = "<group>";
 		};
 		126FE22113D9C13600D72D46 /* Log */ = {
@@ -911,6 +940,10 @@
 				127E1D9C140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.h in Headers */,
 				127E1DDA140ABCCA00F815D6 /* iOSSocialConstants.h in Headers */,
 				127E1DDE140B1A9500F815D6 /* iOSSocialServicesNavigationController.h in Headers */,
+				126770E1141A5AD900EB2A3C /* Flickr.h in Headers */,
+				126770E3141A5AD900EB2A3C /* FlickrUser.h in Headers */,
+				126770E5141A5AD900EB2A3C /* FlickrUser+Private.h in Headers */,
+				126770E6141A5AD900EB2A3C /* LocalFlickrUser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1212,6 +1245,9 @@
 				127E1D97140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.m in Sources */,
 				127E1D9D140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				127E1DDF140B1A9500F815D6 /* iOSSocialServicesNavigationController.m in Sources */,
+				126770E2141A5AD900EB2A3C /* Flickr.m in Sources */,
+				126770E4141A5AD900EB2A3C /* FlickrUser.m in Sources */,
+				126770E7141A5AD900EB2A3C /* LocalFlickrUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,6 +36,4 @@ typedef void(^iOSSRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlRe
 
 - (void)performRequestWithHandler:(iOSSRequestHandler)handler;
 
-- (void)requiresOAuth1AuthenticationWithParams:(NSString*)oauthHeaderString;
-
 @end
