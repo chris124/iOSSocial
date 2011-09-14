@@ -8,8 +8,8 @@
 
 #import "iOSSRequest.h"
 //#import "UIApplication+iOSSNetworkActivity.h"
-#import "iOSSConnection.h"
 #import "ASIFormDataRequest.h"
+#import "ASIOARequest.h"
 
 @interface iOSSRequest () {
     NSDictionary *_parameters;
@@ -21,10 +21,8 @@
 @property(nonatomic, readwrite, assign) iOSSRequestMethod requestMethod;
 @property(nonatomic, readwrite, retain) NSURL *URL;
 @property(nonatomic, copy)              iOSSRequestHandler requestHandler;
-@property(nonatomic, retain)            iOSSConnection *connection;
-@property(nonatomic, retain)            ASIFormDataRequest *request;
-@property(nonatomic, assign)            BOOL requiresAuthentication;
-@property(nonatomic, retain)            NSString *oauth_header;
+@property(nonatomic, retain)            ASIOARequest *request;
+@property(nonatomic, retain)            NSMutableArray *files;
 
 @end
 
@@ -34,10 +32,9 @@
 @synthesize requestMethod=_requestMethod;
 @synthesize URL=_URL;
 @synthesize requestHandler;
-@synthesize connection;
 @synthesize request;
-@synthesize requiresAuthentication;
-@synthesize oauth_header;
+@synthesize oauth_params;
+@synthesize files;
 
 - (id)init
 {
@@ -64,41 +61,6 @@
     return self;
 }
 
-- (void)addMultiPartData:(NSData *)data 
-                withName:(NSString *)name 
-                    type:(NSString *)type
-{
-    
-}
-
-/*
-- (void)requestFinished:(ASIHTTPRequest *)req
-{    
-    NSError *error = nil;
-    self.response = [NSDictionary dictionaryWithJSONString:[req responseString] error:&error];
-    
-    if (error) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(request:didFailWithError:)]) {
-            error = [[[NSError alloc] initWithDomain:@"JSONparseError" 
-                                                code:[req responseStatusCode] 
-                                            userInfo: [NSDictionary dictionaryWithObject:[req responseString] forKey:@"responseString"]] autorelease];
-            [self.delegate request:self didFailWithError:[req error]];
-        }
-    } else if ( ! ([[response objectForKey:@"status"] isEqualToString:@"ok"]) ) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(request:didFailWithError:)]) {
-            error = [[[NSError alloc] initWithDomain:@"serverError" code:[req responseStatusCode] userInfo:self.response ] autorelease];
-            [self.delegate request:self didFailWithError:[req error]];
-        }
-    } else {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(requestDidFinishLoading:)]) {
-            [self.delegate requestDidFinishLoading:self];
-            
-        }
-    }
-    [self release];
-}
-*/
-
 - (void)performRequestWithHandler:(iOSSRequestHandler)handler
 {
     self.requestHandler = handler;
@@ -108,16 +70,19 @@
     switch (self.requestMethod) {
         case iOSSRequestMethodGET:
         {
-            self.request = [ASIHTTPRequest requestWithURL:self.URL];
-            if (self.requiresAuthentication && self.oauth_header) {
-                [request addRequestHeader:@"Authorization" value:self.oauth_header];
-                self.oauth_header = nil;
+            self.request = [ASIOARequest requestWithURL:self.URL];
+            self.request.delegate = self;
+            self.request.requestMethod = @"GET";
+
+            if (self.oauth_params) {
+                self.request.oauthParams = self.oauth_params;
             }
+
             self.request.completionBlock = ^(void) {
                 if (theRequest.requestHandler) {
                     //NSError *error = nil;
                     //NSDictionary *response = [NSDictionary dictionaryWithJSONString:[self.request responseString] error:&error];
-                   // NSString *response = [theRequest.request responseString];
+                    // NSString *response = [theRequest.request responseString];
                     theRequest.requestHandler([theRequest.request responseData], nil, theRequest.request.error);
                 }
             };
@@ -125,49 +90,31 @@
             [self.request setFailedBlock:^(void) {
                 NSLog(@"failed");
                 if (theRequest.requestHandler) {
-                    //self.requestHandler(nil, self.request.error);
                     theRequest.requestHandler(nil, nil, theRequest.request.error);
                 }
             } ];
-            /*
-            ASIDataBlock dataBlock = ^(NSData *data) {
-                if (self.requestHandler) {
-                    self.requestHandler(theConnection.downloadData, theConnection.httpResponse, error);
-                }
-            };
-            [request setDataReceivedBlock:dataBlock];
-            */
+
             [self.request startAsynchronous];
-            
-            /*
-            self.connection = [iOSSConnection connectionWithURL:self.URL progressBlock:^(iOSSConnection *theConnection) {
-                if (theConnection) {
-                    //
-                    int i = 0;
-                    i = 1;
-                }
-            } authorizationBlock:^(iOSSConnection *theConnection) {
-                //
-            } completionBlock:^(iOSSConnection *theConnection, NSError *error) {
-                if (self.requestHandler) {
-                    self.requestHandler(theConnection.downloadData, theConnection.httpResponse, error);
-                }
-            }];
-             */
         }
             break;
             
         case iOSSRequestMethodPOST:
         {
-            self.request = [ASIFormDataRequest requestWithURL:self.URL];
-            if (self.requiresAuthentication && self.oauth_header) {
-                [request addRequestHeader:@"Authorization" value:self.oauth_header];
-                self.oauth_header = nil;
-            }
-            
+            self.request = [ASIOARequest requestWithURL:self.URL];
+            self.request.delegate = self;
+            self.request.requestMethod = @"POST";
+
             NSArray *keys = [self.parameters allKeys];
             for (NSString *key in keys) {
                 [self.request addPostValue:[self.parameters objectForKey:key] forKey:key];
+            }
+            
+            for (NSDictionary *fileDictionary in self.files) {
+                [self.request addFile:[fileDictionary objectForKey:@"path"] forKey:[fileDictionary objectForKey:@"key"]];
+            }
+            
+            if (self.oauth_params) {
+                self.request.oauthParams = self.oauth_params;
             }
             
             self.request.completionBlock = ^(void) {
@@ -177,25 +124,15 @@
                     //NSString *response = [theRequest.request responseString];
                     theRequest.requestHandler([theRequest.request responseData], nil, theRequest.request.error);
                 }
-                
-                /*
-                NSData *data = theRequest.request.responseData;
-                data = nil;
-                //if (self.requestHandler) {
-                //self.requestHandler(self.request.responseData, self.request.error);
-                //}
-                */
             };
             
             [self.request setFailedBlock:^(void) {
                 NSLog(@"failed");
                 if (theRequest.requestHandler) {
-                    //self.requestHandler(nil, self.request.error);
                     theRequest.requestHandler(nil, nil, theRequest.request.error);
                 }
             } ];
-            
-            //self.request.delegate = self;
+
             [self.request startAsynchronous];
         }
             break;
@@ -212,15 +149,16 @@
     
     //cwnote: make sure we POP!
     //[[UIApplication sharedApplication] ioss_pushNetworkActivity];
-    
-    //now start the connection
-    [self.connection start];
 }
 
-- (void)requiresOAuth1AuthenticationWithParams:(NSString*)oauthHeaderString
+- (void)addFile:(NSString*)filePath forKey:(NSString *)key
 {
-    self.requiresAuthentication = YES;
-    self.oauth_header = oauthHeaderString;
+    if (nil == self.files) {
+        self.files = [NSMutableArray array];
+    }
+    
+    NSDictionary *fileDictionary = [NSDictionary dictionaryWithObjectsAndKeys:filePath, @"path", key, @"key", nil];
+    [self.files addObject:fileDictionary];
 }
 
 @end

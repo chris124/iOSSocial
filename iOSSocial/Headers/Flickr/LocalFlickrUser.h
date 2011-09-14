@@ -14,7 +14,7 @@
 
 typedef void(^FlickrAuthenticationHandler)(NSError *error);
 
-@interface LocalFlickrUser : FlickrUser <iOSSocialLocalUserProtocol> 
+@interface LocalFlickrUser : FlickrUser <iOSSocialLocalUserProtocol, NSXMLParserDelegate> 
 
 // Obtain the LocalFlickrUser object.
 // The user is only available for offline use until logged in.
@@ -41,5 +41,7 @@ typedef void(^FlickrAuthenticationHandler)(NSError *error);
 
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
+
+- (void)postPhoto;
 
 @end

@@ -12,6 +12,4 @@
 
 @interface Instagram : iOSSocialServiceOAuth2Provider <iOSSocialServiceProtocol>
 
-+ (id)JSONFromData:(NSData*)data;
-
 @end

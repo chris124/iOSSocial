@@ -33,4 +33,6 @@
 
 - (NSString*)authorizationHeaderForRequest:(NSURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth;
 
++ (id)JSONFromData:(NSData*)data;
+
 @end

@@ -48,6 +48,8 @@
 
 - (NSString*)authorizationHeaderForRequest:(NSURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth;
 
++ (id)JSONFromData:(NSData*)data;
+
 @end
 
 @interface iOSSocialServicesStore : NSObject
@@ -59,6 +61,8 @@
 + (iOSSocialServicesStore*)sharedServiceStore;
 
 - (id<iOSSocialServiceProtocol>)serviceWithType:(NSString*)serviceName;
+
+- (id<iOSSocialLocalUserProtocol>)accountWithType:(NSString*)accountName;
 
 - (void)registerService:(id<iOSSocialServiceProtocol>)theService;
 

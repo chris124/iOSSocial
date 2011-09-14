@@ -11,5 +11,7 @@
 
 @interface InstaBetaViewController : UIViewController <iOSSServicesViewControllerDelegate>
 - (IBAction)servicesButtonPressed:(id)sender;
+- (IBAction)actionButtonPressed:(id)sender;
+- (IBAction)anotheractionButtonPressed:(id)sender;
 
 @end

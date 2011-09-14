@@ -134,11 +134,140 @@ static LocalTwitterUser *localTwitterUser = nil;
     return url;
 }
 
+- (void)getMentions
+{
+    //self.fetchUserDataHandler = completionHandler;
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://api.twitter.com/1/statuses/mentions.json"];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil  
+                                              requestMethod:iOSSRequestMethodGET];
+    
+    NSMutableDictionary *oauthParams = [NSMutableDictionary dictionary];
+    [oauthParams setObject:[[Twitter sharedService] apiKey] forKey:kASIOAuthConsumerKey];
+    [oauthParams setObject:[[Twitter sharedService] apiSecret] forKey:kASIOAuthConsumerSecret];
+    [oauthParams setObject:[self oAuthAccessToken] forKey:kASIOAuthTokenKey];
+    [oauthParams setObject:kASIOAuthSignatureMethodHMAC_SHA1 forKey:kASIOAuthSignatureMethodKey];
+    [oauthParams setObject:@"1.0" forKey:kASIOAuthVersionKey];
+    [oauthParams setObject:self.auth.tokenSecret forKey:kASIOAuthTokenSecretKey];
+    
+    request.oauth_params = oauthParams;
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(error);
+                self.fetchUserDataHandler = nil;
+            }
+        } else {
+            NSDictionary *dictionary = [Twitter JSONFromData:responseData];
+            
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler = nil;
+            }
+        }
+    }];
+}
+
+- (void)postTweet
+{
+    //self.fetchUserDataHandler = completionHandler;
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://api.twitter.com/1/statuses/update.json"];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@"bananas!" forKey:@"status"];
+    
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:params 
+                                              requestMethod:iOSSRequestMethodPOST];
+
+    NSMutableDictionary *oauthParams = [NSMutableDictionary dictionary];
+    [oauthParams setObject:[[Twitter sharedService] apiKey] forKey:kASIOAuthConsumerKey];
+    [oauthParams setObject:[[Twitter sharedService] apiSecret] forKey:kASIOAuthConsumerSecret];
+    [oauthParams setObject:[self oAuthAccessToken] forKey:kASIOAuthTokenKey];
+    [oauthParams setObject:kASIOAuthSignatureMethodHMAC_SHA1 forKey:kASIOAuthSignatureMethodKey];
+    [oauthParams setObject:@"1.0" forKey:kASIOAuthVersionKey];
+    [oauthParams setObject:self.auth.tokenSecret forKey:kASIOAuthTokenSecretKey];
+    
+    request.oauth_params = oauthParams;
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(error);
+                self.fetchUserDataHandler = nil;
+            }
+        } else {
+            NSDictionary *dictionary = [Twitter JSONFromData:responseData];
+            
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler = nil;
+            }
+        }
+    }];
+}
+
+- (void)postTweetWithMedia
+{
+    //self.fetchUserDataHandler = completionHandler;
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://upload.twitter.com/1/statuses/update_with_media.json"];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@"photo!" forKey:@"status"];
+    
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:params 
+                                              requestMethod:iOSSRequestMethodPOST];
+    
+    //NSString *photoPath = [[NSBundle mainBundle] pathForResource:@"CIMG2891" ofType:@"JPG"];
+    //[self.request setFile:photoPath forKey:@"media[]"];
+    
+    NSString *photoPath = [[NSBundle mainBundle] pathForResource:@"CIMG2891" ofType:@"JPG"];
+    [request addFile:photoPath forKey:@"media[]"];
+    
+    NSMutableDictionary *oauthParams = [NSMutableDictionary dictionary];
+    [oauthParams setObject:[[Twitter sharedService] apiKey] forKey:kASIOAuthConsumerKey];
+    [oauthParams setObject:[[Twitter sharedService] apiSecret] forKey:kASIOAuthConsumerSecret];
+    [oauthParams setObject:[self oAuthAccessToken] forKey:kASIOAuthTokenKey];
+    [oauthParams setObject:kASIOAuthSignatureMethodHMAC_SHA1 forKey:kASIOAuthSignatureMethodKey];
+    [oauthParams setObject:@"1.0" forKey:kASIOAuthVersionKey];
+    [oauthParams setObject:self.auth.tokenSecret forKey:kASIOAuthTokenSecretKey];
+    
+    request.oauth_params = oauthParams;
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(error);
+                self.fetchUserDataHandler = nil;
+            }
+        } else {
+            NSDictionary *dictionary = [Twitter JSONFromData:responseData];
+            
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler = nil;
+            }
+        }
+    }];
+}
+
 - (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
     self.fetchUserDataHandler = completionHandler;
 
-    NSString *urlString = [NSString stringWithFormat:@"http://api.twitter.com/1/users/show.json?user_id=%@", self.userID];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.twitter.com/1/users/show.json?user_id=%@", self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     
     iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
@@ -187,7 +316,7 @@ static LocalTwitterUser *localTwitterUser = nil;
                     NSDictionary *user = [userInfo objectForKey:@"user"];
                     self.userDictionary = user;
                 }
-                
+
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
                     if (!error) {
                         [[iOSSocialServicesStore sharedServiceStore] registerAccount:self];

@@ -10,6 +10,7 @@
 		126770ED141A641100EB2A3C /* flickr-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 126770EC141A641100EB2A3C /* flickr-logo.png */; };
 		127E1D89140AA43300F815D6 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 127E1D87140AA43300F815D6 /* GTMOAuth2ViewTouch.xib */; };
 		127E1D90140AA46400F815D6 /* GTMOAuthViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 127E1D8E140AA46400F815D6 /* GTMOAuthViewTouch.xib */; };
+		1293A86B141FC7F500E8AD8A /* CIMG2891.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 1293A86A141FC7F500E8AD8A /* CIMG2891.JPG */; };
 		1299F61D141E728600A3C2F3 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 1299F605141E728600A3C2F3 /* NSObject+SBJson.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1299F61E141E728600A3C2F3 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1299F608141E728600A3C2F3 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1299F61F141E728600A3C2F3 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1299F60A141E728600A3C2F3 /* SBJsonStreamParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -182,6 +183,7 @@
 		127E1D87140AA43300F815D6 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		127E1D8E140AA46400F815D6 /* GTMOAuthViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuthViewTouch.xib; sourceTree = "<group>"; };
 		127E1DDB140ABEB200F815D6 /* iOSSocialConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSocialConstants.h; path = ../Headers/iOSSocialConstants.h; sourceTree = "<group>"; };
+		1293A86A141FC7F500E8AD8A /* CIMG2891.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CIMG2891.JPG; sourceTree = "<group>"; };
 		1299F604141E728600A3C2F3 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJson.h"; path = "../../json-framework/Classes/NSObject+SBJson.h"; sourceTree = "<group>"; };
 		1299F605141E728600A3C2F3 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJson.m"; path = "../../json-framework/Classes/NSObject+SBJson.m"; sourceTree = "<group>"; };
 		1299F606141E728600A3C2F3 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJson.h; path = "../../json-framework/Classes/SBJson.h"; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 		12AB3A7213DF6D4E00565332 = {
 			isa = PBXGroup;
 			children = (
+				1293A86A141FC7F500E8AD8A /* CIMG2891.JPG */,
 				1299F603141E727B00A3C2F3 /* SBJSON */,
 				12677140141AAB0500EB2A3C /* AVFoundation.framework */,
 				127E1D8A140AA45800F815D6 /* gtm-oauth1 */,
@@ -839,6 +842,7 @@
 				127E1D89140AA43300F815D6 /* GTMOAuth2ViewTouch.xib in Resources */,
 				127E1D90140AA46400F815D6 /* GTMOAuthViewTouch.xib in Resources */,
 				126770ED141A641100EB2A3C /* flickr-logo.png in Resources */,
+				1293A86B141FC7F500E8AD8A /* CIMG2891.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

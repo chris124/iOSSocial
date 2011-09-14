@@ -13,6 +13,4 @@
 
 @interface Foursquare : iOSSocialServiceOAuth2Provider <iOSSocialServiceProtocol>
 
-+ (id)JSONFromData:(NSData*)data;
-
 @end

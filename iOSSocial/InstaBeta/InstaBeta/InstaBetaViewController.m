@@ -10,6 +10,8 @@
 #import "iOSSService.h"
 #import "iOSSocialLocalUser.h"
 #import "iOSSocialServicesStore.h"
+#import "LocalFlickrUser.h"
+#import "LocalTwitterUser.h"
 
 @interface InstaBetaViewController () 
 
@@ -95,6 +97,26 @@
     iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
     iossServicesViewController.serviceControllerDelegate = self;
     [self presentModalViewController:iossServicesViewController animated:YES];
+    
+    [iossServicesViewController presentModallyFromViewController:self withCompletionHandler:^{
+        //
+        [self dismissModalViewControllerAnimated:YES];
+    }];
+}
+
+- (IBAction)actionButtonPressed:(id)sender 
+{
+    //cwnote: update readme for iOSSocial to show this use case
+    
+    LocalTwitterUser *localTwitterUser = (LocalTwitterUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Twitter"];
+    //[localTwitterUser postTweetWithMedia];
+    [localTwitterUser postTweet];
+}
+
+- (IBAction)anotheractionButtonPressed:(id)sender 
+{
+    LocalFlickrUser *localFlickrUser = (LocalFlickrUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Flickr"];
+    [localFlickrUser postPhoto];
 }
 
 -(void)servicesViewController:(iOSSServicesViewController*)servicesController 
