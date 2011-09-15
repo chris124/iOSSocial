@@ -13,6 +13,6 @@
 @property(nonatomic, readwrite, retain) NSString *alias;
 @property(nonatomic, readwrite, retain) NSString *firstName;
 @property(nonatomic, readwrite, retain) NSString *profilePictureURL;
-@property(nonatomic, copy)      FetchUserDataHandler fetchUserDataHandler;
+@property(nonatomic, copy)              FetchUserDataHandler fetchUserDataHandler;
 
 @end

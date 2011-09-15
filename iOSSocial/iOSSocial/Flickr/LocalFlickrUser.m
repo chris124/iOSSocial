@@ -23,6 +23,10 @@ static LocalFlickrUser *localFlickrUser = nil;
 @property(nonatomic, retain)    GTMOAuthAuthenticationWithAdditions *auth;
 @property(nonatomic, retain)    NSString *keychainItemName;
 @property(nonatomic, retain)    NSString *uuidString;
+@property(nonatomic, retain)    NSMutableString *currentElementData;
+@property(nonatomic, copy)      PostPhotoDataHandler postPhotoDataHandler;
+@property(nonatomic, copy)      PhotoInfoDataHandler photoInfoDataHandler;
+@property(nonatomic, copy)      UserPhotosDataHandler userPhotosDataHandler;
 
 @end
 
@@ -35,6 +39,10 @@ static LocalFlickrUser *localFlickrUser = nil;
 @synthesize auth;
 @synthesize keychainItemName;
 @synthesize uuidString;
+@synthesize currentElementData;
+@synthesize postPhotoDataHandler;
+@synthesize photoInfoDataHandler;
+@synthesize userPhotosDataHandler;
 
 + (LocalFlickrUser *)localFlickrUser
 {
@@ -133,14 +141,9 @@ static LocalFlickrUser *localFlickrUser = nil;
     return url;
 }
 
-- (NSString*)apiEndpoint
+- (void)getUserPhotosWithCompletionHandler:(UserPhotosDataHandler)completionHandler;
 {
-    return @"http://api.flickr.com/services/rest/";
-}
-
-- (void)userPhotos
-{
-    //self.fetchUserDataHandler = completionHandler;
+    self.userPhotosDataHandler = completionHandler;
     
     NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.activity.userPhotos&format=json&nojsoncallback=1"];
     
@@ -162,24 +165,24 @@ static LocalFlickrUser *localFlickrUser = nil;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(error);
-                self.fetchUserDataHandler = nil;
+            if (self.userPhotosDataHandler) {
+                self.userPhotosDataHandler(nil, error);
+                self.userPhotosDataHandler = nil;
             }
         } else {
             NSDictionary *dictionary = [Flickr JSONFromData:responseData];
             
-            if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(nil);
-                self.fetchUserDataHandler = nil;
+            if (self.userPhotosDataHandler) {
+                self.userPhotosDataHandler(dictionary, nil);
+                self.userPhotosDataHandler = nil;
             }
         }
     }];
 }
 
-- (void)getPhotoInfoWithId:(NSString*)photoID
+- (void)getInfoForPhotoWithId:(NSString*)photoID andCompletionHandler:(PhotoInfoDataHandler)completionHandler
 {
-    //self.fetchUserDataHandler = completionHandler;
+    self.photoInfoDataHandler = completionHandler;
     
     NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.getInfo&photo_id=%@&format=json&nojsoncallback=1", photoID];
     
@@ -201,37 +204,58 @@ static LocalFlickrUser *localFlickrUser = nil;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(error);
-                self.fetchUserDataHandler = nil;
+            if (self.photoInfoDataHandler) {
+                self.photoInfoDataHandler(nil, error);
+                self.photoInfoDataHandler = nil;
             }
         } else {
             NSDictionary *dictionary = [Flickr JSONFromData:responseData];
             
-            if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(nil);
-                self.fetchUserDataHandler = nil;
+            if (self.photoInfoDataHandler) {
+                self.photoInfoDataHandler(dictionary, nil);
+                self.photoInfoDataHandler = nil;
             }
         }
     }];
 }
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict 
+{
     
     if ( [elementName isEqualToString:@"photoid"]) {
-        // addresses is an NSMutableArray instance variable
-        NSLog(@"meh");
-        //if (!addresses)
-        //    addresses = [[NSMutableArray alloc] init];
         return;
     }
     
     // .... continued for remaining elements ....
 }
 
-- (void)postPhoto
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string 
+{	
+    if (self.currentElementData == nil) {
+        self.currentElementData = [[NSMutableString alloc] init];
+    }
+	
+    [self.currentElementData appendString:string];
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI
+ qualifiedName:(NSString *)qName {
+
+    if ( [elementName isEqualToString:@"photoid"]) {
+        if (self.postPhotoDataHandler) {
+            NSString *photoID = [self.currentElementData stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+            self.postPhotoDataHandler(photoID, nil);
+            self.postPhotoDataHandler = nil;
+        }
+    }
+
+    self.currentElementData = nil;
+}
+
+- (void)postPhotoWithCompletionHandler:(PostPhotoDataHandler)completionHandler;
 {
-    //self.fetchUserDataHandler = completionHandler;
+    self.postPhotoDataHandler = completionHandler;
 
     NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/upload/"];
     
@@ -261,19 +285,20 @@ static LocalFlickrUser *localFlickrUser = nil;
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(error);
-                self.fetchUserDataHandler = nil;
+            if (self.postPhotoDataHandler) {
+                self.postPhotoDataHandler(nil, error);
+                self.postPhotoDataHandler = nil;
             }
         } else {
             
             NSXMLParser *parser = [[NSXMLParser alloc] initWithData:responseData];
             parser.delegate = self;
-            [parser parse];
-            
-            if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(nil);
-                self.fetchUserDataHandler = nil;
+            if (NO == [parser parse]) {
+                //report error here
+                if (self.postPhotoDataHandler) {
+                    self.postPhotoDataHandler(nil, nil);
+                    self.postPhotoDataHandler = nil;
+                }
             }
         }
     }];

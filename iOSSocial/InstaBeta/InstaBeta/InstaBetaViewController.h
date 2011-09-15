@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "iOSSServicesViewController.h"
 
-@interface InstaBetaViewController : UIViewController <iOSSServicesViewControllerDelegate>
+@interface InstaBetaViewController : UIViewController <iOSSServicesViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 - (IBAction)servicesButtonPressed:(id)sender;
 - (IBAction)actionButtonPressed:(id)sender;
 - (IBAction)anotheractionButtonPressed:(id)sender;

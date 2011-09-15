@@ -13,6 +13,9 @@
 #import "iOSSocialLocalUser.h"
 
 typedef void(^FlickrAuthenticationHandler)(NSError *error);
+typedef void(^PostPhotoDataHandler)(NSString *photoID, NSError *error);
+typedef void(^PhotoInfoDataHandler)(NSDictionary *photoInfo, NSError *error);
+typedef void(^UserPhotosDataHandler)(NSDictionary *photos, NSError *error);
 
 @interface LocalFlickrUser : FlickrUser <iOSSocialLocalUserProtocol, NSXMLParserDelegate> 
 
@@ -42,6 +45,10 @@ typedef void(^FlickrAuthenticationHandler)(NSError *error);
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 
-- (void)postPhoto;
+- (void)getUserPhotosWithCompletionHandler:(UserPhotosDataHandler)completionHandler;
+
+- (void)postPhotoWithCompletionHandler:(PostPhotoDataHandler)completionHandler;
+
+- (void)getInfoForPhotoWithId:(NSString*)photoID andCompletionHandler:(PhotoInfoDataHandler)completionHandler;
 
 @end

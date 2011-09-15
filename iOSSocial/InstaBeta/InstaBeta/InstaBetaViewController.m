@@ -115,8 +115,38 @@
 
 - (IBAction)anotheractionButtonPressed:(id)sender 
 {
+    /*
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init]; 
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera; 
+    }
+    picker.delegate = self; 
+    [self presentModalViewController:picker animated:YES];
+     */
+
     LocalFlickrUser *localFlickrUser = (LocalFlickrUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Flickr"];
-    [localFlickrUser postPhoto];
+    /*
+    [localFlickrUser postPhotoWithCompletionHandler:^(NSString *photoID, NSError *error) {
+        //
+        if (!error) {
+            //get the photo info of the photo with this id
+            ////now get the photo info
+            [localFlickrUser getInfoForPhotoWithId:photoID andCompletionHandler:^(NSDictionary *photoInfo, NSError *error) {
+                //
+                NSLog(@"meh");
+            }];
+            
+            [localFlickrUser getUserPhotosWithCompletionHandler:^(NSDictionary *photos, NSError *error) {
+                //
+                NSLog(@"meh");
+            }];
+        }
+    }];
+    */
+    [localFlickrUser getUserPhotosWithCompletionHandler:^(NSDictionary *photos, NSError *error) {
+        //
+        NSLog(@"meh");
+    }];
 }
 
 -(void)servicesViewController:(iOSSServicesViewController*)servicesController 
