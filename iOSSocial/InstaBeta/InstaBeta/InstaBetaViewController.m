@@ -12,6 +12,7 @@
 #import "iOSSocialServicesStore.h"
 #import "LocalFlickrUser.h"
 #import "LocalTwitterUser.h"
+#import "iOSSServicesViewController.h"
 
 @interface InstaBetaViewController () 
 
@@ -95,7 +96,6 @@
 - (IBAction)servicesButtonPressed:(id)sender 
 {
     iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
-    iossServicesViewController.serviceControllerDelegate = self;
     [self presentModalViewController:iossServicesViewController animated:YES];
     
     [iossServicesViewController presentModallyFromViewController:self withCompletionHandler:^{
@@ -147,36 +147,6 @@
         //
         NSLog(@"meh");
     }];
-}
-
--(void)servicesViewController:(iOSSServicesViewController*)servicesController 
-             didSelectService:(id<iOSSServiceProtocol>)service
-{
-    /*
-    id<iOSSocialLocalUserProtocol> localUser = service.localUser;
-    
-    if ([service isConnected]) {
-        [localUser logout];
-        
-        //cwnote: here we need to remove the service for our user from the server
-        
-    } else {
-        [localUser authenticateFromViewController:self 
-                            withCompletionHandler:^(NSError *error){
-                                if (!error) {
-                                    [servicesController refreshUI];
-                                    //cwnote: here we need to save this service for the user on our server
-                                    [[PSLocalUser localUser] updateUserWithService:service andCompletionHandler:^(NSError *error) {
-                                        NSLog(@"doh!");
-                                    }];
-                                }}];
-    }
-*/
-}
-
--(void)servicesViewControllerDidSelectDoneButton:(iOSSServicesViewController *)servicesController
-{
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

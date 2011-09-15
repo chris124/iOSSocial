@@ -11,28 +11,8 @@
 
 typedef void(^ServicesViewControllerHandler)();
 
-@class iOSSServicesViewController;
-
-@protocol iOSSocialServiceProtocol;
-
-@protocol iOSSServicesViewControllerDelegate <NSObject>
-
-@optional
-
--(void)servicesViewController:(iOSSServicesViewController*)servicesController 
-             didSelectService:(id<iOSSocialServiceProtocol>)service;
-
--(void)servicesViewControllerDidSelectDoneButton:(iOSSServicesViewController*)servicesController;
-
-@end
-
-
-
 @interface iOSSServicesViewController : TTTableViewController <UITableViewDelegate> {
-    id _serviceControllerDelegate;
 }
-
-@property(nonatomic, retain)    id<iOSSServicesViewControllerDelegate> serviceControllerDelegate;
 
 - (id)initWithServicesFilter:(NSArray*)filter;
 

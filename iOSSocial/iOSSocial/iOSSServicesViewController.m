@@ -19,7 +19,6 @@
 
 @implementation iOSSServicesViewController
 
-@synthesize serviceControllerDelegate=_serviceControllerDelegate;
 @synthesize servicesViewControllerHandler;
 
 - (id)init
@@ -129,17 +128,6 @@
                                         }
                                     }];
             }
-
-            /*
-            if ([self.serviceControllerDelegate respondsToSelector:@selector(servicesViewController:didSelectService:)]) {
-                iOSSService *service = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
-                
-                //cwnote: this probably needs to take a completion handler.
-                [self.serviceControllerDelegate servicesViewController:self 
-                                                      didSelectService:service];
-                [tableView reloadData];
-            }
-            */
         }
             break;
         case 1:
@@ -167,12 +155,6 @@
                 self.servicesViewControllerHandler();
                 self.servicesViewControllerHandler = nil; 
             }
-            
-            /*
-            if ([self.serviceControllerDelegate respondsToSelector:@selector(servicesViewControllerDidSelectDoneButton:)]) {
-                [self.serviceControllerDelegate servicesViewControllerDidSelectDoneButton:self];
-            }
-            */
         }
             break;
         default:
