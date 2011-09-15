@@ -1,25 +1,24 @@
 //
-//  Instagram.m
-//  InstaBeta
+//  Flickr.m
+//  iOSSocial
 //
-//  Created by Christopher White on 7/14/11.
+//  Created by Christopher White on 7/22/11.
 //  Copyright 2011 Mad Races, Inc. All rights reserved.
 //
 
-#import "Instagram.h"
+#import "Flickr.h"
 #import "iOSSLog.h"
-#import "LocalInstagramUser.h"
+#import "LocalFlickrUser.h"
 
-
-@interface Instagram ()
+@interface Flickr ()
 
 @property(nonatomic, readwrite, assign)  BOOL primary;
 
 @end
 
-static Instagram *instagramService = nil;
+static Flickr *FlickrService = nil;
 
-@implementation Instagram
+@implementation Flickr
 
 @synthesize name;
 @synthesize logoImage;
@@ -28,18 +27,19 @@ static Instagram *instagramService = nil;
 + (id<iOSSocialServiceProtocol>)sharedService;
 {
     @synchronized(self) {
-        if(instagramService == nil) {
-            instagramService = [[super allocWithZone:NULL] init];
-            [[iOSSocialServicesStore sharedServiceStore] registerService:instagramService];
+        if(FlickrService == nil) {
+            FlickrService = [[super allocWithZone:NULL] init];
+            [[iOSSocialServicesStore sharedServiceStore] registerService:FlickrService];
         }
     }
-    return instagramService;
+    return FlickrService;
 }
 
 - (id)init
 {
     self = [super init];
     if (self) {
+        // Initialization code here.
     }
     
     return self;
@@ -54,24 +54,24 @@ static Instagram *instagramService = nil;
 
 - (NSString*)name
 {
-    return @"Instagram";
+    return @"Flickr";
 }
 
 - (UIImage*)logoImage
 {
-    NSURL *logoURL = [[NSBundle mainBundle] URLForResource:@"instagram_trans" withExtension:@"png"];
+    NSURL *logoURL = [[NSBundle mainBundle] URLForResource:@"flickr-logo" withExtension:@"png"];
     UIImage *theLogoImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:logoURL]];
     return theLogoImage;
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUser
 {
-    return [[LocalInstagramUser alloc] init];
+    return [[LocalFlickrUser alloc] init];
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
 {
-    return [[LocalInstagramUser alloc] initWithUUID:uuid];
+    return [[LocalFlickrUser alloc] initWithUUID:uuid];
 }
 
 @end

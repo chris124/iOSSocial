@@ -1,5 +1,5 @@
 //
-//  LocalTwitterUser.h
+//  LocalFlickrUser.h
 //  iOSSocial
 //
 //  Created by Christopher White on 7/22/11.
@@ -8,18 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "TwitterUser.h"
+#import "FlickrUser.h"
 #import "iOSSocialServiceOAuth1ProviderConstants.h"
 #import "iOSSocialLocalUser.h"
 
-typedef void(^TwitterAuthenticationHandler)(NSError *error);
+typedef void(^FlickrAuthenticationHandler)(NSError *error);
+typedef void(^PostPhotoDataHandler)(NSString *photoID, NSError *error);
+typedef void(^PhotoInfoDataHandler)(NSDictionary *photoInfo, NSError *error);
+typedef void(^UserPhotosDataHandler)(NSDictionary *photos, NSError *error);
 
-@interface LocalTwitterUser : TwitterUser <iOSSocialLocalUserProtocol> 
+@interface LocalFlickrUser : FlickrUser <iOSSocialLocalUserProtocol, NSXMLParserDelegate> 
 
-// Obtain the LocalTwitterUser object.
+// Obtain the LocalFlickrUser object.
 // The user is only available for offline use until logged in.
 // A temporary use is created if no account is set up.
-+ (LocalTwitterUser *)localTwitterUser;
++ (LocalFlickrUser *)localFlickrUser;
 
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
 
@@ -27,7 +30,7 @@ typedef void(^TwitterAuthenticationHandler)(NSError *error);
 // The user must be authenticated in order to use other APIs. 
 // This should be called for each launch of the application as soon as the UI is ready.
 // Authentication happens automatically on return to foreground, and the completion handler will be called again. 
-// Twitter UI may be presented during this authentication. 
+// Flickr UI may be presented during this authentication. 
 // Apps should check the local user's authenticated and user ID properties to determine if the local user has changed.
 // The authorization screen, if needed, is show modally so pass in the current view controller.
 // Possible reasons for error:
@@ -42,7 +45,10 @@ typedef void(^TwitterAuthenticationHandler)(NSError *error);
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 
-- (void)postTweet;
-- (void)postTweetWithMedia;
+- (void)getUserPhotosWithCompletionHandler:(UserPhotosDataHandler)completionHandler;
+
+- (void)postPhotoWithCompletionHandler:(PostPhotoDataHandler)completionHandler;
+
+- (void)getInfoForPhotoWithId:(NSString*)photoID andCompletionHandler:(PhotoInfoDataHandler)completionHandler;
 
 @end

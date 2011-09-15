@@ -10,6 +10,8 @@
 #import "iOSSService.h"
 #import "iOSSocialLocalUser.h"
 #import "iOSSocialServicesStore.h"
+#import "LocalFlickrUser.h"
+#import "LocalTwitterUser.h"
 
 @interface InstaBetaViewController () 
 
@@ -95,6 +97,56 @@
     iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
     iossServicesViewController.serviceControllerDelegate = self;
     [self presentModalViewController:iossServicesViewController animated:YES];
+    
+    [iossServicesViewController presentModallyFromViewController:self withCompletionHandler:^{
+        //
+        [self dismissModalViewControllerAnimated:YES];
+    }];
+}
+
+- (IBAction)actionButtonPressed:(id)sender 
+{
+    //cwnote: update readme for iOSSocial to show this use case
+    
+    LocalTwitterUser *localTwitterUser = (LocalTwitterUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Twitter"];
+    //[localTwitterUser postTweetWithMedia];
+    [localTwitterUser postTweet];
+}
+
+- (IBAction)anotheractionButtonPressed:(id)sender 
+{
+    /*
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init]; 
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera; 
+    }
+    picker.delegate = self; 
+    [self presentModalViewController:picker animated:YES];
+     */
+
+    LocalFlickrUser *localFlickrUser = (LocalFlickrUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Flickr"];
+    /*
+    [localFlickrUser postPhotoWithCompletionHandler:^(NSString *photoID, NSError *error) {
+        //
+        if (!error) {
+            //get the photo info of the photo with this id
+            ////now get the photo info
+            [localFlickrUser getInfoForPhotoWithId:photoID andCompletionHandler:^(NSDictionary *photoInfo, NSError *error) {
+                //
+                NSLog(@"meh");
+            }];
+            
+            [localFlickrUser getUserPhotosWithCompletionHandler:^(NSDictionary *photos, NSError *error) {
+                //
+                NSLog(@"meh");
+            }];
+        }
+    }];
+    */
+    [localFlickrUser getUserPhotosWithCompletionHandler:^(NSDictionary *photos, NSError *error) {
+        //
+        NSLog(@"meh");
+    }];
 }
 
 -(void)servicesViewController:(iOSSServicesViewController*)servicesController 

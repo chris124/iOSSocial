@@ -14,12 +14,14 @@
 
 @end
 
-static NSString *const kOAuth1UserIDKey     = @"user_id";
-static NSString *const kOAuth1UserNameKey   = @"screen_name";
+static NSString *const kOAuth1TwitterUserIDKey      = @"user_id";
+static NSString *const kOAuth1TwitterUserNameKey    = @"screen_name";
+static NSString *const kOAuth1FlickrUserIDKey       = @"user_nsid";
+static NSString *const kOAuth1FlickrUserNameKey     = @"username";
 
 @interface GTMOAuthAuthenticationWithAdditions ()
 
-@property(nonatomic, readwrite, retain)  NSString *userID;   // User identifier.
+@property(nonatomic, readwrite, retain)  NSString *userID;      // User identifier.
 @property(nonatomic, readwrite, retain)  NSString *username;    // The user's alias
 
 @end
@@ -43,12 +45,24 @@ static NSString *const kOAuth1UserNameKey   = @"screen_name";
 {
     [super setKeysForResponseDictionary:dict];
     
-    NSString *newUserID = [dict objectForKey:kOAuth1UserIDKey];
+    //Try Twitter
+    NSString *newUserID = [dict objectForKey:kOAuth1TwitterUserIDKey];
     if (newUserID) {
         [self setUserID:newUserID];
     }
     
-    NSString *newUsername = [dict objectForKey:kOAuth1UserNameKey];
+    NSString *newUsername = [dict objectForKey:kOAuth1TwitterUserNameKey];
+    if (newUsername) {
+        [self setUsername:newUsername];
+    }
+    
+    //Try Flickr
+    newUserID = [dict objectForKey:kOAuth1FlickrUserIDKey];
+    if (newUserID) {
+        [self setUserID:newUserID];
+    }
+    
+    newUsername = [dict objectForKey:kOAuth1FlickrUserNameKey];
     if (newUsername) {
         [self setUsername:newUsername];
     }
