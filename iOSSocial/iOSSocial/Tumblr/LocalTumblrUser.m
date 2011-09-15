@@ -132,6 +132,7 @@ static LocalTumblrUser *localTumblrUser = nil;
 
 - (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
+    /*
     self.fetchUserDataHandler = completionHandler;
 
     NSString *urlString = [NSString stringWithFormat:@"http://api.Tumblr.com/services/rest/?method=Tumblr.people.getInfo&user_id=%@&format=json&nojsoncallback=1", self.userID];
@@ -168,6 +169,7 @@ static LocalTumblrUser *localTumblrUser = nil;
             }
         }
     }];
+    */
 }
 
 - (void)authenticateFromViewController:(UIViewController*)vc 
