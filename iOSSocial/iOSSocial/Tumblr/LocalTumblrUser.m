@@ -132,16 +132,15 @@ static LocalTumblrUser *localTumblrUser = nil;
 
 - (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
-    /*
     self.fetchUserDataHandler = completionHandler;
 
-    NSString *urlString = [NSString stringWithFormat:@"http://api.Tumblr.com/services/rest/?method=Tumblr.people.getInfo&user_id=%@&format=json&nojsoncallback=1", self.userID];
+    NSString *urlString = [NSString stringWithFormat:@"http://api.tumblr.com/v2/user/info"];
     
     NSURL *url = [NSURL URLWithString:urlString];
 
     iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
                                                  parameters:nil 
-                                              requestMethod:iOSSRequestMethodGET];
+                                              requestMethod:iOSSRequestMethodPOST];
     
     NSMutableDictionary *oauthParams = [NSMutableDictionary dictionary];
     [oauthParams setObject:[[Tumblr sharedService] apiKey] forKey:kASIOAuthConsumerKey];
@@ -169,7 +168,6 @@ static LocalTumblrUser *localTumblrUser = nil;
             }
         }
     }];
-    */
 }
 
 - (void)authenticateFromViewController:(UIViewController*)vc 

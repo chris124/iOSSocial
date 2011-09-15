@@ -52,20 +52,19 @@
 {
     userDictionary = theUserDictionary;
     
-    /*
-    self.userID = [theUserDictionary objectForKey:@"id"];
-    self.profilePictureURL = [theUserDictionary objectForKey:@"profile_image_url_https"];
-    NSString *username = [theUserDictionary objectForKey:@"username"];
+    NSDictionary *response = [theUserDictionary objectForKey:@"response"];
+    NSDictionary *user = [response objectForKey:@"user"];
+    
+    NSString *username = [user objectForKey:@"name"];
     if (username) {
         self.alias = username;
-    } else {
-        self.alias = [theUserDictionary objectForKey:@"screen_name"];
     }
-    */
 }
 
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler
 {
+    //cwnote: fix this!!!
+    /*
     self.loadPhotoHandler = completionHandler;
 
     NSString *urlString = self.profilePictureURL;
@@ -90,6 +89,7 @@
             }
         }
     }];
+    */
 }
 
 @end
