@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIOARequest.h"
+
 
 enum iOSSRequestMethod {
     iOSSRequestMethodGET,
@@ -19,20 +19,21 @@ typedef enum iOSSRequestMethod iOSSRequestMethod;
 //typedef void(^iOSSRequestHandler)(NSString *responseString, NSError *error);
 typedef void(^iOSSRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error);
 
-@interface iOSSRequest : NSObject <ASIHTTPRequestDelegate> {
+@interface iOSSRequest : NSObject {
 }
 
 - (id)initWithURL:(NSURL *)url 
        parameters:(NSDictionary *)parameters 
     requestMethod:(iOSSRequestMethod)requestMethod;
 
-@property(nonatomic, readonly, retain)  NSDictionary *parameters;
-@property(nonatomic, readonly, assign)  iOSSRequestMethod requestMethod;
-@property(nonatomic, readonly, retain)  NSURL *URL;
-@property(nonatomic, retain)            NSDictionary *oauth_params;
+@property(nonatomic, readonly, retain) NSDictionary *parameters;
+@property(nonatomic, readonly, assign) iOSSRequestMethod requestMethod;
+@property(nonatomic, readonly, retain) NSURL *URL;
+
+- (void)addMultiPartData:(NSData *)data 
+                withName:(NSString *)name 
+                    type:(NSString *)type;
 
 - (void)performRequestWithHandler:(iOSSRequestHandler)handler;
-
-- (void)addFile:(NSString*)filePath forKey:(NSString *)key;
 
 @end

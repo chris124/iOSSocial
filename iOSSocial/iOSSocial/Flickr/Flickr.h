@@ -1,5 +1,5 @@
 //
-//  Foursquare.h
+//  Flickr.h
 //  iOSSocial
 //
 //  Created by Christopher White on 7/22/11.
@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "iOSSocialServiceOAuth2Provider.h"
+#import "iOSSocialServiceOAuth1Provider.h"
 #import "iOSSocialServicesStore.h"
 
-
-@interface Foursquare : iOSSocialServiceOAuth2Provider <iOSSocialServiceProtocol>
+@interface Flickr : iOSSocialServiceOAuth1Provider <iOSSocialServiceProtocol>
 
 @end

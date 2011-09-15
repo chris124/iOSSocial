@@ -13,3 +13,6 @@
 [submodule "asi-http-request"]
 	path = asi-http-request
 	url = git@github.com:chris124/asi-http-request.git
+[submodule "json-framework"]
+	path = json-framework
+	url = git@github.com:chris124/json-framework.git

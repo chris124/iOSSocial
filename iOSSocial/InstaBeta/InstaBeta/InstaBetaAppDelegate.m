@@ -14,8 +14,8 @@
 #import "iOSSocialServiceOAuth2ProviderConstants.h"
 //OAuth 1 Services
 #import "Twitter.h"
+#import "Flickr.h"
 #import "iOSSocialServiceOAuth1ProviderConstants.h"
-
 
 @implementation InstaBetaAppDelegate
 
@@ -25,22 +25,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"instagram app client id" forKey:kSMOAuth2ClientID];
-    [params setObject:@"instagram app client secret" forKey:kSMOAuth2ClientSecret];
-    [params setObject:@"instagram app callback" forKey:kSMOAuth2RedirectURI];
-    [params setObject:@"unique name for keychain item" forKey:kSMOAuth2KeychainItemName];
+	[params setObject:@"" forKey:kSMOAuth2ClientID];
+	[params setObject:@"" forKey:kSMOAuth2ClientSecret];
+	[params setObject:@"" forKey:kSMOAuth2RedirectURI];
+	[params setObject:@"InstaBeta_Instagram_Service" forKey:kSMOAuth2KeychainItemName];
     [params setObject:@"https://api.instagram.com/oauth/authorize" forKey:kSMOAuth2AuthorizeURL];
     [params setObject:@"https://api.instagram.com/oauth/access_token" forKey:kSMOAuth2AccessTokenURL];
     [params setObject:@"Instagram Service" forKey:kSMOAuth2ServiceProviderName];
-    [params setObject:@"basic comments relationships likes" forKey:kSMOAuth2Scope];
+    [params setObject:@"" forKey:kSMOAuth2Scope];
     [[Instagram sharedService] assignOAuthParams:params asPrimary:YES];
     
     [params removeAllObjects];
     
-    [params setObject:@"twitter app client id" forKey:kSMOAuth1ClientID];
-    [params setObject:@"twitter app client secret" forKey:kSMOAuth1ClientSecret];
-    [params setObject:@"twitter app callback" forKey:kSMOAuth1RedirectURI];
-    [params setObject:@"unique name for keychain item" forKey:kSMOAuth1KeychainItemName];
+    [params setObject:@"" forKey:kSMOAuth1ClientID];
+    [params setObject:@"" forKey:kSMOAuth1ClientSecret];
+    [params setObject:@"" forKey:kSMOAuth1RedirectURI];
+    [params setObject:@"InstaBeta_Twitter_Service" forKey:kSMOAuth1KeychainItemName];
     [params setObject:@"https://api.twitter.com/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
     [params setObject:@"https://api.twitter.com/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
     [params setObject:@"https://api.twitter.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
@@ -49,10 +49,22 @@
     
     [params removeAllObjects];
     
-    [params setObject:@"foursquare app client id" forKey:kSMOAuth2ClientID];
-    [params setObject:@"foursquare app client secret" forKey:kSMOAuth2ClientSecret];
-    [params setObject:@"foursquare app callback" forKey:kSMOAuth2RedirectURI];
-    [params setObject:@"unique name for keychain item" forKey:kSMOAuth2KeychainItemName];
+    [params setObject:@"" forKey:kSMOAuth1ClientID];
+    [params setObject:@"" forKey:kSMOAuth1ClientSecret];
+    [params setObject:@"" forKey:kSMOAuth1RedirectURI];
+    [params setObject:@"InstaBeta_Flickr_Service" forKey:kSMOAuth1KeychainItemName];
+    [params setObject:@"http://www.flickr.com/services/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
+    [params setObject:@"http://www.flickr.com/services/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
+    [params setObject:@"http://www.flickr.com/services/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
+    [params setObject:@"Flickr Service" forKey:kSMOAuth1ServiceProviderName];
+    [[Flickr sharedService] assignOAuthParams:params asPrimary:NO];
+    
+    [params removeAllObjects];
+    
+    [params setObject:@"" forKey:kSMOAuth2ClientID];
+    [params setObject:@"" forKey:kSMOAuth2ClientSecret];
+    [params setObject:@"" forKey:kSMOAuth2RedirectURI];
+    [params setObject:@"InstaBeta_Foursquare_Service" forKey:kSMOAuth2KeychainItemName];
     [params setObject:@"https://foursquare.com/oauth2/authorize" forKey:kSMOAuth2AuthorizeURL];
     [params setObject:@"https://foursquare.com/oauth2/access_token" forKey:kSMOAuth2AccessTokenURL];
     [params setObject:@"Foursquare Service" forKey:kSMOAuth2ServiceProviderName];

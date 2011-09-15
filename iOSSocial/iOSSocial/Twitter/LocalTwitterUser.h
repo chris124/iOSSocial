@@ -42,4 +42,7 @@ typedef void(^TwitterAuthenticationHandler)(NSError *error);
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 
+- (void)postTweet;
+- (void)postTweetWithMedia;
+
 @end

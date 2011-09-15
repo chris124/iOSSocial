@@ -131,6 +131,17 @@ static iOSSocialServicesStore *serviceStore = nil;
     return theService;
 }
 
+- (id<iOSSocialLocalUserProtocol>)accountWithType:(NSString*)accountName
+{
+    id<iOSSocialLocalUserProtocol> theAccount = nil;
+    for (id<iOSSocialLocalUserProtocol> account in self.accounts) {
+        if (NSOrderedSame == [accountName compare:account.servicename]) {
+            theAccount = account;
+        }
+    }
+    return theAccount;
+}
+
 - (void)saveAccount:(id<iOSSocialLocalUserProtocol>)theAccount
 {
     BOOL bFound = NO;

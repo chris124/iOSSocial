@@ -12,6 +12,4 @@
 
 @interface Twitter : iOSSocialServiceOAuth1Provider <iOSSocialServiceProtocol>
 
-+ (id)JSONFromData:(NSData*)data;
-
 @end
