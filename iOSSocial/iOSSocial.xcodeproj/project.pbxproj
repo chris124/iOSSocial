@@ -40,8 +40,6 @@
 		127E1D9C140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 127E1D99140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.h */; };
 		127E1D9D140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 127E1D9A140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		127E1DDA140ABCCA00F815D6 /* iOSSocialConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 127E1DD9140ABCC900F815D6 /* iOSSocialConstants.h */; };
-		127E1DDE140B1A9500F815D6 /* iOSSocialServicesNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 127E1DDC140B1A9400F815D6 /* iOSSocialServicesNavigationController.h */; };
-		127E1DDF140B1A9500F815D6 /* iOSSocialServicesNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 127E1DDD140B1A9400F815D6 /* iOSSocialServicesNavigationController.m */; };
 		1286BC9D13EC560400A12786 /* iOSServicesDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BC9713EC560400A12786 /* iOSServicesDataSource.h */; };
 		1286BC9E13EC560400A12786 /* iOSServicesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1286BC9813EC560400A12786 /* iOSServicesDataSource.m */; };
 		1286BC9F13EC560400A12786 /* iOSSService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BC9913EC560400A12786 /* iOSSService.h */; };
@@ -349,8 +347,6 @@
 		127E1D99140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
 		127E1D9A140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2ViewControllerTouch.m; sourceTree = "<group>"; };
 		127E1DD9140ABCC900F815D6 /* iOSSocialConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialConstants.h; sourceTree = "<group>"; };
-		127E1DDC140B1A9400F815D6 /* iOSSocialServicesNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialServicesNavigationController.h; sourceTree = "<group>"; };
-		127E1DDD140B1A9400F815D6 /* iOSSocialServicesNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialServicesNavigationController.m; sourceTree = "<group>"; };
 		1286BC9713EC560400A12786 /* iOSServicesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSServicesDataSource.h; sourceTree = "<group>"; };
 		1286BC9813EC560400A12786 /* iOSServicesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSServicesDataSource.m; sourceTree = "<group>"; };
 		1286BC9913EC560400A12786 /* iOSSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSService.h; sourceTree = "<group>"; };
@@ -662,8 +658,6 @@
 				1286BC9C13EC560400A12786 /* iOSSServiceTableViewCell.m */,
 				127E1D3A140A8F1000F815D6 /* iOSSocialAccountTableViewCell.h */,
 				127E1D3B140A8F1000F815D6 /* iOSSocialAccountTableViewCell.m */,
-				127E1DDC140B1A9400F815D6 /* iOSSocialServicesNavigationController.h */,
-				127E1DDD140B1A9400F815D6 /* iOSSocialServicesNavigationController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -963,7 +957,6 @@
 				127E1D96140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.h in Headers */,
 				127E1D9C140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.h in Headers */,
 				127E1DDA140ABCCA00F815D6 /* iOSSocialConstants.h in Headers */,
-				127E1DDE140B1A9500F815D6 /* iOSSocialServicesNavigationController.h in Headers */,
 				126770E1141A5AD900EB2A3C /* Flickr.h in Headers */,
 				126770E3141A5AD900EB2A3C /* FlickrUser.h in Headers */,
 				126770E5141A5AD900EB2A3C /* FlickrUser+Private.h in Headers */,
@@ -1270,7 +1263,6 @@
 				127E1D3D140A8F1000F815D6 /* iOSSocialAccountTableViewCell.m in Sources */,
 				127E1D97140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.m in Sources */,
 				127E1D9D140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.m in Sources */,
-				127E1DDF140B1A9500F815D6 /* iOSSocialServicesNavigationController.m in Sources */,
 				126770E2141A5AD900EB2A3C /* Flickr.m in Sources */,
 				126770E4141A5AD900EB2A3C /* FlickrUser.m in Sources */,
 				126770E7141A5AD900EB2A3C /* LocalFlickrUser.m in Sources */,
