@@ -15,6 +15,7 @@
 //OAuth 1 Services
 #import "Twitter.h"
 #import "Flickr.h"
+#import "Tumblr.h"
 #import "iOSSocialServiceOAuth1ProviderConstants.h"
 
 @implementation InstaBetaAppDelegate
@@ -69,6 +70,18 @@
     [params setObject:@"https://foursquare.com/oauth2/access_token" forKey:kSMOAuth2AccessTokenURL];
     [params setObject:@"Foursquare Service" forKey:kSMOAuth2ServiceProviderName];
     [[Foursquare sharedService] assignOAuthParams:params asPrimary:NO];
+    
+    [params removeAllObjects];
+    
+    [params setObject:@"" forKey:kSMOAuth1ClientID];
+    [params setObject:@"" forKey:kSMOAuth1ClientSecret];
+    [params setObject:@"" forKey:kSMOAuth1RedirectURI];
+    [params setObject:@"InstaBeta_Tumblr_Service" forKey:kSMOAuth1KeychainItemName];
+    [params setObject:@"http://www.tumblr.com/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
+    [params setObject:@"http://www.tumblr.com/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
+    [params setObject:@"http://www.tumblr.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
+    [params setObject:@"Tumblr Service" forKey:kSMOAuth1ServiceProviderName];
+    [[Tumblr sharedService] assignOAuthParams:params asPrimary:NO];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

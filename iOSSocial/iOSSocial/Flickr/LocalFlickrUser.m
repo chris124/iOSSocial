@@ -135,10 +135,7 @@ static LocalFlickrUser *localFlickrUser = nil;
 
 - (NSURL*)authorizedURL:(NSURL*)theURL
 {
-    NSString *access_token = [NSString stringWithFormat:@"?auth_token=%@", [self oAuthAccessToken]];
-    NSURL *url = [NSURL URLWithString:access_token relativeToURL:theURL];
-    
-    return url;
+    return nil;
 }
 
 - (void)getUserPhotosWithCompletionHandler:(UserPhotosDataHandler)completionHandler;
