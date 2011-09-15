@@ -9,7 +9,7 @@ Supported services:
 
 OAuth 2- Instagram, Foursquare
 
-OAuth 1 - Twitter
+OAuth 1 - Twitter, Flickr, Tumblr
 
 Coming soon: Facebook (OAuth2)!
 
@@ -118,7 +118,7 @@ Which services you want to use is up to you. The underlying code will automatica
 iOSSocialLocalUserProtocol
 ------------
 
-Local user account objects are used to represent an authenticated user account for a given service. All of the local user account classes adhere to iOSSocialLocalUserProtocol. The available classes are LocalInstagramUser, LocalTwitterUser, and LocalFoursquareUser (more to come as more services are supported). These derived classes can be created directly or if you just want to get an instance of a local user object for whichever service was set at the primary service you can call [[iOSSocialServicesStore sharedServiceStore] defaultAccount]. Once you have a local user account object, you can authenticate it, query its authentication state, log it out, get its OAuth access token and more. See the code below:
+Local user account objects are used to represent an authenticated user account for a given service. All of the local user account classes adhere to iOSSocialLocalUserProtocol. The available classes are LocalInstagramUser, LocalTwitterUser, LocalFoursquareUser, LocalFlickrUser, and LocalTumblrUser, (more to come as more services are supported). These derived classes can be created directly or if you just want to get an instance of a local user object for whichever service was set at the primary service you can call [[iOSSocialServicesStore sharedServiceStore] defaultAccount]. Once you have a local user account object, you can authenticate it, query its authentication state, log it out, get its OAuth access token and more. See the code below:
 	
 <pre><code>
 // The defaultAccount method returns an local user object for the service that was set as the primary service.

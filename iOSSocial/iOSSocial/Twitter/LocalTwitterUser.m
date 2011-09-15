@@ -128,10 +128,7 @@ static LocalTwitterUser *localTwitterUser = nil;
 
 - (NSURL*)authorizedURL:(NSURL*)theURL
 {
-    NSString *access_token = [NSString stringWithFormat:@"?oauth_token=%@", [self oAuthAccessToken]];
-    NSURL *url = [NSURL URLWithString:access_token relativeToURL:theURL];
-    
-    return url;
+    return nil;
 }
 
 - (void)getMentions
