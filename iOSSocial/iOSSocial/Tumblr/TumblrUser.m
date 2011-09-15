@@ -1,22 +1,22 @@
 //
-//  FlickrUser.m
+//  TumblrUser.m
 //  iOSSocial
 //
 //  Created by Christopher White on 7/22/11.
 //  Copyright 2011 Mad Races, Inc. All rights reserved.
 //
 
-#import "FlickrUser.h"
-#import "FlickrUser+Private.h"
+#import "TumblrUser.h"
+#import "TumblrUser+Private.h"
 #import "iOSSRequest.h"
 
-@interface FlickrUser ()
+@interface TumblrUser ()
 
 @property(nonatomic, copy)      LoadPhotoHandler loadPhotoHandler;
 
 @end
 
-@implementation FlickrUser
+@implementation TumblrUser
 
 @synthesize userDictionary;
 @synthesize userID;
@@ -52,18 +52,19 @@
 {
     userDictionary = theUserDictionary;
     
-    self.userID = [theUserDictionary objectForKey:@"id"];
-    self.profilePictureURL = [theUserDictionary objectForKey:@"profile_image_url_https"];
-    NSString *username = [theUserDictionary objectForKey:@"username"];
+    NSDictionary *response = [theUserDictionary objectForKey:@"response"];
+    NSDictionary *user = [response objectForKey:@"user"];
+    
+    NSString *username = [user objectForKey:@"name"];
     if (username) {
         self.alias = username;
-    } else {
-        self.alias = [theUserDictionary objectForKey:@"screen_name"];
     }
 }
 
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler
 {
+    //cwnote: fix this!!!
+    /*
     self.loadPhotoHandler = completionHandler;
 
     NSString *urlString = self.profilePictureURL;
@@ -88,6 +89,7 @@
             }
         }
     }];
+    */
 }
 
 @end

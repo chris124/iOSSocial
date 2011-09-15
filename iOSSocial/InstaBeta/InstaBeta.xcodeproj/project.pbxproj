@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120A63671422948900EB4FD9 /* tumblr-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 120A63641422948900EB4FD9 /* tumblr-logo.png */; };
 		126770ED141A641100EB2A3C /* flickr-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 126770EC141A641100EB2A3C /* flickr-logo.png */; };
 		127E1D89140AA43300F815D6 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 127E1D87140AA43300F815D6 /* GTMOAuth2ViewTouch.xib */; };
 		127E1D90140AA46400F815D6 /* GTMOAuthViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 127E1D8E140AA46400F815D6 /* GTMOAuthViewTouch.xib */; };
@@ -174,6 +175,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		120A63631422948900EB4FD9 /* LocalTumblrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalTumblrUser.h; sourceTree = "<group>"; };
+		120A63641422948900EB4FD9 /* tumblr-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumblr-logo.png"; sourceTree = "<group>"; };
+		120A63651422948900EB4FD9 /* Tumblr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tumblr.h; sourceTree = "<group>"; };
+		120A63661422948900EB4FD9 /* TumblrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TumblrUser.h; sourceTree = "<group>"; };
 		126770E9141A5C2500EB2A3C /* Flickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flickr.h; sourceTree = "<group>"; };
 		126770EA141A5C2500EB2A3C /* FlickrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrUser.h; sourceTree = "<group>"; };
 		126770EB141A5C2500EB2A3C /* LocalFlickrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalFlickrUser.h; sourceTree = "<group>"; };
@@ -301,6 +306,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		120A63621422948900EB4FD9 /* Tumblr */ = {
+			isa = PBXGroup;
+			children = (
+				120A63631422948900EB4FD9 /* LocalTumblrUser.h */,
+				120A63641422948900EB4FD9 /* tumblr-logo.png */,
+				120A63651422948900EB4FD9 /* Tumblr.h */,
+				120A63661422948900EB4FD9 /* TumblrUser.h */,
+			);
+			name = Tumblr;
+			path = ../Headers/Tumblr;
+			sourceTree = "<group>";
+		};
 		126770E8141A5C2500EB2A3C /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +487,7 @@
 		12B4F0091409E45D002E98A6 /* iOSSocial */ = {
 			isa = PBXGroup;
 			children = (
+				120A63621422948900EB4FD9 /* Tumblr */,
 				1267712F141A7CFC00EB2A3C /* iOSSRequest.h */,
 				126770E8141A5C2500EB2A3C /* Flickr */,
 				127E1DDB140ABEB200F815D6 /* iOSSocialConstants.h */,
@@ -843,6 +861,7 @@
 				127E1D90140AA46400F815D6 /* GTMOAuthViewTouch.xib in Resources */,
 				126770ED141A641100EB2A3C /* flickr-logo.png in Resources */,
 				1293A86B141FC7F500E8AD8A /* CIMG2891.JPG in Resources */,
+				120A63671422948900EB4FD9 /* tumblr-logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
