@@ -185,6 +185,7 @@
 		126770EC141A641100EB2A3C /* flickr-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr-logo.png"; sourceTree = "<group>"; };
 		1267712F141A7CFC00EB2A3C /* iOSSRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSRequest.h; path = ../Headers/iOSSRequest.h; sourceTree = "<group>"; };
 		12677140141AAB0500EB2A3C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1272C51D1423D154003B5FF5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		127E1D87140AA43300F815D6 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		127E1D8E140AA46400F815D6 /* GTMOAuthViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuthViewTouch.xib; sourceTree = "<group>"; };
 		127E1DDB140ABEB200F815D6 /* iOSSocialConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSSocialConstants.h; path = ../Headers/iOSSocialConstants.h; sourceTree = "<group>"; };
@@ -399,6 +400,7 @@
 		12AB3A7213DF6D4E00565332 = {
 			isa = PBXGroup;
 			children = (
+				1272C51D1423D154003B5FF5 /* AssetsLibrary.framework */,
 				1293A86A141FC7F500E8AD8A /* CIMG2891.JPG */,
 				1299F603141E727B00A3C2F3 /* SBJSON */,
 				12677140141AAB0500EB2A3C /* AVFoundation.framework */,

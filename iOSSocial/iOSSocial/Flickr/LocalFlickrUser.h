@@ -47,7 +47,9 @@ typedef void(^UserPhotosDataHandler)(NSDictionary *photos, NSError *error);
 
 - (void)getUserPhotosWithCompletionHandler:(UserPhotosDataHandler)completionHandler;
 
-- (void)postPhotoWithCompletionHandler:(PostPhotoDataHandler)completionHandler;
+- (void)postPhotoData:(NSData*)imageData 
+         withFileName:(NSString *)fileName 
+ andCompletionHandler:(PostPhotoDataHandler)completionHandler;
 
 - (void)getInfoForPhotoWithId:(NSString*)photoID andCompletionHandler:(PhotoInfoDataHandler)completionHandler;
 

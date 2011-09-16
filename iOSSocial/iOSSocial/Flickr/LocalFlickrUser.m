@@ -250,7 +250,9 @@ static LocalFlickrUser *localFlickrUser = nil;
     self.currentElementData = nil;
 }
 
-- (void)postPhotoWithCompletionHandler:(PostPhotoDataHandler)completionHandler;
+- (void)postPhotoData:(NSData*)imageData 
+         withFileName:(NSString *)fileName 
+ andCompletionHandler:(PostPhotoDataHandler)completionHandler
 {
     self.postPhotoDataHandler = completionHandler;
 
@@ -267,8 +269,7 @@ static LocalFlickrUser *localFlickrUser = nil;
                                                  parameters:params 
                                               requestMethod:iOSSRequestMethodPOST];
     
-    NSString *photoPath = [[NSBundle mainBundle] pathForResource:@"CIMG2891" ofType:@"JPG"];
-    [request addFile:photoPath forKey:@"photo"];
+    [request addData:imageData withFileName:fileName andContentType:@"image/jpeg" forKey:@"photo"];
     
     NSMutableDictionary *oauthParams = [NSMutableDictionary dictionary];
     [oauthParams setObject:[[Flickr sharedService] apiKey] forKey:kASIOAuthConsumerKey];

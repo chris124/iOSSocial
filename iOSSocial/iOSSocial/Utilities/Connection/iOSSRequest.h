@@ -35,4 +35,6 @@ typedef void(^iOSSRequestHandler)(NSData *responseData, NSHTTPURLResponse *urlRe
 
 - (void)addFile:(NSString*)filePath forKey:(NSString *)key;
 
+- (void)addData:(id)data withFileName:(NSString *)fileName andContentType:(NSString *)contentType forKey:(NSString *)key;
+
 @end

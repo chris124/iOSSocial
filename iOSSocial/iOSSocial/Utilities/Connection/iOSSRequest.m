@@ -23,6 +23,7 @@
 @property(nonatomic, copy)              iOSSRequestHandler requestHandler;
 @property(nonatomic, retain)            ASIOARequest *request;
 @property(nonatomic, retain)            NSMutableArray *files;
+@property(nonatomic, retain)            NSMutableArray *data;
 
 @end
 
@@ -35,6 +36,7 @@
 @synthesize request;
 @synthesize oauth_params;
 @synthesize files;
+@synthesize data;
 
 - (id)init
 {
@@ -113,6 +115,17 @@
                 [self.request addFile:[fileDictionary objectForKey:@"path"] forKey:[fileDictionary objectForKey:@"key"]];
             }
             
+            self.files = nil;
+            
+            for (NSDictionary *dataDictionary in self.data) {
+                [self.request addData:[dataDictionary objectForKey:@"data"] 
+                         withFileName:[dataDictionary objectForKey:@"fileName"] 
+                       andContentType:[dataDictionary objectForKey:@"contentType"] 
+                               forKey:[dataDictionary objectForKey:@"key"]];
+            }
+            
+            self.data = nil;
+            
             if (self.oauth_params) {
                 self.request.oauthParams = self.oauth_params;
             }
@@ -159,6 +172,16 @@
     
     NSDictionary *fileDictionary = [NSDictionary dictionaryWithObjectsAndKeys:filePath, @"path", key, @"key", nil];
     [self.files addObject:fileDictionary];
+}
+
+- (void)addData:(id)theData withFileName:(NSString *)fileName andContentType:(NSString *)contentType forKey:(NSString *)key
+{
+    if (nil == self.data) {
+        self.data = [NSMutableArray array];
+    }
+    
+    NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjectsAndKeys:theData, @"data", fileName, @"fileName", contentType, @"contentType", key, @"key", nil];
+    [self.data addObject:dataDictionary];
 }
 
 @end
