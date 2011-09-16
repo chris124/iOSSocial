@@ -26,6 +26,7 @@ static LocalFlickrUser *localFlickrUser = nil;
 @property(nonatomic, retain)    NSMutableString *currentElementData;
 @property(nonatomic, copy)      PostPhotoDataHandler postPhotoDataHandler;
 @property(nonatomic, copy)      PhotoInfoDataHandler photoInfoDataHandler;
+@property(nonatomic, copy)      PhotoSizesDataHandler photoSizesDataHandler;
 @property(nonatomic, copy)      UserPhotosDataHandler userPhotosDataHandler;
 
 @end
@@ -42,6 +43,7 @@ static LocalFlickrUser *localFlickrUser = nil;
 @synthesize currentElementData;
 @synthesize postPhotoDataHandler;
 @synthesize photoInfoDataHandler;
+@synthesize photoSizesDataHandler;
 @synthesize userPhotosDataHandler;
 
 + (LocalFlickrUser *)localFlickrUser
@@ -172,6 +174,45 @@ static LocalFlickrUser *localFlickrUser = nil;
             if (self.userPhotosDataHandler) {
                 self.userPhotosDataHandler(dictionary, nil);
                 self.userPhotosDataHandler = nil;
+            }
+        }
+    }];
+}
+
+- (void)getPhotoSizesForPhotoWithId:(NSString*)photoID andCompletionHandler:(PhotoSizesDataHandler)completionHandler
+{
+    self.photoSizesDataHandler = completionHandler;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.getSizes&photo_id=%@&format=json&nojsoncallback=1", photoID];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
+    
+    NSMutableDictionary *oauthParams = [NSMutableDictionary dictionary];
+    [oauthParams setObject:[[Flickr sharedService] apiKey] forKey:kASIOAuthConsumerKey];
+    [oauthParams setObject:[[Flickr sharedService] apiSecret] forKey:kASIOAuthConsumerSecret];
+    [oauthParams setObject:[self oAuthAccessToken] forKey:kASIOAuthTokenKey];
+    [oauthParams setObject:kASIOAuthSignatureMethodHMAC_SHA1 forKey:kASIOAuthSignatureMethodKey];
+    [oauthParams setObject:@"1.0" forKey:kASIOAuthVersionKey];
+    [oauthParams setObject:self.auth.tokenSecret forKey:kASIOAuthTokenSecretKey];
+    
+    request.oauth_params = oauthParams;
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            if (self.photoSizesDataHandler) {
+                self.photoSizesDataHandler(nil, error);
+                self.photoSizesDataHandler = nil;
+            }
+        } else {
+            NSDictionary *dictionary = [Flickr JSONFromData:responseData];
+            
+            if (self.photoSizesDataHandler) {
+                self.photoSizesDataHandler(dictionary, nil);
+                self.photoSizesDataHandler = nil;
             }
         }
     }];

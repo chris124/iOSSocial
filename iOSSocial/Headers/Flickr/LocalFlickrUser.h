@@ -16,6 +16,7 @@ typedef void(^FlickrAuthenticationHandler)(NSError *error);
 typedef void(^PostPhotoDataHandler)(NSString *photoID, NSError *error);
 typedef void(^PhotoInfoDataHandler)(NSDictionary *photoInfo, NSError *error);
 typedef void(^UserPhotosDataHandler)(NSDictionary *photos, NSError *error);
+typedef void(^PhotoSizesDataHandler)(NSDictionary *photoInfo, NSError *error);
 
 @interface LocalFlickrUser : FlickrUser <iOSSocialLocalUserProtocol, NSXMLParserDelegate> 
 
@@ -52,5 +53,6 @@ typedef void(^UserPhotosDataHandler)(NSDictionary *photos, NSError *error);
  andCompletionHandler:(PostPhotoDataHandler)completionHandler;
 
 - (void)getInfoForPhotoWithId:(NSString*)photoID andCompletionHandler:(PhotoInfoDataHandler)completionHandler;
+- (void)getPhotoSizesForPhotoWithId:(NSString*)photoID andCompletionHandler:(PhotoSizesDataHandler)completionHandler;
 
 @end
