@@ -293,6 +293,7 @@ static LocalFlickrUser *localFlickrUser = nil;
 
 - (void)postPhotoData:(NSData*)imageData 
          withFileName:(NSString *)fileName 
+            andParams:(NSDictionary*)photoParams 
  andCompletionHandler:(PostPhotoDataHandler)completionHandler
 {
     self.postPhotoDataHandler = completionHandler;
@@ -301,13 +302,8 @@ static LocalFlickrUser *localFlickrUser = nil;
     
     NSURL *url = [NSURL URLWithString:urlString];
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"bananas" forKey:@"title"];
-    [params setObject:@"this is too cool for school" forKey:@"description"];
-    [params setObject:@"swirlapp vans" forKey:@"tags"];
-    
     iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
-                                                 parameters:params 
+                                                 parameters:photoParams 
                                               requestMethod:iOSSRequestMethodPOST];
     
     [request addData:imageData withFileName:fileName andContentType:@"image/jpeg" forKey:@"photo"];

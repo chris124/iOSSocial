@@ -50,6 +50,7 @@ typedef void(^PhotoSizesDataHandler)(NSDictionary *photoInfo, NSError *error);
 
 - (void)postPhotoData:(NSData*)imageData 
          withFileName:(NSString *)fileName 
+            andParams:(NSDictionary*)photoParams 
  andCompletionHandler:(PostPhotoDataHandler)completionHandler;
 
 - (void)getInfoForPhotoWithId:(NSString*)photoID andCompletionHandler:(PhotoInfoDataHandler)completionHandler;
