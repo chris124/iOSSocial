@@ -14,12 +14,14 @@
 @interface iOSSServicesViewController ()
 
 @property(nonatomic, copy)  ServicesViewControllerHandler servicesViewControllerHandler;
+@property(nonatomic, copy)  ServiceConnectedHandler serviceConnectedHandler;
 
 @end
 
 @implementation iOSSServicesViewController
 
 @synthesize servicesViewControllerHandler;
+@synthesize serviceConnectedHandler;
 
 - (id)init
 {
@@ -143,14 +145,15 @@
                                 withCompletionHandler:^(NSError *error){
                                     if (!error) {
                                         [self refreshUI];
+                                        if (self.serviceConnectedHandler) {
+                                            self.serviceConnectedHandler(localUser);
+                                        }
                                     }
                                 }];
         }
             break;
         case 2:
         {
-            //tell delegate done button was pressed!
-            
             if (self.servicesViewControllerHandler) {
                 self.servicesViewControllerHandler();
                 self.servicesViewControllerHandler = nil; 
@@ -178,8 +181,10 @@
 }
 
 - (void)presentModallyFromViewController:(UIViewController*)vc 
+             withServiceConnectedHandler:(ServiceConnectedHandler)newServiceConnectionHandler 
                    withCompletionHandler:(ServicesViewControllerHandler)completionHandler
 {
+    self.serviceConnectedHandler = newServiceConnectionHandler;
     self.servicesViewControllerHandler = completionHandler;
     
     [vc presentModalViewController:self animated:YES];

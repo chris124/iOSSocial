@@ -96,12 +96,14 @@
 - (IBAction)servicesButtonPressed:(id)sender 
 {
     iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
-    [self presentModalViewController:iossServicesViewController animated:YES];
-    
-    [iossServicesViewController presentModallyFromViewController:self withCompletionHandler:^{
-        //
-        [self dismissModalViewControllerAnimated:YES];
-    }];
+
+    [iossServicesViewController presentModallyFromViewController:self 
+                                     withServiceConnectedHandler:^(id<iOSSocialLocalUserProtocol> localUser) {
+                                     }  
+                                           withCompletionHandler:^{
+                                               [self dismissModalViewControllerAnimated:YES];
+                                           }
+     ];
 }
 
 - (IBAction)actionButtonPressed:(id)sender 
@@ -113,19 +115,47 @@
     [localTwitterUser postTweet];
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    LocalFlickrUser *localFlickrUser = (LocalFlickrUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Flickr"];
+
+    UIImage *image = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
+    NSData *dataObj = UIImageJPEGRepresentation(image, 1.0);
+    
+    [localFlickrUser postPhotoData:dataObj
+                      withFileName:@"test.JPG" 
+                         andParams:nil 
+              andCompletionHandler:^(NSString *photoID, NSError *error) {
+        if (!error) {
+            /*
+            [localFlickrUser getInfoForPhotoWithId:photoID andCompletionHandler:^(NSDictionary *photoInfo, NSError *error) {
+                PSFlickr *flickr = [[PSFlickr alloc] initWithMediaDictionary:photoInfo];
+                [[PSLocalUser localUser] uploadMedia:flickr fromService:@"flickr" withCompletionHandler:^(NSError *error) {
+                    //if no error, call completion handler. ugh
+                } ];
+            }];
+            */
+        }
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (IBAction)anotheractionButtonPressed:(id)sender 
 {
-    /*
     UIImagePickerController *picker = [[UIImagePickerController alloc] init]; 
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         picker.sourceType = UIImagePickerControllerSourceTypeCamera; 
     }
     picker.delegate = self; 
     [self presentModalViewController:picker animated:YES];
-     */
-
-    LocalFlickrUser *localFlickrUser = (LocalFlickrUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Flickr"];
+ 
     /*
+    LocalFlickrUser *localFlickrUser = (LocalFlickrUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Flickr"];
+
     [localFlickrUser postPhotoWithCompletionHandler:^(NSString *photoID, NSError *error) {
         //
         if (!error) {
@@ -135,18 +165,19 @@
                 //
                 NSLog(@"meh");
             }];
-            
-            [localFlickrUser getUserPhotosWithCompletionHandler:^(NSDictionary *photos, NSError *error) {
+
+            //[localFlickrUser getUserPhotosWithCompletionHandler:^(NSDictionary *photos, NSError *error) {
                 //
-                NSLog(@"meh");
-            }];
+            //    NSLog(@"meh");
+            //}];
         }
-    }];
-    */
+    }];*/
+    /*
     [localFlickrUser getUserPhotosWithCompletionHandler:^(NSDictionary *photos, NSError *error) {
         //
         NSLog(@"meh");
     }];
+    */
 }
 
 @end

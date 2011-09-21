@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Three20/Three20.h"
 
+@protocol iOSSocialLocalUserProtocol;
+
 typedef void(^ServicesViewControllerHandler)();
+typedef void(^ServiceConnectedHandler)(id<iOSSocialLocalUserProtocol> localUser);
 
 @interface iOSSServicesViewController : TTTableViewController <UITableViewDelegate> {
 }
@@ -19,6 +22,7 @@ typedef void(^ServicesViewControllerHandler)();
 - (void)refreshUI;
 
 - (void)presentModallyFromViewController:(UIViewController*)vc 
+             withServiceConnectedHandler:(ServiceConnectedHandler)serviceConnectedHandler 
                    withCompletionHandler:(ServicesViewControllerHandler)completionHandler;
 
 @end

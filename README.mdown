@@ -59,8 +59,14 @@ Here is the code in action:
 
 <pre><code>
 iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
-iossServicesViewController.serviceControllerDelegate = self;
-[self.navigationController pushViewController:iossServicesViewController animated:YES];
+
+[iossServicesViewController presentModallyFromViewController:self 
+	                             withServiceConnectedHandler:^(id<iOSSocialLocalUserProtocol> localUser) {
+	                             }  
+	                                   withCompletionHandler:^{
+	                                       [self dismissModalViewControllerAnimated:YES];
+	                                   }
+];
 </pre></code>
 
 iOSSocialServiceProtocol
