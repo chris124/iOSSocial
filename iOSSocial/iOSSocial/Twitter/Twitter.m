@@ -70,6 +70,12 @@ static Twitter *twitterService = nil;
     return [[LocalTwitterUser alloc] init];
 }
 
+- (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary
+{
+    LocalTwitterUser *theUser = [[LocalTwitterUser alloc] initWithDictionary:dictionary];
+    return theUser;
+}
+
 - (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
 {
     return [[LocalTwitterUser alloc] initWithUUID:uuid];

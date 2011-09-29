@@ -52,13 +52,21 @@
 {
     userDictionary = theUserDictionary;
     
-    self.userID = [theUserDictionary objectForKey:@"id"];
-    self.profilePictureURL = [theUserDictionary objectForKey:@"profile_image_url_https"];
-    NSString *username = [theUserDictionary objectForKey:@"username"];
-    if (username) {
-        self.alias = username;
+    NSDictionary *personDictionary = [theUserDictionary objectForKey:@"person"];
+    if (personDictionary) {
+        //
+        self.userID = [personDictionary objectForKey:@"id"];
+        NSDictionary *usernameDictionary = [personDictionary objectForKey:@"username"];
+        if (usernameDictionary) {
+            self.alias = [usernameDictionary objectForKey:@"_content"];
+        }
     } else {
-        self.alias = [theUserDictionary objectForKey:@"screen_name"];
+        self.userID = [theUserDictionary objectForKey:@"id"];
+        //self.profilePictureURL = [theUserDictionary objectForKey:@"profile_image_url_https"];
+        NSString *username = [theUserDictionary objectForKey:@"username"];
+        if (username) {
+            self.alias = username;
+        }
     }
 }
 

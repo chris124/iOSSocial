@@ -46,15 +46,6 @@ static LocalTwitterUser *localTwitterUser = nil;
     return localTwitterUser;
 }
 
-+ (id<iOSSocialLocalUserProtocol>)localUser
-{
-    @synchronized(self) {
-        if(localTwitterUser == nil)
-            localTwitterUser = [[super allocWithZone:NULL] init];
-    }
-    return localTwitterUser;
-}
-
 - (NSDictionary *)ioss_twitterUserDictionary 
 { 
     return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyTwitterUserDictionary, self.uuidString]];
@@ -86,6 +77,21 @@ static LocalTwitterUser *localTwitterUser = nil;
         }
     }
     
+    return self;
+}
+
+- (id)initWithDictionary:(NSDictionary*)dictionary
+{
+    self = [self init];
+    if (self) {
+        //set the local user dictionary based on params that have been sent in
+        self.auth.accessToken = [dictionary objectForKey:@"access_token"];
+        self.auth.tokenSecret = [dictionary objectForKey:@"access_token_secret"];
+        NSMutableDictionary *localUserDictionary = [NSMutableDictionary dictionary];
+        [localUserDictionary setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
+        [localUserDictionary setObject:[dictionary objectForKey:@"username"] forKey:@"username"];
+        self.userDictionary = localUserDictionary;
+    }
     return self;
 }
 
@@ -160,7 +166,7 @@ static LocalTwitterUser *localTwitterUser = nil;
                 self.fetchUserDataHandler = nil;
             }
         } else {
-            NSDictionary *dictionary = [Twitter JSONFromData:responseData];
+            //NSDictionary *dictionary = [Twitter JSONFromData:responseData];
             
             if (self.fetchUserDataHandler) {
                 self.fetchUserDataHandler(nil);
@@ -202,7 +208,7 @@ static LocalTwitterUser *localTwitterUser = nil;
                 self.fetchUserDataHandler = nil;
             }
         } else {
-            NSDictionary *dictionary = [Twitter JSONFromData:responseData];
+            //NSDictionary *dictionary = [Twitter JSONFromData:responseData];
             
             if (self.fetchUserDataHandler) {
                 self.fetchUserDataHandler(nil);
@@ -239,7 +245,7 @@ static LocalTwitterUser *localTwitterUser = nil;
     [oauthParams setObject:[self oAuthAccessToken] forKey:kASIOAuthTokenKey];
     [oauthParams setObject:kASIOAuthSignatureMethodHMAC_SHA1 forKey:kASIOAuthSignatureMethodKey];
     [oauthParams setObject:@"1.0" forKey:kASIOAuthVersionKey];
-    [oauthParams setObject:self.auth.tokenSecret forKey:kASIOAuthTokenSecretKey];
+    [oauthParams setObject:[self oAuthAccessTokenSecret] forKey:kASIOAuthTokenSecretKey];
     
     request.oauth_params = oauthParams;
     
@@ -250,7 +256,7 @@ static LocalTwitterUser *localTwitterUser = nil;
                 self.fetchUserDataHandler = nil;
             }
         } else {
-            NSDictionary *dictionary = [Twitter JSONFromData:responseData];
+            //NSDictionary *dictionary = [Twitter JSONFromData:responseData];
             
             if (self.fetchUserDataHandler) {
                 self.fetchUserDataHandler(nil);
@@ -316,7 +322,7 @@ static LocalTwitterUser *localTwitterUser = nil;
 
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
                     if (!error) {
-                        [[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
+                        //[[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
                     }
                     
                     if (self.authenticationHandler) {
@@ -343,6 +349,11 @@ static LocalTwitterUser *localTwitterUser = nil;
 - (NSString*)oAuthAccessToken
 {
     return self.auth.accessToken;
+}
+
+- (NSString*)oAuthAccessTokenSecret
+{
+    return self.auth.tokenSecret;
 }
 
 - (void)logout

@@ -144,10 +144,11 @@
             [localUser authenticateFromViewController:self 
                                 withCompletionHandler:^(NSError *error){
                                     if (!error) {
-                                        [self refreshUI];
+                                        //let the handler handle it and decice what they want to do this this local user
                                         if (self.serviceConnectedHandler) {
                                             self.serviceConnectedHandler(localUser);
                                         }
+                                        [self refreshUI];
                                     }
                                 }];
         }

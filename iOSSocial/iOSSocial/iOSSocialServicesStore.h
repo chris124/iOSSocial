@@ -38,6 +38,8 @@
 
 - (id<iOSSocialLocalUserProtocol>)localUser;
 
+- (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary;
+
 - (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid;
 
 - (void)logout:(id)theAuth forKeychainItemName:(NSString*)theKeychainItemName;
@@ -63,6 +65,8 @@
 - (id<iOSSocialServiceProtocol>)serviceWithType:(NSString*)serviceName;
 
 - (id<iOSSocialLocalUserProtocol>)accountWithType:(NSString*)accountName;
+
+- (id<iOSSocialLocalUserProtocol>)accountWithDictionary:(NSDictionary*)accountDictionary;
 
 - (void)registerService:(id<iOSSocialServiceProtocol>)theService;
 

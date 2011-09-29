@@ -7,7 +7,6 @@
 //
 
 #import "iOSSServiceTableViewCell.h"
-//#import "iOSSService.h"
 #import "iOSSocialLocalUser.h"
 #import "iOSSocialServicesStore.h"
 

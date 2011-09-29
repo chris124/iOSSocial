@@ -44,19 +44,23 @@
     if (self) {
         self.users = [NSMutableArray array];
 
+        //cwnote: fix this!!! warning on line user.dataSource = /*id<>*/self;
+        /*
         if (collectionDictionary) {
             NSInteger index = 0;
             NSArray *userDictionaries = [collectionDictionary objectForKey:@"data"];
             for (NSDictionary *userDictionary in userDictionaries) {
                 InstagramUser *user = [[InstagramUser alloc] initWithDictionary:userDictionary];
                 user.index = index;
-                user.dataSource = /*id<>*/self;
+                user.dataSource = self;
+                //user.dataSource = id<>*;
                 [self.users addObject:user];
                 index++;
             }
             
             //pagination!!!
         }
+        */
     }
     
     return self;

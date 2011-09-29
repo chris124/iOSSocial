@@ -43,6 +43,8 @@ typedef void(^PhotoSizesDataHandler)(NSDictionary *photoInfo, NSError *error);
 
 - (NSString*)oAuthAccessToken;
 
+- (NSString*)oAuthAccessTokenSecret;
+
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 

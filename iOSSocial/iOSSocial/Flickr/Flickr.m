@@ -69,6 +69,12 @@ static Flickr *FlickrService = nil;
     return [[LocalFlickrUser alloc] init];
 }
 
+- (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary
+{
+    LocalFlickrUser *theUser = [[LocalFlickrUser alloc] initWithDictionary:dictionary];
+    return theUser;
+}
+
 - (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
 {
     return [[LocalFlickrUser alloc] initWithUUID:uuid];

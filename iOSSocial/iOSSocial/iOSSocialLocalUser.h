@@ -14,10 +14,9 @@ typedef void(^AuthenticationHandler)(NSError *error);
 
 @protocol iOSSocialLocalUserProtocol <NSObject>
 
-- (id)initWithUUID:(NSString*)uuid;
+- (id)initWithDictionary:(NSDictionary*)dictionary;
 
-//cwnote: still need this
-+ (id<iOSSocialLocalUserProtocol>)localUser;
+- (id)initWithUUID:(NSString*)uuid;
 
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
 
@@ -40,6 +39,8 @@ typedef void(^AuthenticationHandler)(NSError *error);
                  withCompletionHandler:(AuthenticationHandler)completionHandler;
 
 - (NSString*)oAuthAccessToken;
+
+- (NSString*)oAuthAccessTokenSecret;
 
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;

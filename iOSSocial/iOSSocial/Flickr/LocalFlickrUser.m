@@ -55,15 +55,6 @@ static LocalFlickrUser *localFlickrUser = nil;
     return localFlickrUser;
 }
 
-+ (id<iOSSocialLocalUserProtocol>)localUser
-{
-    @synchronized(self) {
-        if(localFlickrUser == nil)
-            localFlickrUser = [[super allocWithZone:NULL] init];
-    }
-    return localFlickrUser;
-}
-
 - (NSDictionary *)ioss_FlickrUserDictionary 
 { 
     return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFlickrUserDictionary, self.uuidString]];
@@ -95,6 +86,21 @@ static LocalFlickrUser *localFlickrUser = nil;
         }
     }
     
+    return self;
+}
+
+- (id)initWithDictionary:(NSDictionary*)dictionary
+{
+    self = [self init];
+    if (self) {
+        //set the local user dictionary based on params that have been sent in
+        self.auth.accessToken = [dictionary objectForKey:@"access_token"];
+        self.auth.tokenSecret = [dictionary objectForKey:@"access_token_secret"];
+        NSMutableDictionary *localUserDictionary = [NSMutableDictionary dictionary];
+        [localUserDictionary setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
+        [localUserDictionary setObject:[dictionary objectForKey:@"username"] forKey:@"username"];
+        self.userDictionary = localUserDictionary;
+    }
     return self;
 }
 
@@ -357,7 +363,7 @@ static LocalFlickrUser *localFlickrUser = nil;
     [oauthParams setObject:[self oAuthAccessToken] forKey:kASIOAuthTokenKey];
     [oauthParams setObject:kASIOAuthSignatureMethodHMAC_SHA1 forKey:kASIOAuthSignatureMethodKey];
     [oauthParams setObject:@"1.0" forKey:kASIOAuthVersionKey];
-    [oauthParams setObject:self.auth.tokenSecret forKey:kASIOAuthTokenSecretKey];
+    [oauthParams setObject:[self oAuthAccessTokenSecret] forKey:kASIOAuthTokenSecretKey];
     
     request.oauth_params = oauthParams;
 
@@ -406,7 +412,7 @@ static LocalFlickrUser *localFlickrUser = nil;
 
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
                     if (!error) {
-                        [[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
+                        //[[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
                     }
                     
                     if (self.authenticationHandler) {
@@ -437,7 +443,7 @@ static LocalFlickrUser *localFlickrUser = nil;
 
 - (NSString*)oAuthAccessTokenSecret
 {
-    return self.auth.accessToken;
+    return self.auth.tokenSecret;
 }
 
 - (void)logout

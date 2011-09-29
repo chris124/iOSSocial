@@ -42,8 +42,6 @@
 		127E1DDA140ABCCA00F815D6 /* iOSSocialConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 127E1DD9140ABCC900F815D6 /* iOSSocialConstants.h */; };
 		1286BC9D13EC560400A12786 /* iOSServicesDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BC9713EC560400A12786 /* iOSServicesDataSource.h */; };
 		1286BC9E13EC560400A12786 /* iOSServicesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1286BC9813EC560400A12786 /* iOSServicesDataSource.m */; };
-		1286BC9F13EC560400A12786 /* iOSSService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BC9913EC560400A12786 /* iOSSService.h */; };
-		1286BCA013EC560400A12786 /* iOSSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1286BC9A13EC560400A12786 /* iOSSService.m */; };
 		1286BCA113EC560400A12786 /* iOSSServiceTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BC9B13EC560400A12786 /* iOSSServiceTableViewCell.h */; };
 		1286BCA213EC560400A12786 /* iOSSServiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1286BC9C13EC560400A12786 /* iOSSServiceTableViewCell.m */; };
 		1286BCB813EC56EF00A12786 /* ASIAuthenticationDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BCA413EC56EF00A12786 /* ASIAuthenticationDialog.h */; };
@@ -349,8 +347,6 @@
 		127E1DD9140ABCC900F815D6 /* iOSSocialConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialConstants.h; sourceTree = "<group>"; };
 		1286BC9713EC560400A12786 /* iOSServicesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSServicesDataSource.h; sourceTree = "<group>"; };
 		1286BC9813EC560400A12786 /* iOSServicesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSServicesDataSource.m; sourceTree = "<group>"; };
-		1286BC9913EC560400A12786 /* iOSSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSService.h; sourceTree = "<group>"; };
-		1286BC9A13EC560400A12786 /* iOSSService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSService.m; sourceTree = "<group>"; };
 		1286BC9B13EC560400A12786 /* iOSSServiceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSServiceTableViewCell.h; sourceTree = "<group>"; };
 		1286BC9C13EC560400A12786 /* iOSSServiceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSServiceTableViewCell.m; sourceTree = "<group>"; };
 		1286BCA413EC56EF00A12786 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "../../asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = "<group>"; };
@@ -557,8 +553,6 @@
 				12AB3A1113DF13EE00565332 /* iOSSocialLocalUser.m */,
 				1286BC9713EC560400A12786 /* iOSServicesDataSource.h */,
 				1286BC9813EC560400A12786 /* iOSServicesDataSource.m */,
-				1286BC9913EC560400A12786 /* iOSSService.h */,
-				1286BC9A13EC560400A12786 /* iOSSService.m */,
 				1264A13213D08B900085E394 /* Supporting Files */,
 				12B4F201140A0D46002E98A6 /* iOSSocialServicesStore.h */,
 				12B4F202140A0D46002E98A6 /* iOSSocialServicesStore.m */,
@@ -935,7 +929,6 @@
 				12AB3BCD13DF84AC00565332 /* iOSSLog.h in Headers */,
 				12AB3BE713DF84D800565332 /* iOSSRequest.h in Headers */,
 				1286BC9D13EC560400A12786 /* iOSServicesDataSource.h in Headers */,
-				1286BC9F13EC560400A12786 /* iOSSService.h in Headers */,
 				1286BCA113EC560400A12786 /* iOSSServiceTableViewCell.h in Headers */,
 				1286BCB813EC56EF00A12786 /* ASIAuthenticationDialog.h in Headers */,
 				1286BCBA13EC56EF00A12786 /* ASICacheDelegate.h in Headers */,
@@ -1247,7 +1240,6 @@
 				12AB3BCE13DF84AC00565332 /* iOSSLog.m in Sources */,
 				12AB3BE813DF84D800565332 /* iOSSRequest.m in Sources */,
 				1286BC9E13EC560400A12786 /* iOSServicesDataSource.m in Sources */,
-				1286BCA013EC560400A12786 /* iOSSService.m in Sources */,
 				1286BCA213EC560400A12786 /* iOSSServiceTableViewCell.m in Sources */,
 				1286BCB913EC56EF00A12786 /* ASIAuthenticationDialog.m in Sources */,
 				1286BCBC13EC56EF00A12786 /* ASIDataCompressor.m in Sources */,

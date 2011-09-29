@@ -65,15 +65,15 @@ typedef enum _FBPhotoAlbumLoadState {
     //return self.name;
     return nil;
 }
-/*
-- (id<iOSSUserProtocol>)objectAtIndex:(NSInteger)index
+
+- (id<iOSSocialUserProtocol>)objectAtIndex:(NSInteger)index;
 {
     if (index <= self.maxObjectIndex) {
         return [self.items objectAtIndex:index];
     }
     return nil;
 }
-*/
+
 - (NSInteger)numberOfObjects
 {
     iOSSLog(@"count: %d", [self.items count]);

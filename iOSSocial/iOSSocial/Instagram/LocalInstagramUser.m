@@ -49,15 +49,6 @@ static LocalInstagramUser *localInstagramUser = nil;
     return localInstagramUser;
 }
 
-+ (id<iOSSocialLocalUserProtocol>)localUser
-{
-    @synchronized(self) {
-        if(localInstagramUser == nil)
-            localInstagramUser = [[super allocWithZone:NULL] init];
-    }
-    return localInstagramUser;
-}
-
 - (NSDictionary *)ioss_instagramUserDictionary 
 { 
     return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyInstagramUserDictionary, self.uuidString]];
@@ -90,6 +81,20 @@ static LocalInstagramUser *localInstagramUser = nil;
         }
     }
     
+    return self;
+}
+
+- (id)initWithDictionary:(NSDictionary*)dictionary
+{
+    self = [self init];
+    if (self) {
+        //set the local user dictionary based on params that have been sent in
+        self.auth.accessToken = [dictionary objectForKey:@"access_token"];
+        NSMutableDictionary *localUserDictionary = [NSMutableDictionary dictionary];
+        [localUserDictionary setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
+        [localUserDictionary setObject:[dictionary objectForKey:@"username"] forKey:@"username"];
+        self.userDictionary = localUserDictionary;
+    }
     return self;
 }
 
@@ -317,7 +322,7 @@ static LocalInstagramUser *localInstagramUser = nil;
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
                     if (!error) {
                         //
-                        [[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
+                        //[[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
                     }
                     
                     if (self.authenticationHandler) {
@@ -344,6 +349,11 @@ static LocalInstagramUser *localInstagramUser = nil;
 - (NSString*)oAuthAccessToken
 {
     return self.auth.accessToken;
+}
+
+- (NSString*)oAuthAccessTokenSecret
+{
+    return nil;
 }
 
 - (void)logout

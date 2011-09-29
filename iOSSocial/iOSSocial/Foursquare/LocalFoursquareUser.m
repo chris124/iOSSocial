@@ -46,15 +46,6 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     return localFoursquareUser;
 }
 
-+ (id<iOSSocialLocalUserProtocol>)localUser
-{
-    @synchronized(self) {
-        if(localFoursquareUser == nil)
-            localFoursquareUser = [[super allocWithZone:NULL] init];
-    }
-    return localFoursquareUser;
-}
-
 - (NSDictionary *)ioss_foursquareUserDictionary 
 { 
     return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFoursquareUserDictionary, self.uuidString]];
@@ -86,6 +77,40 @@ static LocalFoursquareUser *localFoursquareUser = nil;
         }
     }
     
+    return self;
+}
+
+- (id)initWithDictionary:(NSDictionary*)dictionary
+{
+    self = [self init];
+    if (self) {
+        //set the local user dictionary based on params that have been sent in
+        self.auth.accessToken = [dictionary objectForKey:@"access_token"];
+        NSMutableDictionary *localUserDictionary = [NSMutableDictionary dictionary];
+        //[localUserDictionary setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
+        //[localUserDictionary setObject:[dictionary objectForKey:@"username"] forKey:@"username"];
+        
+        /*
+        NSDictionary *responseDict = [theUserDictionary objectForKey:@"response"];
+        if (responseDict) {
+            NSDictionary *userDict = [responseDict objectForKey:@"user"];
+            if (userDict) {
+                self.userID = [userDict objectForKey:@"id"];
+                self.alias = [userDict objectForKey:@"firstName"];
+                self.firstName = [userDict objectForKey:@"firstName"];
+                self.profilePictureURL = [userDict objectForKey:@"photo"];
+            }
+        }
+        */
+        NSMutableDictionary *responseDict = [NSMutableDictionary dictionary];
+        NSMutableDictionary *userDict = [NSMutableDictionary dictionary];
+        [userDict setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
+        [userDict setObject:[dictionary objectForKey:@"username"] forKey:@"firstName"];
+        [responseDict setObject:userDict forKey:@"user"];
+        [localUserDictionary setObject:responseDict forKey:@"response"];
+        
+        self.userDictionary = localUserDictionary;
+    }
     return self;
 }
 
@@ -193,7 +218,7 @@ static LocalFoursquareUser *localFoursquareUser = nil;
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
                     if (!error) {
                         //
-                        [[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
+                        //[[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
                     }
                     
                     if (self.authenticationHandler) {
@@ -220,6 +245,11 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 - (NSString*)oAuthAccessToken
 {
     return self.auth.accessToken;
+}
+
+- (NSString*)oAuthAccessTokenSecret
+{
+    return nil;
 }
 
 - (void)logout
