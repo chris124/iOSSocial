@@ -25,8 +25,8 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 @property(nonatomic, copy)      InstagramAuthenticationHandler authenticationHandler;
 @property(nonatomic, retain)    GTMOAuth2Authentication *auth;
-@property(nonatomic, retain)    NSString *keychainItemName;
-@property(nonatomic, readwrite, retain)    NSString *uuidString;
+@property(nonatomic, retain)            NSString *keychainItemName;
+@property(nonatomic, readwrite, retain) NSString *uuidString;
 
 @end
 
@@ -320,11 +320,6 @@ static LocalInstagramUser *localInstagramUser = nil;
                 self.userDictionary = user;
                 
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
-                    if (!error) {
-                        //
-                        //[[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
-                    }
-                    
                     if (self.authenticationHandler) {
                         self.authenticationHandler(error);
                         self.authenticationHandler = nil;

@@ -216,11 +216,6 @@ static LocalFoursquareUser *localFoursquareUser = nil;
                 }
             } else {
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
-                    if (!error) {
-                        //
-                        //[[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
-                    }
-                    
                     if (self.authenticationHandler) {
                         self.authenticationHandler(error);
                         self.authenticationHandler = nil;

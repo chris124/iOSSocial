@@ -207,8 +207,8 @@ static iOSSocialServicesStore *serviceStore = nil;
         for (id<iOSSocialLocalUserProtocol> account in self.accounts) {
             BOOL isPrimary = (account == self.defaultAccount);
             NSDictionary *accountDictionary = [NSDictionary 
-                                               dictionaryWithObjects:[NSArray arrayWithObjects:account.uuidString, account.servicename, [NSNumber numberWithBool:isPrimary], nil] 
-                                               forKeys:[NSArray arrayWithObjects:@"account_uuid", @"service_name", @"primary", nil]];
+                                               dictionaryWithObjects:[NSArray arrayWithObjects:account.servicename, [NSNumber numberWithBool:isPrimary], account.uuidString, nil] 
+                                               forKeys:[NSArray arrayWithObjects:@"service_name", @"primary", @"account_uuid", nil]];
             [theAccounts addObject:accountDictionary];
         }
         

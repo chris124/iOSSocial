@@ -98,7 +98,10 @@
     iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
 
     [iossServicesViewController presentModallyFromViewController:self 
-                                     withServiceConnectedHandler:^(id<iOSSocialLocalUserProtocol> localUser) {
+                                     withServiceConnectedHandler:^(id<iOSSocialLocalUserProtocol> theLocalUser) {
+                                             [[iOSSocialServicesStore sharedServiceStore] registerAccount:theLocalUser];
+                                             [iossServicesViewController refreshUI];
+
                                      }  
                                            withCompletionHandler:^{
                                                [self dismissModalViewControllerAnimated:YES];

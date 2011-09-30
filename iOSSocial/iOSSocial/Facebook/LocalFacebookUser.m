@@ -8,9 +8,12 @@
 
 #import "LocalFacebookUser.h"
 #import "KeychainItemWrapper.h"
-#import "SocialManager.h"
 #import "FBConnect.h"
 #import "FacebookPhotoAlbum.h"
+#import "FacebookService.h"
+#import "Facebook.h"
+#import "FacebookUser+Private.h"
+#import "iOSSLog.h"
 
 @interface FacebookUser () <FBRequestDelegate>
 
@@ -37,9 +40,13 @@ typedef enum _FBRequestType {
 @property(nonatomic, copy)              CreatePhotoAlbumHandler createPhotoAlbumHandler;
 @property(nonatomic, copy)              LoadPhotoAlbumsHandler loadPhotoAlbumsHandler;
 @property(nonatomic, retain)            KeychainItemWrapper *accessTokenItem;
+@property(nonatomic, readwrite, retain) Facebook *facebook;
+@property(nonatomic, retain)            NSString *keychainItemName;
+@property(nonatomic, readwrite, retain) NSString *uuidString;
 
 @end
 
+NSString *const iOSSDefaultsKeyFacebookUserDictionary  = @"ioss_facebookUserDictionary";
 
 static LocalFacebookUser *localFacebookUser = nil;
 
@@ -56,6 +63,11 @@ NSInteger usersCount = 0;
 @synthesize loadUsersHandler;
 @synthesize createPhotoAlbumHandler;
 @synthesize loadPhotoAlbumsHandler;
+@synthesize servicename;
+@synthesize username;
+@synthesize uuidString;
+@synthesize facebook;
+@synthesize keychainItemName;
 
 + (LocalFacebookUser *)localFacebookUser
 {
@@ -66,44 +78,36 @@ NSInteger usersCount = 0;
     return localFacebookUser;
 }
 
-+ (id)allocWithZone:(NSZone *)zone 
-{
-    return [[self localFacebookUser] retain];
+- (NSDictionary *)ioss_facebookUserDictionary 
+{ 
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFacebookUserDictionary, self.uuidString]];
 }
 
-- (id)copyWithZone:(NSZone *)zone 
-{
-    return self;
-}
-
-- (id)retain 
-{
-    return self;
-}
-
-- (unsigned)retainCount 
-{
-    return UINT_MAX; //denotes an object that cannot be released
-}
-/*
-- (void)release 
-{
-    // never release
-}
-*/
-- (id)autorelease 
-{
-    return self;
+- (void)ioss_setFacebookUserDictionary:(NSDictionary *)theUserDictionary 
+{ 
+    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFacebookUserDictionary, self.uuidString]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (id)init
 {
     self = [super init];
     if (self) {
+        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
+        
+        CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+        CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+        self.uuidString = (__bridge NSString *)uuidStr;
+        CFRelease(uuidStr);
+        CFRelease(uuid); 
+        
+        //cwnote: what to do with this? should use this above?
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Instagram_Service-%@", self.uuidString];
+        //self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+        
         // Initialization code here.
-        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"AccessToken" accessGroup:nil];
+        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainItemName/*@"AccessToken"*/ accessGroup:nil];
         self.accessTokenItem = wrapper;
-        [wrapper release];
         
         //fetch access token and expiration date from keychain and assign to facebook object
         NSArray *components = [[self.accessTokenItem objectForKey:@"v_Data"] componentsSeparatedByString:@"&"];
@@ -111,30 +115,93 @@ NSInteger usersCount = 0;
         if (1 < [components count]) {
             NSString *accessToken = [components objectAtIndex:0];
             
-            NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             [dateFormat setDateStyle:kCFDateFormatterFullStyle];
             NSDate *expirationDate = [dateFormat dateFromString:[components objectAtIndex:1]];
             
             if (accessToken) {
-                [SocialManager socialManager].facebook.accessToken = accessToken;
-                [SocialManager socialManager].facebook.expirationDate = expirationDate;
+                self.facebook.accessToken = accessToken;
+                self.facebook.expirationDate = expirationDate;
             }
+        }
+        
+        // Initialization code here.
+        NSDictionary *localUserDictionary = [self ioss_facebookUserDictionary];
+        if (localUserDictionary) {
+            self.userDictionary = localUserDictionary;
         }
     }
     
     return self;
 }
 
-- (void)dealloc
+- (id)initWithUUID:(NSString*)uuid
 {
-    [friends release];
-    [accessTokenItem release];
-    [authenticationHandler release];
-    [findFriendsHandler release];
-    [loadUsersHandler release];
-    [createPhotoAlbumHandler release];
-    [loadPhotoAlbumsHandler release];
-    [super dealloc];
+    self = [super init];
+    if (self) {
+        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
+        
+        self.uuidString = uuid;
+        
+        //cwnote: what to do with this? should use this above?
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Instagram_Service-%@", self.uuidString];
+        //self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+        
+        // Initialization code here.
+        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainItemName/*@"AccessToken"*/ accessGroup:nil];
+        self.accessTokenItem = wrapper;
+        
+        //fetch access token and expiration date from keychain and assign to facebook object
+        NSArray *components = [[self.accessTokenItem objectForKey:@"v_Data"] componentsSeparatedByString:@"&"];
+        
+        if (1 < [components count]) {
+            NSString *accessToken = [components objectAtIndex:0];
+            
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateStyle:kCFDateFormatterFullStyle];
+            NSDate *expirationDate = [dateFormat dateFromString:[components objectAtIndex:1]];
+            
+            if (accessToken) {
+                self.facebook.accessToken = accessToken;
+                self.facebook.expirationDate = expirationDate;
+            }
+        }
+        
+        // Initialization code here.
+        NSDictionary *localUserDictionary = [self ioss_facebookUserDictionary];
+        if (localUserDictionary) {
+            self.userDictionary = localUserDictionary;
+        }
+    }
+    
+    return self;
+}
+
+- (id)initWithDictionary:(NSDictionary*)dictionary
+{
+    self = [self init];
+    if (self) {
+        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
+        
+        //set the local user dictionary based on params that have been sent in
+        self.facebook.accessToken = [dictionary objectForKey:@"access_token"];
+        NSMutableDictionary *localUserDictionary = [NSMutableDictionary dictionary];
+        [localUserDictionary setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
+        [localUserDictionary setObject:[dictionary objectForKey:@"username"] forKey:@"username"];
+        self.userDictionary = localUserDictionary;
+    }
+    return self;
+}
+
+- (void)setUserDictionary:(NSDictionary *)theUserDictionary
+{
+    if (theUserDictionary) {
+        [super setUserDictionary:theUserDictionary];
+        
+        [self ioss_setFacebookUserDictionary:theUserDictionary];
+    } else {
+        iOSSLog(@"meh: no user dictionary");
+    }
 }
 
 - (BOOL)isAuthenticated 
@@ -146,37 +213,90 @@ NSInteger usersCount = 0;
     if (0 < [facebookCookies count]) {
         hasCookies = YES;
     }
-    
-    if (NO == [[SocialManager socialManager].facebook isSessionValid] && !hasCookies)
+
+    if ((NO == [self.facebook isSessionValid]) && !hasCookies)
         return NO;
     return YES;
 }
 
-- (void)fetchLocalUserData
+- (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
+    self.fetchUserDataHandler = completionHandler;
+
     //since they're logged in, fetch their details
-    FBRequest *request = [[SocialManager socialManager].facebook requestWithGraphPath:@"me" 
+    FBRequest *request = [self.facebook requestWithGraphPath:@"me" 
                                                  andDelegate:self];
     [self recordRequest:request withType:FBUserRequestType];
 }
 
-- (void)authenticateUserPermissions:(NSArray*)permissions 
-              withCompletionHandler:(AuthenticationHandler)completionHandler
+- (void)authenticateFromViewController:(UIViewController*)vc 
+                 withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
     self.authenticationHandler = completionHandler;
-    
+
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
 
-        [[SocialManager socialManager].facebook authorize:permissions 
-                                                 delegate:self];
-    } else {
-        if (self.authenticationHandler) {
-            self.authenticationHandler(nil);
-            self.authenticationHandler = nil;
+        /*
+        if (nil == self.facebook) {
+            self.facebook = [[FacebookService sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         }
-        [self fetchLocalUserData];
+        */
+        
+        //cwnote: need permissions!
+        NSString *scope = [[FacebookService sharedService] apiScope];
+        //create an array from space separated string components!!!
+        NSArray *permissions = nil;
+        [self.facebook authorize:permissions];
+        //[self.facebook authorize:[NSArray arrayWithObjects:@"read_stream", @"publish_stream", @"offline_access",nil]];
+    } else {
+        [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+            if (!error) {
+                //
+            }
+            
+            if (self.authenticationHandler) {
+                self.authenticationHandler(error);
+                self.authenticationHandler = nil;
+            }
+        }];
     }
+
+}
+
+- (NSString*)oAuthAccessToken
+{
+    return self.facebook.accessToken;
+}
+
+- (NSString*)oAuthAccessTokenSecret
+{
+    return nil;
+}
+
+- (void)logout
+{
+    [self.facebook logout:self];
+}
+
+- (NSString*)userId
+{
+    return self.userID;
+}
+
+- (NSString*)username
+{
+    return self.alias;
+}
+
+- (NSString*)servicename
+{
+    return [FacebookService sharedService].name;
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url
+{
+    return [self.facebook handleOpenURL:url];
 }
 
 - (void)loadFriendsWithCompletionHandler:(FindFriendsHandler)completionHandler
@@ -185,9 +305,9 @@ NSInteger usersCount = 0;
 
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"friends.getAppUsers" forKey:@"method"];
-    
+
     //use the old REST api to get friends who use this app
-    FBRequest *request = [[SocialManager socialManager].facebook requestWithParams:params andDelegate:self];
+    FBRequest *request = [self.facebook requestWithParams:params andDelegate:self];
     
     [self recordRequest:request withType:FBUserFriendsRequestType];
 }
@@ -208,7 +328,7 @@ NSInteger usersCount = 0;
     
     for (NSNumber *identifier in identifiers) {
         NSString *path = [identifier stringValue];
-        FBRequest *request = [[SocialManager socialManager].facebook requestWithGraphPath:path andDelegate:self];
+        FBRequest *request = [self.facebook requestWithGraphPath:path andDelegate:self];
         [self recordRequest:request withType:FBUsersRequestType];
     }
 }
@@ -224,19 +344,20 @@ NSInteger usersCount = 0;
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     [dictionary setObject:name forKey:@"name"];
     [dictionary setObject:message forKey:@"message"];
-    FBRequest *request = [[SocialManager socialManager].facebook requestWithGraphPath:@"me/albums" 
-                                                                            andParams:dictionary 
-                                                                        andHttpMethod:@"POST"
-                                                                          andDelegate:self];
+
+    FBRequest *request = [self.facebook requestWithGraphPath:@"me/albums" 
+                                                   andParams:dictionary 
+                                               andHttpMethod:@"POST"
+                                                 andDelegate:self];
     [self recordRequest:request withType:FBCreatePhotoAlbumRequestType];
 }
 
 - (void)loadPhotoAlbumsWithCompletionHandler:(LoadPhotoAlbumsHandler)completionHandler
 {
     self.loadPhotoAlbumsHandler = completionHandler;
-    
-    FBRequest *request = [[SocialManager socialManager].facebook requestWithGraphPath:@"me/albums" 
-                                                                          andDelegate:self];
+
+    FBRequest *request = [self.facebook requestWithGraphPath:@"me/albums" 
+                                                 andDelegate:self];
     [self recordRequest:request withType:FBUserPhotoAlbumsRequestType];
 }
 
@@ -246,22 +367,21 @@ NSInteger usersCount = 0;
 - (void)fbDidLogin
 {
     //save the access token and expiration date in the keychain for retrieval later when app starts. will be used to initialize facebook 
-
-    NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateStyle:kCFDateFormatterFullStyle];
-    NSString *date = [dateFormat stringFromDate:[SocialManager socialManager].facebook.expirationDate];
+    NSString *date = [dateFormat stringFromDate:self.facebook.expirationDate];
     
-    NSString *accessToken = [NSString stringWithFormat:@"%@&%@", [SocialManager socialManager].facebook.accessToken, date];
+    NSString *accessToken = [NSString stringWithFormat:@"%@&%@", self.facebook.accessToken, date];
     [self.accessTokenItem setObject:accessToken forKey:@"v_Data"];
+
+    NSLog(@"fbDidLogin");
     
-    NSLog(@"fbDigLogin");
-    
-    if (self.authenticationHandler) {
-        self.authenticationHandler(nil);
-        self.authenticationHandler = nil;
-    }
-    
-    [self fetchLocalUserData];
+    [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
+        if (self.authenticationHandler) {
+            self.authenticationHandler(error);
+            self.authenticationHandler = nil;
+        }
+    }];
     
     //issue notification? UserAuthenticationDidChangeNotificationName
 }
@@ -299,7 +419,19 @@ NSInteger usersCount = 0;
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
     FBRequestType requestType = [self requestTypeForRequest:request];
+    
+    [super request:request didFailWithError:error];
+    
     switch (requestType) {
+            
+        case FBUserRequestType:
+        {
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler = nil;
+            }
+        }
+            break;
             
         case FBUserFriendsRequestType:
         {
@@ -312,7 +444,7 @@ NSInteger usersCount = 0;
             
         case FBUsersRequestType:
         {
-            FacebookUser *user = [[[FacebookUser alloc] init] autorelease];
+            FacebookUser *user = [[FacebookUser alloc] init];
             
             //save this user
             [users addObject:user];
@@ -350,14 +482,27 @@ NSInteger usersCount = 0;
         default:
             break;
     }
-    
-    [super request:request didFailWithError:error];
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result
 {
     FBRequestType requestType = [self requestTypeForRequest:request];
+    
+    [super request:request didLoad:result];
+    
     switch (requestType) {
+            
+        case FBUserRequestType:
+        {
+            NSDictionary *dictionary = (NSDictionary*)result;
+            self.userDictionary = dictionary;
+            
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler = nil;
+            }
+        }
+            break;
             
         case FBUserFriendsRequestType:
         {
@@ -375,7 +520,7 @@ NSInteger usersCount = 0;
         case FBUsersRequestType:
         {
             NSDictionary *dictionary = (NSDictionary*)result;
-            FacebookUser *user = [[[FacebookUser alloc] initWithDictionary:dictionary] autorelease];
+            FacebookUser *user = [[FacebookUser alloc] initWithDictionary:dictionary];
             
             //save this user
             [users addObject:user];
@@ -407,13 +552,13 @@ NSInteger usersCount = 0;
         case FBUserPhotoAlbumsRequestType:
         {
             //cwnote: need permissions for album. 
-            
+            /*
             NSDictionary *albumsDictionary = [(NSDictionary*)result objectForKey:@"data"];
             
             NSMutableArray *albums = [NSMutableArray array];
             for (NSDictionary *albumDictionary in albumsDictionary) {
                 //create an album object for each
-                FacebookPhotoAlbum *album = [[[FacebookPhotoAlbum alloc] initWithDictionary:albumDictionary] autorelease];
+                FacebookPhotoAlbum *album = [[FacebookPhotoAlbum alloc] initWithDictionary:albumDictionary];
                 //save the name and description of the album
                 [albums addObject:album];
             }
@@ -423,13 +568,12 @@ NSInteger usersCount = 0;
                 self.loadPhotoAlbumsHandler(albums, nil);
                 self.loadPhotoAlbumsHandler = nil;
             }
+            */
         }
             
         default:
             break;
     }
-    
-    [super request:request didLoad:result];
 }
 
 - (void)request:(FBRequest *)request didLoadRawResponse:(NSData *)data

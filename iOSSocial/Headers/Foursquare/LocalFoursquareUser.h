@@ -37,6 +37,10 @@ typedef void(^FoursquareAuthenticationHandler)(NSError *error);
 - (void)authenticateFromViewController:(UIViewController*)vc 
                  withCompletionHandler:(AuthenticationHandler)completionHandler;
 
+- (NSString*)oAuthAccessToken;
+
+- (NSString*)oAuthAccessTokenSecret;
+
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 

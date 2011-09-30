@@ -125,11 +125,6 @@ static LocalTumblrUser *localTumblrUser = nil;
     return YES;
 }
 
-- (NSURL*)authorizedURL:(NSURL*)theURL
-{
-    return nil;
-}
-
 - (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
 {
     self.fetchUserDataHandler = completionHandler;
@@ -196,10 +191,6 @@ static LocalTumblrUser *localTumblrUser = nil;
                 }
 
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
-                    if (!error) {
-                        [[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
-                    }
-                    
                     if (self.authenticationHandler) {
                         self.authenticationHandler(error);
                         self.authenticationHandler = nil;

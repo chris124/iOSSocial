@@ -141,11 +141,6 @@ static LocalFlickrUser *localFlickrUser = nil;
     return YES;
 }
 
-- (NSURL*)authorizedURL:(NSURL*)theURL
-{
-    return nil;
-}
-
 - (void)getUserPhotosWithCompletionHandler:(UserPhotosDataHandler)completionHandler;
 {
     self.userPhotosDataHandler = completionHandler;
@@ -411,10 +406,6 @@ static LocalFlickrUser *localFlickrUser = nil;
                 }
 
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
-                    if (!error) {
-                        //[[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
-                    }
-                    
                     if (self.authenticationHandler) {
                         self.authenticationHandler(error);
                         self.authenticationHandler = nil;
