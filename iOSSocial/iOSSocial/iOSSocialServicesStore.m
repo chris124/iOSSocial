@@ -214,21 +214,4 @@ static iOSSocialServicesStore *serviceStore = nil;
 }
 
 @end
-rKey:@"accounts"];
-        [self setServicesStoreDictionary:servicesDictionary];
-    }
-}
 
-- (id<iOSSocialLocalUserProtocol>)defaultAccount
-{
-    if (nil == _defaultAccount) {
-        //
-        id<iOSSocialServiceProtocol> primaryService = [self primaryService];
-     
-        _defaultAccount = [primaryService localUser];
-    }
-    
-    return _defaultAccount;
-}
-
-@end
