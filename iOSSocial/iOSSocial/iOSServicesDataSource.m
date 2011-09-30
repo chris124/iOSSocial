@@ -312,15 +312,7 @@
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 }
                 cell.textLabel.text = @"Done";
-                
-                /*
-                UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-                [doneButton setFrame:cell.frame];
-                [doneButton setTitle:@"Done" forState:UIControlStateNormal];
-                [cell.contentView addSubview:doneButton];
-                [doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-                */
-                
+
                 theCell = cell;
             }
                 break;

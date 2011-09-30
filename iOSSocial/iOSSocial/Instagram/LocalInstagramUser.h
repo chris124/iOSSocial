@@ -39,6 +39,8 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
 
 - (NSString*)oAuthAccessToken;
 
+- (NSTimeInterval)oAuthAccessTokenExpirationDate;
+
 - (NSString*)oAuthAccessTokenSecret;
 
 //remove all stored OAuth info from the keychain and reset state in memory

@@ -28,7 +28,19 @@
 // See iOSSocialServiceOAuth2ProviderConstants.h or iOSSocialServiceOAuthProviderConstants.h for the Keys for this dictionary.
 - (void)assignOAuthParams:(NSDictionary*)params asPrimary:(BOOL)isPrimary;
 
-- (id)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
+- (id<iOSSocialLocalUserProtocol>)localUser;
+
+- (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary;
+
+- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid;
+
+- (NSString*)apiKey;
+
+- (NSString*)apiSecret;
+
+@optional
+
+- (NSString*)apiScope;
 
 - (void)authorizeFromViewController:(UIViewController*)vc 
                             forAuth:(id)theAuth 
@@ -36,21 +48,13 @@
                     andCookieDomain:(NSString*)cookieDomain
               withCompletionHandler:(AuthorizationHandler)completionHandler;
 
-- (id<iOSSocialLocalUserProtocol>)localUser;
-
-- (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary;
-
-- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid;
-
 - (void)logout:(id)theAuth forKeychainItemName:(NSString*)theKeychainItemName;
 
-- (NSString*)apiKey;
-
-- (NSString*)apiSecret;
-
-- (NSString*)authorizationHeaderForRequest:(NSURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth;
+- (id)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
 
 + (id)JSONFromData:(NSData*)data;
+
+- (NSString*)authorizationHeaderForRequest:(NSURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth;
 
 @end
 

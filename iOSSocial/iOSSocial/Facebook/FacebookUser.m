@@ -7,16 +7,13 @@
 //
 
 #import "FacebookUser.h"
-#import "SocialManager.h"
 #import "FBConnect.h"
+#import "FacebookUser+Private.h"
+#import "FacebookService.h"
 
-@interface FacebookUser () <FBRequestDelegate>
+@interface FacebookUser () <FBRequestDelegate, FBSessionDelegate>
 
-@property(nonatomic, readwrite, retain) NSString *userID;
-@property(nonatomic, readwrite, retain) NSString *alias;
-@property(nonatomic, readwrite, retain) NSString *firstName;
-@property(nonatomic, readwrite, retain) NSString *lastName;
-@property(nonatomic, readwrite, retain) NSString *email;
+
 @property (nonatomic, retain)           NSMutableDictionary *requestDictionary;
 @property (nonatomic, copy)             LoadPhotoHandler loadPhotoHandler;
 
@@ -43,44 +40,43 @@ typedef enum _FBRequestType {
 @synthesize email;
 @synthesize requestDictionary;
 @synthesize loadPhotoHandler;
+@synthesize index;
+@synthesize dataSource;
+@synthesize fetchUserDataHandler;
+@synthesize userDictionary;
+@synthesize profilePictureURL;
+@synthesize facebook;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         // Initialization code here.
+        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
     }
     
     return self;
 }
 
-- (id)initWithDictionary:(NSDictionary*)userDictionary
+- (id)initWithDictionary:(NSDictionary*)theUserDictionary
 {
     self = [self init];
     if (self) {
         // Initialization code here.
-        self.firstName = [userDictionary objectForKey:@"first_name"];
-        self.lastName = [userDictionary objectForKey:@"last_name"];
-        self.userID = [userDictionary objectForKey:@"id"];
-        self.alias = [userDictionary objectForKey:@"username"];
-        self.email = [userDictionary objectForKey:@"email"];
+        self.userDictionary = theUserDictionary;
     }
     
     return self;
 }
-
-- (void)dealloc
+- (void)setUserDictionary:(NSDictionary *)theUserDictionary
 {
-    //null out the delegates on any outstanding requests?
+    userDictionary = theUserDictionary;
     
-    [loadPhotoHandler release];
-    [requestDictionary release];
-    [lastName release];
-    [firstName release];
-    [email release];
-    [alias release];
-    [userID release];
-    [super dealloc];
+    self.userID = [theUserDictionary objectForKey:@"id"];
+    self.alias = [theUserDictionary objectForKey:@"username"];
+    self.firstName = [theUserDictionary objectForKey:@"first_name"];
+    self.lastName = [theUserDictionary objectForKey:@"last_name"];
+    self.profilePictureURL = [theUserDictionary objectForKey:@"profile_picture"];
 }
 
 - (BOOL)isFriend
@@ -109,9 +105,9 @@ typedef enum _FBRequestType {
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler
 {
     self.loadPhotoHandler = completionHandler;
-    
+
     NSString *path = [NSString stringWithFormat:@"%@/picture", self.userID];
-    FBRequest *request = [[SocialManager socialManager].facebook requestWithGraphPath:path andDelegate:self];
+    FBRequest *request = [self.facebook requestWithGraphPath:path andDelegate:self];
     [self recordRequest:request withType:FBUserPictureRequestType];
 }
 
@@ -182,12 +178,17 @@ typedef enum _FBRequestType {
             
         case FBUserRequestType:
         {
+            /*
             NSDictionary *dictionary = (NSDictionary*)result;
+            self.userDictionary = dictionary;
+            */
+            /*
             self.firstName = [dictionary objectForKey:@"first_name"];
             self.lastName = [dictionary objectForKey:@"last_name"];
             self.userID = [dictionary objectForKey:@"id"];
             self.alias = [dictionary objectForKey:@"username"];
             self.email = [dictionary objectForKey:@"email"];
+            */
         }
             break;
             
