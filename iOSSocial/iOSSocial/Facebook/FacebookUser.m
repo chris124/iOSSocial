@@ -9,8 +9,9 @@
 #import "FacebookUser.h"
 #import "FBConnect.h"
 #import "FacebookUser+Private.h"
+#import "FacebookService.h"
 
-@interface FacebookUser () <FBRequestDelegate>
+@interface FacebookUser () <FBRequestDelegate, FBSessionDelegate>
 
 
 @property (nonatomic, retain)           NSMutableDictionary *requestDictionary;
@@ -44,12 +45,14 @@ typedef enum _FBRequestType {
 @synthesize fetchUserDataHandler;
 @synthesize userDictionary;
 @synthesize profilePictureURL;
+@synthesize facebook;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         // Initialization code here.
+        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
     }
     
     return self;
@@ -102,12 +105,10 @@ typedef enum _FBRequestType {
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler
 {
     self.loadPhotoHandler = completionHandler;
-    
-    /*
+
     NSString *path = [NSString stringWithFormat:@"%@/picture", self.userID];
-    FBRequest *request = [[SocialManager socialManager].facebook requestWithGraphPath:path andDelegate:self];
+    FBRequest *request = [self.facebook requestWithGraphPath:path andDelegate:self];
     [self recordRequest:request withType:FBUserPictureRequestType];
-    */
 }
 
 #pragma mark -

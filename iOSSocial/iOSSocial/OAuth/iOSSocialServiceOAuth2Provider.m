@@ -17,6 +17,7 @@
 @interface IOSSOAuthParserClass : NSObject
 // just enough of SBJSON to be able to parse
 - (id)objectWithString:(NSString*)repr error:(NSError**)error;
+- (id)objectWithString:(NSString*)repr;
 @end
 
 
@@ -259,7 +260,11 @@
             NSString *jsonStr = [[NSString alloc] initWithData:data
                                                       encoding:NSUTF8StringEncoding];
             if (jsonStr) {
-                obj = [parser objectWithString:jsonStr error:&error];
+                if ([parser respondsToSelector:@selector(objectWithString:error:)]) {
+                    obj = [parser objectWithString:jsonStr error:&error];
+                } else {
+                    obj = [parser objectWithString:jsonStr];
+                }
 #if DEBUG
                 if (error) {
                     iOSSLog(@"%@ error %@ parsing %@", NSStringFromClass(jsonParseClass),

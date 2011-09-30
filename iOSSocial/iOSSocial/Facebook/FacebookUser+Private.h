@@ -16,6 +16,7 @@
 @property(nonatomic, readwrite, retain) NSString *email;
 @property(nonatomic, readwrite, retain) NSString *profilePictureURL;
 @property(nonatomic, copy)              FetchUserDataHandler fetchUserDataHandler;
+@property(nonatomic, readwrite, retain) Facebook *facebook;
 
 @end
 

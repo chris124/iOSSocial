@@ -342,6 +342,11 @@ static LocalTwitterUser *localTwitterUser = nil;
     return self.auth.accessToken;
 }
 
+- (NSTimeInterval)oAuthAccessTokenExpirationDate
+{
+    return 0.0;
+}
+
 - (NSString*)oAuthAccessTokenSecret
 {
     return self.auth.tokenSecret;

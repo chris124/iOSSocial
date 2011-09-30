@@ -95,14 +95,14 @@ static FacebookService *facebookService = nil;
 - (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary
 {
     LocalFacebookUser *theUser = [[LocalFacebookUser alloc] initWithDictionary:dictionary];
-    //TODO: now save this as the facebook localuser!!
+    [LocalFacebookUser setLocalFacebookUser:theUser];
     return theUser;
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
 {
     LocalFacebookUser *theUser = [[LocalFacebookUser alloc] initWithUUID:uuid];
-    //TODO: now save this as the facebook localuser!!
+    [LocalFacebookUser setLocalFacebookUser:theUser];
     return theUser;
 }
 

@@ -15,7 +15,7 @@
 #import "FacebookUser+Private.h"
 #import "iOSSLog.h"
 
-@interface FacebookUser () <FBRequestDelegate>
+@interface FacebookUser () <FBRequestDelegate, FBSessionDelegate>
 
 typedef enum _FBRequestType {
 	FBUserRequestType = 0,
@@ -40,7 +40,6 @@ typedef enum _FBRequestType {
 @property(nonatomic, copy)              CreatePhotoAlbumHandler createPhotoAlbumHandler;
 @property(nonatomic, copy)              LoadPhotoAlbumsHandler loadPhotoAlbumsHandler;
 @property(nonatomic, retain)            KeychainItemWrapper *accessTokenItem;
-@property(nonatomic, readwrite, retain) Facebook *facebook;
 @property(nonatomic, retain)            NSString *keychainItemName;
 @property(nonatomic, readwrite, retain) NSString *uuidString;
 
@@ -66,7 +65,6 @@ NSInteger usersCount = 0;
 @synthesize servicename;
 @synthesize username;
 @synthesize uuidString;
-@synthesize facebook;
 @synthesize keychainItemName;
 
 + (LocalFacebookUser *)localFacebookUser
@@ -76,6 +74,11 @@ NSInteger usersCount = 0;
             localFacebookUser = [[super allocWithZone:NULL] init];
     }
     return localFacebookUser;
+}
+
++ (void)setLocalFacebookUser:(LocalFacebookUser *)theLocalFacebookUser
+{
+    localFacebookUser = theLocalFacebookUser;
 }
 
 - (NSDictionary *)ioss_facebookUserDictionary 
@@ -93,7 +96,7 @@ NSInteger usersCount = 0;
 {
     self = [super init];
     if (self) {
-        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
+        //self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
         
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
@@ -139,7 +142,7 @@ NSInteger usersCount = 0;
 {
     self = [super init];
     if (self) {
-        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
+        //self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
         
         self.uuidString = uuid;
         
@@ -181,10 +184,12 @@ NSInteger usersCount = 0;
 {
     self = [self init];
     if (self) {
-        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
+        //self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
         
         //set the local user dictionary based on params that have been sent in
         self.facebook.accessToken = [dictionary objectForKey:@"access_token"];
+        NSDecimalNumber *expiration = [dictionary objectForKey:@"access_token_expiration"];
+        self.facebook.expirationDate = [NSDate dateWithTimeIntervalSinceReferenceDate:[expiration doubleValue]];
         NSMutableDictionary *localUserDictionary = [NSMutableDictionary dictionary];
         [localUserDictionary setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
         [localUserDictionary setObject:[dictionary objectForKey:@"username"] forKey:@"username"];
@@ -246,9 +251,8 @@ NSInteger usersCount = 0;
         //cwnote: need permissions!
         NSString *scope = [[FacebookService sharedService] apiScope];
         //create an array from space separated string components!!!
-        NSArray *permissions = nil;
+        NSArray *permissions = [scope componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         [self.facebook authorize:permissions];
-        //[self.facebook authorize:[NSArray arrayWithObjects:@"read_stream", @"publish_stream", @"offline_access",nil]];
     } else {
         [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
             if (!error) {
@@ -267,6 +271,11 @@ NSInteger usersCount = 0;
 - (NSString*)oAuthAccessToken
 {
     return self.facebook.accessToken;
+}
+
+- (NSTimeInterval)oAuthAccessTokenExpirationDate
+{
+    return [self.facebook.expirationDate timeIntervalSinceReferenceDate];
 }
 
 - (NSString*)oAuthAccessTokenSecret
@@ -391,7 +400,8 @@ NSInteger usersCount = 0;
     NSLog(@"fbDidNotLogin");
 
     if (self.authenticationHandler) {
-        self.authenticationHandler(nil);
+        NSError *error = [NSError errorWithDomain:@"SW" code:1 userInfo:nil];
+        self.authenticationHandler(error);
         self.authenticationHandler = nil;
     }
 }
@@ -427,7 +437,7 @@ NSInteger usersCount = 0;
         case FBUserRequestType:
         {
             if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler(error);
                 self.fetchUserDataHandler = nil;
             }
         }
@@ -436,7 +446,7 @@ NSInteger usersCount = 0;
         case FBUserFriendsRequestType:
         {
              if (self.findFriendsHandler) {
-                 self.findFriendsHandler(nil, nil);
+                 self.findFriendsHandler(nil, error);
                  self.findFriendsHandler = nil;
              }
         }
@@ -444,17 +454,10 @@ NSInteger usersCount = 0;
             
         case FBUsersRequestType:
         {
-            FacebookUser *user = [[FacebookUser alloc] init];
-            
-            //save this user
-            [users addObject:user];
-            
-            if (usersCount == [users count]) {
-                if (self.loadUsersHandler) {
-                    self.loadUsersHandler(users, nil);
-                    [users removeAllObjects];
-                    self.loadUsersHandler = nil;
-                }
+            if (self.loadUsersHandler) {
+                self.loadUsersHandler(nil, error);
+                [users removeAllObjects];
+                self.loadUsersHandler = nil;
             }
         }
             break;
@@ -463,7 +466,7 @@ NSInteger usersCount = 0;
         {
             //call completion handler with error
             if (self.createPhotoAlbumHandler) {
-                self.createPhotoAlbumHandler(nil);
+                self.createPhotoAlbumHandler(error);
                 self.createPhotoAlbumHandler = nil;
             }
         }
@@ -473,7 +476,7 @@ NSInteger usersCount = 0;
         {
             //call completion handler with error
             if (self.loadPhotoAlbumsHandler) {
-                self.loadPhotoAlbumsHandler(nil, nil);
+                self.loadPhotoAlbumsHandler(nil, error);
                 self.loadPhotoAlbumsHandler = nil;
             }
         }

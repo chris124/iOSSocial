@@ -144,22 +144,6 @@ static iOSSocialServicesStore *serviceStore = nil;
     return theAccount;
 }
 
-/*
- {
- "access_token" = "4885060.3f46672.e6083c3e647c411a9c3e61507d8b4c5a";
- service = Instagram;
- userId = 4885060;
- username = mrchristopher124;
- },
- {
- "access_token" = "103384600-SUYmFIuO0YGIcbi5mZrxsfBUxGiaOJd0SImJB8Wf";
- "access_token_secret" = U5IodBJ5PzIu5wdlLSlQrN3HqlFOBs29BiHTVWZNY;
- service = Twitter;
- userId = 103384600;
- username = christhepiss;
- },
- */
-
 - (id<iOSSocialLocalUserProtocol>)accountWithDictionary:(NSDictionary*)accountDictionary
 {
     //get the service for the type then create a local user with the dictionary info
@@ -213,6 +197,24 @@ static iOSSocialServicesStore *serviceStore = nil;
         }
         
         NSDictionary *servicesDictionary = [NSDictionary dictionaryWithObject:theAccounts forKey:@"accounts"];
+        [self setServicesStoreDictionary:servicesDictionary];
+    }
+}
+
+- (id<iOSSocialLocalUserProtocol>)defaultAccount
+{
+    if (nil == _defaultAccount) {
+        //
+        id<iOSSocialServiceProtocol> primaryService = [self primaryService];
+     
+        _defaultAccount = [primaryService localUser];
+    }
+    
+    return _defaultAccount;
+}
+
+@end
+rKey:@"accounts"];
         [self setServicesStoreDictionary:servicesDictionary];
     }
 }

@@ -351,6 +351,11 @@ static LocalInstagramUser *localInstagramUser = nil;
     return nil;
 }
 
+- (NSTimeInterval)oAuthAccessTokenExpirationDate
+{
+    return 0.0;
+}
+
 - (void)logout
 {
     [[Instagram sharedService] logout:self.auth forKeychainItemName:self.keychainItemName];
