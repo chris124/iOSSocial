@@ -25,6 +25,8 @@ typedef void(^LoadPhotoAlbumsHandler)(NSArray *photoAlbums, NSError *error);
 // A temporary use is created if no account is set up.
 + (LocalFacebookUser *)localFacebookUser;
 
++ (void)setLocalFacebookUser:(LocalFacebookUser *)theLocalFacebookUser;
+
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
 /*
 // Authenticate the user for access to user details. This may present UI to the user if necessary to login or create an account. The user must be authenticated in order to use other APIs. This should be called for each launch of the application as soon as the UI is ready.
@@ -53,6 +55,8 @@ typedef void(^LoadPhotoAlbumsHandler)(NSArray *photoAlbums, NSError *error);
 - (NSString*)oAuthAccessToken;
 
 - (NSString*)oAuthAccessTokenSecret;
+
+- (NSTimeInterval)oAuthAccessTokenExpirationDate;
 
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
