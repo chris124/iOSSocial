@@ -14,6 +14,8 @@ typedef void(^AuthenticationHandler)(NSError *error);
 
 @protocol iOSSocialLocalUserProtocol <NSObject>
 
+@required
+
 - (id)initWithUUID:(NSString*)uuid;
 
 //cwnote: still need this
@@ -47,6 +49,8 @@ typedef void(^AuthenticationHandler)(NSError *error);
 - (NSString*)userId;
 
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler;
+
+@optional
 
 - (NSURL*)authorizedURL:(NSURL*)theURL;
 

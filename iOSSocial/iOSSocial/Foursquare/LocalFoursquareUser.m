@@ -216,11 +216,6 @@ static LocalFoursquareUser *localFoursquareUser = nil;
                 }
             } else {
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
-                    if (!error) {
-                        //
-                        //[[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
-                    }
-                    
                     if (self.authenticationHandler) {
                         self.authenticationHandler(error);
                         self.authenticationHandler = nil;
@@ -245,6 +240,11 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 - (NSString*)oAuthAccessToken
 {
     return self.auth.accessToken;
+}
+
+- (NSTimeInterval)oAuthAccessTokenExpirationDate
+{
+    return 0.0;
 }
 
 - (NSString*)oAuthAccessTokenSecret

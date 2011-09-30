@@ -132,11 +132,6 @@ static LocalTwitterUser *localTwitterUser = nil;
     return YES;
 }
 
-- (NSURL*)authorizedURL:(NSURL*)theURL
-{
-    return nil;
-}
-
 - (void)getMentions
 {
     //self.fetchUserDataHandler = completionHandler;
@@ -321,10 +316,6 @@ static LocalTwitterUser *localTwitterUser = nil;
                 }
 
                 [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
-                    if (!error) {
-                        //[[iOSSocialServicesStore sharedServiceStore] registerAccount:self];
-                    }
-                    
                     if (self.authenticationHandler) {
                         self.authenticationHandler(error);
                         self.authenticationHandler = nil;
@@ -349,6 +340,11 @@ static LocalTwitterUser *localTwitterUser = nil;
 - (NSString*)oAuthAccessToken
 {
     return self.auth.accessToken;
+}
+
+- (NSTimeInterval)oAuthAccessTokenExpirationDate
+{
+    return 0.0;
 }
 
 - (NSString*)oAuthAccessTokenSecret

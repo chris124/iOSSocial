@@ -14,6 +14,8 @@ typedef void(^AuthenticationHandler)(NSError *error);
 
 @protocol iOSSocialLocalUserProtocol <NSObject>
 
+@required
+
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 
 - (id)initWithUUID:(NSString*)uuid;
@@ -40,6 +42,8 @@ typedef void(^AuthenticationHandler)(NSError *error);
 
 - (NSString*)oAuthAccessToken;
 
+- (NSTimeInterval)oAuthAccessTokenExpirationDate;
+
 - (NSString*)oAuthAccessTokenSecret;
 
 //remove all stored OAuth info from the keychain and reset state in memory
@@ -48,6 +52,8 @@ typedef void(^AuthenticationHandler)(NSError *error);
 - (NSString*)userId;
 
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler;
+
+@optional
 
 - (NSURL*)authorizedURL:(NSURL*)theURL;
 
