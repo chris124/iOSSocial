@@ -205,8 +205,8 @@ iOSSServicesViewController is powered by iOSServicesDataSource. If you want to u
 
 ## Adding Support for a New Service
 
-There are a lot of services to support and this is where you come in. :) To add support for a new service, fork the repo, create a branch and give it a good name, create a sub folder and name it after the service and then create the three following files (You can copy and paste the content from one of the other services. Please bare with me for now. Lots of duplicate code. Need to doa major code cleanup.):
+There are a lot of services to support and this is where you come in. :) To add support for a new service, fork the repo, create a branch and give it a good name (one that matches the service you want to integrate with would be perfect), create a sub folder and name it after the service and then create the three following files (You can copy and paste the content from one of the other services. Please bare with me for now. Lots of duplicate code. Need to do a major code cleanup.):
 
-1. Service.m/.h: This class must implement iOSSocialServiceProtocol and be derived from iOSSocialServiceProtocol or iOSSocialServiceOAuth2Provider depending on if its an OAuth1 or OAuth2 service. See Instagram.m/.h.
-2. ServiceUser.m/.h: This class must implement iOSSocialUserProtocol. See InstagramUser.m/.h.
-3. LocalServiceUser.m/.h: This class must implement toiOSSocialLocalUserProtocol. See LocalInstagramUser.m/.h.
+1. ServiceName.m/.h: This class must implement iOSSocialServiceProtocol and be derived from iOSSocialServiceProtocol or iOSSocialServiceOAuth2Provider depending on if its an OAuth1 or OAuth2 service. See Instagram.m/.h.
+2. ServiceNameUser.m/.h: This class must implement iOSSocialUserProtocol. See InstagramUser.m/.h.
+3. LocalServiceNameUser.m/.h: This class must implement toiOSSocialLocalUserProtocol. See LocalInstagramUser.m/.h.
