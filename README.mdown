@@ -70,6 +70,7 @@ If you want to filter which services are displayed in the view controller, pass 
 
 >
 NSArray *filter = [NSArray arrayWithObjects:@"Twitter", nil];
+>
 iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] initWithServicesFilter:filter];
 >
 [iossServicesViewController presentModallyFromViewController:self 
