@@ -1,4 +1,4 @@
-iOSSocial
+# iOSSocial
 =======
 
 (cwnote: I apologize for some of the code formatting. Still learning my way around this markup. If you know how to fix it, feel free to fork and send a pull request.)
@@ -15,12 +15,12 @@ Coming soon: Facebook (OAuth2)!
 
 Supported iOS platforms: iOS 4, iOS 5
 
-Community
+## Community
 =========
 
 Hopefully coming soon!
 
-Adding iOSSocial to your project
+## Adding iOSSocial to your project
 ==============================
 
 iOSSocial is compiled as a static library. To use it in your project, do the following:
@@ -33,10 +33,10 @@ iOSSocial is compiled as a static library. To use it in your project, do the fol
 - Call authenticateWithScope:fromViewController:withCompletionHandler: on the local user object of the service to present the OAuth Login View Controller to the user. If successful, the error returned by the completion handler will be nil.
 - Call logout on the local user object of the service to blow out the local OAuth goodies.
   
-An Overview of iOSSocial
+## An Overview of iOSSocial
 ======================
     
-iOSSServicesViewController
+### iOSSServicesViewController
 ------------
 
 Use iOSSServicesViewController to present a list of supported services to the user. The controller is evolving, but for now, it shows a list of available services to connect to (based on the services you choose to configure. Read below on iOSSocialServiceProtocol.):
@@ -69,7 +69,7 @@ iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewContr
 ];
 </pre></code>
 
-iOSSocialServiceProtocol
+### iOSSocialServiceProtocol
 ------------   
 
 Which services you want to use is up to you. The underlying code will automatically pick-up which services are available based on what you configure. It is recommended that the services be configured in your application delegate before calling any other code. Here is an example of how the Instagram, Twitter, and Foursquare services are configured in an application delegate:
@@ -121,7 +121,7 @@ Which services you want to use is up to you. The underlying code will automatica
 }
 </pre></code>
 
-iOSSocialLocalUserProtocol
+### iOSSocialLocalUserProtocol
 ------------
 
 Local user account objects are used to represent an authenticated user account for a given service. All of the local user account classes adhere to iOSSocialLocalUserProtocol. The available classes are LocalInstagramUser, LocalTwitterUser, LocalFoursquareUser, LocalFlickrUser, and LocalTumblrUser, (more to come as more services are supported). These derived classes can be created directly or if you just want to get an instance of a local user object for whichever service was set at the primary service you can call [[iOSSocialServicesStore sharedServiceStore] defaultAccount]. Once you have a local user account object, you can authenticate it, query its authentication state, log it out, get its OAuth access token and more. See the code below:
@@ -147,7 +147,7 @@ BOOL isAuthenticated = [localUser isAuthenticated];
 [localUser logout];
 </pre></code>
 
-iOSServicesDataSource
+### iOSServicesDataSource
 ------------
 
 iOSSServicesViewController is powered by iOSServicesDataSource. If you want to use your own UI, you can take a look at how iOSSServicesViewController uses iOSServicesDataSource.
@@ -201,7 +201,7 @@ iOSSServicesViewController is powered by iOSServicesDataSource. If you want to u
 }
 </pre></code>
 
-Adding Support for a New Service
+## Adding Support for a New Service
 ------------
 
 There are a lot of services to support and this is where you come in. :) To add support for a new service, fork the repo, create a branch and give it a good name, create a sub folder and name it after the service and then create the three following files (You can copy and paste the content from one of the other services. Please bare with me for now. Lots of duplicate code. Need to doa major code cleanup.):
