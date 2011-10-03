@@ -6,13 +6,13 @@ iOSSocial is a collection of classes that makes it easy to integrate with one or
 
 Supported services:
 
-OAuth 2- Instagram, Foursquare
+- OAuth 2: Instagram, Foursquare, Facebook
+- OAuth 1: Twitter, Flickr, Tumblr
 
-OAuth 1 - Twitter, Flickr, Tumblr
+Supported iOS platforms: 
 
-Coming soon: Facebook (OAuth2)!
-
-Supported iOS platforms: iOS 4, iOS 5
+- iOS 4
+- iOS 5
 
 ## Community
 
