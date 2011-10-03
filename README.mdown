@@ -73,14 +73,14 @@ iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewContr
 
 Which services you want to use is up to you. The underlying code will automatically pick-up which services are available based on what you configure. It is recommended that the services be configured in your application delegate before calling any other code. Here is an example of how the Instagram, Twitter, and Foursquare services are configured in an application delegate:
 
-<pre><code>
+>
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// Note: For Instagram, when setting the object for the kSMOAuth2RedirectURI key in the OAuth params
 	// dictionary, the URL specified MUST match the callback URL you specified when you created your 
 	// Instagram application on their site. It doesn't matter what the URL actually points to, but 
 	// the value specified here HAS to match what you specified when you created your Instagram app.
-	
+>	
 	// Note: Be passing YES to the asPrimary parameter, we are stating that Instagram is going to be the primary service for authentication.
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
 	[params setObject:@"instagram app client id" forKey:kSMOAuth2ClientID];
@@ -92,9 +92,9 @@ Which services you want to use is up to you. The underlying code will automatica
 	[params setObject:@"Instagram Service" forKey:kSMOAuth2ServiceProviderName];
 	[params setObject:@"basic comments relationships likes" forKey:kSMOAuth2Scope];
 	[[Instagram sharedService] assignOAuthParams:params asPrimary:YES];
-
+>
 	[params removeAllObjects];
-
+>
 	[params setObject:@"twitter app client id" forKey:kSMOAuth1ClientID];
 	[params setObject:@"twitter app client secret" forKey:kSMOAuth1ClientSecret];
 	[params setObject:@"twitter app callback" forKey:kSMOAuth1RedirectURI];
@@ -104,9 +104,9 @@ Which services you want to use is up to you. The underlying code will automatica
 	[params setObject:@"https://api.twitter.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
 	[params setObject:@"Twitter Service" forKey:kSMOAuth1ServiceProviderName];
 	[[Twitter sharedService] assignOAuthParams:params asPrimary:NO];
-
+>
 	[params removeAllObjects];
-
+>
 	[params setObject:@"foursquare app client id" forKey:kSMOAuth2ClientID];
 	[params setObject:@"foursquare app client secret" forKey:kSMOAuth2ClientSecret];
 	[params setObject:@"foursquare app callback" forKey:kSMOAuth2RedirectURI];
@@ -115,10 +115,9 @@ Which services you want to use is up to you. The underlying code will automatica
 	[params setObject:@"https://foursquare.com/oauth2/access_token" forKey:kSMOAuth2AccessTokenURL];
 	[params setObject:@"Foursquare Service" forKey:kSMOAuth2ServiceProviderName];
 	[[Foursquare sharedService] assignOAuthParams:params asPrimary:NO];
-
+>
 	...
 }
-</pre></code>
 
 ### iOSSocialLocalUserProtocol
 ------------
