@@ -20,13 +20,10 @@ Hopefully coming soon!
 
 iOSSocial is intended to be used as drop-in code for your project. To use it in your project, do the following:
 
-- Build the project on its own or add it to your application's project/workspace.
-- Link your application against libiOSSocial.a, Security.framework, and SystemConfiguration.framework
-- Include the appropriate headers: LocalInstagramUser.h, LocalFoursquareUser.h, and/or LocalTwitterUser.h
-- Call assignOAuthParams: on the local user object of the service that you want to integrate with.
-- Call isAuthenticated on the local user object of the service to see if the user has already authorized your app.
-- Call authenticateWithScope:fromViewController:withCompletionHandler: on the local user object of the service to present the OAuth Login View Controller to the user. If successful, the error returned by the completion handler will be nil.
-- Call logout on the local user object of the service to blow out the local OAuth goodies.
+- Add this repo to your git repo as a submodule: git submodule add git@github.com:chris124/iOSSocial.git iOSSocial
+- Perform a git submodule update --init
+- Drag the source files into your project.
+- Link your application against Security.framework, SystemConfiguration.framework, CFNetwork.framework, MobileCoreServices.framework, libz.1.2.5.dylib
   
 ## An Overview of iOSSocial
     
