@@ -57,7 +57,7 @@ Selecting an already connected account logs the user out of that account (ie, cl
 
 Here is the code in action:
 
-<pre><code>
+>
 iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
 
 [iossServicesViewController presentModallyFromViewController:self 
@@ -67,7 +67,6 @@ iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewContr
 	                                       [self dismissModalViewControllerAnimated:YES];
 	                                   }
 ];
-</pre></code>
 
 ### iOSSocialServiceProtocol
 ------------   
