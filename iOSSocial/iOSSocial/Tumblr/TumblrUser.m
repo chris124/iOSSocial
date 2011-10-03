@@ -22,8 +22,6 @@
 @synthesize userID;
 @synthesize alias;
 @synthesize fetchUserDataHandler;
-@synthesize index;
-@synthesize dataSource;
 @synthesize loadPhotoHandler;
 @synthesize profilePictureURL;
 

@@ -12,9 +12,11 @@
 #import "iOSSocialConstants.h"
 
 @class InstagramMediaCollection;
-@class InstagramUserCollection;
 
 typedef void(^FetchMediaHandler)(InstagramMediaCollection *collection, NSError *error);
+
+@class InstagramUserCollection;
+
 typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 
 @interface InstagramUser : NSObject <iOSSocialUserProtocol>
@@ -64,10 +66,6 @@ typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler;
 
 - (void)fetchUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler;
-
-- (void)fetchRecentMediaWithCompletionHandler:(FetchMediaHandler)completionHandler;
-
-- (void)fetchFollowsWithCompletionHandler:(FetchUsersHandler)completionHandler;
 
 - (void)fetchFollowedByWithCompletionHandler:(FetchUsersHandler)completionHandler;
 

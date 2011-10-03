@@ -46,10 +46,6 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 
-- (void)fetchFeedWithCompletionHandler:(FetchMediaHandler)completionHandler;
-
-- (void)fetchLikedMediaWithCompletionHandler:(FetchMediaHandler)completionHandler;
-
 - (void)fetchRelationshipToUser;
 
 - (void)fetchRequestedBy;
