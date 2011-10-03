@@ -2,7 +2,7 @@
 
 (cwnote: I apologize for some of the code formatting. Still learning my way around this markup. If you know how to fix it, feel free to fork and send a pull request.)
 
-iOSSocial is a collection of classes that makes it easy to integrate with one or more popular social networks. Includes OAuth authentication support for each service out-of-the box via view controllers (The underlying data model makes it possible for you to easily build your own UI as well.) and saving of OAuth tokens in the keychain. The code supports authenticating multiple accounts for a given service and also the concept of setting a particular service as the primary service to be used for authentication.
+iOSSocial is a collection of classes that makes it easy to integrate with one or more popular social networks. Includes OAuth authentication support for each service out-of-the box via view controllers and saving of OAuth tokens in the keychain. The code supports authenticating multiple accounts for a given service and also the concept of setting a particular service as the primary service to be used for authentication.
 
 Supported services:
 
@@ -20,7 +20,7 @@ Hopefully coming soon!
 
 ## Adding iOSSocial to your project
 
-iOSSocial is compiled as a static library. To use it in your project, do the following:
+iOSSocial is intended to be used as drop-in code for your project. To use it in your project, do the following:
 
 - Build the project on its own or add it to your application's project/workspace.
 - Link your application against libiOSSocial.a, Security.framework, and SystemConfiguration.framework
@@ -34,6 +34,8 @@ iOSSocial is compiled as a static library. To use it in your project, do the fol
     
 ### iOSSServicesViewController
 ------------
+
+iOSSServicesViewController is a stand along class that can be used in conjunction with iOSSocial. It is shown here to give you an idea of how you can easily use iOSSocial to build a UI that presents a choice of services to a user to authenticate against. It lives in a separate repo here: https://github.com/chris124/iOSSocialViewControllers
 
 Use iOSSServicesViewController to present a list of supported services to the user. The controller is evolving, but for now, it shows a list of available services to connect to (based on the services you choose to configure. Read below on iOSSocialServiceProtocol.):
 
@@ -54,7 +56,21 @@ Selecting an already connected account logs the user out of that account (ie, cl
 Here is the code in action:
 
 >
-iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
+iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] initWithServicesFilter:nil];
+>
+[iossServicesViewController presentModallyFromViewController:self 
+	                             withServiceConnectedHandler:^(id<iOSSocialLocalUserProtocol> localUser) {
+	                             }  
+	                                   withCompletionHandler:^{
+	                                       [self dismissModalViewControllerAnimated:YES];
+	                                   }
+];
+
+If you want to filter which services are displayed in the view controller, pass in an array of service names. 
+
+>
+NSArray *filter = [NSArray arrayWithObjects:@"Twitter", nil];
+iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] initWithServicesFilter:filter];
 >
 [iossServicesViewController presentModallyFromViewController:self 
 	                             withServiceConnectedHandler:^(id<iOSSocialLocalUserProtocol> localUser) {
