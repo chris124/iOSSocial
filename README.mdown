@@ -1,5 +1,4 @@
 # iOSSocial
-=======
 
 (cwnote: I apologize for some of the code formatting. Still learning my way around this markup. If you know how to fix it, feel free to fork and send a pull request.)
 
@@ -16,12 +15,10 @@ Coming soon: Facebook (OAuth2)!
 Supported iOS platforms: iOS 4, iOS 5
 
 ## Community
-=========
 
 Hopefully coming soon!
 
 ## Adding iOSSocial to your project
-==============================
 
 iOSSocial is compiled as a static library. To use it in your project, do the following:
 
@@ -34,7 +31,6 @@ iOSSocial is compiled as a static library. To use it in your project, do the fol
 - Call logout on the local user object of the service to blow out the local OAuth goodies.
   
 ## An Overview of iOSSocial
-======================
     
 ### iOSSServicesViewController
 ------------
@@ -191,7 +187,6 @@ iOSSServicesViewController is powered by iOSServicesDataSource. If you want to u
 </pre></code>
 
 ## Adding Support for a New Service
-------------
 
 There are a lot of services to support and this is where you come in. :) To add support for a new service, fork the repo, create a branch and give it a good name, create a sub folder and name it after the service and then create the three following files (You can copy and paste the content from one of the other services. Please bare with me for now. Lots of duplicate code. Need to doa major code cleanup.):
 
