@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12012415143A06D500BF209C /* iOSSocialAccountTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 12012411143A06D500BF209C /* iOSSocialAccountTableViewCell.h */; };
+		12012416143A06D500BF209C /* iOSSocialAccountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12012412143A06D500BF209C /* iOSSocialAccountTableViewCell.m */; };
+		12012417143A06D500BF209C /* iOSSServiceTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 12012413143A06D500BF209C /* iOSSServiceTableViewCell.h */; };
+		12012418143A06D500BF209C /* iOSSServiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12012414143A06D500BF209C /* iOSSServiceTableViewCell.m */; };
 		120A635B142292AC00EB4FD9 /* LocalTumblrUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 120A6353142292AC00EB4FD9 /* LocalTumblrUser.h */; };
 		120A635C142292AC00EB4FD9 /* LocalTumblrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 120A6354142292AC00EB4FD9 /* LocalTumblrUser.m */; };
 		120A635D142292AC00EB4FD9 /* Tumblr.h in Headers */ = {isa = PBXBuildFile; fileRef = 120A6356142292AC00EB4FD9 /* Tumblr.h */; };
@@ -31,10 +35,6 @@
 		126770E5141A5AD900EB2A3C /* FlickrUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 126770DE141A5AD900EB2A3C /* FlickrUser+Private.h */; };
 		126770E6141A5AD900EB2A3C /* LocalFlickrUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 126770DF141A5AD900EB2A3C /* LocalFlickrUser.h */; };
 		126770E7141A5AD900EB2A3C /* LocalFlickrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126770E0141A5AD900EB2A3C /* LocalFlickrUser.m */; };
-		126FE23513D9C28E00D72D46 /* iOSSServicesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */; };
-		126FE23613D9C28E00D72D46 /* iOSSServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */; };
-		127E1D3C140A8F1000F815D6 /* iOSSocialAccountTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 127E1D3A140A8F1000F815D6 /* iOSSocialAccountTableViewCell.h */; };
-		127E1D3D140A8F1000F815D6 /* iOSSocialAccountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 127E1D3B140A8F1000F815D6 /* iOSSocialAccountTableViewCell.m */; };
 		127E1D96140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 127E1D93140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.h */; };
 		127E1D97140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 127E1D94140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		127E1D9C140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 127E1D99140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.h */; };
@@ -42,8 +42,6 @@
 		127E1DDA140ABCCA00F815D6 /* iOSSocialConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 127E1DD9140ABCC900F815D6 /* iOSSocialConstants.h */; };
 		1286BC9D13EC560400A12786 /* iOSServicesDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BC9713EC560400A12786 /* iOSServicesDataSource.h */; };
 		1286BC9E13EC560400A12786 /* iOSServicesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1286BC9813EC560400A12786 /* iOSServicesDataSource.m */; };
-		1286BCA113EC560400A12786 /* iOSSServiceTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BC9B13EC560400A12786 /* iOSSServiceTableViewCell.h */; };
-		1286BCA213EC560400A12786 /* iOSSServiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1286BC9C13EC560400A12786 /* iOSSServiceTableViewCell.m */; };
 		1286BCB813EC56EF00A12786 /* ASIAuthenticationDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BCA413EC56EF00A12786 /* ASIAuthenticationDialog.h */; };
 		1286BCB913EC56EF00A12786 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1286BCA513EC56EF00A12786 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1286BCBA13EC56EF00A12786 /* ASICacheDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1286BCA613EC56EF00A12786 /* ASICacheDelegate.h */; };
@@ -102,15 +100,9 @@
 		12AB3B9913DF843E00565332 /* TwitterUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B9213DF843E00565332 /* TwitterUser+Private.h */; };
 		12AB3BAC13DF846B00565332 /* Instagram.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B9D13DF846B00565332 /* Instagram.h */; };
 		12AB3BAD13DF846B00565332 /* Instagram.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3B9E13DF846B00565332 /* Instagram.m */; };
-		12AB3BAE13DF846B00565332 /* InstagramMedia.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3B9F13DF846B00565332 /* InstagramMedia.h */; };
-		12AB3BAF13DF846B00565332 /* InstagramMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA013DF846B00565332 /* InstagramMedia.m */; };
-		12AB3BB013DF846B00565332 /* InstagramMediaCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA113DF846B00565332 /* InstagramMediaCollection.h */; };
-		12AB3BB113DF846B00565332 /* InstagramMediaCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA213DF846B00565332 /* InstagramMediaCollection.m */; };
 		12AB3BB213DF846B00565332 /* InstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA313DF846B00565332 /* InstagramUser.h */; };
 		12AB3BB313DF846B00565332 /* InstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA413DF846B00565332 /* InstagramUser.m */; };
 		12AB3BB413DF846B00565332 /* InstagramUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA513DF846B00565332 /* InstagramUser+Private.h */; };
-		12AB3BB513DF846B00565332 /* InstagramUserCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA613DF846B00565332 /* InstagramUserCollection.h */; };
-		12AB3BB613DF846B00565332 /* InstagramUserCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA713DF846B00565332 /* InstagramUserCollection.m */; };
 		12AB3BB713DF846B00565332 /* LocalInstagramUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BA813DF846B00565332 /* LocalInstagramUser.h */; };
 		12AB3BB813DF846B00565332 /* LocalInstagramUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AB3BA913DF846B00565332 /* LocalInstagramUser.m */; };
 		12AB3BC313DF849500565332 /* GTMOAuthAuthentication+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 12AB3BBB13DF849500565332 /* GTMOAuthAuthentication+Additions.h */; };
@@ -159,13 +151,6 @@
 		12E987D11434F5EC00E8B825 /* FacebookService.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E987CF1434F5EC00E8B825 /* FacebookService.h */; };
 		12E987D21434F5EC00E8B825 /* FacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E987D01434F5EC00E8B825 /* FacebookService.m */; };
 		12E988171435196100E8B825 /* FacebookUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12E988161435195F00E8B825 /* FacebookUser+Private.h */; };
-		12ECAE4013D5D3E700C1297B /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECADFE13D5BDD200C1297B /* libThree20.a */; };
-		12ECAE4113D5D3E700C1297B /* libThree20Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE0A13D5BF0700C1297B /* libThree20Core.a */; };
-		12ECAE4213D5D3E700C1297B /* libThree20Network.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE1513D5BF1100C1297B /* libThree20Network.a */; };
-		12ECAE4313D5D3E700C1297B /* libThree20Style.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE2213D5BF6600C1297B /* libThree20Style.a */; };
-		12ECAE4413D5D3E700C1297B /* libThree20UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE3D13D5BF7D00C1297B /* libThree20UI.a */; };
-		12ECAE4513D5D3E700C1297B /* libThree20UICommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE2B13D5BF6B00C1297B /* libThree20UICommon.a */; };
-		12ECAE4613D5D3E700C1297B /* libThree20UINavigator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ECAE3413D5BF7000C1297B /* libThree20UINavigator.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,156 +161,13 @@
 			remoteGlobalIDString = 1264A12B13D08B900085E394;
 			remoteInfo = iOSSocial;
 		};
-		12ECADFD13D5BDD200C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECADD213D5BDD100C1297B /* Three20.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
-			remoteInfo = Three20;
-		};
-		12ECADFF13D5BDD200C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECADD213D5BDD100C1297B /* Three20.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
-			remoteInfo = Three20UnitTests;
-		};
-		12ECAE0913D5BF0700C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE0413D5BF0700C1297B /* Three20Core.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
-			remoteInfo = Three20Core;
-		};
-		12ECAE0B13D5BF0700C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE0413D5BF0700C1297B /* Three20Core.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
-			remoteInfo = Three20CoreUnitTests;
-		};
-		12ECAE1413D5BF1100C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE0D13D5BF1100C1297B /* Three20Network.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
-			remoteInfo = Three20Network;
-		};
-		12ECAE1813D5BF1100C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE0D13D5BF1100C1297B /* Three20Network.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
-			remoteInfo = Three20NetworkUnitTests;
-		};
-		12ECAE2113D5BF6600C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE1C13D5BF6500C1297B /* Three20Style.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
-			remoteInfo = Three20Style;
-		};
-		12ECAE2313D5BF6600C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE1C13D5BF6500C1297B /* Three20Style.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
-			remoteInfo = Three20StyleUnitTests;
-		};
-		12ECAE2A13D5BF6B00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE2513D5BF6B00C1297B /* Three20UICommon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
-			remoteInfo = Three20UICommon;
-		};
-		12ECAE2C13D5BF6B00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE2513D5BF6B00C1297B /* Three20UICommon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
-			remoteInfo = Three20UICommonUnitTests;
-		};
-		12ECAE3313D5BF7000C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE2E13D5BF7000C1297B /* Three20UINavigator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
-			remoteInfo = Three20UINavigator;
-		};
-		12ECAE3513D5BF7000C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE2E13D5BF7000C1297B /* Three20UINavigator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
-			remoteInfo = Three20UINavigatorUnitTests;
-		};
-		12ECAE3C13D5BF7D00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE3713D5BF7D00C1297B /* Three20UI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
-			remoteInfo = Three20UI;
-		};
-		12ECAE3E13D5BF7D00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE3713D5BF7D00C1297B /* Three20UI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB9E6C6210B6A8F800DE563C;
-			remoteInfo = Three20UIUnitTests;
-		};
-		12ECAE4713D5D43E00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE2E13D5BF7000C1297B /* Three20UINavigator.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
-			remoteInfo = Three20UINavigator;
-		};
-		12ECAE4913D5D43E00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE2513D5BF6B00C1297B /* Three20UICommon.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
-			remoteInfo = Three20UICommon;
-		};
-		12ECAE4B13D5D43E00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE0D13D5BF1100C1297B /* Three20Network.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
-			remoteInfo = Three20Network;
-		};
-		12ECAE4D13D5D43E00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE3713D5BF7D00C1297B /* Three20UI.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
-			remoteInfo = Three20UI;
-		};
-		12ECAE4F13D5D43E00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE1C13D5BF6500C1297B /* Three20Style.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
-			remoteInfo = Three20Style;
-		};
-		12ECAE5113D5D43E00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECAE0413D5BF0700C1297B /* Three20Core.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
-			remoteInfo = Three20Core;
-		};
-		12ECAE5313D5D43E00C1297B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 12ECADD213D5BDD100C1297B /* Three20.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BEF31F390F352DF5000DE5D2;
-			remoteInfo = Three20;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12012411143A06D500BF209C /* iOSSocialAccountTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialAccountTableViewCell.h; sourceTree = "<group>"; };
+		12012412143A06D500BF209C /* iOSSocialAccountTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialAccountTableViewCell.m; sourceTree = "<group>"; };
+		12012413143A06D500BF209C /* iOSSServiceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSServiceTableViewCell.h; sourceTree = "<group>"; };
+		12012414143A06D500BF209C /* iOSSServiceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSServiceTableViewCell.m; sourceTree = "<group>"; };
 		120A6353142292AC00EB4FD9 /* LocalTumblrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalTumblrUser.h; sourceTree = "<group>"; };
 		120A6354142292AC00EB4FD9 /* LocalTumblrUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalTumblrUser.m; sourceTree = "<group>"; };
 		120A6355142292AC00EB4FD9 /* tumblr-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumblr-logo.png"; sourceTree = "<group>"; };
@@ -353,10 +195,6 @@
 		126770DE141A5AD900EB2A3C /* FlickrUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FlickrUser+Private.h"; path = "Flickr/FlickrUser+Private.h"; sourceTree = "<group>"; };
 		126770DF141A5AD900EB2A3C /* LocalFlickrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalFlickrUser.h; path = Flickr/LocalFlickrUser.h; sourceTree = "<group>"; };
 		126770E0141A5AD900EB2A3C /* LocalFlickrUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalFlickrUser.m; path = Flickr/LocalFlickrUser.m; sourceTree = "<group>"; };
-		126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSServicesViewController.h; sourceTree = "<group>"; };
-		126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSServicesViewController.m; sourceTree = "<group>"; };
-		127E1D3A140A8F1000F815D6 /* iOSSocialAccountTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialAccountTableViewCell.h; sourceTree = "<group>"; };
-		127E1D3B140A8F1000F815D6 /* iOSSocialAccountTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSocialAccountTableViewCell.m; sourceTree = "<group>"; };
 		127E1D93140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuthViewControllerTouch.h; sourceTree = "<group>"; };
 		127E1D94140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuthViewControllerTouch.m; sourceTree = "<group>"; };
 		127E1D99140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
@@ -364,8 +202,6 @@
 		127E1DD9140ABCC900F815D6 /* iOSSocialConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSocialConstants.h; sourceTree = "<group>"; };
 		1286BC9713EC560400A12786 /* iOSServicesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSServicesDataSource.h; sourceTree = "<group>"; };
 		1286BC9813EC560400A12786 /* iOSServicesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSServicesDataSource.m; sourceTree = "<group>"; };
-		1286BC9B13EC560400A12786 /* iOSSServiceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSSServiceTableViewCell.h; sourceTree = "<group>"; };
-		1286BC9C13EC560400A12786 /* iOSSServiceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSSServiceTableViewCell.m; sourceTree = "<group>"; };
 		1286BCA413EC56EF00A12786 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "../../asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = "<group>"; };
 		1286BCA513EC56EF00A12786 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "../../asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = "<group>"; };
 		1286BCA613EC56EF00A12786 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "../../asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = "<group>"; };
@@ -424,15 +260,9 @@
 		12AB3B9213DF843E00565332 /* TwitterUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TwitterUser+Private.h"; path = "Twitter/TwitterUser+Private.h"; sourceTree = "<group>"; };
 		12AB3B9D13DF846B00565332 /* Instagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Instagram.h; path = Instagram/Instagram.h; sourceTree = "<group>"; };
 		12AB3B9E13DF846B00565332 /* Instagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Instagram.m; path = Instagram/Instagram.m; sourceTree = "<group>"; };
-		12AB3B9F13DF846B00565332 /* InstagramMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramMedia.h; path = Instagram/InstagramMedia.h; sourceTree = "<group>"; };
-		12AB3BA013DF846B00565332 /* InstagramMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramMedia.m; path = Instagram/InstagramMedia.m; sourceTree = "<group>"; };
-		12AB3BA113DF846B00565332 /* InstagramMediaCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramMediaCollection.h; path = Instagram/InstagramMediaCollection.h; sourceTree = "<group>"; };
-		12AB3BA213DF846B00565332 /* InstagramMediaCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramMediaCollection.m; path = Instagram/InstagramMediaCollection.m; sourceTree = "<group>"; };
 		12AB3BA313DF846B00565332 /* InstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramUser.h; path = Instagram/InstagramUser.h; sourceTree = "<group>"; };
 		12AB3BA413DF846B00565332 /* InstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramUser.m; path = Instagram/InstagramUser.m; sourceTree = "<group>"; };
 		12AB3BA513DF846B00565332 /* InstagramUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "InstagramUser+Private.h"; path = "Instagram/InstagramUser+Private.h"; sourceTree = "<group>"; };
-		12AB3BA613DF846B00565332 /* InstagramUserCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstagramUserCollection.h; path = Instagram/InstagramUserCollection.h; sourceTree = "<group>"; };
-		12AB3BA713DF846B00565332 /* InstagramUserCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstagramUserCollection.m; path = Instagram/InstagramUserCollection.m; sourceTree = "<group>"; };
 		12AB3BA813DF846B00565332 /* LocalInstagramUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalInstagramUser.h; path = Instagram/LocalInstagramUser.h; sourceTree = "<group>"; };
 		12AB3BA913DF846B00565332 /* LocalInstagramUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalInstagramUser.m; path = Instagram/LocalInstagramUser.m; sourceTree = "<group>"; };
 		12AB3BBB13DF849500565332 /* GTMOAuthAuthentication+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GTMOAuthAuthentication+Additions.h"; path = "OAuth/GTMOAuthAuthentication+Additions.h"; sourceTree = "<group>"; };
@@ -483,14 +313,6 @@
 		12E987CF1434F5EC00E8B825 /* FacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookService.h; path = Facebook/FacebookService.h; sourceTree = "<group>"; };
 		12E987D01434F5EC00E8B825 /* FacebookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookService.m; path = Facebook/FacebookService.m; sourceTree = "<group>"; };
 		12E988161435195F00E8B825 /* FacebookUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FacebookUser+Private.h"; path = "Facebook/FacebookUser+Private.h"; sourceTree = "<group>"; };
-		12ECADD213D5BDD100C1297B /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../three20/src/Three20/Three20.xcodeproj; sourceTree = "<group>"; };
-		12ECAE0413D5BF0700C1297B /* Three20Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Core.xcodeproj; path = ../three20/src/Three20Core/Three20Core.xcodeproj; sourceTree = "<group>"; };
-		12ECAE0D13D5BF1100C1297B /* Three20Network.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Network.xcodeproj; path = ../three20/src/Three20Network/Three20Network.xcodeproj; sourceTree = "<group>"; };
-		12ECAE1C13D5BF6500C1297B /* Three20Style.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Style.xcodeproj; path = ../three20/src/Three20Style/Three20Style.xcodeproj; sourceTree = "<group>"; };
-		12ECAE2513D5BF6B00C1297B /* Three20UICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UICommon.xcodeproj; path = "/Users/christopherwhite/Documents/iOSSocial/iOSSocial-master/iOSSocial/three20/src/Three20/../Three20UICommon/Three20UICommon.xcodeproj"; sourceTree = "<absolute>"; };
-		12ECAE2E13D5BF7000C1297B /* Three20UINavigator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UINavigator.xcodeproj; path = "/Users/christopherwhite/Documents/iOSSocial/iOSSocial-master/iOSSocial/three20/src/Three20/../Three20UINavigator/Three20UINavigator.xcodeproj"; sourceTree = "<absolute>"; };
-		12ECAE3713D5BF7D00C1297B /* Three20UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UI.xcodeproj; path = "/Users/christopherwhite/Documents/iOSSocial/iOSSocial-master/iOSSocial/three20/src/Three20/../Three20UI/Three20UI.xcodeproj"; sourceTree = "<absolute>"; };
-		12ECAE5513D5D46D00C1297B /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -498,13 +320,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12ECAE4013D5D3E700C1297B /* libThree20.a in Frameworks */,
-				12ECAE4113D5D3E700C1297B /* libThree20Core.a in Frameworks */,
-				12ECAE4213D5D3E700C1297B /* libThree20Network.a in Frameworks */,
-				12ECAE4313D5D3E700C1297B /* libThree20Style.a in Frameworks */,
-				12ECAE4413D5D3E700C1297B /* libThree20UI.a in Frameworks */,
-				12ECAE4513D5D3E700C1297B /* libThree20UICommon.a in Frameworks */,
-				12ECAE4613D5D3E700C1297B /* libThree20UINavigator.a in Frameworks */,
 				1264A16B13D0951E0085E394 /* UIKit.framework in Frameworks */,
 				1264A13013D08B900085E394 /* Foundation.framework in Frameworks */,
 			);
@@ -543,14 +358,6 @@
 		1264A12113D08B900085E394 = {
 			isa = PBXGroup;
 			children = (
-				12ECAE5513D5D46D00C1297B /* Three20.bundle */,
-				12ECAE3713D5BF7D00C1297B /* Three20UI.xcodeproj */,
-				12ECAE2E13D5BF7000C1297B /* Three20UINavigator.xcodeproj */,
-				12ECAE2513D5BF6B00C1297B /* Three20UICommon.xcodeproj */,
-				12ECAE1C13D5BF6500C1297B /* Three20Style.xcodeproj */,
-				12ECAE0D13D5BF1100C1297B /* Three20Network.xcodeproj */,
-				12ECAE0413D5BF0700C1297B /* Three20Core.xcodeproj */,
-				12ECADD213D5BDD100C1297B /* Three20.xcodeproj */,
 				1264A13113D08B900085E394 /* iOSSocial */,
 				1264A14713D08B900085E394 /* iOSSocialTests */,
 				1264A12E13D08B900085E394 /* Frameworks */,
@@ -594,9 +401,12 @@
 				126FE24F13D9C7C400D72D46 /* Twitter */,
 				126FE23913D9C55F00D72D46 /* gtm-oauth */,
 				126FE23813D9C2AC00D72D46 /* Utilities */,
-				126FE23713D9C29E00D72D46 /* ViewControllers */,
 				1264A16C13D0965E0085E394 /* gtm-oauth2 */,
 				1264A15913D08CA80085E394 /* Instagram */,
+				12012411143A06D500BF209C /* iOSSocialAccountTableViewCell.h */,
+				12012412143A06D500BF209C /* iOSSocialAccountTableViewCell.m */,
+				12012413143A06D500BF209C /* iOSSServiceTableViewCell.h */,
+				12012414143A06D500BF209C /* iOSSServiceTableViewCell.m */,
 				12AB3A0C13DF13D300565332 /* iOSSocialUser.h */,
 				12AB3A0D13DF13D400565332 /* iOSSocialUser.m */,
 				12AB3A1013DF13ED00565332 /* iOSSocialLocalUser.h */,
@@ -643,15 +453,9 @@
 			children = (
 				12AB3B9D13DF846B00565332 /* Instagram.h */,
 				12AB3B9E13DF846B00565332 /* Instagram.m */,
-				12AB3B9F13DF846B00565332 /* InstagramMedia.h */,
-				12AB3BA013DF846B00565332 /* InstagramMedia.m */,
-				12AB3BA113DF846B00565332 /* InstagramMediaCollection.h */,
-				12AB3BA213DF846B00565332 /* InstagramMediaCollection.m */,
 				12AB3BA313DF846B00565332 /* InstagramUser.h */,
 				12AB3BA413DF846B00565332 /* InstagramUser.m */,
 				12AB3BA513DF846B00565332 /* InstagramUser+Private.h */,
-				12AB3BA613DF846B00565332 /* InstagramUserCollection.h */,
-				12AB3BA713DF846B00565332 /* InstagramUserCollection.m */,
 				12AB3BA813DF846B00565332 /* LocalInstagramUser.h */,
 				12AB3BA913DF846B00565332 /* LocalInstagramUser.m */,
 			);
@@ -691,19 +495,6 @@
 				12AB3BCC13DF84AC00565332 /* iOSSLog.m */,
 			);
 			name = Log;
-			sourceTree = "<group>";
-		};
-		126FE23713D9C29E00D72D46 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				126FE22F13D9C28E00D72D46 /* iOSSServicesViewController.h */,
-				126FE23013D9C28E00D72D46 /* iOSSServicesViewController.m */,
-				1286BC9B13EC560400A12786 /* iOSSServiceTableViewCell.h */,
-				1286BC9C13EC560400A12786 /* iOSSServiceTableViewCell.m */,
-				127E1D3A140A8F1000F815D6 /* iOSSocialAccountTableViewCell.h */,
-				127E1D3B140A8F1000F815D6 /* iOSSocialAccountTableViewCell.m */,
-			);
-			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		126FE23813D9C2AC00D72D46 /* Utilities */ = {
@@ -933,69 +724,6 @@
 			name = Connection;
 			sourceTree = "<group>";
 		};
-		12ECADD313D5BDD100C1297B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				12ECADFE13D5BDD200C1297B /* libThree20.a */,
-				12ECAE0013D5BDD200C1297B /* Three20UnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		12ECAE0513D5BF0700C1297B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				12ECAE0A13D5BF0700C1297B /* libThree20Core.a */,
-				12ECAE0C13D5BF0700C1297B /* CoreUnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		12ECAE0E13D5BF1100C1297B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				12ECAE1513D5BF1100C1297B /* libThree20Network.a */,
-				12ECAE1913D5BF1100C1297B /* NetworkUnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		12ECAE1D13D5BF6500C1297B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				12ECAE2213D5BF6600C1297B /* libThree20Style.a */,
-				12ECAE2413D5BF6600C1297B /* StyleUnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		12ECAE2613D5BF6B00C1297B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				12ECAE2B13D5BF6B00C1297B /* libThree20UICommon.a */,
-				12ECAE2D13D5BF6B00C1297B /* UICommonUnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		12ECAE2F13D5BF7000C1297B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				12ECAE3413D5BF7000C1297B /* libThree20UINavigator.a */,
-				12ECAE3613D5BF7000C1297B /* UINavigatorUnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		12ECAE3813D5BF7D00C1297B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				12ECAE3D13D5BF7D00C1297B /* libThree20UI.a */,
-				12ECAE3F13D5BF7D00C1297B /* UIUnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1003,7 +731,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				126FE23513D9C28E00D72D46 /* iOSSServicesViewController.h in Headers */,
 				12AB358813DDBAE100565332 /* GTMOAuth2Authentication.h in Headers */,
 				12AB358A13DDBAE100565332 /* GTMOAuth2SignIn.h in Headers */,
 				12AB359613DDBB1800565332 /* GTMOAuthAuthentication.h in Headers */,
@@ -1020,11 +747,8 @@
 				12AB3B9713DF843E00565332 /* TwitterUser.h in Headers */,
 				12AB3B9913DF843E00565332 /* TwitterUser+Private.h in Headers */,
 				12AB3BAC13DF846B00565332 /* Instagram.h in Headers */,
-				12AB3BAE13DF846B00565332 /* InstagramMedia.h in Headers */,
-				12AB3BB013DF846B00565332 /* InstagramMediaCollection.h in Headers */,
 				12AB3BB213DF846B00565332 /* InstagramUser.h in Headers */,
 				12AB3BB413DF846B00565332 /* InstagramUser+Private.h in Headers */,
-				12AB3BB513DF846B00565332 /* InstagramUserCollection.h in Headers */,
 				12AB3BB713DF846B00565332 /* LocalInstagramUser.h in Headers */,
 				12AB3BC313DF849500565332 /* GTMOAuthAuthentication+Additions.h in Headers */,
 				12AB3BC513DF849500565332 /* iOSSocialServiceOAuth1Provider.h in Headers */,
@@ -1034,7 +758,6 @@
 				12AB3BCD13DF84AC00565332 /* iOSSLog.h in Headers */,
 				12AB3BE713DF84D800565332 /* iOSSRequest.h in Headers */,
 				1286BC9D13EC560400A12786 /* iOSServicesDataSource.h in Headers */,
-				1286BCA113EC560400A12786 /* iOSSServiceTableViewCell.h in Headers */,
 				1286BCB813EC56EF00A12786 /* ASIAuthenticationDialog.h in Headers */,
 				1286BCBA13EC56EF00A12786 /* ASICacheDelegate.h in Headers */,
 				1286BCBB13EC56EF00A12786 /* ASIDataCompressor.h in Headers */,
@@ -1051,7 +774,6 @@
 				1286BCD413EC576600A12786 /* PRPSmartTableViewCell.h in Headers */,
 				12B4F203140A0D46002E98A6 /* iOSSocialServicesStore.h in Headers */,
 				12B4F20D140A2023002E98A6 /* iOSSocialOAuth.h in Headers */,
-				127E1D3C140A8F1000F815D6 /* iOSSocialAccountTableViewCell.h in Headers */,
 				127E1D96140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.h in Headers */,
 				127E1D9C140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.h in Headers */,
 				127E1DDA140ABCCA00F815D6 /* iOSSocialConstants.h in Headers */,
@@ -1082,6 +804,8 @@
 				12E987CD1434DB1C00E8B825 /* KeychainItemWrapper.h in Headers */,
 				12E987D11434F5EC00E8B825 /* FacebookService.h in Headers */,
 				12E988171435196100E8B825 /* FacebookUser+Private.h in Headers */,
+				12012415143A06D500BF209C /* iOSSocialAccountTableViewCell.h in Headers */,
+				12012417143A06D500BF209C /* iOSSServiceTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1099,13 +823,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				12ECAE4813D5D43E00C1297B /* PBXTargetDependency */,
-				12ECAE4A13D5D43E00C1297B /* PBXTargetDependency */,
-				12ECAE4C13D5D43E00C1297B /* PBXTargetDependency */,
-				12ECAE4E13D5D43E00C1297B /* PBXTargetDependency */,
-				12ECAE5013D5D43E00C1297B /* PBXTargetDependency */,
-				12ECAE5213D5D43E00C1297B /* PBXTargetDependency */,
-				12ECAE5413D5D43E00C1297B /* PBXTargetDependency */,
 			);
 			name = iOSSocial;
 			productName = iOSSocial;
@@ -1150,36 +867,6 @@
 			mainGroup = 1264A12113D08B900085E394;
 			productRefGroup = 1264A12D13D08B900085E394 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 12ECADD313D5BDD100C1297B /* Products */;
-					ProjectRef = 12ECADD213D5BDD100C1297B /* Three20.xcodeproj */;
-				},
-				{
-					ProductGroup = 12ECAE0513D5BF0700C1297B /* Products */;
-					ProjectRef = 12ECAE0413D5BF0700C1297B /* Three20Core.xcodeproj */;
-				},
-				{
-					ProductGroup = 12ECAE0E13D5BF1100C1297B /* Products */;
-					ProjectRef = 12ECAE0D13D5BF1100C1297B /* Three20Network.xcodeproj */;
-				},
-				{
-					ProductGroup = 12ECAE1D13D5BF6500C1297B /* Products */;
-					ProjectRef = 12ECAE1C13D5BF6500C1297B /* Three20Style.xcodeproj */;
-				},
-				{
-					ProductGroup = 12ECAE3813D5BF7D00C1297B /* Products */;
-					ProjectRef = 12ECAE3713D5BF7D00C1297B /* Three20UI.xcodeproj */;
-				},
-				{
-					ProductGroup = 12ECAE2613D5BF6B00C1297B /* Products */;
-					ProjectRef = 12ECAE2513D5BF6B00C1297B /* Three20UICommon.xcodeproj */;
-				},
-				{
-					ProductGroup = 12ECAE2F13D5BF7000C1297B /* Products */;
-					ProjectRef = 12ECAE2E13D5BF7000C1297B /* Three20UINavigator.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				1264A12B13D08B900085E394 /* iOSSocial */,
@@ -1187,107 +874,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		12ECADFE13D5BDD200C1297B /* libThree20.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libThree20.a;
-			remoteRef = 12ECADFD13D5BDD200C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE0013D5BDD200C1297B /* Three20UnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = Three20UnitTests.octest;
-			remoteRef = 12ECADFF13D5BDD200C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE0A13D5BF0700C1297B /* libThree20Core.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libThree20Core.a;
-			remoteRef = 12ECAE0913D5BF0700C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE0C13D5BF0700C1297B /* CoreUnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CoreUnitTests.octest;
-			remoteRef = 12ECAE0B13D5BF0700C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE1513D5BF1100C1297B /* libThree20Network.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libThree20Network.a;
-			remoteRef = 12ECAE1413D5BF1100C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE1913D5BF1100C1297B /* NetworkUnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = NetworkUnitTests.octest;
-			remoteRef = 12ECAE1813D5BF1100C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE2213D5BF6600C1297B /* libThree20Style.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libThree20Style.a;
-			remoteRef = 12ECAE2113D5BF6600C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE2413D5BF6600C1297B /* StyleUnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = StyleUnitTests.octest;
-			remoteRef = 12ECAE2313D5BF6600C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE2B13D5BF6B00C1297B /* libThree20UICommon.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libThree20UICommon.a;
-			remoteRef = 12ECAE2A13D5BF6B00C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE2D13D5BF6B00C1297B /* UICommonUnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UICommonUnitTests.octest;
-			remoteRef = 12ECAE2C13D5BF6B00C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE3413D5BF7000C1297B /* libThree20UINavigator.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libThree20UINavigator.a;
-			remoteRef = 12ECAE3313D5BF7000C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE3613D5BF7000C1297B /* UINavigatorUnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UINavigatorUnitTests.octest;
-			remoteRef = 12ECAE3513D5BF7000C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE3D13D5BF7D00C1297B /* libThree20UI.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libThree20UI.a;
-			remoteRef = 12ECAE3C13D5BF7D00C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		12ECAE3F13D5BF7D00C1297B /* UIUnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UIUnitTests.octest;
-			remoteRef = 12ECAE3E13D5BF7D00C1297B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1264A13913D08B900085E394 /* Resources */ = {
@@ -1322,7 +908,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				126FE23613D9C28E00D72D46 /* iOSSServicesViewController.m in Sources */,
 				12AB358913DDBAE100565332 /* GTMOAuth2Authentication.m in Sources */,
 				12AB358B13DDBAE100565332 /* GTMOAuth2SignIn.m in Sources */,
 				12AB359713DDBB1800565332 /* GTMOAuthAuthentication.m in Sources */,
@@ -1337,10 +922,7 @@
 				12AB3B9613DF843E00565332 /* Twitter.m in Sources */,
 				12AB3B9813DF843E00565332 /* TwitterUser.m in Sources */,
 				12AB3BAD13DF846B00565332 /* Instagram.m in Sources */,
-				12AB3BAF13DF846B00565332 /* InstagramMedia.m in Sources */,
-				12AB3BB113DF846B00565332 /* InstagramMediaCollection.m in Sources */,
 				12AB3BB313DF846B00565332 /* InstagramUser.m in Sources */,
-				12AB3BB613DF846B00565332 /* InstagramUserCollection.m in Sources */,
 				12AB3BB813DF846B00565332 /* LocalInstagramUser.m in Sources */,
 				12AB3BC413DF849500565332 /* GTMOAuthAuthentication+Additions.m in Sources */,
 				12AB3BC613DF849500565332 /* iOSSocialServiceOAuth1Provider.m in Sources */,
@@ -1348,7 +930,6 @@
 				12AB3BCE13DF84AC00565332 /* iOSSLog.m in Sources */,
 				12AB3BE813DF84D800565332 /* iOSSRequest.m in Sources */,
 				1286BC9E13EC560400A12786 /* iOSServicesDataSource.m in Sources */,
-				1286BCA213EC560400A12786 /* iOSSServiceTableViewCell.m in Sources */,
 				1286BCB913EC56EF00A12786 /* ASIAuthenticationDialog.m in Sources */,
 				1286BCBC13EC56EF00A12786 /* ASIDataCompressor.m in Sources */,
 				1286BCBE13EC56EF00A12786 /* ASIDataDecompressor.m in Sources */,
@@ -1360,7 +941,6 @@
 				1286BCD013EC570100A12786 /* Reachability.m in Sources */,
 				1286BCD513EC576600A12786 /* PRPSmartTableViewCell.m in Sources */,
 				12B4F204140A0D46002E98A6 /* iOSSocialServicesStore.m in Sources */,
-				127E1D3D140A8F1000F815D6 /* iOSSocialAccountTableViewCell.m in Sources */,
 				127E1D97140AA4CA00F815D6 /* GTMOAuthViewControllerTouch.m in Sources */,
 				127E1D9D140AA4DC00F815D6 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				126770E2141A5AD900EB2A3C /* Flickr.m in Sources */,
@@ -1385,6 +965,8 @@
 				12E987C91434D9B900E8B825 /* SBJsonWriter.m in Sources */,
 				12E987CE1434DB1C00E8B825 /* KeychainItemWrapper.m in Sources */,
 				12E987D21434F5EC00E8B825 /* FacebookService.m in Sources */,
+				12012416143A06D500BF209C /* iOSSocialAccountTableViewCell.m in Sources */,
+				12012418143A06D500BF209C /* iOSSServiceTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1403,41 +985,6 @@
 			isa = PBXTargetDependency;
 			target = 1264A12B13D08B900085E394 /* iOSSocial */;
 			targetProxy = 1264A14413D08B900085E394 /* PBXContainerItemProxy */;
-		};
-		12ECAE4813D5D43E00C1297B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Three20UINavigator;
-			targetProxy = 12ECAE4713D5D43E00C1297B /* PBXContainerItemProxy */;
-		};
-		12ECAE4A13D5D43E00C1297B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Three20UICommon;
-			targetProxy = 12ECAE4913D5D43E00C1297B /* PBXContainerItemProxy */;
-		};
-		12ECAE4C13D5D43E00C1297B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Three20Network;
-			targetProxy = 12ECAE4B13D5D43E00C1297B /* PBXContainerItemProxy */;
-		};
-		12ECAE4E13D5D43E00C1297B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Three20UI;
-			targetProxy = 12ECAE4D13D5D43E00C1297B /* PBXContainerItemProxy */;
-		};
-		12ECAE5013D5D43E00C1297B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Three20Style;
-			targetProxy = 12ECAE4F13D5D43E00C1297B /* PBXContainerItemProxy */;
-		};
-		12ECAE5213D5D43E00C1297B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Three20Core;
-			targetProxy = 12ECAE5113D5D43E00C1297B /* PBXContainerItemProxy */;
-		};
-		12ECAE5413D5D43E00C1297B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Three20;
-			targetProxy = 12ECAE5313D5D43E00C1297B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1501,10 +1048,7 @@
 				DSTROOT = /tmp/iOSSocial.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSSocial/iOSSocial-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"$(BUILT_PRODUCTS_DIR)/../../three20\"",
-					"\"$(BUILT_PRODUCTS_DIR)/../three20\"",
-				);
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				"OTHER_CFLAGS[arch=*]" = "-DIOSSDEBUG";
 				OTHER_LDFLAGS = "-ObjC";
@@ -1520,10 +1064,7 @@
 				DSTROOT = /tmp/iOSSocial.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSSocial/iOSSocial-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"$(BUILT_PRODUCTS_DIR)/../../three20\"",
-					"\"$(BUILT_PRODUCTS_DIR)/../three20\"",
-				);
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -9,7 +9,6 @@
 #import "LocalFacebookUser.h"
 #import "KeychainItemWrapper.h"
 #import "FBConnect.h"
-#import "FacebookPhotoAlbum.h"
 #import "FacebookService.h"
 #import "Facebook.h"
 #import "FacebookUser+Private.h"

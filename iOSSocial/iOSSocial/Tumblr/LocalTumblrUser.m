@@ -222,6 +222,11 @@ static LocalTumblrUser *localTumblrUser = nil;
     return self.auth.accessToken;
 }
 
+- (NSTimeInterval)oAuthAccessTokenExpirationDate
+{
+    return 0.0;
+}
+
 - (void)logout
 {
     [[Tumblr sharedService] logout:self.auth forKeychainItemName:self.keychainItemName];

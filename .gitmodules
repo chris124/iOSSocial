@@ -19,3 +19,6 @@
 [submodule "facebook-ios-sdk"]
 	path = facebook-ios-sdk
 	url = git@github.com:chris124/facebook-ios-sdk.git
+[submodule "iOSSocialViewControllers"]
+	path = iOSSocialViewControllers
+	url = git@github.com:chris124/iOSSocialViewControllers.git
