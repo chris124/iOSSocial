@@ -154,8 +154,12 @@ BOOL isAuthenticated = [localUser isAuthenticated];
 
 ### iOSServicesDataSource
 ------------
+	
+iOSServicesDataSource is the underlying data source (UITableViewDataSource) that you want to use for your UI (a UITableView) to present the list of available services to the user. For your convenience, there is an initializer that takes no params that will make all of the configured services available from the data source and there is a initWithServicesFilter: initializer that takes an array of iOSSocialServiceProtocol objects to let you specify which specific services you want to display at a given time.
 
-iOSSServicesViewController is powered by iOSServicesDataSource. If you want to use your own UI, you can take a look at how iOSSServicesViewController uses iOSServicesDataSource. Here is iOSSServicesViewController's tableView:didSelectRowAtIndexPath:
+iOSSServicesViewController is powered by iOSServicesDataSource. See iOSSServicesViewController's initWithServicesFilter: initializer to see how to filter which services are provided by the data source.
+
+If you want to use your own UI, you can take a look at how iOSSServicesViewController uses iOSServicesDataSource. Here is iOSSServicesViewController's tableView:didSelectRowAtIndexPath:
 
 <pre><code>
     switch (indexPath.section) {
