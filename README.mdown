@@ -59,7 +59,7 @@ Here is the code in action:
 
 >
 iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
-
+>
 [iossServicesViewController presentModallyFromViewController:self 
 	                             withServiceConnectedHandler:^(id<iOSSocialLocalUserProtocol> localUser) {
 	                             }  
