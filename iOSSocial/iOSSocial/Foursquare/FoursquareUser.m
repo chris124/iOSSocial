@@ -25,8 +25,6 @@
 @synthesize firstName;
 @synthesize fetchUserDataHandler;
 @synthesize profilePictureURL;
-@synthesize dataSource;
-@synthesize index;
 @synthesize loadPhotoHandler;
 
 - (id)init

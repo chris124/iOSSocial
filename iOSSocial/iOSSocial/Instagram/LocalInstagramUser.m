@@ -11,7 +11,6 @@
 #import "Instagram.h"
 #import "iOSSRequest.h"
 #import "InstagramUser+Private.h"
-#import "InstagramMediaCollection.h"
 #import "GTMOAuth2Authentication.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "iOSSocialServiceOAuth2Provider.h"
@@ -130,76 +129,6 @@ static LocalInstagramUser *localInstagramUser = nil;
     NSURL *url = [NSURL URLWithString:access_token relativeToURL:theURL];
     
     return url;
-}
-
-- (void)fetchFeedWithCompletionHandler:(FetchMediaHandler)completionHandler
-{
-    self.fetchMediaHandler = completionHandler;
-    
-    NSString *urlString = @"https://api.instagram.com/v1/users/self/feed";
-    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
-    
-    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
-                                                 parameters:nil 
-                                              requestMethod:iOSSRequestMethodGET];
-    
-    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            if (self.fetchMediaHandler) {
-                self.fetchMediaHandler(nil, error);
-                self.fetchMediaHandler = nil;
-            }
-        } else {
-            if (responseData) {
-                NSDictionary *dictionary = [Instagram JSONFromData:responseData];
-                
-                InstagramMediaCollection *collection = [[InstagramMediaCollection alloc] initWithDictionary:dictionary];
-                collection.name = [NSString stringWithFormat:@"%@ Likes", self.alias];
-                
-                //call completion handler with error
-                if (self.fetchMediaHandler) {
-                    self.fetchMediaHandler(collection, nil);
-                    self.fetchMediaHandler = nil;
-                }
-                
-            }
-        }
-    }];
-}
-
-- (void)fetchLikedMediaWithCompletionHandler:(FetchMediaHandler)completionHandler
-{
-    self.fetchMediaHandler = completionHandler;
-    
-    NSString *urlString = @"https://api.instagram.com/v1/users/self/media/liked";
-    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
-    
-    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
-                                                 parameters:nil 
-                                              requestMethod:iOSSRequestMethodGET];
-    
-    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            if (self.fetchMediaHandler) {
-                self.fetchMediaHandler(nil, error);
-                self.fetchMediaHandler = nil;
-            }
-        } else {
-            if (responseData) {
-                NSDictionary *dictionary = [Instagram JSONFromData:responseData];
-                
-                InstagramMediaCollection *collection = [[InstagramMediaCollection alloc] initWithDictionary:dictionary];
-                collection.name = [NSString stringWithFormat:@"%@ Likes", self.alias];
-                
-                //call completion handler with error
-                if (self.fetchMediaHandler) {
-                    self.fetchMediaHandler(collection, nil);
-                    self.fetchMediaHandler = nil;
-                }
-                
-            }
-        }
-    }];
 }
 
 - (void)fetchLocalUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler

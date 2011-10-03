@@ -40,8 +40,6 @@ typedef enum _FBRequestType {
 @synthesize email;
 @synthesize requestDictionary;
 @synthesize loadPhotoHandler;
-@synthesize index;
-@synthesize dataSource;
 @synthesize fetchUserDataHandler;
 @synthesize userDictionary;
 @synthesize profilePictureURL;
