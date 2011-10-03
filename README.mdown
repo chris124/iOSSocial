@@ -1,7 +1,5 @@
 # iOSSocial
 
-(cwnote: I apologize for some of the code formatting. Still learning my way around this markup. If you know how to fix it, feel free to fork and send a pull request.)
-
 iOSSocial is a collection of classes that makes it easy to integrate with one or more popular social networks. Includes OAuth authentication support for each service out-of-the box via view controllers and saving of OAuth tokens in the keychain. The code supports authenticating multiple accounts for a given service and also the concept of setting a particular service as the primary service to be used for authentication.
 
 Supported services:
