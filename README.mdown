@@ -142,11 +142,9 @@ BOOL isAuthenticated = [localUser isAuthenticated];
 ### iOSServicesDataSource
 ------------
 
-iOSSServicesViewController is powered by iOSServicesDataSource. If you want to use your own UI, you can take a look at how iOSSServicesViewController uses iOSServicesDataSource.
+iOSSServicesViewController is powered by iOSServicesDataSource. If you want to use your own UI, you can take a look at how iOSSServicesViewController uses iOSServicesDataSource. Here is iOSSServicesViewController's tableView:didSelectRowAtIndexPath:
 
 <pre><code>
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
     switch (indexPath.section) {
             case 0:
         {
@@ -190,7 +188,6 @@ iOSSServicesViewController is powered by iOSServicesDataSource. If you want to u
         default:
             break;
     }
-}
 </pre></code>
 
 ## Adding Support for a New Service
