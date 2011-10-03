@@ -75,7 +75,9 @@ Which services you want to use is up to you. The underlying code will automatica
 
 >
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+>
 {
+>
 	// Note: For Instagram, when setting the object for the kSMOAuth2RedirectURI key in the OAuth params
 	// dictionary, the URL specified MUST match the callback URL you specified when you created your 
 	// Instagram application on their site. It doesn't matter what the URL actually points to, but 
@@ -115,8 +117,6 @@ Which services you want to use is up to you. The underlying code will automatica
 	[params setObject:@"https://foursquare.com/oauth2/access_token" forKey:kSMOAuth2AccessTokenURL];
 	[params setObject:@"Foursquare Service" forKey:kSMOAuth2ServiceProviderName];
 	[[Foursquare sharedService] assignOAuthParams:params asPrimary:NO];
->
-	...
 }
 
 ### iOSSocialLocalUserProtocol
