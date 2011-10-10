@@ -13,8 +13,7 @@
 
 @interface InstagramUser ()
 
-@property(nonatomic, copy)      LoadPhotoHandler loadPhotoHandler;
-@property(nonatomic, copy)      FetchUsersHandler   fetchUsersHandler;
+@property(nonatomic, copy)  LoadPhotoHandler loadPhotoHandler;
 
 @end
 
@@ -32,9 +31,6 @@
 @synthesize followsCount;
 @synthesize followedByCount;
 @synthesize loadPhotoHandler;
-@synthesize fetchMediaHandler;
-@synthesize fetchUsersHandler;
-@synthesize fetchUserDataHandler;
 
 - (id)init
 {
@@ -104,81 +100,6 @@
             }
         }
     }];
-}
-
-- (void)fetchUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
-{
-    self.fetchUserDataHandler = completionHandler;
-    
-    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/", self.userID];
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
-                                                 parameters:nil 
-                                              requestMethod:iOSSRequestMethodGET];
-    
-    //cwnote: fix this!!
-    //request.requiresAuthentication = YES;
-    
-    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(error);
-                self.fetchUserDataHandler = nil;
-            }
-        } else {
-            NSDictionary *dictionary = [Instagram JSONFromData:responseData];
-            self.userDictionary = dictionary;
-            
-            if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(nil);
-                self.fetchUserDataHandler = nil;
-            }
-        }
-    }];
-}
-
-- (void)fetchFollowedByWithCompletionHandler:(FetchUsersHandler)completionHandler
-{
-    self.fetchUsersHandler = completionHandler;
-    
-    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/followed-by", self.userID];
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
-                                                 parameters:nil 
-                                              requestMethod:iOSSRequestMethodGET];
-    
-    //cwnote: fix this!!
-    //request.requiresAuthentication = YES;
-    
-    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            if (self.fetchUsersHandler) {
-                self.fetchUsersHandler(nil, error);
-                self.fetchUsersHandler = nil;
-            }
-        } else {
-            if (responseData) {
-                //NSDictionary *dictionary = [Instagram JSONFromData:responseData];
-                
-                //InstagramUserCollection *collection = [[InstagramUserCollection alloc] initWithDictionary:dictionary];
-                //collection.name = [NSString stringWithFormat:@"%@ Feed", self.alias];
-                
-                //call completion handler with error
-                if (self.fetchUsersHandler) {
-                    self.fetchUsersHandler(nil /*collection*/, nil);
-                    self.fetchUsersHandler = nil;
-                }
-                
-            }
-        }
-    }];
-}
-
-+ (void)searchUsersWithCompletionHandler:(FetchUsersHandler)completionHandler
-{
-    
 }
 
 @end

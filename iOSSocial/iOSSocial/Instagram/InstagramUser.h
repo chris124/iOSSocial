@@ -11,13 +11,6 @@
 #import "iOSSocialUser.h"
 #import "iOSSocialConstants.h"
 
-@class InstagramMediaCollection;
-
-typedef void(^FetchMediaHandler)(InstagramMediaCollection *collection, NSError *error);
-
-@class InstagramUserCollection;
-
-typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 
 @interface InstagramUser : NSObject <iOSSocialUserProtocol>
 
@@ -64,12 +57,5 @@ typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
 // Possible reasons for error:
 // 1. Communications failure
 - (void)loadPhotoWithCompletionHandler:(LoadPhotoHandler)completionHandler;
-
-- (void)fetchUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler;
-
-- (void)fetchFollowedByWithCompletionHandler:(FetchUsersHandler)completionHandler;
-
-//search for a user...q and count param
-+ (void)searchUsersWithCompletionHandler:(FetchUsersHandler)completionHandler;
 
 @end

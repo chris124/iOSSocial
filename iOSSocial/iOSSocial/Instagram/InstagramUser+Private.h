@@ -19,7 +19,5 @@
 @property(nonatomic, readwrite, assign) NSInteger mediaCount;
 @property(nonatomic, readwrite, assign) NSInteger followsCount;
 @property(nonatomic, readwrite, assign) NSInteger followedByCount;
-@property(nonatomic, copy)      FetchMediaHandler fetchMediaHandler;
-@property(nonatomic, copy)      FetchUserDataHandler fetchUserDataHandler;
 
 @end

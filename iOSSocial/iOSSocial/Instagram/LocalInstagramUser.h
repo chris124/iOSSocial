@@ -12,7 +12,16 @@
 #import "iOSSocialServiceOAuth2ProviderConstants.h"
 #import "iOSSocialLocalUser.h"
 
+@class InstagramMediaCollection;
+
+typedef void(^FetchMediaHandler)(NSDictionary *dictionary, NSError *error);
+
+@class InstagramUserCollection;
+
+typedef void(^FetchUsersHandler)(NSArray *users, NSError *error);
+
 typedef void(^InstagramAuthenticationHandler)(NSError *error);
+
 
 @interface LocalInstagramUser : InstagramUser <iOSSocialLocalUserProtocol>
 
@@ -61,5 +70,9 @@ typedef void(^InstagramAuthenticationHandler)(NSError *error);
 + (void)mediaWithID:(NSString*)mediaID;
 + (void)editPhotoWithURL:(NSURL*)url 
          andMenuFromView:(UIView*)view;
+
+- (void)fetchUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler;
+
+- (void)fetchRecentMediaWithCompletionHandler:(FetchMediaHandler)completionHandler;
 
 @end

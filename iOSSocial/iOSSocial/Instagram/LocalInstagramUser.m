@@ -22,10 +22,13 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 @interface LocalInstagramUser () 
 
-@property(nonatomic, copy)      InstagramAuthenticationHandler authenticationHandler;
-@property(nonatomic, retain)    GTMOAuth2Authentication *auth;
+@property(nonatomic, copy)              InstagramAuthenticationHandler authenticationHandler;
+@property(nonatomic, retain)            GTMOAuth2Authentication *auth;
 @property(nonatomic, retain)            NSString *keychainItemName;
 @property(nonatomic, readwrite, retain) NSString *uuidString;
+@property(nonatomic, copy)              FetchUserDataHandler fetchUserDataHandler;
+@property(nonatomic, copy)              FetchMediaHandler fetchMediaHandler;
+@property(nonatomic, copy)              FetchUsersHandler   fetchUsersHandler;
 
 @end
 
@@ -38,6 +41,9 @@ static LocalInstagramUser *localInstagramUser = nil;
 @synthesize auth;
 @synthesize keychainItemName;
 @synthesize uuidString;
+@synthesize fetchUserDataHandler;
+@synthesize fetchMediaHandler;
+@synthesize fetchUsersHandler;
 
 + (LocalInstagramUser *)localInstagramUser
 {
@@ -268,6 +274,67 @@ static LocalInstagramUser *localInstagramUser = nil;
             }
         }];
     }
+}
+
+- (void)fetchUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler
+{
+    self.fetchUserDataHandler = completionHandler;
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/", self.userID];
+    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
+    
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(error);
+                self.fetchUserDataHandler = nil;
+            }
+        } else {
+            NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+            self.userDictionary = dictionary;
+            
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler = nil;
+            }
+        }
+    }];
+}
+
+- (void)fetchRecentMediaWithCompletionHandler:(FetchMediaHandler)completionHandler
+{
+    self.fetchMediaHandler = completionHandler;
+    
+    NSString *urlString = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent", self.userID];
+    NSURL *url = [self authorizedURL:[NSURL URLWithString:urlString]];
+    
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
+                                                 parameters:nil 
+                                              requestMethod:iOSSRequestMethodGET];
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error) {
+            if (self.fetchMediaHandler) {
+                self.fetchMediaHandler(nil, error);
+                self.fetchMediaHandler = nil;
+            }
+        } else {
+            if (responseData) {
+                NSDictionary *dictionary = [Instagram JSONFromData:responseData];
+                
+                //call completion handler with error
+                if (self.fetchMediaHandler) {
+                    self.fetchMediaHandler(dictionary, nil);
+                    self.fetchMediaHandler = nil;
+                }
+                
+            }
+        }
+    }];
 }
 
 - (NSString*)oAuthAccessToken
