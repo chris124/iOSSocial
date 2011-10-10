@@ -211,9 +211,6 @@
     
     // remove the stored Google authentication from the keychain, if any
     [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:theKeychainItemName];
-    
-    // Discard our retained authentication object.
-    //theAuth = nil;
 }
 
 - (NSString*)apiKey

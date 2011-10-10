@@ -76,4 +76,6 @@
 
 - (void)registerAccount:(id<iOSSocialLocalUserProtocol>)theAccount;
 
+- (void)unregisterAccount:(id<iOSSocialLocalUserProtocol>)theAccount;
+
 @end

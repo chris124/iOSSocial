@@ -201,6 +201,33 @@ static iOSSocialServicesStore *serviceStore = nil;
     }
 }
 
+- (void)unregisterAccount:(id<iOSSocialLocalUserProtocol>)theAccount
+{
+    if (nil != self.defaultAccount) {
+        //when we register an account and there is no default account, see if there is a primary service. 
+        //if there is a primary service, and this account is from that service, set it as the default
+        id<iOSSocialServiceProtocol> primaryService = [self primaryService];
+        if (NSOrderedSame == [theAccount.servicename compare:primaryService.name]) {
+            self.defaultAccount = nil;
+        }
+    }
+    
+    [self.accounts removeObject:theAccount];
+    
+    //build the array of account dictionaries and then set the accounts dictionary
+    NSMutableArray *theAccounts = [NSMutableArray array];
+    for (id<iOSSocialLocalUserProtocol> account in self.accounts) {
+        BOOL isPrimary = (account == self.defaultAccount);
+        NSDictionary *accountDictionary = [NSDictionary 
+                                           dictionaryWithObjects:[NSArray arrayWithObjects:account.servicename, [NSNumber numberWithBool:isPrimary], account.uuidString, nil] 
+                                           forKeys:[NSArray arrayWithObjects:@"service_name", @"primary", @"account_uuid", nil]];
+        [theAccounts addObject:accountDictionary];
+    }
+    
+    NSDictionary *servicesDictionary = [NSDictionary dictionaryWithObject:theAccounts forKey:@"accounts"];
+    [self setServicesStoreDictionary:servicesDictionary];
+}
+
 - (id<iOSSocialLocalUserProtocol>)defaultAccount
 {
     if (nil == _defaultAccount) {

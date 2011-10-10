@@ -10,8 +10,6 @@
 #import "iOSSService.h"
 #import "iOSSocialLocalUser.h"
 #import "iOSSocialServicesStore.h"
-#import "LocalFlickrUser.h"
-#import "LocalTwitterUser.h"
 #import "iOSSServicesViewController.h"
 
 @interface InstaBetaViewController () 
@@ -21,6 +19,7 @@
 @end
 
 @implementation InstaBetaViewController
+@synthesize actionButton;
 
 @synthesize localUser;
 
@@ -36,18 +35,6 @@
 - (void)loadView
 {
     [super loadView];
-    
-    self.localUser = [[iOSSocialServicesStore sharedServiceStore] defaultAccount];
-    
-    if (![self.localUser isAuthenticated] ) {
-        [self.localUser authenticateFromViewController:self 
-                                          withCompletionHandler:^(NSError *error){
-                                              if (error) {
-                                              } else {
-                                              }
-                                          }];
-    } else {
-    }
 }
 
 - (void)viewDidLoad
@@ -58,6 +45,8 @@
 
 - (void)viewDidUnload
 {
+    [self setActionButton:nil];
+    [self setActionButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -98,6 +87,12 @@
     iOSSServicesViewController *iossServicesViewController = [[iOSSServicesViewController alloc] init];
 
     [iossServicesViewController presentModallyFromViewController:self 
+                                              withAccountHandler:^(id<iOSSocialLocalUserProtocol> theLocalUser) {
+                                                  [[iOSSocialServicesStore sharedServiceStore] unregisterAccount:theLocalUser];
+                                                  [theLocalUser logout];
+                                                  theLocalUser = nil;
+                                                  [iossServicesViewController refreshUI];
+                                              }
                                      withServiceConnectedHandler:^(id<iOSSocialLocalUserProtocol> theLocalUser) {
                                              [[iOSSocialServicesStore sharedServiceStore] registerAccount:theLocalUser];
                                              [iossServicesViewController refreshUI];
@@ -111,76 +106,24 @@
 
 - (IBAction)actionButtonPressed:(id)sender 
 {
-    //cwnote: update readme for iOSSocial to show this use case
-    
-    LocalTwitterUser *localTwitterUser = (LocalTwitterUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Twitter"];
-    //[localTwitterUser postTweetWithMedia];
-    [localTwitterUser postTweet];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    LocalFlickrUser *localFlickrUser = (LocalFlickrUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Flickr"];
-
-    UIImage *image = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
-    NSData *dataObj = UIImageJPEGRepresentation(image, 1.0);
-    
-    [localFlickrUser postPhotoData:dataObj
-                      withFileName:@"test.JPG" 
-                         andParams:nil 
-              andCompletionHandler:^(NSString *photoID, NSError *error) {
-        if (!error) {
-            /*
-            [localFlickrUser getInfoForPhotoWithId:photoID andCompletionHandler:^(NSDictionary *photoInfo, NSError *error) {
-                PSFlickr *flickr = [[PSFlickr alloc] initWithMediaDictionary:photoInfo];
-                [[PSLocalUser localUser] uploadMedia:flickr fromService:@"flickr" withCompletionHandler:^(NSError *error) {
-                    //if no error, call completion handler. ugh
-                } ];
-            }];
-            */
-        }
-    }];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (IBAction)anotheractionButtonPressed:(id)sender 
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init]; 
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera; 
+    if (!self.localUser) {
+        self.localUser = [[iOSSocialServicesStore sharedServiceStore] defaultAccount];
     }
-    picker.delegate = self; 
-    [self presentModalViewController:picker animated:YES];
- 
-    /*
-    LocalFlickrUser *localFlickrUser = (LocalFlickrUser*)[[iOSSocialServicesStore sharedServiceStore] accountWithType:@"Flickr"];
-
-    [localFlickrUser postPhotoWithCompletionHandler:^(NSString *photoID, NSError *error) {
-        //
-        if (!error) {
-            //get the photo info of the photo with this id
-            ////now get the photo info
-            [localFlickrUser getInfoForPhotoWithId:photoID andCompletionHandler:^(NSDictionary *photoInfo, NSError *error) {
-                //
-                NSLog(@"meh");
-            }];
-
-            //[localFlickrUser getUserPhotosWithCompletionHandler:^(NSDictionary *photos, NSError *error) {
-                //
-            //    NSLog(@"meh");
-            //}];
-        }
-    }];*/
-    /*
-    [localFlickrUser getUserPhotosWithCompletionHandler:^(NSDictionary *photos, NSError *error) {
-        //
-        NSLog(@"meh");
-    }];
-    */
+    
+    //cwnote: update readme for iOSSocial to show this use case
+    if (![self.localUser isAuthenticated] ) {
+        [self.localUser authenticateFromViewController:self 
+                                 withCompletionHandler:^(NSError *error){
+                                     if (error) {
+                                     } else {
+                                         [[iOSSocialServicesStore sharedServiceStore] registerAccount:self.localUser];
+                                     }
+                                 }];
+    } else {
+        [[iOSSocialServicesStore sharedServiceStore] unregisterAccount:self.localUser];
+        [self.localUser logout];
+        self.localUser = nil;
+    }
 }
 
 @end

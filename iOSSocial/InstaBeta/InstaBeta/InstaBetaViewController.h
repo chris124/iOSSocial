@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-@interface InstaBetaViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface InstaBetaViewController : UIViewController
+
 - (IBAction)servicesButtonPressed:(id)sender;
 - (IBAction)actionButtonPressed:(id)sender;
-- (IBAction)anotheractionButtonPressed:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *actionButton;
 
 @end
