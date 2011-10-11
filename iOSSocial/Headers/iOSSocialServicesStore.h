@@ -54,8 +54,6 @@
 
 + (id)JSONFromData:(NSData*)data;
 
-- (NSString*)authorizationHeaderForRequest:(NSURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth;
-
 @end
 
 @interface iOSSocialServicesStore : NSObject

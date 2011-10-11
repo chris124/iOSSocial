@@ -235,11 +235,6 @@
     return self.clientSecret;
 }
 
-- (NSString*)authorizationHeaderForRequest:(NSMutableURLRequest *)request withAuth:(GTMOAuthAuthenticationWithAdditions*)auth
-{
-    return [auth authorizationHeaderForRequest:request];
-}
-
 + (id)JSONFromData:(NSData*)data
 {
     id obj = nil;
