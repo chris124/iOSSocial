@@ -30,4 +30,6 @@ static NSString *const kSMOAuth2ServiceProviderName  = @"serviceProviderName";
 
 static NSString *const kSMOAuth2Scope  = @"scope";
 
+static NSString *const kSMOAuth2URLSchemeSuffix = @"urlSchemeSuffix";
+
 #endif

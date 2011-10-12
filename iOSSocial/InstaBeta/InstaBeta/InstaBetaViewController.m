@@ -7,7 +7,6 @@
 //
 
 #import "InstaBetaViewController.h"
-#import "iOSSService.h"
 #import "iOSSocialLocalUser.h"
 #import "iOSSocialServicesStore.h"
 #import "iOSSServicesViewController.h"

@@ -54,6 +54,8 @@
 
 + (id)JSONFromData:(NSData*)data;
 
+- (NSString*)urlSchemeSuffix;
+
 @end
 
 @interface iOSSocialServicesStore : NSObject

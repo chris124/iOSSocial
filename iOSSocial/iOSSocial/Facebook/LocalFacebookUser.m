@@ -241,11 +241,11 @@ NSInteger usersCount = 0;
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
 
-        /*
         if (nil == self.facebook) {
-            self.facebook = [[FacebookService sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+            self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] 
+                                            urlSchemeSuffix:[[FacebookService sharedService] urlSchemeSuffix]
+                                                andDelegate:self];
         }
-        */
         
         //cwnote: need permissions!
         NSString *scope = [[FacebookService sharedService] apiScope];
@@ -285,6 +285,7 @@ NSInteger usersCount = 0;
 - (void)logout
 {
     [self.facebook logout:self];
+    self.facebook = nil;
 }
 
 - (NSString*)userId

@@ -17,6 +17,7 @@
 @property(nonatomic, retain)            NSString *theApiKey;
 @property(nonatomic, retain)            NSString *theApiSecret;
 @property(nonatomic, retain)            NSString *theApiScope;
+@property(nonatomic, retain)            NSString *theURLSchemeSuffix;
 
 @end
 
@@ -30,6 +31,7 @@ static FacebookService *facebookService = nil;
 @synthesize theApiKey;
 @synthesize theApiSecret;
 @synthesize theApiScope;
+@synthesize theURLSchemeSuffix;
 
 + (id<iOSSocialServiceProtocol>)sharedService;
 {
@@ -56,6 +58,7 @@ static FacebookService *facebookService = nil;
     self.theApiKey = [params objectForKey:kSMOAuth2ClientID];
     self.theApiSecret = [params objectForKey:kSMOAuth2ClientSecret];
     self.theApiScope = [params objectForKey:kSMOAuth2Scope];
+    self.theURLSchemeSuffix = [params objectForKey:kSMOAuth2URLSchemeSuffix];
     
     self.primary = isPrimary;
 }
@@ -68,6 +71,11 @@ static FacebookService *facebookService = nil;
 - (NSString*)apiKey
 {
     return self.theApiKey;
+}
+
+- (NSString*)urlSchemeSuffix
+{
+    return self.theURLSchemeSuffix;
 }
 
 - (NSString*)apiSecret

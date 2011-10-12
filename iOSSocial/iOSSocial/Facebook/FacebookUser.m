@@ -50,7 +50,9 @@ typedef enum _FBRequestType {
     self = [super init];
     if (self) {
         // Initialization code here.
-        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
+        self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] 
+                                        urlSchemeSuffix:[[FacebookService sharedService] urlSchemeSuffix]
+                                            andDelegate:self];
     }
     
     return self;

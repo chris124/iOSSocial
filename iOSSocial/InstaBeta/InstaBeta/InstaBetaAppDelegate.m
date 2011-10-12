@@ -11,6 +11,8 @@
 //OAuth 2 Services
 #import "Instagram.h"
 #import "Foursquare.h"
+#import "FacebookService.h"
+#import "LocalFacebookUser.h"
 #import "iOSSocialServiceOAuth2ProviderConstants.h"
 //OAuth 1 Services
 #import "Twitter.h"
@@ -29,11 +31,11 @@
 	[params setObject:@"" forKey:kSMOAuth2ClientID];
 	[params setObject:@"" forKey:kSMOAuth2ClientSecret];
 	[params setObject:@"" forKey:kSMOAuth2RedirectURI];
-	[params setObject:@"InstaBeta_Instagram_Service" forKey:kSMOAuth2KeychainItemName];
+	[params setObject:@"" forKey:kSMOAuth2KeychainItemName];
     [params setObject:@"https://api.instagram.com/oauth/authorize" forKey:kSMOAuth2AuthorizeURL];
     [params setObject:@"https://api.instagram.com/oauth/access_token" forKey:kSMOAuth2AccessTokenURL];
     [params setObject:@"Instagram Service" forKey:kSMOAuth2ServiceProviderName];
-    [params setObject:@"" forKey:kSMOAuth2Scope];
+    [params setObject:@"basic comments relationships likes" forKey:kSMOAuth2Scope];
     [[Instagram sharedService] assignOAuthParams:params asPrimary:YES];
     
     [params removeAllObjects];
@@ -41,7 +43,7 @@
     [params setObject:@"" forKey:kSMOAuth1ClientID];
     [params setObject:@"" forKey:kSMOAuth1ClientSecret];
     [params setObject:@"" forKey:kSMOAuth1RedirectURI];
-    [params setObject:@"InstaBeta_Twitter_Service" forKey:kSMOAuth1KeychainItemName];
+    [params setObject:@"" forKey:kSMOAuth1KeychainItemName];
     [params setObject:@"https://api.twitter.com/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
     [params setObject:@"https://api.twitter.com/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
     [params setObject:@"https://api.twitter.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
@@ -53,7 +55,7 @@
     [params setObject:@"" forKey:kSMOAuth1ClientID];
     [params setObject:@"" forKey:kSMOAuth1ClientSecret];
     [params setObject:@"" forKey:kSMOAuth1RedirectURI];
-    [params setObject:@"InstaBeta_Flickr_Service" forKey:kSMOAuth1KeychainItemName];
+    [params setObject:@"" forKey:kSMOAuth1KeychainItemName];
     [params setObject:@"http://www.flickr.com/services/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
     [params setObject:@"http://www.flickr.com/services/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
     [params setObject:@"http://www.flickr.com/services/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
@@ -65,7 +67,7 @@
     [params setObject:@"" forKey:kSMOAuth2ClientID];
     [params setObject:@"" forKey:kSMOAuth2ClientSecret];
     [params setObject:@"" forKey:kSMOAuth2RedirectURI];
-    [params setObject:@"InstaBeta_Foursquare_Service" forKey:kSMOAuth2KeychainItemName];
+    [params setObject:@"" forKey:kSMOAuth2KeychainItemName];
     [params setObject:@"https://foursquare.com/oauth2/authorize" forKey:kSMOAuth2AuthorizeURL];
     [params setObject:@"https://foursquare.com/oauth2/access_token" forKey:kSMOAuth2AccessTokenURL];
     [params setObject:@"Foursquare Service" forKey:kSMOAuth2ServiceProviderName];
@@ -76,12 +78,20 @@
     [params setObject:@"" forKey:kSMOAuth1ClientID];
     [params setObject:@"" forKey:kSMOAuth1ClientSecret];
     [params setObject:@"" forKey:kSMOAuth1RedirectURI];
-    [params setObject:@"InstaBeta_Tumblr_Service" forKey:kSMOAuth1KeychainItemName];
+    [params setObject:@"" forKey:kSMOAuth1KeychainItemName];
     [params setObject:@"http://www.tumblr.com/oauth/request_token" forKey:kSMOAuth1RequestTokenURL];
     [params setObject:@"http://www.tumblr.com/oauth/access_token" forKey:kSMOAuth1AccessTokenURL];
     [params setObject:@"http://www.tumblr.com/oauth/authorize" forKey:kSMOAuth1AuthorizeURL];
     [params setObject:@"Tumblr Service" forKey:kSMOAuth1ServiceProviderName];
     [[Tumblr sharedService] assignOAuthParams:params asPrimary:NO];
+    
+    [params removeAllObjects];
+    
+    [params setObject:@"" forKey:kSMOAuth2ClientID];
+    [params setObject:@"" forKey:kSMOAuth2ClientSecret];
+    [params setObject:@"" forKey:kSMOAuth2URLSchemeSuffix];
+    [params setObject:@"read_stream publish_stream offline_access" forKey:kSMOAuth2Scope];
+    [[FacebookService sharedService] assignOAuthParams:params asPrimary:NO];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -132,6 +142,11 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [[LocalFacebookUser localFacebookUser] handleOpenURL:url];
 }
 
 @end
