@@ -23,13 +23,13 @@ static Flickr *FlickrService = nil;
 @synthesize name;
 @synthesize logoImage;
 @synthesize primary;
+@synthesize keychainItemName;
 
 + (id<iOSSocialServiceProtocol>)sharedService;
 {
     @synchronized(self) {
         if(FlickrService == nil) {
             FlickrService = [[super allocWithZone:NULL] init];
-            [[iOSSocialServicesStore sharedServiceStore] registerService:FlickrService];
         }
     }
     return FlickrService;
@@ -50,6 +50,8 @@ static Flickr *FlickrService = nil;
     [super assignOAuthParams:params];
     
     self.primary = isPrimary;
+    
+    [[iOSSocialServicesStore sharedServiceStore] registerService:self];
 }
 
 - (NSString*)name
@@ -62,6 +64,11 @@ static Flickr *FlickrService = nil;
     NSURL *logoURL = [[NSBundle mainBundle] URLForResource:@"flickr-logo" withExtension:@"png"];
     UIImage *theLogoImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:logoURL]];
     return theLogoImage;
+}
+
+- (NSString*)serviceKeychainItemName
+{
+    return self.keychainItemName;
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUser

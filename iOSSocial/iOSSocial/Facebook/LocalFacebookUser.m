@@ -103,10 +103,10 @@ NSInteger usersCount = 0;
         CFRelease(uuidStr);
         CFRelease(uuid); 
 
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Facebook_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[FacebookService sharedService] serviceKeychainItemName], self.uuidString];
         
         // Initialization code here.
-        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"OAuth"/*self.keychainItemName*/ accessGroup:nil];
+        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"OAuth" accessGroup:nil];
         [wrapper setObject:@"OAuth" forKey:(__bridge id)kSecAttrAccount];
         [wrapper setObject:self.keychainItemName forKey:(__bridge id)kSecAttrService];
         self.accessTokenItem = wrapper;
@@ -144,10 +144,10 @@ NSInteger usersCount = 0;
 
         self.uuidString = uuid;
 
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Facebook_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[FacebookService sharedService] serviceKeychainItemName], self.uuidString];
         
         // Initialization code here.
-        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"OAuth"/*self.keychainItemName*/ accessGroup:nil];
+        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"OAuth" accessGroup:nil];
         [wrapper setObject:@"OAuth" forKey:(__bridge id)kSecAttrAccount];
         [wrapper setObject:self.keychainItemName forKey:(__bridge id)kSecAttrService];
         self.accessTokenItem = wrapper;

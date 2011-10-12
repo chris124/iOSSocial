@@ -76,7 +76,7 @@ static LocalFlickrUser *localFlickrUser = nil;
         CFRelease(uuidStr);
         CFRelease(uuid); 
         
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Flickr_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Flickr sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Flickr sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.
@@ -110,7 +110,7 @@ static LocalFlickrUser *localFlickrUser = nil;
     if (self) {
         self.uuidString = uuid;
         
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Flickr_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Flickr sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Flickr sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.

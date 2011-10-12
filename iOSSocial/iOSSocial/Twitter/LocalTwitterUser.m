@@ -67,7 +67,7 @@ static LocalTwitterUser *localTwitterUser = nil;
         CFRelease(uuidStr);
         CFRelease(uuid); 
         
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Twitter_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Twitter sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Twitter sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.
@@ -101,7 +101,7 @@ static LocalTwitterUser *localTwitterUser = nil;
     if (self) {
         self.uuidString = uuid;
         
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Twitter_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Twitter sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Twitter sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.

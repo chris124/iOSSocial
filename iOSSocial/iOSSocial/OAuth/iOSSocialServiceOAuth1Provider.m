@@ -23,6 +23,7 @@
 
 @property(nonatomic, readwrite, retain) NSString *clientID;
 @property(nonatomic, readwrite, retain) NSString *clientSecret;
+@property(nonatomic, readwrite, retain) NSString *keychainItemName;
 @property(nonatomic, readwrite, retain) NSString *redirectURI;
 @property(nonatomic, readwrite, retain) NSString *requestTokenURL;
 @property(nonatomic, readwrite, retain) NSString *authorizeURL;
@@ -31,6 +32,7 @@
 @property(nonatomic, readwrite, retain) UIViewController *viewController;
 @property(nonatomic, copy)              AuthorizationHandler authenticationHandler;
 @property(nonatomic, retain)            NSString *scope;
+@property(nonatomic, retain)            UINavigationController *navigationController;
 
 - (GTMOAuthAuthenticationWithAdditions *)authForCustomService;
 
@@ -40,6 +42,7 @@
 
 @synthesize clientID;
 @synthesize clientSecret;
+@synthesize keychainItemName;
 @synthesize redirectURI;
 @synthesize requestTokenURL;
 @synthesize authorizeURL;
@@ -48,6 +51,7 @@
 @synthesize viewController;
 @synthesize authenticationHandler;
 @synthesize scope;
+@synthesize navigationController;
 
 - (id)init
 {
@@ -67,6 +71,7 @@
         self.clientID               = [dictionary objectForKey:kSMOAuth1ClientID];
         self.clientSecret           = [dictionary objectForKey:kSMOAuth1ClientSecret];
         self.redirectURI            = [dictionary objectForKey:kSMOAuth1RedirectURI];
+        self.keychainItemName       = [dictionary objectForKey:kSMOAuth1KeychainItemName];
         self.requestTokenURL        = [dictionary objectForKey:kSMOAuth1RequestTokenURL];
         self.authorizeURL           = [dictionary objectForKey:kSMOAuth1AuthorizeURL];
         self.accessTokenURL         = [dictionary objectForKey:kSMOAuth1AccessTokenURL];
@@ -82,6 +87,7 @@
     self.clientID               = [params objectForKey:kSMOAuth1ClientID];
     self.clientSecret           = [params objectForKey:kSMOAuth1ClientSecret];
     self.redirectURI            = [params objectForKey:kSMOAuth1RedirectURI];
+    self.keychainItemName       = [params objectForKey:kSMOAuth1KeychainItemName];
     self.requestTokenURL        = [params objectForKey:kSMOAuth1RequestTokenURL];
     self.authorizeURL           = [params objectForKey:kSMOAuth1AuthorizeURL];
     self.accessTokenURL         = [params objectForKey:kSMOAuth1AccessTokenURL];
@@ -111,6 +117,8 @@
             self.authenticationHandler(nil, nil, error);
             self.authenticationHandler = nil;
         }
+        
+        self.navigationController = nil;
     } else {
         [self.viewController dismissModalViewControllerAnimated:YES];
         
@@ -128,6 +136,8 @@
             self.authenticationHandler(newAuth, userInfo, nil);
             self.authenticationHandler = nil;
         }
+        
+        self.navigationController = nil;
     }
 }
 
@@ -177,7 +187,12 @@
                                                                  delegate:self
                                                          finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
-    [self.viewController presentModalViewController:oaViewController animated:YES];
+    // Optional: display some html briefly before the sign-in page loads
+    NSString *html = @"<html><body bgcolor=silver><div align=center>Loading sign-in page...</div></body></html>";
+    oaViewController.initialHTMLString = html;
+    
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:oaViewController];
+    [self.viewController presentModalViewController:self.navigationController animated:YES];
 }
 
 - (GTMOAuthAuthenticationWithAdditions *)authForCustomService 

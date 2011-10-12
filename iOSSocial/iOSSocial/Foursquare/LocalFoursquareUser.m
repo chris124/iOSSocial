@@ -67,7 +67,7 @@ static LocalFoursquareUser *localFoursquareUser = nil;
         CFRelease(uuidStr);
         CFRelease(uuid); 
         
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Foursquare_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Foursquare sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Foursquare sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.
@@ -120,7 +120,7 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     if (self) {
         self.uuidString = uuid;
         
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Foursquare_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Foursquare sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Foursquare sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.

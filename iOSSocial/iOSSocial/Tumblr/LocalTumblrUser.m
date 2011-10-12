@@ -75,7 +75,7 @@ static LocalTumblrUser *localTumblrUser = nil;
         CFRelease(uuidStr);
         CFRelease(uuid); 
         
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Tumblr_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Tumblr sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Tumblr sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.
@@ -94,7 +94,7 @@ static LocalTumblrUser *localTumblrUser = nil;
     if (self) {
         self.uuidString = uuid;
         
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Tumblr_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Tumblr sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Tumblr sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.

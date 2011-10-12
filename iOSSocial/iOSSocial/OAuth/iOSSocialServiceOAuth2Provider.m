@@ -33,6 +33,7 @@
 @property(nonatomic, readwrite, retain) UIViewController *viewController;
 @property(nonatomic, copy)              AuthorizationHandler authenticationHandler;
 @property(nonatomic, retain)            NSString *scope;
+@property(nonatomic, retain)            UINavigationController *navigationController;
 
 - (GTMOAuth2Authentication *)authForCustomService;
 
@@ -50,6 +51,7 @@
 @synthesize viewController;
 @synthesize authenticationHandler;
 @synthesize scope;
+@synthesize navigationController;
 
 - (id)init
 {
@@ -112,6 +114,8 @@
             self.authenticationHandler(nil, nil, error);
             self.authenticationHandler = nil;
         }
+        
+        self.navigationController = nil;
     } else {
         // Authentication succeeded
         [self.viewController dismissModalViewControllerAnimated:YES];
@@ -121,6 +125,8 @@
             self.authenticationHandler(newAuth, dictionary, nil);
             self.authenticationHandler = nil;
         }
+        
+        self.navigationController = nil;
     }
 }
 
@@ -155,6 +161,12 @@
                                                                    keychainItemName:theKeychainItemName
                                                                            delegate:self
                                                                    finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+    //oaViewController.navButtonsView
+    /*
+    oaViewController.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
+                                                                                        target:self 
+                                                                                        action:@selector(newStream)];
+     */
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"touch" forKey:@"display"];
@@ -164,8 +176,8 @@
     NSString *html = @"<html><body bgcolor=silver><div align=center>Loading sign-in page...</div></body></html>";
     oaViewController.initialHTMLString = html;
     
-    //[self.viewController pushViewController:oaViewController
-    [self.viewController presentModalViewController:oaViewController animated:YES];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:oaViewController];
+    [self.viewController presentModalViewController:self.navigationController animated:YES];
 }
 
 - (GTMOAuth2Authentication *)authForCustomService 

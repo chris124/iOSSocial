@@ -38,6 +38,8 @@
 
 - (NSString*)apiSecret;
 
+- (NSString*)serviceKeychainItemName;
+
 @optional
 
 - (NSString*)apiScope;

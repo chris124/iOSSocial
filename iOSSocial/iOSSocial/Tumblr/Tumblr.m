@@ -29,7 +29,6 @@ static Tumblr *TumblrService = nil;
     @synchronized(self) {
         if(TumblrService == nil) {
             TumblrService = [[super allocWithZone:NULL] init];
-            [[iOSSocialServicesStore sharedServiceStore] registerService:TumblrService];
         }
     }
     return TumblrService;
@@ -50,6 +49,8 @@ static Tumblr *TumblrService = nil;
     [super assignOAuthParams:params];
     
     self.primary = isPrimary;
+    
+    [[iOSSocialServicesStore sharedServiceStore] registerService:self];
 }
 
 - (NSString*)name
@@ -64,6 +65,11 @@ static Tumblr *TumblrService = nil;
     return theLogoImage;
 }
 
+- (NSString*)serviceKeychainItemName
+{
+    return self.keychainItemName;
+}
+
 - (id<iOSSocialLocalUserProtocol>)localUser
 {
     return [[LocalTumblrUser alloc] init];
@@ -71,7 +77,8 @@ static Tumblr *TumblrService = nil;
 
 - (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary
 {
-    return nil;
+    LocalTumblrUser *theUser = [[LocalTumblrUser alloc] initWithDictionary:dictionary];
+    return theUser;
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid

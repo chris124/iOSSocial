@@ -30,7 +30,6 @@ static Foursquare *foursquareService = nil;
     @synchronized(self) {
         if(foursquareService == nil) {
             foursquareService = [[super allocWithZone:NULL] init];
-            [[iOSSocialServicesStore sharedServiceStore] registerService:foursquareService];
         }
     }
     return foursquareService;
@@ -50,6 +49,8 @@ static Foursquare *foursquareService = nil;
     [super assignOAuthParams:params];
     
     self.primary = isPrimary;
+    
+    [[iOSSocialServicesStore sharedServiceStore] registerService:self];
 }
 
 - (NSString*)name
@@ -62,6 +63,11 @@ static Foursquare *foursquareService = nil;
     NSURL *logoURL = [[NSBundle mainBundle] URLForResource:@"foursquare_trans" withExtension:@"png"];
     UIImage *theLogoImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:logoURL]];
     return theLogoImage;
+}
+
+- (NSString*)serviceKeychainItemName
+{
+    return self.keychainItemName;
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUser

@@ -30,7 +30,6 @@ static Twitter *twitterService = nil;
     @synchronized(self) {
         if(twitterService == nil) {
             twitterService = [[super allocWithZone:NULL] init];
-            [[iOSSocialServicesStore sharedServiceStore] registerService:twitterService];
         }
     }
     return twitterService;
@@ -51,6 +50,8 @@ static Twitter *twitterService = nil;
     [super assignOAuthParams:params];
     
     self.primary = isPrimary;
+    
+    [[iOSSocialServicesStore sharedServiceStore] registerService:self];
 }
 
 - (NSString*)name
@@ -63,6 +64,11 @@ static Twitter *twitterService = nil;
     NSURL *logoURL = [[NSBundle mainBundle] URLForResource:@"twitter-logo" withExtension:@"png"];
     UIImage *theLogoImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:logoURL]];
     return theLogoImage;
+}
+
+- (NSString*)serviceKeychainItemName
+{
+    return self.keychainItemName;
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUser

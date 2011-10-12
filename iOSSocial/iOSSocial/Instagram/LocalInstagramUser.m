@@ -76,7 +76,7 @@ static LocalInstagramUser *localInstagramUser = nil;
         CFRelease(uuidStr);
         CFRelease(uuid); 
 
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Instagram_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Instagram sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.
@@ -109,7 +109,7 @@ static LocalInstagramUser *localInstagramUser = nil;
     if (self) {
         self.uuidString = uuid;
         
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Instagram_Service-%@", self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Instagram sharedService] serviceKeychainItemName], self.uuidString];
         self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
         
         // Initialization code here.

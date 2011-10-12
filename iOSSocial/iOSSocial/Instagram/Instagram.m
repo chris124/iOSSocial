@@ -30,7 +30,6 @@ static Instagram *instagramService = nil;
     @synchronized(self) {
         if(instagramService == nil) {
             instagramService = [[super allocWithZone:NULL] init];
-            [[iOSSocialServicesStore sharedServiceStore] registerService:instagramService];
         }
     }
     return instagramService;
@@ -50,6 +49,8 @@ static Instagram *instagramService = nil;
     [super assignOAuthParams:params];
     
     self.primary = isPrimary;
+    
+    [[iOSSocialServicesStore sharedServiceStore] registerService:self];
 }
 
 - (NSString*)name
@@ -62,6 +63,11 @@ static Instagram *instagramService = nil;
     NSURL *logoURL = [[NSBundle mainBundle] URLForResource:@"instagram_trans" withExtension:@"png"];
     UIImage *theLogoImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:logoURL]];
     return theLogoImage;
+}
+
+- (NSString*)serviceKeychainItemName
+{
+    return self.keychainItemName;
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUser

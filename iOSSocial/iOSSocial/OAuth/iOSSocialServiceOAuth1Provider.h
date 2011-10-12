@@ -13,6 +13,8 @@
 @class GTMOAuthAuthenticationWithAdditions;
 @interface iOSSocialServiceOAuth1Provider : NSObject
 
+@property(nonatomic, readonly, retain) NSString *keychainItemName;
+
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 
 - (GTMOAuthAuthenticationWithAdditions*)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
