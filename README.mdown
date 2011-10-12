@@ -20,7 +20,7 @@ Hopefully coming soon!
 
 Prerequisites: XCode 4.2 with iOS 5 and ARC support
 
-iOSSocial is intended to be used as drop-in code for your project. To use it in your project, do the following:
+iOSSocial is intended to be used as drop-in code for your project. To use it in your project, do the following (refer to the InstaBeta sample application in the iOSSocial workspace to see all of the files in place and all of the correct project settings):
 
 Fork this repo and add your fork as a submodule to your git repository. Perform the following commands from a terminal in the base directory of your repository:
 
@@ -48,12 +48,17 @@ Add '-fno-objc-arc' compile flag. The compiler will spit out ARC errors for some
 
 Special Considerations:
 
-- Facebook URL Schemes
--- fb[appID][URLSuffix]://authorize
--- fb[appID][URLSuffix]
+Facebook: iOSSocial makes use of the facebook-ios-sdk which uses Facebook's Single Sign On (SSO) feature. In order for the Facebook SDK to redirect back to your app after authorization, you will have to specify two URL Schemes in your application's main plist file (for instructions on adding these to your plist file go here https://github.com/facebook/facebook-ios-sdk OR look at the main plist file in the InstaBeta sample application in the iOSSocial workspace 'InstaBeta-Info.plist'.). In the example below, replace [appID] with the ID that Facebook assigned to the application that you created on their site and set [URLSuffix] to a useful name/identifier for your app. The URLSuffix allows the Facebook SDK to properly redirect back to the correct application even if more than one application on the device uses the same Facebook appID (for example, you have a trial and full version of the same app available within the app store):
 
-- iOSSocialViewControllers
+- fb[appID][URLSuffix]://authorize (refirect back from Safari)
+- fb[appID][URLSuffix] (redirect back from Facebook app via Single Sign On)
 
+iOSSocialViewControllers
+
+If you want to use the iOSSocialViewControllers, fork the repo and add a submodule for it and drag the source files into your project:
+
+- 'git submodule add git@github.com:[your username]/iOSSocialViewControllers.git iOSSocialViewControllers'
+- 'git submodule update --init'
   
 ## An Overview of iOSSocial
     
