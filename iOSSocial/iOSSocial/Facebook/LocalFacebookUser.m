@@ -13,6 +13,7 @@
 #import "Facebook.h"
 #import "FacebookUser+Private.h"
 #import "iOSSLog.h"
+#import <Security/Security.h>
 
 @interface FacebookUser () <FBRequestDelegate, FBSessionDelegate>
 
@@ -95,20 +96,19 @@ NSInteger usersCount = 0;
 {
     self = [super init];
     if (self) {
-        //self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
-        
+
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
         self.uuidString = (__bridge NSString *)uuidStr;
         CFRelease(uuidStr);
         CFRelease(uuid); 
-        
-        //cwnote: what to do with this? should use this above?
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Instagram_Service-%@", self.uuidString];
-        //self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Facebook_Service-%@", self.uuidString];
         
         // Initialization code here.
-        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainItemName/*@"AccessToken"*/ accessGroup:nil];
+        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"OAuth"/*self.keychainItemName*/ accessGroup:nil];
+        [wrapper setObject:@"OAuth" forKey:(__bridge id)kSecAttrAccount];
+        [wrapper setObject:self.keychainItemName forKey:(__bridge id)kSecAttrService];
         self.accessTokenItem = wrapper;
         
         //fetch access token and expiration date from keychain and assign to facebook object
@@ -141,16 +141,15 @@ NSInteger usersCount = 0;
 {
     self = [super init];
     if (self) {
-        //self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
-        
+
         self.uuidString = uuid;
-        
-        //cwnote: what to do with this? should use this above?
-        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Instagram_Service-%@", self.uuidString];
-        //self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+
+        self.keychainItemName = [NSString stringWithFormat:@"InstaBeta_Facebook_Service-%@", self.uuidString];
         
         // Initialization code here.
-        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:self.keychainItemName/*@"AccessToken"*/ accessGroup:nil];
+        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"OAuth"/*self.keychainItemName*/ accessGroup:nil];
+        [wrapper setObject:@"OAuth" forKey:(__bridge id)kSecAttrAccount];
+        [wrapper setObject:self.keychainItemName forKey:(__bridge id)kSecAttrService];
         self.accessTokenItem = wrapper;
         
         //fetch access token and expiration date from keychain and assign to facebook object
@@ -183,8 +182,7 @@ NSInteger usersCount = 0;
 {
     self = [self init];
     if (self) {
-        //self.facebook = [[Facebook alloc] initWithAppId:[[FacebookService sharedService] apiKey] andDelegate:self];
-        
+
         //set the local user dictionary based on params that have been sent in
         self.facebook.accessToken = [dictionary objectForKey:@"access_token"];
         NSDecimalNumber *expiration = [dictionary objectForKey:@"access_token_expiration"];
@@ -210,6 +208,7 @@ NSInteger usersCount = 0;
 
 - (BOOL)isAuthenticated 
 {
+    /*
     NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray* facebookCookies = [cookies cookiesForURL:[NSURL URLWithString:@"http://login.facebook.com"]];
     
@@ -219,6 +218,9 @@ NSInteger usersCount = 0;
     }
 
     if ((NO == [self.facebook isSessionValid]) && !hasCookies)
+        return NO;
+    */
+    if (NO == [self.facebook isSessionValid])
         return NO;
     return YES;
 }
