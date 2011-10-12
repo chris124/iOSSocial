@@ -22,22 +22,26 @@ Prerequisites: XCode 4.2 with iOS 5 and ARC support
 
 iOSSocial is intended to be used as drop-in code for your project. To use it in your project, do the following:
 
-- Fork this repo and add your fork as a submodule to your git repository. Perform the following commands from a terminal in the base directory of your repository:
+Fork this repo and add your fork as a submodule to your git repository. Perform the following commands from a terminal in the base directory of your repository:
 - 'git submodule add git@github.com:[your username]/iOSSocial.git iOSSocial'
 - 'git submodule update --init'
-- Drag the iOSSocial source files into your project.
--- add submodule for iOSSocial and drag iOSSocial folder to project
--- make group facebook-ios-sdk and drag src code to group
--- make asi-http-request group and drag src to group (main files + oath + reachability)
--- make gtm-oauth group and drag src to group
--- make gtm-http-fetcher group and drag src to group
--- make gtm-oauth2 group and drag src to group
--- drag prp folder to project
-- Link your application against Security.framework, SystemConfiguration.framework, CFNetwork.framework, MobileCoreServices.framework, libz.1.2.5.dylib
-- Add '-ObjC' linker flag
-- Add '-fno-objc-arc' compile flag. The compiler will spit out ARC errors for some files from third party libraries so you have to turn off ARC for these files.
--- In Xcode, select your project and go to Build Phases > Compile Sources
--- You will have to add it individually for each file. Hopefully Apple will eventually make it possible to add the flag to multiple files at once. 
+
+Drag the iOSSocial source files into your project.
+- add submodule for iOSSocial and drag iOSSocial folder to project
+- make group facebook-ios-sdk and drag src code to group
+- make asi-http-request group and drag src to group (main files + oath + reachability)
+- make gtm-oauth group and drag src to group
+- make gtm-http-fetcher group and drag src to group
+- make gtm-oauth2 group and drag src to group
+- drag prp folder to project
+
+Link your application against Security.framework, SystemConfiguration.framework, CFNetwork.framework, MobileCoreServices.framework, libz.1.2.5.dylib
+
+Add '-ObjC' linker flag
+
+Add '-fno-objc-arc' compile flag. The compiler will spit out ARC errors for some files from third party libraries so you have to turn off ARC for these files.
+- In Xcode, select your project and go to Build Phases > Compile Sources
+- You will have to add it individually for each file. Hopefully Apple will eventually make it possible to add the flag to multiple files at once. 
 
 Special Considerations:
 
