@@ -65,25 +65,42 @@ static LocalInstagramUser *localInstagramUser = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (id)init
+- (void)commonInit:(NSString*)theUuid
 {
-    self = [super init];
-    if (self) {
-        
+    if (theUuid) {
+        self.uuidString = theUuid;
+    } else {
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
         self.uuidString = (__bridge NSString *)uuidStr;
         CFRelease(uuidStr);
-        CFRelease(uuid); 
+        CFRelease(uuid);
+    }
+     
+    
+    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Instagram sharedService] serviceKeychainItemName], self.uuidString];
+    self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+    
+    // Initialization code here.
+    NSDictionary *localUserDictionary = [self ioss_instagramUserDictionary];
+    if (localUserDictionary) {
+        self.userDictionary = localUserDictionary;
+    }
+}
 
-        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Instagram sharedService] serviceKeychainItemName], self.uuidString];
-        self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
-        
-        // Initialization code here.
-        NSDictionary *localUserDictionary = [self ioss_instagramUserDictionary];
-        if (localUserDictionary) {
-            self.userDictionary = localUserDictionary;
-        }
+- (void)reset
+{
+    self.auth = nil;
+    self.uuidString = nil;
+    self.keychainItemName = nil;
+    self.userDictionary = nil;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self commonInit:nil];
     }
     
     return self;
@@ -107,16 +124,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 {
     self = [super init];
     if (self) {
-        self.uuidString = uuid;
-        
-        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Instagram sharedService] serviceKeychainItemName], self.uuidString];
-        self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
-        
-        // Initialization code here.
-        NSDictionary *localUserDictionary = [self ioss_instagramUserDictionary];
-        if (localUserDictionary) {
-            self.userDictionary = localUserDictionary;
-        }
+        [self commonInit:uuid];
     }
     
     return self;
@@ -236,7 +244,7 @@ static LocalInstagramUser *localInstagramUser = nil;
     if (NO == [self isAuthenticated]) {
 
         if (nil == self.auth) {
-            self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+            [self commonInit:nil];
         }
         
         [[Instagram sharedService] authorizeFromViewController:vc 
@@ -356,7 +364,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 {
     [[Instagram sharedService] logout:self.auth forKeychainItemName:self.keychainItemName];
     
-    self.auth = nil;
+    [self reset];
 }
 
 - (NSString*)userId
