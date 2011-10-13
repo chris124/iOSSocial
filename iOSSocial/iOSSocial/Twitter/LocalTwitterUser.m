@@ -57,24 +57,42 @@ static LocalTwitterUser *localTwitterUser = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (id)init
+- (void)commonInit:(NSString*)theUuid
 {
-    self = [super init];
-    if (self) {
+    if (theUuid) {
+        self.uuidString = theUuid;
+    } else {
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
         self.uuidString = (__bridge NSString *)uuidStr;
         CFRelease(uuidStr);
-        CFRelease(uuid); 
-        
-        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Twitter sharedService] serviceKeychainItemName], self.uuidString];
-        self.auth = [[Twitter sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
-        
-        // Initialization code here.
-        NSDictionary *localUserDictionary = [self ioss_twitterUserDictionary];
-        if (localUserDictionary) {
-            self.userDictionary = localUserDictionary;
-        }
+        CFRelease(uuid);
+    }
+    
+    
+    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Twitter sharedService] serviceKeychainItemName], self.uuidString];
+    self.auth = [[Twitter sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+    
+    // Initialization code here.
+    NSDictionary *localUserDictionary = [self ioss_twitterUserDictionary];
+    if (localUserDictionary) {
+        self.userDictionary = localUserDictionary;
+    }
+}
+
+- (void)reset
+{
+    self.auth = nil;
+    self.uuidString = nil;
+    self.keychainItemName = nil;
+    self.userDictionary = nil;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self commonInit:nil];
     }
     
     return self;
@@ -99,16 +117,7 @@ static LocalTwitterUser *localTwitterUser = nil;
 {
     self = [super init];
     if (self) {
-        self.uuidString = uuid;
-        
-        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Twitter sharedService] serviceKeychainItemName], self.uuidString];
-        self.auth = [[Twitter sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
-        
-        // Initialization code here.
-        NSDictionary *localUserDictionary = [self ioss_twitterUserDictionary];
-        if (localUserDictionary) {
-            self.userDictionary = localUserDictionary;
-        }
+        [self commonInit:uuid];
     }
     
     return self;
@@ -297,6 +306,10 @@ static LocalTwitterUser *localTwitterUser = nil;
     
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
+        
+        if (nil == self.auth) {
+            [self commonInit:nil];
+        }
 
         [[Twitter sharedService] authorizeFromViewController:vc 
                                                      forAuth:self.auth 
@@ -356,7 +369,7 @@ static LocalTwitterUser *localTwitterUser = nil;
 {
     [[Twitter sharedService] logout:self.auth forKeychainItemName:self.keychainItemName];
     
-    self.auth = nil;
+    [self reset];
 }
 
 - (NSString*)userId

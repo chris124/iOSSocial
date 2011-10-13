@@ -65,26 +65,59 @@ static LocalTumblrUser *localTumblrUser = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (id)init
+- (void)commonInit:(NSString*)theUuid
 {
-    self = [super init];
-    if (self) {
+    if (theUuid) {
+        self.uuidString = theUuid;
+    } else {
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
         self.uuidString = (__bridge NSString *)uuidStr;
         CFRelease(uuidStr);
-        CFRelease(uuid); 
-        
-        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Tumblr sharedService] serviceKeychainItemName], self.uuidString];
-        self.auth = [[Tumblr sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
-        
-        // Initialization code here.
-        NSDictionary *localUserDictionary = [self ioss_TumblrUserDictionary];
-        if (localUserDictionary) {
-            self.userDictionary = localUserDictionary;
-        }
+        CFRelease(uuid);
     }
     
+    
+    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Tumblr sharedService] serviceKeychainItemName], self.uuidString];
+    self.auth = [[Tumblr sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+    
+    // Initialization code here.
+    NSDictionary *localUserDictionary = [self ioss_TumblrUserDictionary];
+    if (localUserDictionary) {
+        self.userDictionary = localUserDictionary;
+    }
+}
+
+- (void)reset
+{
+    self.auth = nil;
+    self.uuidString = nil;
+    self.keychainItemName = nil;
+    self.userDictionary = nil;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self commonInit:nil];
+    }
+    
+    return self;
+}
+
+- (id)initWithDictionary:(NSDictionary*)dictionary
+{
+    self = [self init];
+    if (self) {
+        //set the local user dictionary based on params that have been sent in
+        self.auth.accessToken = [dictionary objectForKey:@"access_token"];
+        self.auth.tokenSecret = [dictionary objectForKey:@"access_token_secret"];
+        NSMutableDictionary *localUserDictionary = [NSMutableDictionary dictionary];
+        [localUserDictionary setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
+        [localUserDictionary setObject:[dictionary objectForKey:@"username"] forKey:@"username"];
+        self.userDictionary = localUserDictionary;
+    }
     return self;
 }
 
@@ -92,16 +125,7 @@ static LocalTumblrUser *localTumblrUser = nil;
 {
     self = [super init];
     if (self) {
-        self.uuidString = uuid;
-        
-        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Tumblr sharedService] serviceKeychainItemName], self.uuidString];
-        self.auth = [[Tumblr sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
-        
-        // Initialization code here.
-        NSDictionary *localUserDictionary = [self ioss_TumblrUserDictionary];
-        if (localUserDictionary) {
-            self.userDictionary = localUserDictionary;
-        }
+        [self commonInit:uuid];
     }
     
     return self;
@@ -172,6 +196,10 @@ static LocalTumblrUser *localTumblrUser = nil;
     
     //cwnote: also see if permissions have changed!!!
     if (NO == [self isAuthenticated]) {
+        
+        if (nil == self.auth) {
+            [self commonInit:nil];
+        }
 
         [[Tumblr sharedService] authorizeFromViewController:vc 
                                                      forAuth:self.auth 
@@ -231,7 +259,7 @@ static LocalTumblrUser *localTumblrUser = nil;
 {
     [[Tumblr sharedService] logout:self.auth forKeychainItemName:self.keychainItemName];
     
-    self.auth = nil;
+    [self reset];
 }
 
 - (NSString*)userId
