@@ -1,9 +1,9 @@
 [submodule "gtm-oauth"]
 	path = gtm-oauth
-	url = https://github.com/chris124/gtm-oauth
+	url = git@github.com:chris124/gtm-oauth.git
 [submodule "gtm-oauth2"]
 	path = gtm-oauth2
-	url = https://github.com/chris124/gtm-oauth2
+	url = git@github.com:chris124/gtm-oauth2.git
 [submodule "gtm-http-fetcher"]
 	path = gtm-http-fetcher
 	url = git@github.com:chris124/gtm-http-fetcher.git
