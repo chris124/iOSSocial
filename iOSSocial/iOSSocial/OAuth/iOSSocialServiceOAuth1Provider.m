@@ -209,7 +209,7 @@
     return newAuth;
 }
 
-- (GTMOAuthAuthentication*)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName
+- (id)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName
 {
     // Listen for network change notifications
     /*

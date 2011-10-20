@@ -22,7 +22,7 @@ static LocalFlickrUser *localFlickrUser = nil;
 @property(nonatomic, copy)      FlickrAuthenticationHandler authenticationHandler;
 @property(nonatomic, retain)    GTMOAuthAuthenticationWithAdditions *auth;
 @property(nonatomic, retain)    NSString *keychainItemName;
-@property(nonatomic, retain)    NSString *uuidString;
+@property(nonatomic, readwrite, retain)    NSString *identifier;
 @property(nonatomic, retain)    NSMutableString *currentElementData;
 @property(nonatomic, copy)      PostPhotoDataHandler postPhotoDataHandler;
 @property(nonatomic, copy)      PhotoInfoDataHandler photoInfoDataHandler;
@@ -39,7 +39,7 @@ static LocalFlickrUser *localFlickrUser = nil;
 @synthesize servicename;
 @synthesize auth;
 @synthesize keychainItemName;
-@synthesize uuidString;
+@synthesize identifier;
 @synthesize currentElementData;
 @synthesize postPhotoDataHandler;
 @synthesize photoInfoDataHandler;
@@ -57,29 +57,29 @@ static LocalFlickrUser *localFlickrUser = nil;
 
 - (NSDictionary *)ioss_FlickrUserDictionary 
 { 
-    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFlickrUserDictionary, self.uuidString]];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFlickrUserDictionary, self.identifier]];
 }
 
 - (void)ioss_setFlickrUserDictionary:(NSDictionary *)theUserDictionary 
 { 
-    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFlickrUserDictionary, self.uuidString]];
+    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFlickrUserDictionary, self.identifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)commonInit:(NSString*)theUuid
+- (void)commonInit:(NSString*)theIdentifier
 {
-    if (theUuid) {
-        self.uuidString = theUuid;
+    if (theIdentifier) {
+        self.identifier = theIdentifier;
     } else {
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
-        self.uuidString = (__bridge NSString *)uuidStr;
+        self.identifier = (__bridge NSString *)uuidStr;
         CFRelease(uuidStr);
         CFRelease(uuid);
     }
     
     
-    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Flickr sharedService] serviceKeychainItemName], self.uuidString];
+    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Flickr sharedService] serviceKeychainItemName], self.identifier];
     self.auth = [[Flickr sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
     
     // Initialization code here.
@@ -92,7 +92,7 @@ static LocalFlickrUser *localFlickrUser = nil;
 - (void)reset
 {
     self.auth = nil;
-    self.uuidString = nil;
+    self.identifier = nil;
     self.keychainItemName = nil;
     self.userDictionary = nil;
 }
@@ -122,11 +122,11 @@ static LocalFlickrUser *localFlickrUser = nil;
     return self;
 }
 
-- (id)initWithUUID:(NSString*)uuid
+- (id)initWithIdentifier:(NSString*)theIdentifier
 {
     self = [super init];
     if (self) {
-        [self commonInit:uuid];
+        [self commonInit:theIdentifier];
     }
     
     return self;

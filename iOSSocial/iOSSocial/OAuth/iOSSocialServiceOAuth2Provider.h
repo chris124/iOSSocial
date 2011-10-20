@@ -19,7 +19,7 @@
 // See iOSSocialServiceOAuth2ProviderConstants.h for the Keys for this dictionary.
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 
-- (GTMOAuth2Authentication*)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
+- (id)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
 
 - (void)assignOAuthParams:(NSDictionary*)params;
 

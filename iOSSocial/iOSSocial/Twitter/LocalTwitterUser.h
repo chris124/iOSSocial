@@ -12,7 +12,6 @@
 #import "iOSSocialServiceOAuth1ProviderConstants.h"
 #import "iOSSocialLocalUser.h"
 
-typedef void(^TwitterAuthenticationHandler)(NSError *error);
 
 @interface LocalTwitterUser : TwitterUser <iOSSocialLocalUserProtocol> 
 
@@ -20,6 +19,8 @@ typedef void(^TwitterAuthenticationHandler)(NSError *error);
 // The user is only available for offline use until logged in.
 // A temporary use is created if no account is set up.
 + (LocalTwitterUser *)localTwitterUser;
+
++ (void)setLocalTwitterUser:(LocalTwitterUser *)theLocalTwitterUser;
 
 @property(nonatomic, readonly, getter=isAuthenticated)  BOOL authenticated; // Authentication state
 

@@ -25,7 +25,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 @property(nonatomic, copy)              InstagramAuthenticationHandler authenticationHandler;
 @property(nonatomic, retain)            GTMOAuth2Authentication *auth;
 @property(nonatomic, retain)            NSString *keychainItemName;
-@property(nonatomic, readwrite, retain) NSString *uuidString;
+@property(nonatomic, readwrite, retain) NSString *identifier;
 @property(nonatomic, copy)              FetchUserDataHandler fetchUserDataHandler;
 @property(nonatomic, copy)              FetchMediaHandler fetchMediaHandler;
 @property(nonatomic, copy)              FetchUsersHandler   fetchUsersHandler;
@@ -40,7 +40,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 @synthesize servicename;
 @synthesize auth;
 @synthesize keychainItemName;
-@synthesize uuidString;
+@synthesize identifier;
 @synthesize fetchUserDataHandler;
 @synthesize fetchMediaHandler;
 @synthesize fetchUsersHandler;
@@ -56,29 +56,29 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 - (NSDictionary *)ioss_instagramUserDictionary 
 { 
-    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyInstagramUserDictionary, self.uuidString]];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyInstagramUserDictionary, self.identifier]];
 }
 
 - (void)ioss_setInstagramUserDictionary:(NSDictionary *)theUserDictionary 
 { 
-    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyInstagramUserDictionary, self.uuidString]];
+    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyInstagramUserDictionary, self.identifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)commonInit:(NSString*)theUuid
+- (void)commonInit:(NSString*)theIdentifier
 {
-    if (theUuid) {
-        self.uuidString = theUuid;
+    if (theIdentifier) {
+        self.identifier = theIdentifier;
     } else {
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
-        self.uuidString = (__bridge NSString *)uuidStr;
+        self.identifier = (__bridge NSString *)uuidStr;
         CFRelease(uuidStr);
         CFRelease(uuid);
     }
      
     
-    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Instagram sharedService] serviceKeychainItemName], self.uuidString];
+    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Instagram sharedService] serviceKeychainItemName], self.identifier];
     self.auth = [[Instagram sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
     
     // Initialization code here.
@@ -91,7 +91,7 @@ static LocalInstagramUser *localInstagramUser = nil;
 - (void)reset
 {
     self.auth = nil;
-    self.uuidString = nil;
+    self.identifier = nil;
     self.keychainItemName = nil;
     self.userDictionary = nil;
 }
@@ -120,11 +120,11 @@ static LocalInstagramUser *localInstagramUser = nil;
     return self;
 }
 
-- (id)initWithUUID:(NSString*)uuid
+- (id)initWithIdentifier:(NSString*)theIdentifier
 {
     self = [super init];
     if (self) {
-        [self commonInit:uuid];
+        [self commonInit:theIdentifier];
     }
     
     return self;

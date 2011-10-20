@@ -116,9 +116,9 @@ static FacebookService *facebookService = nil;
     return theUser;
 }
 
-- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
+- (id<iOSSocialLocalUserProtocol>)localUserWithIdentifier:(NSString*)identifier
 {
-    LocalFacebookUser *theUser = [[LocalFacebookUser alloc] initWithUUID:uuid];
+    LocalFacebookUser *theUser = [[LocalFacebookUser alloc] initWithIdentifier:identifier];
     [LocalFacebookUser setLocalFacebookUser:theUser];
     return theUser;
 }
