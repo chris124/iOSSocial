@@ -12,6 +12,7 @@
 #import "iOSSLog.h"
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
+#import <Accounts/Accounts.h>
 
 NSString *const iOSSDefaultsKeyTwitterUserDictionary    = @"ioss_twitterUserDictionary";
 
@@ -95,6 +96,23 @@ static LocalTwitterUser *localTwitterUser = nil;
 {
     self = [self init];
     if (self) {
+        
+        ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+        
+        ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+        NSArray *twitterAccounts = [accountStore accountsWithAccountType:accountType];
+        if (!twitterAccounts.count) {
+            
+        } else {
+            
+            for (ACAccount *account in twitterAccounts) {
+                if (NSOrderedSame == [account.username compare:[dictionary objectForKey:@"username"]]) {
+                    self.auth = account;
+                    self.identifier = account.identifier;
+                    break;
+                }
+            }
+        }
 
         NSMutableDictionary *localUserDictionary = [NSMutableDictionary dictionary];
         [localUserDictionary setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
