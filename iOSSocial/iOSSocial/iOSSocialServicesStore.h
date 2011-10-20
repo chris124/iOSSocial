@@ -80,4 +80,6 @@
 
 - (void)unregisterAccount:(id<iOSSocialLocalUserProtocol>)theAccount;
 
+- (void)unregisterAccounts;
+
 @end

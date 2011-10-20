@@ -201,6 +201,20 @@ static iOSSocialServicesStore *serviceStore = nil;
     }
 }
 
+- (void)unregisterAccounts
+{
+    for (id<iOSSocialLocalUserProtocol> account in self.accounts) {
+        [account logout];
+    }
+    
+    [self.accounts removeAllObjects];
+    
+    self.defaultAccount = nil;
+    
+    NSDictionary *servicesDictionary = [NSDictionary dictionaryWithObject:self.accounts forKey:@"accounts"];
+    [self setServicesStoreDictionary:servicesDictionary];
+}
+
 - (void)unregisterAccount:(id<iOSSocialLocalUserProtocol>)theAccount
 {
     if (nil != self.defaultAccount) {
