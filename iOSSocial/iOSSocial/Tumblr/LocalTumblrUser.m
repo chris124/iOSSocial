@@ -22,7 +22,7 @@ static LocalTumblrUser *localTumblrUser = nil;
 @property(nonatomic, copy)      TumblrAuthenticationHandler authenticationHandler;
 @property(nonatomic, retain)    GTMOAuthAuthenticationWithAdditions *auth;
 @property(nonatomic, retain)    NSString *keychainItemName;
-@property(nonatomic, retain)    NSString *uuidString;
+@property(nonatomic, readwrite, retain)    NSString *identifier;
 
 @end
 
@@ -34,7 +34,7 @@ static LocalTumblrUser *localTumblrUser = nil;
 @synthesize servicename;
 @synthesize auth;
 @synthesize keychainItemName;
-@synthesize uuidString;
+@synthesize identifier;
 
 + (LocalTumblrUser *)localTumblrUser
 {
@@ -56,29 +56,29 @@ static LocalTumblrUser *localTumblrUser = nil;
 
 - (NSDictionary *)ioss_TumblrUserDictionary 
 { 
-    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyTumblrUserDictionary, self.uuidString]];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyTumblrUserDictionary, self.identifier]];
 }
 
 - (void)ioss_setTumblrUserDictionary:(NSDictionary *)theUserDictionary 
 { 
-    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyTumblrUserDictionary, self.uuidString]];
+    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyTumblrUserDictionary, self.identifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)commonInit:(NSString*)theUuid
+- (void)commonInit:(NSString*)theIdentifier
 {
-    if (theUuid) {
-        self.uuidString = theUuid;
+    if (theIdentifier) {
+        self.identifier = theIdentifier;
     } else {
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
-        self.uuidString = (__bridge NSString *)uuidStr;
+        self.identifier = (__bridge NSString *)uuidStr;
         CFRelease(uuidStr);
         CFRelease(uuid);
     }
     
     
-    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Tumblr sharedService] serviceKeychainItemName], self.uuidString];
+    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Tumblr sharedService] serviceKeychainItemName], self.identifier];
     self.auth = [[Tumblr sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
     
     // Initialization code here.
@@ -91,7 +91,7 @@ static LocalTumblrUser *localTumblrUser = nil;
 - (void)reset
 {
     self.auth = nil;
-    self.uuidString = nil;
+    self.identifier = nil;
     self.keychainItemName = nil;
     self.userDictionary = nil;
 }
@@ -121,11 +121,11 @@ static LocalTumblrUser *localTumblrUser = nil;
     return self;
 }
 
-- (id)initWithUUID:(NSString*)uuid
+- (id)initWithIdentifier:(NSString*)theIdentifier
 {
     self = [super init];
     if (self) {
-        [self commonInit:uuid];
+        [self commonInit:theIdentifier];
     }
     
     return self;

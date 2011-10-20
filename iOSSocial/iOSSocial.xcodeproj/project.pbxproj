@@ -18,6 +18,11 @@
 		120A635F142292AC00EB4FD9 /* TumblrUser+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 120A6358142292AC00EB4FD9 /* TumblrUser+Private.h */; };
 		120A6360142292AC00EB4FD9 /* TumblrUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 120A6359142292AC00EB4FD9 /* TumblrUser.h */; };
 		120A6361142292AC00EB4FD9 /* TumblrUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 120A635A142292AC00EB4FD9 /* TumblrUser.m */; };
+		12256A63144F5BA40012C779 /* LocalTwitterUserLegacy.h in Headers */ = {isa = PBXBuildFile; fileRef = 12256A5F144F5BA30012C779 /* LocalTwitterUserLegacy.h */; };
+		12256A64144F5BA40012C779 /* LocalTwitterUserLegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12256A60144F5BA30012C779 /* LocalTwitterUserLegacy.m */; };
+		12256A65144F5BA40012C779 /* TwitterUserLegacy.h in Headers */ = {isa = PBXBuildFile; fileRef = 12256A61144F5BA30012C779 /* TwitterUserLegacy.h */; };
+		12256A66144F5BA40012C779 /* TwitterUserLegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12256A62144F5BA40012C779 /* TwitterUserLegacy.m */; };
+		12256A70144F5D230012C779 /* TwitterUserLegacy+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12256A6F144F5D230012C779 /* TwitterUserLegacy+Private.h */; };
 		1264A13013D08B900085E394 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A12F13D08B900085E394 /* Foundation.framework */; };
 		1264A13E13D08B900085E394 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A13D13D08B900085E394 /* SenTestingKit.framework */; };
 		1264A14013D08B900085E394 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264A13F13D08B900085E394 /* UIKit.framework */; };
@@ -176,6 +181,11 @@
 		120A6358142292AC00EB4FD9 /* TumblrUser+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TumblrUser+Private.h"; sourceTree = "<group>"; };
 		120A6359142292AC00EB4FD9 /* TumblrUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TumblrUser.h; sourceTree = "<group>"; };
 		120A635A142292AC00EB4FD9 /* TumblrUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TumblrUser.m; sourceTree = "<group>"; };
+		12256A5F144F5BA30012C779 /* LocalTwitterUserLegacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalTwitterUserLegacy.h; path = Twitter/LocalTwitterUserLegacy.h; sourceTree = "<group>"; };
+		12256A60144F5BA30012C779 /* LocalTwitterUserLegacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalTwitterUserLegacy.m; path = Twitter/LocalTwitterUserLegacy.m; sourceTree = "<group>"; };
+		12256A61144F5BA30012C779 /* TwitterUserLegacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterUserLegacy.h; path = Twitter/TwitterUserLegacy.h; sourceTree = "<group>"; };
+		12256A62144F5BA40012C779 /* TwitterUserLegacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterUserLegacy.m; path = Twitter/TwitterUserLegacy.m; sourceTree = "<group>"; };
+		12256A6F144F5D230012C779 /* TwitterUserLegacy+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TwitterUserLegacy+Private.h"; path = "Twitter/TwitterUserLegacy+Private.h"; sourceTree = "<group>"; };
 		1264A12C13D08B900085E394 /* libiOSSocial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiOSSocial.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1264A12F13D08B900085E394 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1264A13313D08B900085E394 /* iOSSocial-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSSocial-Prefix.pch"; sourceTree = "<group>"; };
@@ -522,6 +532,11 @@
 		126FE24F13D9C7C400D72D46 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				12256A6F144F5D230012C779 /* TwitterUserLegacy+Private.h */,
+				12256A5F144F5BA30012C779 /* LocalTwitterUserLegacy.h */,
+				12256A60144F5BA30012C779 /* LocalTwitterUserLegacy.m */,
+				12256A61144F5BA30012C779 /* TwitterUserLegacy.h */,
+				12256A62144F5BA40012C779 /* TwitterUserLegacy.m */,
 				12AB3B8B13DF843E00565332 /* LocalTwitterUser.h */,
 				12AB3B8C13DF843E00565332 /* LocalTwitterUser.m */,
 				12AB3B8E13DF843E00565332 /* Twitter.h */,
@@ -806,6 +821,9 @@
 				12E988171435196100E8B825 /* FacebookUser+Private.h in Headers */,
 				12012415143A06D500BF209C /* iOSSocialAccountTableViewCell.h in Headers */,
 				12012417143A06D500BF209C /* iOSSServiceTableViewCell.h in Headers */,
+				12256A63144F5BA40012C779 /* LocalTwitterUserLegacy.h in Headers */,
+				12256A65144F5BA40012C779 /* TwitterUserLegacy.h in Headers */,
+				12256A70144F5D230012C779 /* TwitterUserLegacy+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +985,8 @@
 				12E987D21434F5EC00E8B825 /* FacebookService.m in Sources */,
 				12012416143A06D500BF209C /* iOSSocialAccountTableViewCell.m in Sources */,
 				12012418143A06D500BF209C /* iOSSServiceTableViewCell.m in Sources */,
+				12256A64144F5BA40012C779 /* LocalTwitterUserLegacy.m in Sources */,
+				12256A66144F5BA40012C779 /* TwitterUserLegacy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

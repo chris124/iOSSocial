@@ -23,7 +23,7 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 @property(nonatomic, copy)      FoursquareAuthenticationHandler authenticationHandler;
 @property(nonatomic, retain)    GTMOAuth2Authentication *auth;
 @property(nonatomic, retain)    NSString *keychainItemName;
-@property(nonatomic, retain)    NSString *uuidString;
+@property(nonatomic, readwrite, retain)    NSString *identifier;
 
 @end
 
@@ -35,7 +35,7 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 @synthesize servicename;
 @synthesize auth;
 @synthesize keychainItemName;
-@synthesize uuidString;
+@synthesize identifier;
 
 + (LocalFoursquareUser *)localFoursquareUser
 {
@@ -48,29 +48,29 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 
 - (NSDictionary *)ioss_foursquareUserDictionary 
 { 
-    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFoursquareUserDictionary, self.uuidString]];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFoursquareUserDictionary, self.identifier]];
 }
 
 - (void)ioss_setFoursquareUserDictionary:(NSDictionary *)theUserDictionary 
 { 
-    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFoursquareUserDictionary, self.uuidString]];
+    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFoursquareUserDictionary, self.identifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)commonInit:(NSString*)theUuid
+- (void)commonInit:(NSString*)theIdentifier
 {
-    if (theUuid) {
-        self.uuidString = theUuid;
+    if (theIdentifier) {
+        self.identifier = theIdentifier;
     } else {
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
-        self.uuidString = (__bridge NSString *)uuidStr;
+        self.identifier = (__bridge NSString *)uuidStr;
         CFRelease(uuidStr);
         CFRelease(uuid);
     }
     
     
-    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Foursquare sharedService] serviceKeychainItemName], self.uuidString];
+    self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Foursquare sharedService] serviceKeychainItemName], self.identifier];
     self.auth = [[Foursquare sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
     
     // Initialization code here.
@@ -83,7 +83,7 @@ static LocalFoursquareUser *localFoursquareUser = nil;
 - (void)reset
 {
     self.auth = nil;
-    self.uuidString = nil;
+    self.identifier = nil;
     self.keychainItemName = nil;
     self.userDictionary = nil;
 }
@@ -132,11 +132,11 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     return self;
 }
 
-- (id)initWithUUID:(NSString*)uuid
+- (id)initWithIdentifier:(NSString*)theIdentifier
 {
     self = [super init];
     if (self) {
-        [self commonInit:uuid];
+        [self commonInit:theIdentifier];
     }
     
     return self;
