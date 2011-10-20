@@ -32,7 +32,7 @@
 
 - (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary;
 
-- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid;
+- (id<iOSSocialLocalUserProtocol>)localUserWithIdentifier:(NSString*)uuid;
 
 - (NSString*)apiKey;
 

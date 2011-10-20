@@ -81,9 +81,9 @@ static Foursquare *foursquareService = nil;
     return theUser;
 }
 
-- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
+- (id<iOSSocialLocalUserProtocol>)localUserWithIdentifier:(NSString*)identifier
 {
-    return [[LocalFoursquareUser alloc] initWithUUID:uuid];
+    return [[LocalFoursquareUser alloc] initWithIdentifier:identifier];
 }
 
 @end
