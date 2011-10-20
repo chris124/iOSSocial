@@ -1,22 +1,22 @@
 //
-//  TwitterUser.m
+//  TwitterUserLegacy.m
 //  iOSSocial
 //
 //  Created by Christopher White on 7/22/11.
 //  Copyright 2011 Mad Races, Inc. All rights reserved.
 //
 
-#import "TwitterUser.h"
-#import "TwitterUser+Private.h"
+#import "TwitterUserLegacy.h"
+#import "TwitterUserLegacy+Private.h"
 #import "iOSSRequest.h"
 
-@interface TwitterUser ()
+@interface TwitterUserLegacy ()
 
 @property(nonatomic, copy)      LoadPhotoHandler loadPhotoHandler;
 
 @end
 
-@implementation TwitterUser
+@implementation TwitterUserLegacy
 
 @synthesize userDictionary;
 @synthesize userID;
@@ -80,7 +80,7 @@
     NSString *urlString = self.profilePictureURL;
     NSURL *url = [NSURL URLWithString:urlString];
     
-    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url 
+    iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
                                                  parameters:nil 
                                               requestMethod:iOSSRequestMethodGET];
     

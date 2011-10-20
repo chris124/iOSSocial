@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12256A17144F3DF60012C779 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12256A16144F3DF60012C779 /* Accounts.framework */; };
+		12256A6B144F5C2E0012C779 /* LocalTwitterUserLegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12256A68144F5C2E0012C779 /* LocalTwitterUserLegacy.m */; };
+		12256A6C144F5C2E0012C779 /* TwitterUserLegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12256A6A144F5C2E0012C779 /* TwitterUserLegacy.m */; };
+		12256A72144F71D10012C779 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12256A71144F71D10012C779 /* Twitter.framework */; };
 		1249FDF01445E788008CEC8D /* facebook_trans.png in Resources */ = {isa = PBXBuildFile; fileRef = 1249FD961445E788008CEC8D /* facebook_trans.png */; };
 		1249FDF11445E788008CEC8D /* facebook_trans@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1249FD971445E788008CEC8D /* facebook_trans@2x.png */; };
 		1249FDF21445E788008CEC8D /* FacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1249FD991445E788008CEC8D /* FacebookService.m */; };
@@ -113,6 +117,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12256A16144F3DF60012C779 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		12256A67144F5C2E0012C779 /* LocalTwitterUserLegacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalTwitterUserLegacy.h; sourceTree = "<group>"; };
+		12256A68144F5C2E0012C779 /* LocalTwitterUserLegacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalTwitterUserLegacy.m; sourceTree = "<group>"; };
+		12256A69144F5C2E0012C779 /* TwitterUserLegacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUserLegacy.h; sourceTree = "<group>"; };
+		12256A6A144F5C2E0012C779 /* TwitterUserLegacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterUserLegacy.m; sourceTree = "<group>"; };
+		12256A71144F71D10012C779 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		1249FD961445E788008CEC8D /* facebook_trans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_trans.png; sourceTree = "<group>"; };
 		1249FD971445E788008CEC8D /* facebook_trans@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_trans@2x.png"; sourceTree = "<group>"; };
 		1249FD981445E788008CEC8D /* FacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookService.h; sourceTree = "<group>"; };
@@ -297,6 +307,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12256A72144F71D10012C779 /* Twitter.framework in Frameworks */,
+				12256A17144F3DF60012C779 /* Accounts.framework in Frameworks */,
 				12B4F0B01409EEA7002E98A6 /* QuartzCore.framework in Frameworks */,
 				12B4F0A61409EC52002E98A6 /* MobileCoreServices.framework in Frameworks */,
 				12B4F0691409EB6B002E98A6 /* CFNetwork.framework in Frameworks */,
@@ -450,6 +462,10 @@
 		1249FDDD1445E788008CEC8D /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				12256A67144F5C2E0012C779 /* LocalTwitterUserLegacy.h */,
+				12256A68144F5C2E0012C779 /* LocalTwitterUserLegacy.m */,
+				12256A69144F5C2E0012C779 /* TwitterUserLegacy.h */,
+				12256A6A144F5C2E0012C779 /* TwitterUserLegacy.m */,
 				1249FDDE1445E788008CEC8D /* LocalTwitterUser.h */,
 				1249FDDF1445E788008CEC8D /* LocalTwitterUser.m */,
 				1249FDE01445E788008CEC8D /* twitter-logo.png */,
@@ -692,6 +708,8 @@
 		12AB3A8013DF6D4F00565332 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12256A71144F71D10012C779 /* Twitter.framework */,
+				12256A16144F3DF60012C779 /* Accounts.framework */,
 				1272C51D1423D154003B5FF5 /* AssetsLibrary.framework */,
 				12AB3B0713DF72A600565332 /* SystemConfiguration.framework */,
 				12AB3B0513DF726E00565332 /* Security.framework */,
@@ -936,6 +954,8 @@
 				1249FEA51445E9BA008CEC8D /* PRPSmartTableViewCell.m in Sources */,
 				1249FEAA1445EA9E008CEC8D /* Reachability.m in Sources */,
 				1249FEB91445F90A008CEC8D /* iOSSServicesViewController.m in Sources */,
+				12256A6B144F5C2E0012C779 /* LocalTwitterUserLegacy.m in Sources */,
+				12256A6C144F5C2E0012C779 /* TwitterUserLegacy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

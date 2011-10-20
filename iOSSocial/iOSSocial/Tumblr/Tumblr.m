@@ -81,9 +81,9 @@ static Tumblr *TumblrService = nil;
     return theUser;
 }
 
-- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
+- (id<iOSSocialLocalUserProtocol>)localUserWithIdentifier:(NSString*)identifier
 {
-    return [[LocalTumblrUser alloc] initWithUUID:uuid];
+    return [[LocalTumblrUser alloc] initWithIdentifier:identifier];
 }
 
 @end

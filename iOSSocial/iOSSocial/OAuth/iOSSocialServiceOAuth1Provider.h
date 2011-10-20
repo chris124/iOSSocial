@@ -17,12 +17,12 @@
 
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 
-- (GTMOAuthAuthenticationWithAdditions*)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
+- (id)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName;
 
 - (void)assignOAuthParams:(NSDictionary*)params;
 
 - (void)authorizeFromViewController:(UIViewController*)vc 
-                            forAuth:(GTMOAuthAuthenticationWithAdditions*)theAuth 
+                            forAuth:(id)theAuth 
                 andKeychainItemName:(NSString*)theKeychainItemName 
                     andCookieDomain:(NSString*)cookieDomain
               withCompletionHandler:(AuthorizationHandler)completionHandler;

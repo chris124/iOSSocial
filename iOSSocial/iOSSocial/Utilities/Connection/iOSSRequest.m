@@ -82,9 +82,6 @@
 
             self.request.completionBlock = ^(void) {
                 if (theRequest.requestHandler) {
-                    //NSError *error = nil;
-                    //NSDictionary *response = [NSDictionary dictionaryWithJSONString:[self.request responseString] error:&error];
-                    // NSString *response = [theRequest.request responseString];
                     theRequest.requestHandler([theRequest.request responseData], nil, theRequest.request.error);
                 }
             };
@@ -132,9 +129,6 @@
             
             self.request.completionBlock = ^(void) {
                 if (theRequest.requestHandler) {
-                    //NSError *error = nil;
-                    //NSDictionary *response = [NSDictionary dictionaryWithJSONString:[self.request responseString] error:&error];
-                    //NSString *response = [theRequest.request responseString];
                     theRequest.requestHandler([theRequest.request responseData], nil, theRequest.request.error);
                 }
             };
