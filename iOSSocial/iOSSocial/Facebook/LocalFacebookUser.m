@@ -41,7 +41,7 @@ typedef enum _FBRequestType {
 @property(nonatomic, copy)              LoadPhotoAlbumsHandler loadPhotoAlbumsHandler;
 @property(nonatomic, retain)            KeychainItemWrapper *accessTokenItem;
 @property(nonatomic, retain)            NSString *keychainItemName;
-@property(nonatomic, readwrite, retain) NSString *uuidString;
+@property(nonatomic, readwrite, retain) NSString *identifier;
 
 @end
 
@@ -64,7 +64,7 @@ NSInteger usersCount = 0;
 @synthesize loadPhotoAlbumsHandler;
 @synthesize servicename;
 @synthesize username;
-@synthesize uuidString;
+@synthesize identifier;
 @synthesize keychainItemName;
 
 + (LocalFacebookUser *)localFacebookUser
@@ -83,12 +83,12 @@ NSInteger usersCount = 0;
 
 - (NSDictionary *)ioss_facebookUserDictionary 
 { 
-    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFacebookUserDictionary, self.uuidString]];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFacebookUserDictionary, self.identifier]];
 }
 
 - (void)ioss_setFacebookUserDictionary:(NSDictionary *)theUserDictionary 
 { 
-    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFacebookUserDictionary, self.uuidString]];
+    [[NSUserDefaults standardUserDefaults] setObject:theUserDictionary forKey:[NSString stringWithFormat:@"%@-%@", iOSSDefaultsKeyFacebookUserDictionary, self.identifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -99,11 +99,11 @@ NSInteger usersCount = 0;
 
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         CFStringRef uuidStr = CFUUIDCreateString(kCFAllocatorDefault, uuid);
-        self.uuidString = (__bridge NSString *)uuidStr;
+        self.identifier = (__bridge NSString *)uuidStr;
         CFRelease(uuidStr);
         CFRelease(uuid); 
 
-        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[FacebookService sharedService] serviceKeychainItemName], self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[FacebookService sharedService] serviceKeychainItemName], self.identifier];
         
         // Initialization code here.
         KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"OAuth" accessGroup:nil];
@@ -137,14 +137,14 @@ NSInteger usersCount = 0;
     return self;
 }
 
-- (id)initWithUUID:(NSString*)uuid
+- (id)initWithIdentifier:(NSString*)theIdentifier
 {
     self = [super init];
     if (self) {
 
-        self.uuidString = uuid;
+        self.identifier = theIdentifier;
 
-        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[FacebookService sharedService] serviceKeychainItemName], self.uuidString];
+        self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[FacebookService sharedService] serviceKeychainItemName], self.identifier];
         
         // Initialization code here.
         KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"OAuth" accessGroup:nil];
@@ -337,8 +337,8 @@ NSInteger usersCount = 0;
     
     usersCount = [identifiers count];
     
-    for (NSNumber *identifier in identifiers) {
-        NSString *path = [identifier stringValue];
+    for (NSNumber *anIdentifier in identifiers) {
+        NSString *path = [anIdentifier stringValue];
         FBRequest *request = [self.facebook requestWithGraphPath:path andDelegate:self];
         [self recordRequest:request withType:FBUsersRequestType];
     }

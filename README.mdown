@@ -26,6 +26,8 @@ Fork this repo and add your fork as a submodule to your git repository. Perform 
 
 - 'git submodule add git@github.com:[your username]/iOSSocial.git iOSSocial'
 - 'git submodule update --init'
+- 'cd iOSSocial'
+- 'git submodule update --init'
 
 Drag the iOSSocial source files into your project.
 
@@ -37,7 +39,7 @@ Drag the iOSSocial source files into your project.
 - make gtm-oauth2 group and drag src to group
 - drag prp folder to project
 
-Link your application against Security.framework, SystemConfiguration.framework, CFNetwork.framework, MobileCoreServices.framework, libz.1.2.5.dylib
+Link your application against Security.framework, SystemConfiguration.framework, CFNetwork.framework, MobileCoreServices.framework, Twitter, Accounts, libz.1.2.5.dylib
 
 Add '-ObjC' linker flag
 
@@ -189,47 +191,46 @@ iOSServicesDataSource is the underlying data source (UITableViewDataSource) that
 
 iOSSServicesViewController is powered by iOSServicesDataSource. See iOSSServicesViewController's initWithServicesFilter: initializer to see how to filter which services are provided by the data source.
 
-If you want to use your own UI, you can take a look at how iOSSServicesViewController uses iOSServicesDataSource. Here is iOSSServicesViewController's tableView:didSelectRowAtIndexPath:
+>
+NSArray *filter = [NSArray arrayWithObjects:
+                           [[iOSSocialServicesStore sharedServiceStore] serviceWithType:@"Facebook"],
+                           [[iOSSocialServicesStore sharedServiceStore] serviceWithType:@"Twitter"], 
+                           [[iOSSocialServicesStore sharedServiceStore] serviceWithType:@"Foursquare"], 
+                           [[iOSSocialServicesStore sharedServiceStore] serviceWithType:@"Tumblr"], nil];
+>
+iOSServicesDataSource *dataSource = [[iOSServicesDataSource alloc] initWithServicesFilter:filter];
+
+If you want to use your own UITableViewController, here is example tableView:didSelectRowAtIndexPath: code:
 
 <pre><code>
     switch (indexPath.section) {
             case 0:
         {
-			//get back a local user object here. if authenticated, logout and vice versa.
-            id<iOSSocialLocalUserProtocol> localUser = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
+			//get back a local user object here.
+            id<iOSSocialLocalUserProtocol> localUser = [[iOSSocialServicesStore sharedServiceStore].accounts objectAtIndex:[indexPath row]];
 
-            if ([localUser isAuthenticated]) {
-                [localUser logout];
-                [self refreshUI];
-            } else {
-                [localUser authenticateFromViewController:self 
-                                    withCompletionHandler:^(NSError *error){
-                                        if (!error) {
-                                            [self refreshUI];
-                                        }
-                                    }];
-            }
+			[[iOSSocialServicesStore sharedServiceStore] unregisterAccount:localUser];
+		    [localUser logout];
+			[self.tableView reloadData];
         }
             break;
         case 1:
         {
             //get back a service object here.
             
-            id<iOSSocialServiceProtocol> service = [self.dataSource tableView:tableView objectForRowAtIndexPath:indexPath];
-            
-            id<iOSSocialLocalUserProtocol> localUser = [service localUser];
-            
-            [localUser authenticateFromViewController:self 
-                                withCompletionHandler:^(NSError *error){
-                                    if (!error) {
-                                        [self refreshUI];
-                                    }
-                                }];
-        }
-            break;
-        case 2:
-        {
-            //the done button was pressed
+            id<iOSSocialServiceProtocol> service = [[iOSSocialServicesStore sharedServiceStore].services objectAtIndex:[indexPath row]];
+
+			id<iOSSocialLocalUserProtocol> localUser = [service localUser];
+
+			[localUser authenticateFromViewController:self withCompletionHandler:^(NSError *error) {
+                if (!error) {
+                    NSLog(@"authorized");
+                    [[iOSSocialServicesStore sharedServiceStore] registerAccount:localUser];
+                    [self.tableView reloadData];
+                } else {
+                    NSLog(@"authorization failed");
+                }
+            }];
         }
             break;
         default:

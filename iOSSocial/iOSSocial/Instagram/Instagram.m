@@ -81,9 +81,9 @@ static Instagram *instagramService = nil;
     return theUser;
 }
 
-- (id<iOSSocialLocalUserProtocol>)localUserWithUUID:(NSString*)uuid
+- (id<iOSSocialLocalUserProtocol>)localUserWithIdentifier:(NSString*)identifier
 {
-    return [[LocalInstagramUser alloc] initWithUUID:uuid];
+    return [[LocalInstagramUser alloc] initWithIdentifier:identifier];
 }
 
 @end
