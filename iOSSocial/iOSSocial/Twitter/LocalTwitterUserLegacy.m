@@ -145,8 +145,11 @@ static LocalTwitterUserLegacy *localTwitterUser = nil;
             self.alias = theUsername;
             [newUserDictionary setObject:self.alias forKey:@"username"];
         } else {
-            self.alias = [theUserDictionary objectForKey:@"screen_name"];
-            [newUserDictionary setObject:self.alias forKey:@"screen_name"];
+            theUsername = [theUserDictionary objectForKey:@"screen_name"];
+            if (theUsername) {
+                self.alias = theUsername;
+                [newUserDictionary setObject:self.alias forKey:@"screen_name"];
+            }
         }
         
         [super setUserDictionary:newUserDictionary];
@@ -312,10 +315,23 @@ static LocalTwitterUserLegacy *localTwitterUser = nil;
             }
         } else {
             NSDictionary *dictionary = [Twitter JSONFromData:responseData];
-            self.userDictionary = dictionary;
+            NSString *errorString = [dictionary objectForKey:@"error"];
+            if (!errorString) {
+                self.userDictionary = dictionary;
+            } else {
+                //most likely hit a rate limit. ugh!
+                /*
+                 {
+                 error = "Rate limit exceeded. Clients may not make more than 150 requests per hour.";
+                 request = "/1/users/show.json?screen_name=christhepiss";
+                 }
+                 */
+                
+                error = [NSError errorWithDomain:@"SW" code:1 userInfo:nil];
+            }
             
             if (self.fetchUserDataHandler) {
-                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler(error);
                 self.fetchUserDataHandler = nil;
             }
         }
