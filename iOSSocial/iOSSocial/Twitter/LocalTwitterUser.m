@@ -100,19 +100,40 @@ static LocalTwitterUser *localTwitterUser = nil;
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
         
         ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-        NSArray *twitterAccounts = [accountStore accountsWithAccountType:accountType];
-        if (!twitterAccounts.count) {
-            
-        } else {
-            
-            for (ACAccount *account in twitterAccounts) {
-                if (NSOrderedSame == [account.username compare:[dictionary objectForKey:@"username"]]) {
-                    self.auth = account;
-                    self.identifier = account.identifier;
-                    break;
-                }
-            }
-        }
+        
+        [accountStore requestAccessToAccountsWithType:accountType 
+                                     withCompletionHandler:^(BOOL granted, NSError *error) {
+                                         if (error) {
+                                             
+                                         } else {
+                                             if (granted) {
+                                             } else {
+                                                 ACAccount *account = nil;
+                                                 
+                                                 NSArray *twitterAccounts = [accountStore accountsWithAccountType:accountType];
+                                                 if (!twitterAccounts.count) {
+                                                 } else {
+                                                     
+                                                     for (ACAccount *anAccount in twitterAccounts) {
+                                                         if (NSOrderedSame == [anAccount.username compare:self.username]) {
+                                                             //self.auth = account;
+                                                             //self.identifier = account.identifier;
+                                                             account = anAccount;
+                                                             break;
+                                                         }
+                                                     }
+                                                 }
+                                                 
+                                                 if (account) {
+                                                     self.auth = account;
+                                                     self.identifier = account.identifier;
+                                                 } else {
+                                                     self.auth = nil;
+                                                     self.identifier = nil;
+                                                 }
+                                             }
+                                         }
+                                     }];
 
         NSMutableDictionary *localUserDictionary = [NSMutableDictionary dictionary];
         [localUserDictionary setObject:[dictionary objectForKey:@"userId"] forKey:@"id"];
@@ -124,6 +145,34 @@ static LocalTwitterUser *localTwitterUser = nil;
 
 - (id)initWithIdentifier:(NSString*)theIdentifier
 {
+    ACAccount *account = nil;
+    
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    NSArray *twitterAccounts = [accountStore accountsWithAccountType:accountType];
+    if (!twitterAccounts.count) {
+    } else {
+        
+        for (ACAccount *anAccount in twitterAccounts) {
+            if (NSOrderedSame == [anAccount.username compare:self.username]) {
+                //self.auth = account;
+                //self.identifier = account.identifier;
+                account = anAccount;
+                break;
+            }
+        }
+    }
+    
+    if (account) {
+        self.auth = account;
+        self.identifier = account.identifier;
+    } else {
+        self.auth = nil;
+        self.identifier = nil;
+    }
+    
     self = [super init];
     if (self) {
         [self commonInit:theIdentifier];

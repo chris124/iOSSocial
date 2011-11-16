@@ -103,16 +103,17 @@ static Twitter *twitterService = nil;
 
 - (id)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName
 {
-    if (![ACAccountStore class]) {
+    //if (![ACAccountStore class]) {
         return [super checkAuthenticationForKeychainItemName:theKeychainItemName];
-    }
-    
+    //}
+    /*
     ACAccount *account = nil;
     if (theKeychainItemName) {
         account = [self.accountStore accountWithIdentifier:theKeychainItemName];
     }
     
     return account;
+    */
 }
 
 - (void)authorizeFromViewController:(UIViewController *)vc 
@@ -122,13 +123,13 @@ static Twitter *twitterService = nil;
               withCompletionHandler:(AuthorizationHandler)completionHandler 
 {
     self.authorizationHandler = completionHandler;
-    
+    /*
     if ([ACAccountStore class]) {
 
         ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
         
-        [self.accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:
-         ^(BOOL granted, NSError *error) {
+        [self.accountStore requestAccessToAccountsWithType:accountType 
+                                     withCompletionHandler:^(BOOL granted, NSError *error) {
              if (error) {
                  if (self.authorizationHandler) {
                      self.authorizationHandler(nil, nil, error);
@@ -149,21 +150,29 @@ static Twitter *twitterService = nil;
              }
          }];
     } else {
+     */
         [super authorizeFromViewController:vc forAuth:theAuth andKeychainItemName:theKeychainItemName andCookieDomain:cookieDomain withCompletionHandler:completionHandler];
-    }
+    //}
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUser
 {
+    return [[LocalTwitterUserLegacy alloc] init];
+    
+    /*
     if (![ACAccountStore class]) {
         return [[LocalTwitterUserLegacy alloc] init];
     }
     
     return [LocalTwitterUser localTwitterUser];
+    */
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary
 {
+    return [[LocalTwitterUserLegacy alloc] initWithDictionary:dictionary];
+    
+    /*
     if (![ACAccountStore class]) {
         return [[LocalTwitterUserLegacy alloc] initWithDictionary:dictionary];
     } 
@@ -171,10 +180,14 @@ static Twitter *twitterService = nil;
     LocalTwitterUser *theUser = [[LocalTwitterUser alloc] initWithDictionary:dictionary];
     [LocalTwitterUser setLocalTwitterUser:theUser];
     return theUser;
+    */
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUserWithIdentifier:(NSString*)identifier
 {
+    return [[LocalTwitterUserLegacy alloc] initWithIdentifier:identifier];
+    
+    /*
     if (![ACAccountStore class]) {
         return [[LocalTwitterUserLegacy alloc] initWithIdentifier:identifier];
     }
@@ -182,6 +195,7 @@ static Twitter *twitterService = nil;
     LocalTwitterUser *theUser = [[LocalTwitterUser alloc] initWithIdentifier:identifier];
     [LocalTwitterUser setLocalTwitterUser:theUser];
     return theUser;
+    */
 }
 
 @end
