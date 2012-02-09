@@ -19,7 +19,6 @@
 
 NSString *const iOSSDefaultsKeyServiceStoreDictionary  = @"ioss_serviceStoreDictionary";
 
-static iOSSocialServicesStore *serviceStore = nil;
 
 @interface iOSSocialServicesStore () {
     id<iOSSocialLocalUserProtocol> _defaultAccount;
@@ -43,10 +42,12 @@ static iOSSocialServicesStore *serviceStore = nil;
 
 + (iOSSocialServicesStore*)sharedServiceStore
 {
-    @synchronized(self) {
-        if(serviceStore == nil)
-            serviceStore = [[super allocWithZone:NULL] init];
-    }
+    static iOSSocialServicesStore *serviceStore;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        serviceStore = [[iOSSocialServicesStore alloc] init];
+    });
+    
     return serviceStore;
 }
 

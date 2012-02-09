@@ -26,7 +26,6 @@
 
 NSString *const iOSSDefaultsKeyInstagramUserDictionary  = @"ioss_instagramUserDictionary";
 
-static LocalInstagramUser *localInstagramUser = nil;
 
 @interface LocalInstagramUser () 
 
@@ -55,10 +54,12 @@ static LocalInstagramUser *localInstagramUser = nil;
 
 + (LocalInstagramUser *)localInstagramUser
 {
-    @synchronized(self) {
-        if(localInstagramUser == nil)
-            localInstagramUser = [[super allocWithZone:NULL] init];
-    }
+    static LocalInstagramUser *localInstagramUser;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        localInstagramUser = [[LocalInstagramUser alloc] init];
+    });
+    
     return localInstagramUser;
 }
 
