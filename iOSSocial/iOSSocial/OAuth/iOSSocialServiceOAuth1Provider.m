@@ -149,11 +149,11 @@
     }
 }
 
-- (void)authorizeFromViewController:(UIViewController*)vc 
-                            forAuth:(GTMOAuthAuthentication*)theAuth 
-                andKeychainItemName:(NSString*)theKeychainItemName 
-                    andCookieDomain:(NSString*)cookieDomain 
-              withCompletionHandler:(AuthorizationHandler)completionHandler
+- (UIViewController*)authorizeFromViewController:(UIViewController*)vc 
+                                         forAuth:(GTMOAuthAuthentication*)theAuth 
+                             andKeychainItemName:(NSString*)theKeychainItemName 
+                                 andCookieDomain:(NSString*)cookieDomain 
+                           withCompletionHandler:(AuthorizationHandler)completionHandler
 {
     self.viewController = vc;
     self.authenticationHandler = completionHandler;
@@ -201,6 +201,8 @@
     
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:oaViewController];
     [self.viewController presentModalViewController:self.navigationController animated:YES];
+    
+    return oaViewController;
 }
 
 - (GTMOAuthAuthenticationWithAdditions *)authForCustomService 

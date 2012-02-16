@@ -397,9 +397,11 @@ static LocalFlickrUser *localFlickrUser = nil;
     }];
 }
 
-- (void)authenticateFromViewController:(UIViewController*)vc 
-                 withCompletionHandler:(AuthenticationHandler)completionHandler;
+- (UIViewController*)authenticateFromViewController:(UIViewController*)vc 
+                              withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
+    UIViewController *outVC;
+    
     self.authenticationHandler = completionHandler;
     
     //cwnote: also see if permissions have changed!!!
@@ -409,11 +411,11 @@ static LocalFlickrUser *localFlickrUser = nil;
             [self commonInit:nil];
         }
 
-        [[Flickr sharedService] authorizeFromViewController:vc 
-                                                     forAuth:self.auth 
-                                         andKeychainItemName:self.keychainItemName 
-                                             andCookieDomain:@"flickr.com" 
-                                       withCompletionHandler:^(GTMOAuthAuthentication *theAuth, NSDictionary *userInfo, NSError *error) {
+        outVC = [[Flickr sharedService] authorizeFromViewController:vc 
+                                                            forAuth:self.auth 
+                                                andKeychainItemName:self.keychainItemName 
+                                                    andCookieDomain:@"flickr.com" 
+                                              withCompletionHandler:^(GTMOAuthAuthentication *theAuth, NSDictionary *userInfo, NSError *error) {
             self.auth = (GTMOAuthAuthenticationWithAdditions*)theAuth;
             if (error) {
                 if (self.authenticationHandler) {
@@ -446,6 +448,8 @@ static LocalFlickrUser *localFlickrUser = nil;
             }
         }];
     }
+    
+    return outVC;
 }
 
 - (NSString*)oAuthAccessToken

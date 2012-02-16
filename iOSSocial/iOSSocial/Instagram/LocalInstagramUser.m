@@ -20,7 +20,6 @@
 #import "iOSSRequest.h"
 #import "InstagramUser+Private.h"
 #import "GTMOAuth2Authentication.h"
-#import "GTMOAuth2ViewControllerTouch.h"
 #import "iOSSocialServiceOAuth2Provider.h"
 
 
@@ -244,9 +243,11 @@ NSString *const iOSSDefaultsKeyInstagramUserDictionary  = @"ioss_instagramUserDi
     }
 }
 
-- (void)authenticateFromViewController:(UIViewController*)vc 
-                 withCompletionHandler:(AuthenticationHandler)completionHandler;
+- (UIViewController*)authenticateFromViewController:(UIViewController*)vc 
+                              withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
+    UIViewController *outVC;
+    
     self.authenticationHandler = completionHandler;
     
     //cwnote: also see if permissions have changed!!!
@@ -256,11 +257,11 @@ NSString *const iOSSDefaultsKeyInstagramUserDictionary  = @"ioss_instagramUserDi
             [self commonInit:nil];
         }
         
-        [[Instagram sharedService] authorizeFromViewController:vc 
-                                                       forAuth:self.auth 
-                                           andKeychainItemName:self.keychainItemName 
-                                               andCookieDomain:@"instagram.com" 
-                                         withCompletionHandler:^(GTMOAuth2Authentication *theAuth, NSDictionary *userInfo, NSError *error) {
+        outVC = [[Instagram sharedService] authorizeFromViewController:vc 
+                                                               forAuth:self.auth 
+                                                   andKeychainItemName:self.keychainItemName 
+                                                       andCookieDomain:@"instagram.com" 
+                                                 withCompletionHandler:^(GTMOAuth2Authentication *theAuth, NSDictionary *userInfo, NSError *error) {
             self.auth = theAuth;
             if (error) {
                 if (self.authenticationHandler) {
@@ -291,6 +292,8 @@ NSString *const iOSSDefaultsKeyInstagramUserDictionary  = @"ioss_instagramUserDi
             }
         }];
     }
+    
+    return outVC;
 }
 
 - (void)fetchUserDataWithCompletionHandler:(FetchUserDataHandler)completionHandler

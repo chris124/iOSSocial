@@ -29,11 +29,11 @@
 
 - (void)assignOAuthParams:(NSDictionary*)params;
 
-- (void)authorizeFromViewController:(UIViewController*)vc 
-                            forAuth:(id)theAuth 
-                andKeychainItemName:(NSString*)theKeychainItemName 
-                    andCookieDomain:(NSString*)cookieDomain
-              withCompletionHandler:(AuthorizationHandler)completionHandler;
+- (UIViewController*)authorizeFromViewController:(UIViewController*)vc 
+                                         forAuth:(id)theAuth 
+                             andKeychainItemName:(NSString*)theKeychainItemName 
+                                 andCookieDomain:(NSString*)cookieDomain
+                           withCompletionHandler:(AuthorizationHandler)completionHandler;
 
 - (void)logout:(GTMOAuthAuthenticationWithAdditions*)theAuth forKeychainItemName:(NSString*)theKeychainItemName;
 

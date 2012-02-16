@@ -211,9 +211,11 @@ static LocalFoursquareUser *localFoursquareUser = nil;
     }];
 }
 
-- (void)authenticateFromViewController:(UIViewController*)vc 
-                 withCompletionHandler:(AuthenticationHandler)completionHandler;
+- (UIViewController*)authenticateFromViewController:(UIViewController*)vc 
+                              withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
+    UIViewController *outVC;
+    
     self.authenticationHandler = completionHandler;
     
     //cwnote: also see if permissions have changed!!!
@@ -223,11 +225,11 @@ static LocalFoursquareUser *localFoursquareUser = nil;
             [self commonInit:nil];
         }
 
-        [[Foursquare sharedService] authorizeFromViewController:vc 
-                                                        forAuth:self.auth 
-                                            andKeychainItemName:self.keychainItemName 
-                                                andCookieDomain:@"foursquare.com" 
-                                          withCompletionHandler:^(GTMOAuth2Authentication *theAuth, NSDictionary *userInfo, NSError *error) {
+        outVC = [[Foursquare sharedService] authorizeFromViewController:vc 
+                                                                forAuth:self.auth 
+                                                    andKeychainItemName:self.keychainItemName 
+                                                        andCookieDomain:@"foursquare.com" 
+                                                  withCompletionHandler:^(GTMOAuth2Authentication *theAuth, NSDictionary *userInfo, NSError *error) {
             
             self.auth = theAuth;
             if (error) {
@@ -256,6 +258,8 @@ static LocalFoursquareUser *localFoursquareUser = nil;
             }
         }];
     }
+    
+    return outVC;
 }
 
 - (NSString*)oAuthAccessToken

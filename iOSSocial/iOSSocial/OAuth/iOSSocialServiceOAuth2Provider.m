@@ -138,11 +138,11 @@
     }
 }
 
-- (void)authorizeFromViewController:(UIViewController*)vc 
-                            forAuth:(GTMOAuth2Authentication*)theAuth 
-                           andKeychainItemName:(NSString*)theKeychainItemName 
-                    andCookieDomain:(NSString*)cookieDomain 
-              withCompletionHandler:(AuthorizationHandler)completionHandler
+- (UIViewController*)authorizeFromViewController:(UIViewController*)vc 
+                                                     forAuth:(GTMOAuth2Authentication*)theAuth 
+                                         andKeychainItemName:(NSString*)theKeychainItemName 
+                                             andCookieDomain:(NSString*)cookieDomain 
+                                       withCompletionHandler:(AuthorizationHandler)completionHandler
 {
     self.viewController = vc;
     self.authenticationHandler = completionHandler;
@@ -169,12 +169,6 @@
                                                                    keychainItemName:theKeychainItemName
                                                                            delegate:self
                                                                    finishedSelector:@selector(viewController:finishedWithAuth:error:)];
-    //oaViewController.navButtonsView
-    /*
-    oaViewController.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
-                                                                                        target:self 
-                                                                                        action:@selector(newStream)];
-     */
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"touch" forKey:@"display"];
@@ -186,6 +180,8 @@
     
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:oaViewController];
     [self.viewController presentModalViewController:self.navigationController animated:YES];
+    
+    return oaViewController;
 }
 
 - (GTMOAuth2Authentication *)authForCustomService 

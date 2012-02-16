@@ -52,7 +52,7 @@
 
 - (NSString*)apiScope;
 
-- (void)authorizeFromViewController:(UIViewController*)vc 
+- (UIViewController*)authorizeFromViewController:(UIViewController*)vc 
                             forAuth:(id)theAuth 
                 andKeychainItemName:(NSString*)theKeychainItemName 
                     andCookieDomain:(NSString*)cookieDomain
