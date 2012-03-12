@@ -33,6 +33,7 @@ typedef void(^AuthenticationHandler)(NSError *error);
 @property(nonatomic, readonly, retain)  NSString *username;
 @property(nonatomic, readonly, retain)  NSString *servicename;
 @property(nonatomic, readonly, retain)  NSString *identifier;
+@property(nonatomic, readonly, retain)  NSString *profilePictureURL;
 
 // Authenticate the user for access to user details. This may present a UI to the user if necessary to login or create an account. 
 // The user must be authenticated in order to use some other APIs (on a per-service basis). 
