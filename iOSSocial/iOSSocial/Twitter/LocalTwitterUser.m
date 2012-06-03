@@ -489,8 +489,8 @@ static LocalTwitterUser *localTwitterUser = nil;
     }];
 }
 
-- (void)authenticateFromViewController:(UIViewController*)vc 
-                 withCompletionHandler:(AuthenticationHandler)completionHandler;
+- (UIViewController*)authenticateFromViewController:(UIViewController*)vc 
+                              withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
     self.authenticationHandler = completionHandler;
 
@@ -564,6 +564,8 @@ static LocalTwitterUser *localTwitterUser = nil;
             }
         }];*/
     }
+    
+    return nil;
 }
 
 - (NSString*)oAuthAccessToken

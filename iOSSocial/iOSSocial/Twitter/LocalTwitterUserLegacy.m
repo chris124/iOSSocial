@@ -344,9 +344,11 @@ static LocalTwitterUserLegacy *localTwitterUser = nil;
     }];
 }
 
-- (void)authenticateFromViewController:(UIViewController*)vc 
-                 withCompletionHandler:(AuthenticationHandler)completionHandler;
+- (UIViewController*)authenticateFromViewController:(UIViewController*)vc 
+                              withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
+    UIViewController *outVC = nil;
+    
     self.authenticationHandler = completionHandler;
     
     //cwnote: also see if permissions have changed!!!
@@ -356,11 +358,11 @@ static LocalTwitterUserLegacy *localTwitterUser = nil;
             [self commonInit:nil];
         }
 
-        [[Twitter sharedService] authorizeFromViewController:vc 
-                                                     forAuth:self.auth 
-                                         andKeychainItemName:self.keychainItemName 
-                                             andCookieDomain:@"twitter.com" 
-                                       withCompletionHandler:^(GTMOAuthAuthentication *theAuth, NSDictionary *userInfo, NSError *error) {
+        outVC = [[Twitter sharedService] authorizeFromViewController:vc 
+                                                             forAuth:self.auth 
+                                                 andKeychainItemName:self.keychainItemName 
+                                                     andCookieDomain:@"twitter.com" 
+                                               withCompletionHandler:^(GTMOAuthAuthentication *theAuth, NSDictionary *userInfo, NSError *error) {
             self.auth = theAuth;
             if (error) {
                 if (self.authenticationHandler) {
@@ -393,6 +395,8 @@ static LocalTwitterUserLegacy *localTwitterUser = nil;
             }
         }];
     }
+    
+    return outVC;
 }
 
 - (NSString*)oAuthAccessToken
