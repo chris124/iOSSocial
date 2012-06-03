@@ -124,11 +124,11 @@ static Twitter *twitterService = nil;
     return [super checkAuthenticationForKeychainItemName:theKeychainItemName];
 }
 
-- (void)authorizeFromViewController:(UIViewController *)vc 
-                            forAuth:(id)theAuth 
-                andKeychainItemName:(NSString *)theKeychainItemName 
-                    andCookieDomain:(NSString *)cookieDomain 
-              withCompletionHandler:(AuthorizationHandler)completionHandler 
+- (UIViewController*)authorizeFromViewController:(UIViewController *)vc 
+                                         forAuth:(id)theAuth 
+                             andKeychainItemName:(NSString *)theKeychainItemName 
+                                 andCookieDomain:(NSString *)cookieDomain 
+                           withCompletionHandler:(AuthorizationHandler)completionHandler 
 {
     self.authorizationHandler = completionHandler;
     /*
@@ -159,7 +159,7 @@ static Twitter *twitterService = nil;
          }];
     } else {
      */
-        [super authorizeFromViewController:vc forAuth:theAuth andKeychainItemName:theKeychainItemName andCookieDomain:cookieDomain withCompletionHandler:completionHandler];
+        return [super authorizeFromViewController:vc forAuth:theAuth andKeychainItemName:theKeychainItemName andCookieDomain:cookieDomain withCompletionHandler:completionHandler];
     //}
 }
 
