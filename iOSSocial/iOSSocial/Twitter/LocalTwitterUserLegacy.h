@@ -49,7 +49,8 @@
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 
-- (void)postTweet;
+- (void)postTweetWithParams:(NSDictionary*)params 
+      withCompletionHandler:(FetchUserDataHandler)completionHandler;
 - (void)postTweetWithMedia;
 
 @end

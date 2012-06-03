@@ -79,7 +79,7 @@ static LocalTwitterUserLegacy *localTwitterUser = nil;
     
     
     self.keychainItemName = [NSString stringWithFormat:@"%@-%@", [[Twitter sharedService] serviceKeychainItemName], self.identifier];
-    self.auth = [[Twitter sharedService] checkAuthenticationForKeychainItemName:self.keychainItemName];
+    self.auth = [[Twitter sharedService] checkAuthenticationForLegacyKeychainItemName:self.keychainItemName];
     
     // Initialization code here.
     NSDictionary *localUserDictionary = [self ioss_twitterUserDictionary];
@@ -214,17 +214,15 @@ static LocalTwitterUserLegacy *localTwitterUser = nil;
     }];
 }
 
-- (void)postTweet
+- (void)postTweetWithParams:(NSDictionary*)params 
+      withCompletionHandler:(FetchUserDataHandler)completionHandler;
 {
-    //self.fetchUserDataHandler = completionHandler;
+    self.fetchUserDataHandler = completionHandler;
     
     NSString *urlString = [NSString stringWithFormat:@"https://api.twitter.com/1/statuses/update.json"];
     
     NSURL *url = [NSURL URLWithString:urlString];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"bananas!" forKey:@"status"];
-    
+
     iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
                                                  parameters:params 
                                               requestMethod:iOSSRequestMethodPOST];
