@@ -111,17 +111,17 @@ static Twitter *twitterService = nil;
 
 - (id)checkAuthenticationForKeychainItemName:(NSString*)theKeychainItemName
 {
-    //if (![ACAccountStore class]) {
-        return [super checkAuthenticationForKeychainItemName:theKeychainItemName];
-    //}
-    /*
     ACAccount *account = nil;
     if (theKeychainItemName) {
         account = [self.accountStore accountWithIdentifier:theKeychainItemName];
     }
     
     return account;
-    */
+}
+
+- (id)checkAuthenticationForLegacyKeychainItemName:(NSString*)theKeychainItemName
+{
+    return [super checkAuthenticationForKeychainItemName:theKeychainItemName];
 }
 
 - (void)authorizeFromViewController:(UIViewController *)vc 
@@ -165,45 +165,36 @@ static Twitter *twitterService = nil;
 
 - (id<iOSSocialLocalUserProtocol>)localUser
 {
-    return [[LocalTwitterUserLegacy alloc] init];
-    
-    /*
-    if (![ACAccountStore class]) {
-        return [[LocalTwitterUserLegacy alloc] init];
-    }
-    
     return [LocalTwitterUser localTwitterUser];
-    */
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUserWithDictionary:(NSDictionary*)dictionary
 {
-    return [[LocalTwitterUserLegacy alloc] initWithDictionary:dictionary];
-    
-    /*
-    if (![ACAccountStore class]) {
-        return [[LocalTwitterUserLegacy alloc] initWithDictionary:dictionary];
-    } 
-    
     LocalTwitterUser *theUser = [[LocalTwitterUser alloc] initWithDictionary:dictionary];
     [LocalTwitterUser setLocalTwitterUser:theUser];
     return theUser;
-    */
 }
 
 - (id<iOSSocialLocalUserProtocol>)localUserWithIdentifier:(NSString*)identifier
 {
-    return [[LocalTwitterUserLegacy alloc] initWithIdentifier:identifier];
-    
-    /*
-    if (![ACAccountStore class]) {
-        return [[LocalTwitterUserLegacy alloc] initWithIdentifier:identifier];
-    }
-    
     LocalTwitterUser *theUser = [[LocalTwitterUser alloc] initWithIdentifier:identifier];
     [LocalTwitterUser setLocalTwitterUser:theUser];
     return theUser;
-    */
+}
+
+- (id<iOSSocialLocalUserProtocol>)legacyLocalUser
+{
+    return [[LocalTwitterUserLegacy alloc] init];
+}
+
+- (id<iOSSocialLocalUserProtocol>)legacyLocalUserWithDictionary:(NSDictionary*)dictionary
+{
+    return [[LocalTwitterUserLegacy alloc] initWithDictionary:dictionary];
+}
+
+- (id<iOSSocialLocalUserProtocol>)legacyLocalUserWithIdentifier:(NSString*)identifier
+{
+    return [[LocalTwitterUserLegacy alloc] initWithIdentifier:identifier];
 }
 
 @end
