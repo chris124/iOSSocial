@@ -52,7 +52,7 @@
 
 - (NSString*)apiScope;
 
-- (UIViewController*)authorizeFromViewController:(UIViewController*)vc 
+- (void)authorizeFromViewController:(UIViewController*)vc 
                             forAuth:(id)theAuth 
                 andKeychainItemName:(NSString*)theKeychainItemName 
                     andCookieDomain:(NSString*)cookieDomain
@@ -65,6 +65,15 @@
 + (id)JSONFromData:(NSData*)data;
 
 - (NSString*)urlSchemeSuffix;
+
+//for twitter pre-iOS 5
+- (id<iOSSocialLocalUserProtocol>)legacyLocalUser;
+
+- (id<iOSSocialLocalUserProtocol>)legacyLocalUserWithDictionary:(NSDictionary*)dictionary;
+
+- (id<iOSSocialLocalUserProtocol>)legacyLocalUserWithIdentifier:(NSString*)uuid;
+
+- (id)checkAuthenticationForLegacyKeychainItemName:(NSString*)theKeychainItemName;
 
 @end
 
