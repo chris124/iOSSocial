@@ -43,15 +43,19 @@
 // 1. Communications problem
 // 2. User credentials invalid
 // 3. User cancelled
-- (UIViewController*)authenticateFromViewController:(UIViewController*)vc 
-                              withCompletionHandler:(AuthenticationHandler)completionHandler;
+- (void)authenticateFromViewController:(UIViewController*)vc 
+                 withCompletionHandler:(AuthenticationHandler)completionHandler;
 
 - (NSString*)oAuthAccessToken;
 
 //remove all stored OAuth info from the keychain and reset state in memory
 - (void)logout;
 
-- (void)postTweet;
+- (void)postTweetFromViewController:(UIViewController*)viewController 
+                         withParams:(NSDictionary*)params 
+              withCompletionHandler:(FetchUserDataHandler)completionHandler;
+- (void)postTweetWithParams:(NSDictionary*)params 
+      withCompletionHandler:(FetchUserDataHandler)completionHandler;
 - (void)postTweetWithMedia;
 
 @end

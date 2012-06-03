@@ -111,9 +111,26 @@ static LocalTwitterUser *localTwitterUser = nil;
         
         [accountStore requestAccessToAccountsWithType:accountType 
                                      withCompletionHandler:^(BOOL granted, NSError *error) {
-                                         if (error) {
+                                         if (NO == granted) {
                                              
                                          } else {
+                                             NSArray *twitterAccounts = 
+                                             [accountStore accountsWithAccountType:accountType];
+                                             
+                                             if ([twitterAccounts count] > 0) {
+                                                 // Use the first account for simplicity 
+                                                 ACAccount *account = [twitterAccounts objectAtIndex:0];
+                                                 
+                                                 if (account) {
+                                                     self.auth = account;
+                                                     self.identifier = account.identifier;
+                                                 } else {
+                                                     self.auth = nil;
+                                                     self.identifier = nil;
+                                                 }
+                                             }
+                                             
+                                             /*
                                              if (granted) {
                                              } else {
                                                  ACAccount *account = nil;
@@ -140,6 +157,7 @@ static LocalTwitterUser *localTwitterUser = nil;
                                                      self.identifier = nil;
                                                  }
                                              }
+                                            */
                                          }
                                      }];
 
@@ -278,20 +296,71 @@ static LocalTwitterUser *localTwitterUser = nil;
     */
 }
 
-- (void)postTweet
+- (void)postTweetFromViewController:(UIViewController*)viewController 
+                         withParams:(NSDictionary*)params 
+              withCompletionHandler:(FetchUserDataHandler)completionHandler
+{
+    self.fetchUserDataHandler = completionHandler;
+    
+    if (YES == [TWTweetComposeViewController canSendTweet]) {
+        TWTweetComposeViewController *tweet = [[TWTweetComposeViewController alloc] init];
+        [tweet setInitialText:[params objectForKey:@"message"]];
+        [tweet addURL:[NSURL URLWithString:[params objectForKey:@"url"]]];
+        tweet.completionHandler = ^(TWTweetComposeViewControllerResult result) {
+            if (TWTweetComposeViewControllerResultCancelled == result) {
+                [viewController dismissModalViewControllerAnimated:YES];
+            }
+            
+            if (self.fetchUserDataHandler) {
+                self.fetchUserDataHandler(nil);
+                self.fetchUserDataHandler = nil;
+            }
+        };
+        [viewController presentModalViewController:tweet animated:YES];
+    } else {
+        //send back an error!
+        if (self.fetchUserDataHandler) {
+            self.fetchUserDataHandler(nil);
+            self.fetchUserDataHandler = nil;
+        }
+    }
+}
+
+- (void)postTweetWithParams:(NSDictionary*)params 
+      withCompletionHandler:(FetchUserDataHandler)completionHandler
 {
     //use twitter request object for this
-    
-    /*
-    //self.fetchUserDataHandler = completionHandler;
+
+    self.fetchUserDataHandler = completionHandler;
     
     NSString *urlString = [NSString stringWithFormat:@"https://api.twitter.com/1/statuses/update.json"];
     
     NSURL *url = [NSURL URLWithString:urlString];
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"bananas!" forKey:@"status"];
+    //  Now we can create our request.  Note that we are performing a POST request.
+    TWRequest *request = [[TWRequest alloc] initWithURL:url 
+                                             parameters:params 
+                                          requestMethod:TWRequestMethodPOST];
     
+    [request setAccount:self.auth];
+    
+    //  Perform our request
+    [request performRequestWithHandler:
+     ^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+         
+         if (responseData) {
+             //  Use the NSJSONSerialization class to parse the returned JSON
+             NSDictionary *dict = 
+             (NSDictionary *)[NSJSONSerialization JSONObjectWithData:responseData 
+                                                             options:0 
+                                                               error:nil];
+             
+             // Log the result
+             NSLog(@"%@", dict);
+         }
+     }];
+    
+    /*
     iOSSRequest *request = [[iOSSRequest alloc] initWithURL:url  
                                                  parameters:params 
                                               requestMethod:iOSSRequestMethodPOST];
@@ -420,25 +489,59 @@ static LocalTwitterUser *localTwitterUser = nil;
     }];
 }
 
-- (UIViewController*)authenticateFromViewController:(UIViewController*)vc 
+- (void)authenticateFromViewController:(UIViewController*)vc 
                  withCompletionHandler:(AuthenticationHandler)completionHandler;
 {
-    UIViewController *outVC;
-    
     self.authenticationHandler = completionHandler;
-    
-    //cwnote: also see if permissions have changed!!!
+
     if (NO == [self isAuthenticated]) {
 
         if (nil == self.auth) {
             [self commonInit:nil];
         }
+        
+        ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+        
+        ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+        
+        [accountStore requestAccessToAccountsWithType:accountType 
+                                withCompletionHandler:^(BOOL granted, NSError *error) {
+                                    if (NO == granted) {
+                                        
+                                    } else {
+                                        NSArray *twitterAccounts = 
+                                        [accountStore accountsWithAccountType:accountType];
+                                        
+                                        if ([twitterAccounts count] > 0) {
+                                            // Use the first account for simplicity 
+                                            ACAccount *account = [twitterAccounts objectAtIndex:0];
+                                            
+                                            if (account) {
+                                                self.auth = account;
+                                                self.identifier = account.identifier;
+                                                
+                                                //cwnote: need to set user dictionary here. save identifier and username?
+                                                
+                                            } else {
+                                                self.auth = nil;
+                                                self.identifier = nil;
+                                            }
+                                            
+                                            if (self.authenticationHandler) {
+                                                self.authenticationHandler(error);
+                                                self.authenticationHandler = nil;
+                                            }
+                                        }
+                                    }
+                                }];
 
-        outVC = [[Twitter sharedService] authorizeFromViewController:vc 
-                                                             forAuth:self.auth 
-                                                 andKeychainItemName:nil 
-                                                     andCookieDomain:@"twitter.com" 
-                                               withCompletionHandler:^(ACAccount *theAuth, NSDictionary *userInfo, NSError *error) {
+
+        /*
+        [[Twitter sharedService] authorizeFromViewController:vc 
+                                                     forAuth:self.auth 
+                                         andKeychainItemName:nil 
+                                             andCookieDomain:@"twitter.com" 
+                                       withCompletionHandler:^(ACAccount *theAuth, NSDictionary *userInfo, NSError *error) {
             self.auth = theAuth;
             self.identifier = theAuth.identifier;
             if (error) {
@@ -459,21 +562,8 @@ static LocalTwitterUser *localTwitterUser = nil;
                     }
                 }];
             }
-        }];
-    } else {
-        [self fetchLocalUserDataWithCompletionHandler:^(NSError *error) {
-            if (!error) {
-                //
-            }
-            
-            if (self.authenticationHandler) {
-                self.authenticationHandler(error);
-                self.authenticationHandler = nil;
-            }
-        }];
+        }];*/
     }
-    
-    return outVC;
 }
 
 - (NSString*)oAuthAccessToken
