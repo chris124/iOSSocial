@@ -39,7 +39,7 @@ typedef enum _FBRequestType {
 
 @end
 
-@interface LocalFacebookUser () <FBRequestDelegate, FBSessionDelegate> 
+@interface LocalFacebookUser () <FBRequestDelegate, FBSessionDelegate, FBDialogDelegate> 
 
 @property(nonatomic, readwrite, retain) NSArray *friends;
 @property(nonatomic, copy)              AuthenticationHandler authenticationHandler;
@@ -50,6 +50,7 @@ typedef enum _FBRequestType {
 @property(nonatomic, retain)            KeychainItemWrapper *accessTokenItem;
 @property(nonatomic, retain)            NSString *keychainItemName;
 @property(nonatomic, readwrite, retain) NSString *identifier;
+@property(nonatomic, copy)              CompletionHandler genericCompletionHandler;
 
 @end
 
@@ -74,6 +75,7 @@ NSInteger usersCount = 0;
 @synthesize username;
 @synthesize identifier;
 @synthesize keychainItemName;
+@synthesize genericCompletionHandler;
 
 + (LocalFacebookUser *)localFacebookUser
 {
@@ -380,6 +382,17 @@ NSInteger usersCount = 0;
     [self recordRequest:request withType:FBUserPhotoAlbumsRequestType];
 }
 
+- (void)postStatusUpdate:(NSMutableDictionary*)params 
+   withCompletionHandler:(CompletionHandler)completionHandler
+{
+    self.genericCompletionHandler = completionHandler;
+    
+    //cwnote: need completion handler here so that I can tell caller and they can cleanup. ugh
+    [self.facebook dialog:@"feed" 
+                andParams:params 
+              andDelegate:self];
+}
+
 #pragma mark -
 #pragma mark FBSessionDelegate
 
@@ -594,5 +607,74 @@ NSInteger usersCount = 0;
     [super request:request didLoadRawResponse:data];
 }
 
+/**
+ * Called when the dialog succeeds and is about to be dismissed.
+ */
+- (void)dialogDidComplete:(FBDialog *)dialog
+{
+    if (nil != self.genericCompletionHandler) {
+        self.genericCompletionHandler(nil);
+        self.genericCompletionHandler = nil;
+    }
+}
+
+/**
+ * Called when the dialog succeeds with a returning url.
+ */
+- (void)dialogCompleteWithUrl:(NSURL *)url
+{
+    if (nil != self.genericCompletionHandler) {
+        self.genericCompletionHandler(nil);
+        self.genericCompletionHandler = nil;
+    }
+}
+
+/**
+ * Called when the dialog get canceled by the user.
+ */
+- (void)dialogDidNotCompleteWithUrl:(NSURL *)url
+{
+    if (nil != self.genericCompletionHandler) {
+        self.genericCompletionHandler(nil);
+        self.genericCompletionHandler = nil;
+    }
+}
+
+/**
+ * Called when the dialog is cancelled and is about to be dismissed.
+ */
+- (void)dialogDidNotComplete:(FBDialog *)dialog
+{
+    if (nil != self.genericCompletionHandler) {
+        self.genericCompletionHandler(nil);
+        self.genericCompletionHandler = nil;
+    }
+}
+
+/**
+ * Called when dialog failed to load due to an error.
+ */
+- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error
+{
+    if (nil != self.genericCompletionHandler) {
+        self.genericCompletionHandler(error);
+        self.genericCompletionHandler = nil;
+    }
+}
+
+/**
+ * Asks if a link touched by a user should be opened in an external browser.
+ *
+ * If a user touches a link, the default behavior is to open the link in the Safari browser,
+ * which will cause your app to quit.  You may want to prevent this from happening, open the link
+ * in your own internal browser, or perhaps warn the user that they are about to leave your app.
+ * If so, implement this method on your delegate and return NO.  If you warn the user, you
+ * should hold onto the URL and once you have received their acknowledgement open the URL yourself
+ * using [[UIApplication sharedApplication] openURL:].
+ */
+- (BOOL)dialog:(FBDialog*)dialog shouldOpenURLInExternalBrowser:(NSURL *)url
+{
+    return NO;
+}
 
 @end

@@ -24,6 +24,7 @@ typedef void(^FindFriendsHandler)(NSArray *friends, NSError *error);
 typedef void(^LoadUsersHandler)(NSArray *users, NSError *error);
 typedef void(^CreatePhotoAlbumHandler)(NSError *error);
 typedef void(^LoadPhotoAlbumsHandler)(NSArray *photoAlbums, NSError *error);
+typedef void(^CompletionHandler)(NSError *error);
 
 @interface LocalFacebookUser : FacebookUser <iOSSocialLocalUserProtocol> {
 }
@@ -103,6 +104,9 @@ typedef void(^LoadPhotoAlbumsHandler)(NSArray *photoAlbums, NSError *error);
 // 2. Communications failure
 // 3. Invalid user identifier
 - (void)loadPhotoAlbumsWithCompletionHandler:(LoadPhotoAlbumsHandler)completionHandler;
+
+- (void)postStatusUpdate:(NSMutableDictionary*)params 
+   withCompletionHandler:(CompletionHandler)completionHandler;
 
 @end
 
