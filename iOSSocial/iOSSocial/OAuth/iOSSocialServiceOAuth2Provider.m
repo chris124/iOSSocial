@@ -139,10 +139,10 @@
 }
 
 - (UIViewController*)authorizeFromViewController:(UIViewController*)vc 
-                                                     forAuth:(GTMOAuth2Authentication*)theAuth 
-                                         andKeychainItemName:(NSString*)theKeychainItemName 
-                                             andCookieDomain:(NSString*)cookieDomain 
-                                       withCompletionHandler:(AuthorizationHandler)completionHandler
+                                         forAuth:(GTMOAuth2Authentication*)theAuth 
+                             andKeychainItemName:(NSString*)theKeychainItemName 
+                                 andCookieDomain:(NSString*)cookieDomain 
+                           withCompletionHandler:(AuthorizationHandler)completionHandler
 {
     self.viewController = vc;
     self.authenticationHandler = completionHandler;

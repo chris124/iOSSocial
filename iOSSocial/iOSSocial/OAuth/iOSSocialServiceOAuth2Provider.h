@@ -32,10 +32,10 @@
 - (void)assignOAuthParams:(NSDictionary*)params;
 
 - (UIViewController*)authorizeFromViewController:(UIViewController*)vc 
-                                                     forAuth:(GTMOAuth2Authentication*)theAuth 
-                                         andKeychainItemName:(NSString*)theKeychainItemName 
-                                             andCookieDomain:(NSString*)cookieDomain
-                                       withCompletionHandler:(AuthorizationHandler)completionHandler;
+                                         forAuth:(GTMOAuth2Authentication*)theAuth 
+                             andKeychainItemName:(NSString*)theKeychainItemName 
+                                 andCookieDomain:(NSString*)cookieDomain
+                           withCompletionHandler:(AuthorizationHandler)completionHandler;
 
 - (void)logout:(GTMOAuth2Authentication*)theAuth forKeychainItemName:(NSString*)theKeychainItemName;
 
